@@ -1,4 +1,4 @@
-# {{Projectname}}
+# EuropArt
 
 ## Used Technology
 > Fill in this information e.g. SQL Server, SQL Lite, NuGet pacetc.
@@ -14,7 +14,7 @@ Instructions how to run the project (don't forget the DB Connection etc.)
 
 ## Members
 > Fill in this information
-- Groupmember 1 : {{GitHub Username}} - {{Lastname}} - {{Firstname}} 
+- Groupmember 1 : Wolfderechter - De Rechter - Wolf 
 - Groupmember 2 : {{GitHub Username}} - {{Lastname}} - {{Firstname}}
 - Groupmember 3 : {{GitHub Username}} - {{Lastname}} - {{Firstname}}
 - Groupmember 4 : {{GitHub Username}} - {{Lastname}} - {{Firstname}}
