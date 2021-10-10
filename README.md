@@ -1,12 +1,7 @@
 # EuropArt
 
 ## Used Technology
-> Fill in this information e.g. SQL Server, SQL Lite, NuGet pacetc.
-- Database:
-- NuGet packages:
- - ...
- - ...
- - ...
+
 
 ## How to run
 > Fill in this information
@@ -14,9 +9,12 @@ Instructions how to run the project (don't forget the DB Connection etc.)
 
 ## Members
 > Fill in this information
-- Groupmember 1 : Wolfderechter - De Rechter - Wolf 
-- Groupmember 2 : {{GitHub Username}} - {{Lastname}} - {{Firstname}}
-- Groupmember 3 : {{GitHub Username}} - {{Lastname}} - {{Firstname}}
-- Groupmember 4 : {{GitHub Username}} - {{Lastname}} - {{Firstname}}
-- Groupmember 5 : {{GitHub Username}} - {{Lastname}} - {{Firstname}}
-- Groupmember 6 : {{GitHub Username}} - {{Lastname}} - {{Firstname}}
+- Groupmember 1 : <https://github.com/wolfderechter> - De Rechter - Wolf 
+- Groupmember 2 : <https://github.com/stefboerjan> - Boerjan - Stef
+- Groupmember 3 : <https://github.com/zowieverschuere>  - Verschuere - Zowie
+- Groupmember 4 : <https://github.com/DylanDC666> - De Corte - Dylan
+- Groupmember 5 : {{GitHub Username}} - Dehaen - Emiel
+- Groupmember 6 : {{GitHub Username}} - Bekaert - Simon
+
+## Trello
+> - [Information about sprint 1 on Trello](https://trello.com/b/g7cm3JGS/sprint-1)
