@@ -13,7 +13,7 @@ Instructions how to run the project (don't forget the DB Connection etc.)
 - Groupmember 2 : <https://github.com/stefboerjan> - Boerjan - Stef
 - Groupmember 3 : <https://github.com/zowieverschuere>  - Verschuere - Zowie
 - Groupmember 4 : <https://github.com/DylanDC666> - De Corte - Dylan
-- Groupmember 5 : {{GitHub Username}} - Dehaen - Emiel
+- Groupmember 5 : <https://github.com/EmielDehaen> - Dehaen - Emiel
 - Groupmember 6 : {{GitHub Username}} - Bekaert - Simon
 
 ## Trello
