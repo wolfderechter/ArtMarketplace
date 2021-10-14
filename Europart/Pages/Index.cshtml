@@ -3,70 +3,63 @@
 @{ ViewData["Title"] = "Home page"; }
 
 <h1>Kunstwerken</h1>
-<button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">Toon filters</button>
-<div class="filters row show align-items-center">
-    <div class="col-2">
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Veilingen</label>
-        </div>
-    </div>
-    <div class="col-2">
-        <h3>Categorie:</h3>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Alles</option>
-            <option value="1">Collage</option>
-            <option value="2">Fotografie</option>
-            <option value="3">Schilderijen</option>
-            <option value="4">Sculpturen</option>
-            <option value="5">Tekeningen</option>
-            <option value="6">Andere</option>
-        </select>
-    </div>
-    <div class="col-3">
-        <h3>Prijs:</h3>
-        <div class="row">
-            <div class="form-floating col-6">
-                <input type="number" class="form-control" id="floatingInput" placeholder="0">
-                <label for="floatingInput">Min.</label>
-            </div>
-            <div class="form-floating col-6">
-                <input type="number" class="form-control" id="floatingInput" placeholder="0">
-                <label for="floatingInput">Max.</label>
-            </div>
-        </div>
-    </div>
-    <div class="col-5">
-        <h3>Stijl:</h3>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Abstract</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Klassiek</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Minimalisme</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Modernisme</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Surrealisme</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">Andere</label>
-        </div>
-    </div>
-</div>
+<button id="filters" type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">Toon filters</button>
+
 <div class="row">
     <div class="col-12">
         <div class="row">
+            <div id="f-row" class="filters col-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Veilingen</label>
+                </div>
+                <h3>Categorie:</h3>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Alles</option>
+                    <option value="1">Collage</option>
+                    <option value="2">Fotografie</option>
+                    <option value="3">Schilderijen</option>
+                    <option value="4">Sculpturen</option>
+                    <option value="5">Tekeningen</option>
+                    <option value="6">Andere</option>
+                </select>
+                <h3>Prijs:</h3>
+                <div class="row">
+                    <div class="form-floating col-6">
+                        <input type="number" class="form-control" id="floatingInput" placeholder="0">
+                        <label for="floatingInput">Min.</label>
+                    </div>
+                    <div class="form-floating col-6">
+                        <input type="number" class="form-control" id="floatingInput" placeholder="0">
+                        <label for="floatingInput">Max.</label>
+                    </div>
+                </div>
+                <h3>Stijl:</h3>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Abstract</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Klassiek</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Minimalisme</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Modernisme</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Surrealisme</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Andere</label>
+                </div>
+            </div>
             <div class="col-4">
                 <div class="badge-kunstwerk">
                     <img src="images/img_x300_615b0f51057766-33663549-37540512.jpg">
