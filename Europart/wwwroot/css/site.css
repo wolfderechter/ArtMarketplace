@@ -1,71 +1,145 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿.round-nav {
+    content: "";
+    display: block;
+    width: 130%;
+    padding-top: 75px;
+    position: fixed;
+    background-color: #372c2e;
+    z-index: 1000;
+    border-radius: 100%;
+    top: 40px;
+    left: -17%;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.navbar-first {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 0.8rem;
+    background-color: #fff3ec;
+    z-index: 1031;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.navbar-second {
+    top: 34px;
+    /*background-color:#3c231a;*/
+    background-color: #372C2E;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.dropdown-menu {
+    z-index: 9999;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.btn-outline-white {
+    color: white;
+    border-color: white;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    .btn-outline-white:hover {
+        color: black;
+        border-color: white;
+        background-color: white;
+    }
+
+.content {
+    margin-top: 8rem;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.badge-kunstwerk {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 2rem;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    .badge-kunstwerk .k-p {
+        position: relative;
+    }
+
+        .badge-kunstwerk .k-p h2 {
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .badge-kunstwerk .k-p span.prijs {
+            color: #606060;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+    .badge-kunstwerk img {
+        max-width: 100%;
+        width: 100%;
+    }
+
+.filters {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 2rem;
+    display: none;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+    .filters.show {
+        display: flex;
+    }
+
+    .filters .form-floating > label {
+        padding: 0.4rem 1.75rem;
+    }
+
+    .filters .form-floating > .form-control {
+        height: calc(2.5rem + -2px);
+    }
+
+.badge-kunstenaars {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    .badge-kunstenaars .profile-pic {
+        height: 200px;
+        border-radius: 100%;
+        width: 200px;
+        min-width: 100px;
+        min-height: 100px;
+        max-height: 200px;
+        max-width: 200px;
+        margin: auto;
+    }
+
+        .badge-kunstenaars .profile-pic img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    .badge-kunstenaars h2 {
+        font-size: 1.4rem;
+        margin-top: 1rem;
+    }
+
+    .badge-kunstenaars span.locatie, .badge-kunstenaars span.kunstwerken {
+        color: #6a6a6a;
+    }
+
+        .badge-kunstenaars span.locatie img {
+            max-height: 15px;
+            transform: translateY(-2px);
+        }
+
+form input.form-control {
+    padding: 0.675rem 1.15rem;
+    border-radius: 25px;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+form .btn-own {
+    width: 100%;
+    border: none;
+    padding: .775rem .75rem;
+    background-color: #372C2E;
+    font-weight: 600;
+    border-radius: 0;
 }
+
+    form .btn-own:hover {
+        background-color: #3d3537;
+    }
