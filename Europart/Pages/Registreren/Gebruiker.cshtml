@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{ ViewData["Title"] = "Welkom gebruiker"; }
+
+<h1 class="text-center">Welkom gebruiker</h1>
+<div class="row">
+    <div class="col-4 offset-4">
+        <form>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="naam">
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="voornaam">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="e-mail">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="exampleInputEmail1" placeholder="wachtwoord">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="exampleInputEmail1" placeholder="controle wachtwoord">
+            </div>
+            <div class="mb-3">
+                <input type="date" class="form-control" id="exampleInputEmail1" placeholder="">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Straat en huisnummer">
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-4">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Postcode">
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Gemeente">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary btn-own">Registreren</button>
+            </div>
+        </form>
+    </div>
+</div>

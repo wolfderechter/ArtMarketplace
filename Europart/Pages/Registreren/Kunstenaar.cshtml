@@ -1,0 +1,77 @@
+﻿@page
+@model IndexModel
+@{ ViewData["Title"] = "Welkom kunstenaar"; }
+
+<h1 class="text-center">Welkom kunstenaar!</h1>
+<div class="row">
+    <div class="col-4 offset-4">
+        <form>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="naam">
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="voornaam">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="e-mail">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="exampleInputEmail1" placeholder="wachtwoord">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="exampleInputEmail1" placeholder="controle wachtwoord">
+            </div>
+            <div class="mb-3">
+                <input type="date" class="form-control" id="exampleInputEmail1" placeholder="">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Straat en huisnummer">
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-4">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Postcode">
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Gemeente">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3>">
+                <p>Welke stijl:</p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Abstract</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Klassiek</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Minimalisme</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Modernisme</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Surrealisme</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Andere</label>
+                </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary btn-own">Registreren</button>
+            </div>
+        </form>
+    </div>
+</div>
