@@ -41,7 +41,7 @@
     }
 
 .content {
-    margin-top: 8rem;
+    margin-top: 11rem;
 }
 
 .badge-kunstwerk {
@@ -80,7 +80,7 @@
 }
 
     .filters.show {
-        display: flex;
+        display: block;
     }
 
     .filters .form-floating > label {
@@ -156,4 +156,8 @@ a.big-button {
 
 a.big-button:hover {
     background-color: #3d3537;
+}
+
+.content .row img {
+    max-width: 100%;
 }
