@@ -56,14 +56,17 @@ namespace EuropArt.Server
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
-            app.UseRequestLocalization(GetLocalizationOptions());
+            //app.UseRequestLocalization(GetLocalizationOptions());
+            app.UseRequestLocalization(new RequestLocalizationOptions()
+                .AddSupportedCultures(new[] { "en-US", "es-CL" })
+                .AddSupportedUICultures(new[] { "en-US", "es-CL" }));
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
                 endpoints.MapFallbackToFile("index.html");
             });
         }

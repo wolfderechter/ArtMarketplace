@@ -5,16 +5,10 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Nederlands
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" href="#">English</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <div class="navbar-nav justify-content-start flex-grow-1 pe-3 nav-item">
+                <p class="nav-link">Site Language</p>
+                <ChooseLanguage />
+            </div>
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
                     <NavLink class="nav-link" href="Login">Sign in</NavLink>
