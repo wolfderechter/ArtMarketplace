@@ -11,7 +11,7 @@ Instructions how to run the project (don't forget the DB Connection etc.)
 
 ## Members
 
-> Fill in this information
+### Development
 
 - Groupmember 1 : <https://github.com/wolfderechter> - De Rechter - Wolf
 - Groupmember 2 : <https://github.com/stefboerjan> - Boerjan - Stef
@@ -19,6 +19,11 @@ Instructions how to run the project (don't forget the DB Connection etc.)
 - Groupmember 4 : <https://github.com/DylanDC666> - De Corte - Dylan
 - Groupmember 5 : <https://github.com/EmielDehaen> - Dehaen - Emiel
 - Groupmember 6 : <https://github.com/SimonBekaertt> - Bekaert - Simon
+
+### Operations
+
+- Groupmember 7 : <https://github.com/vic-rottiers> - Rottiers - Vic
+- Groupmember 8 : <https://github.com/pietervankeer> - Van Keer - Pieter
 
 ## Trello
 
