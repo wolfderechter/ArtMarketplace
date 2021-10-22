@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using EuropArt.Shared.Artworks;
+using EuropArt.Shared.Artist;
 
 namespace EuropArt.Client
 {
@@ -18,7 +20,8 @@ namespace EuropArt.Client
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
+            builder.Services.AddScoped<IArtworkService, FakeArtworkService>();
+            builder.Services.AddScoped<IArtistService, FakeArtistService>();
             await builder.Build().RunAsync();
         }
     }

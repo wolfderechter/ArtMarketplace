@@ -1,0 +1,38 @@
+﻿@page "/artists"
+@using EuropArt.Shared.Artist
+@inject IArtistService ArtistService
+
+
+<h3>Artist</h3>
+
+<div class="row">
+    @if (_artists is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        @foreach (var artist in _artists)
+        {
+            <div class="col-4 text-center">
+                <div class="badge-kunstenaars">
+                    <div class="profile-pic">
+                        <img src="@artist.ImagePath" />
+                    </div>
+                    <h2>@artist.Name</h2>
+                    <span class="locatie"><img src="images/locate.svg" /> @artist.City</span><br />
+                    <span class="kunstwerken">50 kunstwerken</span>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private IEnumerable<ArtistDto.Index> _artists;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _artists = await ArtistService.GetIndexAsync();
+    }
+}
