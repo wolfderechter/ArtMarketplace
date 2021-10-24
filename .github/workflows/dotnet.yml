@@ -4,9 +4,6 @@ on:
   push:
   pull_request:
     branches: [ main ]
-    paths:
-    - '**.cs'
-    - '**.csproj'
 
 jobs:
   build:
@@ -20,8 +17,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore ../../Europart/Europart.sln
+      run: dotnet restore Europart/Europart.sln
     - name: Build
-      run: dotnet build --no-restore ../../Europart/Europart.sln
+      run: dotnet build --no-restore Europart/Europart.sln
     - name: Test
-      run: dotnet test --no-build --verbosity normal ../../Europart/Europart.sln
+      run: dotnet test --no-build --verbosity normal Europart/Europart.sln
