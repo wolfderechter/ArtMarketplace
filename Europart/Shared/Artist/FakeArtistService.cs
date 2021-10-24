@@ -20,6 +20,8 @@ namespace EuropArt.Shared.Artist
                 .RuleFor(x => x.Id, _ => artistIds++)
                 .RuleFor(x => x.ImagePath, f => f.Internet.Avatar())
                 .RuleFor(x => x.City, f => f.Address.City())
+                .RuleFor(x => x.Website, f => f.Person.Website)
+                .RuleFor(x => x.Biography, f => f.Lorem.Sentence(5))
                 .RuleFor(x => x.Name, f => f.Name.FullName());
 
             _artists.AddRange(faker.Generate(25));

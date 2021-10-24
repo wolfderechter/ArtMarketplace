@@ -18,7 +18,8 @@ namespace EuropArt.Shared.Artist
 
         public class Detail : Index
         {
-
+            public string Biography { get; set; }
+            public string Website { get; set; }
         }
     }
 }

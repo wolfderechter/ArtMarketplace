@@ -1,6 +1,29 @@
 ﻿@page "/artwork/{id:int}"
-<h3>Detail</h3>
+@using EuropArt.Shared.Artworks
+<h3>Artwork Detail</h3>
+@if (_artwork == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <p>@_artwork.Id</p>
+    <p>@_artwork.Name</p>
+    <p>@_artwork.Description</p>
+    <p>@_artwork.Price.ToString("C")</p>
+    <img src="@_artwork.ImagePath" />
+}
+
+
 
 @code {
+    private ArtworkDto.Detail _artwork = new();
 
+    [Parameter] public int Id { get; set; }
+    [Inject] public IArtworkService ArtworkService { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _artwork = await ArtworkService.GetDetailAsync(Id);
+    }
 }

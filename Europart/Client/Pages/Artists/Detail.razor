@@ -1,6 +1,31 @@
 ﻿@page "/artist/{id:int}"
-<h3>Detail</h3>
+@using EuropArt.Shared.Artist
 
-@code {
 
+
+<h3>Detail Artist</h3>
+
+@if (_artist == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <p>@_artist.Id</p>
+    <p>@_artist.Name</p>
+    <p>@_artist.City</p>
+    <p>@_artist.Biography</p>
+    <a href="@_artist.Website">Portfolio</a>
+    <img src="@_artist.ImagePath" />
+}
+
+@code { private ArtistDto.Detail _artist = new();
+
+            [Parameter] public int Id { get; set; }
+            [Inject] public IArtistService ArtistService { get; set; }
+
+            protected override async Task OnParametersSetAsync()
+            {
+                _artist = await ArtistService.GetDetailAsync(Id);
+            } 
 }
