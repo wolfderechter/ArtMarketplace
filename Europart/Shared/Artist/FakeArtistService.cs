@@ -38,5 +38,7 @@ namespace EuropArt.Shared.Artist
             await Task.Delay(100);
             return _artists.AsEnumerable();
         }
+
+
     }
 }

@@ -37,5 +37,7 @@ namespace EuropArt.Shared.Artworks
             await Task.Delay(100);
             return _artworks.AsEnumerable();
         }
+
+    
     }
 }

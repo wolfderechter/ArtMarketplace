@@ -11,5 +11,6 @@ namespace EuropArt.Shared.Artworks
         Task<IEnumerable<ArtworkDto.Index>> GetIndexAsync();
         Task<ArtworkDto.Detail> GetDetailAsync(int id);
 
+    
     }
 }
