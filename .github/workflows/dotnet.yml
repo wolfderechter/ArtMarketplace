@@ -1,4 +1,4 @@
-name: Test Build .NET app
+name: Build .NET app
 
 on:
   push:
