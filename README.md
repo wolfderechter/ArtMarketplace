@@ -1,6 +1,7 @@
 # EuropArt
 
 [![GitHub Super-Linter](https://github.com/HoGentTIN/devops-project-web-h8/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![Build .NET app](https://github.com/HoGentTIN/devops-project-web-h8/actions/workflows/dotnet.yml/badge.svg)](https://github.com/HoGentTIN/devops-project-web-h8/actions/workflows/dotnet.yml)
 
 ## Used Technology
 
