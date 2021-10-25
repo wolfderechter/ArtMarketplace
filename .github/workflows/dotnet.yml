@@ -2,9 +2,13 @@ name: Build .NET app
 
 on:
   push:
-    branches: [main]
+    branches: 
+      - develop
+
   pull_request:
-    branches: [ main ]
+    branches: 
+      - main
+      - develop
 
 jobs:
   build:
