@@ -1,17 +1,38 @@
 ﻿@page "/artwork/{id:int}"
 @using EuropArt.Shared.Artworks
-<h3>Artwork Detail</h3>
 @if (_artwork == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <p>@_artwork.Id</p>
+    @*<p>@_artwork.Id</p>
     <p>@_artwork.Name</p>
     <p>@_artwork.Description</p>
     <p>@_artwork.Price.ToString("C")</p>
-    <img src="@_artwork.ImagePath" />
+    <img src="@_artwork.ImagePath" />*@
+
+    <div class="row">
+    <div class="row">
+        <div class="col-8">
+            <div class="badge-kunstwerk text-center">
+                <img src="@_artwork.ImagePath" style="width:auto;">
+            </div>
+            <h2 class="Kunstenaar">@_artwork.Name</h2>
+            <h4><span style="color:#b1b4b7">door</span> Stan De Doncker</h4>
+            <p>@_artwork.Description</p>
+        </div>
+        <div class="col-4">
+            <div class="bieden">
+                <span class="prijs-groot">@_artwork.Price.ToString("C")</span>
+                <form>
+                    <button class="btn btn-winkelmand mb-3">In winkelmand</button>
+                    <button class="btn btn-bieden mb-3">Nu kopen</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 }
 
 

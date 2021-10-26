@@ -1,10 +1,12 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-html, body {
+html,
+body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-a, .btn-link {
+a,
+.btn-link {
     color: #0366d6;
 }
 
@@ -14,9 +16,9 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
-/*.content {
+/* .content {
     padding-top: 1.1rem;
-}*/
+} */
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
@@ -42,28 +44,14 @@ a, .btn-link {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
-
-
-/*Custom css*/
-
-﻿.round-nav {
-    content: "";
-    display: block;
-    width: 130%;
-    padding-top: 75px;
-    position: fixed;
-    background-color: #372c2e;
-    z-index: 1000;
-    border-radius: 100%;
-    top: 40px;
-    left: -17%;
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
 }
+
+/* Custom css */
 
 .navbar-first {
     padding-top: 0;
@@ -73,10 +61,22 @@ a, .btn-link {
     z-index: 1031;
 }
 
+.round-nav {
+    content: "";
+    display: block;
+    width: 130%;
+    padding-top: 75px;
+    position: fixed;
+    background-color: #372c2e;
+    z-index: 1000;
+    border-radius: 100%;
+    top: 54px;
+    left: -17%;
+}
+
 .navbar-second {
-    top: 34px;
-    /*background-color:#3c231a;*/
-    background-color: #372C2E;
+    top: 50px;
+    background-color: #372c2e;
 }
 
 .dropdown-menu {
@@ -88,11 +88,11 @@ a, .btn-link {
     border-color: white;
 }
 
-    .btn-outline-white:hover {
-        color: black;
-        border-color: white;
-        background-color: white;
-    }
+.btn-outline-white:hover {
+    color: black;
+    border-color: white;
+    background-color: white;
+}
 
 .content {
     margin-top: 11rem;
@@ -104,26 +104,31 @@ a, .btn-link {
     margin-bottom: 2rem;
 }
 
-    .badge-kunstwerk .k-p {
-        position: relative;
-    }
+.badge-kunstwerk .k-p {
+    position: relative;
+}
 
-        .badge-kunstwerk .k-p h2 {
-            margin-top: 0.5rem;
-            font-size: 1.2rem;
-        }
+.badge-kunstenaars h2 {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+}
 
-        .badge-kunstwerk .k-p span.prijs {
-            color: #606060;
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
+.badge-kunstwerk .k-p h2 {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+}
 
-    .badge-kunstwerk img {
-        max-width: 100%;
-        width: 100%;
-    }
+.badge-kunstwerk .k-p span.prijs {
+    color: #606060;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.badge-kunstwerk img {
+    max-width: 100%;
+    width: 100%;
+}
 
 .filters {
     margin-top: 1rem;
@@ -133,52 +138,48 @@ a, .btn-link {
     display: none;
 }
 
-    .filters.show {
-        display: block;
-    }
+.filters.show {
+    display: block;
+}
 
-    .filters .form-floating > label {
-        padding: 0.4rem 1.75rem;
-    }
+.filters .form-floating > label {
+    padding: 0.4rem 1.75rem;
+}
 
-    .filters .form-floating > .form-control {
-        height: calc(2.5rem + -2px);
-    }
+.filters .form-floating > .form-control {
+    height: calc(2.5rem + -2px);
+}
 
 .badge-kunstenaars {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
-    .badge-kunstenaars .profile-pic {
-        height: 200px;
-        border-radius: 100%;
-        width: 200px;
-        min-width: 100px;
-        min-height: 100px;
-        max-height: 200px;
-        max-width: 200px;
-        margin: auto;
-    }
+.badge-kunstenaars .profile-pic {
+    height: 200px;
+    border-radius: 100%;
+    width: 200px;
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 200px;
+    max-width: 200px;
+    margin: auto;
+}
 
-        .badge-kunstenaars .profile-pic img {
-            max-width: 100%;
-            max-height: 100%;
-        }
+.badge-kunstenaars .profile-pic img {
+    max-width: 100%;
+    max-height: 100%;
+}
 
-    .badge-kunstenaars h2 {
-        font-size: 1.4rem;
-        margin-top: 1rem;
-    }
+.badge-kunstenaars span.locatie,
+.badge-kunstenaars span.kunstwerken {
+    color: #6a6a6a;
+}
 
-    .badge-kunstenaars span.locatie, .badge-kunstenaars span.kunstwerken {
-        color: #6a6a6a;
-    }
-
-        .badge-kunstenaars span.locatie img {
-            max-height: 15px;
-            transform: translateY(-2px);
-        }
+.badge-kunstenaars span.locatie img {
+    max-height: 15px;
+    transform: translateY(-2px);
+}
 
 form input.form-control {
     padding: 0.675rem 1.15rem;
@@ -189,14 +190,14 @@ form .btn-own {
     width: 100%;
     border: none;
     padding: .775rem .75rem;
-    background-color: #372C2E;
+    background-color: #372c2e;
     font-weight: 600;
     border-radius: 0;
 }
 
-    form .btn-own:hover {
-        background-color: #3d3537;
-    }
+form .btn-own:hover {
+    background-color: #3d3537;
+}
 
 a.big-button {
     display: inline-block;
@@ -208,10 +209,98 @@ a.big-button {
     font-size: 1.5rem;
 }
 
-    a.big-button:hover {
-        background-color: #3d3537;
-    }
+a.big-button:hover {
+    background-color: #3d3537;
+}
 
 .content .row img {
     max-width: 100%;
+}
+
+.content div.bieden {
+    text-align: center;
+    padding: 2rem;
+    background-color: #ebebeb;
+}
+
+.content div.bieden span.timer {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.content div.bieden .btn.btn-bieden {
+    background-color: #372c2e;
+    color: white;
+    border-radius: 0;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 0.4rem 2rem;
+    width: 100%;
+}
+
+button.btn.btn-winkelmand {
+    background-color: #fff3ec;
+    font-size: 1.5rem;
+    width: 100%;
+    font-weight: 500;
+    padding: 0.4rem 0rem;
+}
+
+.bieden-input {
+    position: relative;
+}
+
+.bieden-input input {
+    padding-left: 2.5rem !important;
+    font-weight: 700;
+}
+
+.bieden-input::after {
+    content: "€";
+    position: absolute;
+    top: 5px;
+    left: 1rem;
+    color: #7a7a7a;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.bieden span.prijs-groot {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.shopping-cart > div {
+    margin-bottom: 2rem;
+}
+
+.shopping-cart .img-cart {
+    width: 100%;
+    padding-top: 150px;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 150px;
+    max-height: 150px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.shopping-cart span.artist {
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.shopping-cart-total span.total-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.shopping-cart-total .btn.btn-bestellen {
+    background-color: #372c2e;
+    border-radius: 0;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 0.3rem 3rem;
 }

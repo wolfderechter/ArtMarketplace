@@ -3,16 +3,19 @@
 
 @if (cultures != null)
 {
-    <form class="form-inline">
+<form class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="col-12">
         <select class="form-control mr-2" @bind="selectedCulture">
             <option value="null">Select...</option>
-            @foreach(var culture in cultures)
-                {
-                    <option value="@culture.Key">@culture.Value</option>
-                }
+            @foreach (var culture in cultures)
+            {
+            <option value="@culture.Key">@culture.Value</option>}
         </select>
+    </div>
+    <div class="col-12">
         <button class="btn btn-outline-primary" @onclick="RequestCultureChange">Change</button>
-    </form>
+    </div>
+</form>
 }
 
 @code { 
