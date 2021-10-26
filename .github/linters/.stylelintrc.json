@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "indentation": [
+      4,
+      {
+        "except": ["block"],
+        "message": "Please use 4 spaces for indentation.",
+        "severity": "warning"
+      }
+    ]
+  },
+  "no-missing-end-of-source-newline":false,
+  "extends": "stylelint-config-standard"
+}
