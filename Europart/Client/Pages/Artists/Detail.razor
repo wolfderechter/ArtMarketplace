@@ -2,30 +2,81 @@
 @using EuropArt.Shared.Artist
 
 
+<h2 class="Kunstenaar">@_artist.Name</h2>
 
-<h3>Detail Artist</h3>
 
 @if (_artist == null)
 {
     <p><em>Loading...</em></p>
 }
+
+
+
 else
 {
-    <p>@_artist.Id</p>
-    <p>@_artist.Name</p>
-    <p>@_artist.City</p>
-    <p>@_artist.Biography</p>
+    @*
+        <p>@_artist.Id</p>
+        <p>@_artist.Name</p>
+        <p>@_artist.City</p>
+        <p>@_artist.Biography</p>
+        <a href="@_artist.Website">Portfolio</a>
+        <img src="@_artist.ImagePath" />
+
+    *@
+
+
+
+
+<div class="row">
+
+
+
+
+
+
+
+    <img src="@_artist.ImagePath" style="width:auto;">
+   
+    <p>
+        
+        <br>Lives in @_artist.City
+    </p>
+
+    
+
     <a href="@_artist.Website">Portfolio</a>
-    <img src="@_artist.ImagePath" />
+
+  
+
+    <p>
+        <br>
+        About the artist :
+
+        @_artist.Biography
+    </p>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
 }
 
 @code { private ArtistDto.Detail _artist = new();
 
-            [Parameter] public int Id { get; set; }
-            [Inject] public IArtistService ArtistService { get; set; }
+    [Parameter] public int Id { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
 
-            protected override async Task OnParametersSetAsync()
-            {
-                _artist = await ArtistService.GetDetailAsync(Id);
-            } 
+    protected override async Task OnParametersSetAsync()
+    {
+        _artist = await ArtistService.GetDetailAsync(Id);
+    }
 }
+
