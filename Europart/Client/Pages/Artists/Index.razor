@@ -1,9 +1,10 @@
 ﻿@page "/artist"
 @using EuropArt.Shared.Artist
+@using System.Globalization
 @inject IArtistService ArtistService
+@inject IStringLocalizer<Resources.Artist> Loc
 
-
-<h3>Artist</h3>
+<h3>@Loc["titel"]</h3>
 
 <div class="row">
     @if (_artists is null)
@@ -17,7 +18,7 @@
             <div class="col-4 text-center">
                 <div class="badge-kunstenaars">
                     <div class="profile-pic">
-                        <a href="/artist/@artist.Id"><img src="@artist.ImagePath"/></a>
+                        <a href="/artist/@artist.Id"><img src="@artist.ImagePath" /></a>
                     </div>
                     <h2>@artist.Name</h2>
                     <span class="locatie"><img src="images/locate.svg" /> @artist.City</span><br />

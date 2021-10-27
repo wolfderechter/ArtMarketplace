@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    
+
     <div id="app">Loading...</div>
 
     <div id="blazor-error-ui">
@@ -23,6 +23,12 @@
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/site.js"></script>
+    <script>
+        window.blazorCulture = {
+            get: () => window.localStorage['BlazorCulture'],
+            set: (value) => window.localStorage['BlazorCulture'] = value
+        };
+    </script>
 </body>
 
 </html>
