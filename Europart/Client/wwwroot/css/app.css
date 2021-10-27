@@ -98,6 +98,10 @@ h2 {
     margin-top: 11rem;
 }
 
+.content .row img {
+    max-width: 100%;
+}
+
 .badge-kunstwerk {
     width: 100%;
     padding: 0.5rem;
@@ -214,10 +218,6 @@ a.big-button:hover {
     background-color: #3d3537;
 }
 
-.content .row img {
-    max-width: 100%;
-}
-
 .content div.bieden {
     text-align: center;
     padding: 2rem;
@@ -244,7 +244,7 @@ button.btn.btn-winkelmand {
     font-size: 1.5rem;
     width: 100%;
     font-weight: 500;
-    padding: 0.4rem 0rem;
+    padding: 0.4rem 0;
 }
 
 .bieden-input {
@@ -308,7 +308,7 @@ button.btn.btn-winkelmand {
 
 .artist-detail .detail-profile-pic {
     width: 100%;
-    max-width: 200px!important;
+    max-width: 200px !important;
     max-height: 200px;
     height: 100%;
     border-radius: 100%;
