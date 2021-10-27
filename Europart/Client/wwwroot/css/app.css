@@ -98,10 +98,6 @@ h2 {
     margin-top: 11rem;
 }
 
-.content .row img {
-    max-width: 100%;
-}
-
 .badge-kunstwerk {
     width: 100%;
     padding: 0.5rem;
@@ -133,6 +129,10 @@ h2 {
 .badge-kunstwerk img {
     max-width: 100%;
     width: 100%;
+}
+
+.content .row img {
+    max-width: 100%;
 }
 
 .filters {
