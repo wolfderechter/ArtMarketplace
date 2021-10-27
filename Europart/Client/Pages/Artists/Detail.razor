@@ -27,38 +27,34 @@ else
 
 
 
-<div class="row">
-
-
-
-
-
-
-
-    <img src="@_artist.ImagePath" style="width:auto;">
-   
-    <p>
-        
-        <br>Lives in @_artist.City
-    </p>
-
-    
-
-    <a href="@_artist.Website">Portfolio</a>
-
-  
-
-    <p>
-        <br>
-        About the artist :
-
-        @_artist.Biography
-    </p>
-
-
-
-
-
+<div class="row artist-detail align-items-center">
+    <div class="col-4 text-center mb-5">
+        <img src="@_artist.ImagePath" class="detail-profile-pic" />
+    </div>
+    <div class="col-8 mb-5">
+        <p>
+            <img src="images/locate.svg" class="location" /> @_artist.City
+        </p>
+        <p>
+            @_artist.Biography
+        </p>
+        <p><a href="http://www.@_artist.Website" target="_blank">@_artist.Website</a></p>
+    </div>
+    <div class="col-8">
+        <h3>Latest artworks</h3>
+    </div>
+    <div class="col-4 text-end">
+        <a href="#">View all # artworks</a>
+    </div>
+    <div class="col-4 text-center">
+        <span style="font-size:5rem;font-weight:400;">1</span>
+    </div>
+    <div class="col-4 text-center">
+        <span style="font-size:5rem;font-weight:400;">2</span>
+    </div>
+    <div class="col-4 text-center">
+        <span style="font-size:5rem;font-weight:400;">3</span>
+    </div>
 </div>
 
 
