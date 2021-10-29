@@ -2,31 +2,39 @@
 <h1>Add an artwork</h1>
 
 
-<div class="mb-3">
-    <h5>Title</h5>
-    <input class="form-control"  placeholder="Title">
-</div>
-<div class="mb-3">
-    <h5>Description</h5>
-    <input class="form-control" placeholder="Description">
-</div>
-<div class="mb-3">
-    <h5>Price</h5>
-    <input class="form-control" placeholder="Price">
-</div>
 
-    <fieldset>
-      <legend> Upload Image </legend>
-      <label for="Image">Image</label>
-      <br />
-      <input type="file" name="Image" />
-      <br/>
-      <input type="submit" value="Upload" />
-    </fieldset>
+<form method="post">
+    <div class="mb-3">
+        <h6>Title</h6>
+        <input type="title" class="form-control" id="exampleInputTitle" aria-describedby="titleHelp" placeholder="Enter title">
+    </div>
+    <div class="mb-3">
+        <h6>Description</h6>
+        <input type="description" class="form-control" id="exampleInputDescription1" placeholder="Enter description">
+    </div>
+    <div class="mb-3">
+        <h6>Price</h6>
+        <input type="description" class="form-control" placeholder="Enter price">
+    </div>
 
-<div class="mb-3">
-    <button type="submit" class="btn btn-primary btn-own">Add artwork</button>
-</div>
+ 
+
+
+    <div class="mb-3">
+        <h6>Choose artwork</h6>
+        <input type="file" id="artwork" name="artwork" />
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Add artwork</button>
+    </div>
+
+</form>
+
+
+
+
+
 
 @code {
 

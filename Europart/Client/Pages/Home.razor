@@ -1,4 +1,11 @@
 ﻿@page "/"
+@using EuropArt.Shared.Artist
+@using System.Globalization
+@inject IArtistService ArtistService
+
+@using EuropArt.Shared.Artworks
+@inject IArtworkService ArtworkService
+
 <div id="homepage">
     <div class="row">
         <div class="col-12">
@@ -42,9 +49,88 @@
                 <span class="naam">Unbranded Fresh Cheese</span>
             </div>
         </div>
+
+
+
+
+        <div class="col-12 text-center">
+            <h2>Featured artworks</h2>
+        </div>
+        <div class="row">
+            @if (_artworks is null)
+            {
+                <p>Loading...</p>
+            }
+            else
+            {
+                @for (var i = 0; i < 3; i++)
+                {
+                    <div class="kol col-4">
+                        <div class="badge-kunstwerk">
+                            <a href="artwork/@_artworks.ElementAt(i).Id"><img src="@_artworks.ElementAt(i).ImagePath"></a>
+                            <div class="k-p">
+                                <h2 class="kunstenaar">by @*@_artworks.ElementAt(i).Name*@</h2>
+                                <span class="prijs">@_artworks.ElementAt(i).Price.ToString("C")</span>
+                            </div>
+                            <span class="naam">@_artworks.ElementAt(i).Name</span>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+
+
+
+
+        <div class="col-12 text-center">
+            <h2>Featured artists</h2>
+        </div>
+        <div class="row">
+            @if (_artists is null)
+            {
+                <p>Loading...</p>
+            }
+            else
+            {
+                @for (var i = 0; i < 3; i++)
+                {
+                    <div class="col-4 text-center">
+                        <div class="badge-kunstenaars">
+                            <div class="profile-pic">
+                                <a href="/artist/@_artists.ElementAt(i).Id"><img src="@_artists.ElementAt(i).ImagePath" /></a>
+                            </div>
+                            <h2>@_artists.ElementAt(i).Name</h2>
+                            <span class="locatie"><img src="images/locate.svg" /> @_artists.ElementAt(i).City</span><br />
+                            <span class="kunstwerken">50 kunstwerken</span>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+
+
+
     </div>
 </div>
 
 
 
-@code { }
+
+@code {
+    private IEnumerable<ArtistDto.Index> _artists;
+
+    private IEnumerable<ArtworkDto.Index> _artworks;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _artists = await ArtistService.GetIndexAsync();
+        _artworks = await ArtworkService.GetIndexAsync();
+    }
+
+
+
+
+}
