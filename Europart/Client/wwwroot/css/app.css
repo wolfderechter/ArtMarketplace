@@ -53,14 +53,6 @@ h2 {
 
 /* Custom css */
 
-.navbar-first {
-    padding-top: 0;
-    padding-bottom: 0;
-    font-size: 0.8rem;
-    background-color: #fff3ec;
-    z-index: 1031;
-}
-
 .round-nav {
     content: "";
     display: block;
@@ -70,12 +62,11 @@ h2 {
     background-color: #372c2e;
     z-index: 1000;
     border-radius: 100%;
-    top: 54px;
+    top: 4px;
     left: -17%;
 }
 
 .navbar-second {
-    top: 50px;
     background-color: #372c2e;
 }
 
@@ -317,4 +308,62 @@ button.btn.btn-winkelmand {
 .artist-detail img.location {
     max-height: 15px;
     transform: translateY(-2px);
+}
+
+.fixed-language-user {
+    position: fixed;
+    bottom: 35px;
+    right: 35px;
+    text-align:center;
+    z-index:1000;
+}
+
+.fixed-language-user a.user-profile {
+    background-color: white;
+    border-radius: 100%;
+    box-shadow: 0px 3px 6px #00000052;
+    padding: 1.3rem 1.2rem;
+    transition: box-shadow 0.2s ease-in-out
+}
+
+.fixed-language-user a.user-profile:hover {
+    box-shadow: 0px 1px 6px #000000;
+}
+
+.fixed-language-user a.user-profile img {
+    width: 25px;
+}
+
+.fixed-language-user .language-selector {
+    margin-top: 25px;
+}
+
+#homepage .banner {
+    width: 100%;
+    padding-top: calc(100% / 16 * 3);
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position:relative;
+}
+
+#homepage .banner .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+#homepage .banner .text h1 {
+    color: black;
+    font-weight: 600;
+    text-shadow: 0px 0px 10px white;
+}
+
+#homepage .banner .text span.small-banner-text {
+    font-size:1.2rem;
+    text-shadow: 0px 0px 10px white;
 }

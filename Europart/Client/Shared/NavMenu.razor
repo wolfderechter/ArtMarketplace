@@ -1,25 +1,4 @@
 ﻿<div class="round-nav fixed-top"></div>
-<nav class="navbar navbar-first navbar-expand navbar-light fixed-top">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <div class="navbar-nav justify-content-start flex-grow-1 pe-3 nav-item">
-                <p class="nav-link">Site Language</p>
-                <CultureSelector />
-            </div>
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="Login">Sign in</NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="Register">Register</NavLink>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 <nav class="navbar navbar-second navbar-dark navbar-expand-lg fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">EuropArt</a>
@@ -56,6 +35,12 @@
         </div>
     </div>
 </nav>
+<div class="fixed-language-user">
+    <NavLink class="user-profile" href="login">
+        <img src="images/user.svg" />
+    </NavLink>
+    <CultureSelector />
+</div>
 
 
 @code {
