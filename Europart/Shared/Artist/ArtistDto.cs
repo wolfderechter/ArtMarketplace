@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EuropArt.Shared.Artworks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace EuropArt.Shared.Artist
             public string Name { get; set; }
             public string City { get; set; }
             public string ImagePath { get; set; }
+            public IEnumerable<ArtworkDto.Detail> Artworks = Enumerable.Empty<ArtworkDto.Detail>();
         }
 
         public class Detail : Index

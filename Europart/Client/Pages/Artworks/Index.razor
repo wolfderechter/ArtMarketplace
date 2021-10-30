@@ -79,7 +79,7 @@
                         <div class="badge-kunstwerk">
                             <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
                             <div class="k-p">
-                                <h2 class="kunstenaar">by @*@artwork.Artist.Name*@</h2>
+                                <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id">by @artwork.Artist.Name</a></h2>
                                 <span class="prijs">@artwork.Price.ToString("C")</span>
                             </div>
                             <span class="naam">@artwork.Name</span>
