@@ -23,9 +23,9 @@ namespace EuropArt.Shared.Artworks
                 .RuleFor(x => x.Artist, f => f.PickRandom(artists))
                 .RuleFor(x => x.Description, f => f.Commerce.ProductDescription())
                 .RuleFor(x => x.Price, f => f.Random.Decimal(0, 250))
-                .RuleFor(x => x.ImagePath, f => f.Internet.Avatar());
+                .RuleFor(x => x.ImagePath, _ => $"/images/artworks/{artworkIds}.jpg");
 
-            _artworks.AddRange(faker.Generate(250));
+            _artworks.AddRange(faker.Generate(29));
         }
 
         public async Task<ArtworkDto.Detail> GetDetailAsync(int id)

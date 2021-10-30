@@ -30,7 +30,7 @@ namespace EuropArt.Shared.Artist
                 .RuleFor(x => x.Biography, f => f.Lorem.Sentence(5))
                 .RuleFor(x => x.Name, f => f.Name.FullName());
 
-            _artists.AddRange(faker.Generate(25));
+            _artists.AddRange(faker.Generate(5));
             _artists.ForEach(a => a.Artworks = artworks.Where(aw => aw.Artist.Id == a.Id));
         }
 

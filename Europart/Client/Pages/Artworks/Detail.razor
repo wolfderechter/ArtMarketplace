@@ -1,6 +1,6 @@
 ﻿@page "/artwork/{id:int}"
 @using EuropArt.Shared.Artworks
-@if (_artwork == null)
+@if (_artwork == null || _artwork.Artist == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -18,7 +18,7 @@ else
                 <img src="@_artwork.ImagePath" style="width:auto;">
             </div>
             <h2 class="mb-1">@_artwork.Name</h2>
-            <h4><span style="color:#b1b4b7">door</span> Stan De Doncker</h4>
+            <h4><span style="color:#b1b4b7">door</span> @_artwork.Artist.Name</h4>
             <p>@_artwork.Description</p>
         </div>
         <div class="col-4">
