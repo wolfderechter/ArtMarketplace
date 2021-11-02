@@ -46,24 +46,23 @@ else
     <div class="col-4 text-end">
         <a href="#">View all # artworks</a>
     </div>
-    <div class="col-4 text-center">
-        @if(_artist.Artworks != null) { 
-            @foreach(var artwork in _artist.Artworks) { 
-                <span style="font-size:5rem;font-weight:400;">
-                    <div class="kol col-4">
-                        <div class="badge-kunstwerk">
-                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-                            <div class="k-p">
-                                <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id">by @*@artwork.Artist.Name*@</a></h2>
-                                <span class="prijs">@artwork.Price.ToString("C")</span>
-                            </div>
-                            <span class="naam">@artwork.Name</span>
+    @if(_artist.Artworks != null) { 
+        @foreach(var artwork in _artist.Artworks) { 
+                <div class="kol col-4">
+                    <div class="badge-kunstwerk">
+                        <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                        <div class="k-p">
+                            <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id">by @*@artwork.Artist.Name*@</a></h2>
+                            <span class="prijs">@artwork.Price.ToString("C")</span>
                         </div>
+                        <span class="naam">@artwork.Name</span>
                     </div>
-                </span>
-             }
-        }
-    </div>
+                </div>
+            }
+    } else
+    {
+        <p>Nog geen kunstwerken</p>
+    }
     @*<div class="col-4 text-center">
         <span style="font-size:5rem;font-weight:400;">2</span>
     </div>
