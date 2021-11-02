@@ -2,21 +2,30 @@
 
 <h1 class="text-center">Welcome back!</h1>
 <div class="row">
-    <div class="col-4 offset-4">
-        <form>
+    <div class="col-6 offset-3">
+        <form class="form">
             <div class="mb-3">
                 <input type="email" class="form-control" id="exampleInputEmail1" placeholder="e-mail">
             </div>
             <div class="mb-3">
                 <input type="password" class="form-control" id="exampleInputEmail1" placeholder="wachtwoord">
             </div>
-            <div class="mb-3">
+            <div>
                 <button type="submit" class="btn btn-primary btn-own">Sign in</button>
             </div>
         </form>
     </div>
 </div>
 
-@code {
+<div class="intermetzo">
+    <span>Or</span>
+</div>
 
-}
+<h2 class="text-center">Register now</h2>
+<h3 class="text-center">I am a...</h3>
+<div class="text-center">
+    <a class="big-button" asp-area="" asp-page="/Registreren/Gebruiker">User</a>
+    <a class="big-button" asp-area="" asp-page="/Registreren/Kunstenaar">Artist</a>
+</div>
+
+@code { }

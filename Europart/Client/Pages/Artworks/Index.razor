@@ -73,9 +73,10 @@
             }
             else
             {
+                <div class="kol col-4">
                 @foreach (var artwork in _artworks)
                 {
-                    <div class="kol col-4">
+                    @if(artwork.Id % 3 == 0) { 
                         <div class="badge-kunstwerk">
                             <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
                             <div class="k-p">
@@ -84,10 +85,40 @@
                             </div>
                             <span class="naam">@artwork.Name</span>
                         </div>
-                    </div>
+                    }
                 }
+                </div>
+                <div class="kol col-4">
+                @foreach (var artwork in _artworks)
+                {
+                    @if(artwork.Id % 3 == 1) { 
+                        <div class="badge-kunstwerk">
+                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                            <div class="k-p">
+                                <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id">by @artwork.Artist.Name</a></h2>
+                                <span class="prijs">@artwork.Price.ToString("C")</span>
+                            </div>
+                            <span class="naam">@artwork.Name</span>
+                        </div>
+                    }
+                }
+                </div>
+                <div class="kol col-4">
+                @foreach (var artwork in _artworks)
+                {
+                    @if(artwork.Id % 3 == 2) { 
+                        <div class="badge-kunstwerk">
+                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                            <div class="k-p">
+                                <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id">by @artwork.Artist.Name</a></h2>
+                                <span class="prijs">@artwork.Price.ToString("C")</span>
+                            </div>
+                            <span class="naam">@artwork.Name</span>
+                        </div>
+                    }
+                }
+                </div>
             }
-
         </div>
     </div>
 </div>
