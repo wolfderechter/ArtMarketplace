@@ -424,3 +424,27 @@ form.form {
     top: 50%;
     transform: translateY(-50%);
 }
+
+#dashboard > a {
+    text-align: center;
+    padding: 1rem;
+    text-decoration:none;
+}
+
+#dashboard a .badge {
+    background-color: #f4f4f4;
+    display: block;
+    padding: 2rem;
+}
+
+#dashboard a .badge h2 {
+    color: #212529;
+    font-size: 1.2rem;
+    text-decoration:none;
+}
+
+#dashboard a .badge span {
+    font-size: 3rem;
+    color: #212529;
+    font-weight: 600;
+}
