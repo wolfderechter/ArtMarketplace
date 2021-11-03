@@ -1,4 +1,7 @@
 ﻿@page "/artwork/add"
+@inject IStringLocalizer<Resources.Artworks.Create> Loc
+
+
 <h1 class="text-center">Add an artwork</h1>
 
 <div class="row">
@@ -34,12 +37,8 @@
     </div>
 </div>
 
-@code {
-
-    EuropArt.Shared.Artworks.ArtworkDto.Detail newArtwork = new EuropArt.Shared.Artworks.ArtworkDto.Detail();
-    void CreateNewArtwork()
-    {
-        Console.WriteLine("Created new artwork!");
-    }
-
-}
+@code { EuropArt.Shared.Artworks.ArtworkDto.Detail newArtwork = new EuropArt.Shared.Artworks.ArtworkDto.Detail();
+            void CreateNewArtwork()
+            {
+                Console.WriteLine("Created new artwork!");
+            } }

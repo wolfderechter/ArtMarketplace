@@ -1,6 +1,7 @@
 ﻿@page "/login"
+@inject IStringLocalizer<Resources.Login> Loc
 
-<h1 class="text-center">Welcome back!</h1>
+<h1 class="text-center">@Loc["Welcome Back"]!</h1>
 <div class="row">
     <div class="col-6 offset-3">
         <form class="form">
@@ -11,21 +12,16 @@
                 <input type="password" class="form-control" id="exampleInputEmail1" placeholder="wachtwoord">
             </div>
             <div>
-                <button type="submit" class="btn btn-primary btn-own">Sign in</button>
+                <button type="submit" class="btn btn-primary btn-own">@Loc["Sign In"]</button>
             </div>
         </form>
     </div>
 </div>
 
 <div class="intermetzo">
-    <span>Or</span>
+    <span><a href="/register">@Loc["Don't Have An Account Yet"]</a></span>
 </div>
 
-<h2 class="text-center">Register now</h2>
-<h3 class="text-center">I am a...</h3>
-<div class="text-center">
-    <a class="big-button" asp-area="" asp-page="/Registreren/Gebruiker">User</a>
-    <a class="big-button" asp-area="" asp-page="/Registreren/Kunstenaar">Artist</a>
-</div>
+
 
 @code { }

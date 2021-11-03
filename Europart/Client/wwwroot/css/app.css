@@ -430,6 +430,9 @@ form.form {
     transform: translateY(-50%);
 }
 
+.intermetzo span a{
+    text-decoration: none;
+}
 #dashboard > a {
     text-align: center;
     padding: 1rem;

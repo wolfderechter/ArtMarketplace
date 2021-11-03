@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EuropArt.Client.Resources {
+namespace EuropArt.Client.Resources.Artists {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EuropArt.Client.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Artist {
+    public class Detail {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Artist() {
+        internal Detail() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EuropArt.Client.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Client.Resources.Artist", typeof(Artist).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Client.Resources.Artists.Detail", typeof(Detail).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,38 @@ namespace EuropArt.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Artist.
+        ///   Looks up a localized string similar to artworks.
         /// </summary>
-        public static string titel {
+        public static string artworks {
             get {
-                return ResourceManager.GetString("titel", resourceCulture);
+                return ResourceManager.GetString("artworks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latest Artworks.
+        /// </summary>
+        public static string Latest_Artworks {
+            get {
+                return ResourceManager.GetString("Latest Artworks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No artworks yet.
+        /// </summary>
+        public static string No_artworks_yet {
+            get {
+                return ResourceManager.GetString("No artworks yet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View all.
+        /// </summary>
+        public static string View_all {
+            get {
+                return ResourceManager.GetString("View all", resourceCulture);
             }
         }
     }

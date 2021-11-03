@@ -1,84 +1,60 @@
 ﻿@page "/artist/{id:int}"
 @using EuropArt.Shared.Artist
-
+@inject IStringLocalizer<Resources.Artists.Detail> Loc
 
 <h2 class="Kunstenaar">@_artist.Name</h2>
 
-
 @if (_artist == null)
 {
-    <p><em>Loading...</em></p>
-}
+<p><em>Loading...</em></p> }
 
 
 
 else
 {
-    @*
-        <p>@_artist.Id</p>
-        <p>@_artist.Name</p>
-        <p>@_artist.City</p>
-        <p>@_artist.Biography</p>
-        <a href="@_artist.Website">Portfolio</a>
-        <img src="@_artist.ImagePath" />
-
-    *@
-
-
-
-
-<div class="row artist-detail align-items-center">
-    <div class="col-4 text-center mb-5">
-        <img src="@_artist.ImagePath" class="detail-profile-pic" />
-    </div>
-    <div class="col-8 mb-5">
-        <p>
-            <img src="images/locate.svg" class="location" /> @_artist.City
-        </p>
-        <p>
-            @_artist.Biography
-        </p>
-        <p><a href="http://www.@_artist.Website" target="_blank">@_artist.Website</a></p>
-    </div>
-    <div class="col-8">
-        <h3>Latest artworks</h3>
-    </div>
-    <div class="col-4 text-end">
-        <a href="#">View all # artworks</a>
-    </div>
-    @if(_artist.Artworks != null) { 
-        @foreach(var artwork in _artist.Artworks) { 
-                <div class="kol col-4">
-                    <div class="badge-kunstwerk">
-                        <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-                        <div class="k-p">
-                            <span class="prijs">@artwork.Price.ToString("C")</span>
-                        </div>
-                        <span class="naam">@artwork.Name</span>
+    <div class="row artist-detail align-items-center">
+        <div class="col-4 text-center mb-5">
+            <img src="@_artist.ImagePath" class="detail-profile-pic" />
+        </div>
+        <div class="col-8 mb-5">
+            <p>
+                <img src="images/locate.svg" class="location" /> @_artist.City
+            </p>
+            <p>
+                @_artist.Biography
+            </p>
+            <p><a href="http://www.@_artist.Website" target="_blank">@_artist.Website</a></p>
+        </div>
+        <div class="col-8">
+            <h3>@Loc["Latest Artworks"]</h3>
+        </div>
+        <div class="col-4 text-end">
+            <a href="#">@Loc["View all"] @_artist.Artworks.Count() @Loc["artworks"]</a>
+        </div>
+        @if (_artist.Artworks != null)
+        {
+            @foreach (var artwork in _artist.Artworks)
+            {
+            <div class="kol col-4">
+                <div class="badge-kunstwerk">
+                    <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                    <div class="k-p">
+                        <span class="prijs">@artwork.Price.ToString("C")</span>
                     </div>
+                    <span class="naam">@artwork.Name</span>
                 </div>
-            }
-    } else
-    {
-        <p>Nog geen kunstwerken</p>
-    }
-    @*<div class="col-4 text-center">
-        <span style="font-size:5rem;font-weight:400;">2</span>
+            </div>
+            } 
+         }
+         else
+         {
+            <p>@Loc["No artworks yet"]</p>
+         }
     </div>
-    <div class="col-4 text-center">
-        <span style="font-size:5rem;font-weight:400;">3</span>
-    </div>*@
-</div>
-
-
-
-
-
-
-
 }
 
-@code { private ArtistDto.Detail _artist = new();
+@code { 
+    private ArtistDto.Detail _artist = new();
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtistService ArtistService { get; set; }
@@ -86,6 +62,5 @@ else
     protected override async Task OnParametersSetAsync()
     {
         _artist = await ArtistService.GetDetailAsync(Id);
-    }
-}
+    } }
 

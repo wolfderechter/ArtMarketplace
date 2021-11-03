@@ -1,5 +1,8 @@
 ﻿@page "/artwork/{id:int}"
 @using EuropArt.Shared.Artworks
+@inject IStringLocalizer<Resources.Artworks.Detail> Loc
+
+
 @if (_artwork == null || _artwork.Artist == null)
 {
     <p><em>Loading...</em></p>

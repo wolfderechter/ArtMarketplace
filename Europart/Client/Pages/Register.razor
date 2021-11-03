@@ -1,13 +1,13 @@
 ﻿@page "/register"
+@inject IStringLocalizer<Resources.Register> Loc
 
 <div class="container-lg content">
-    <h1 class="text-center">Ik ben een ...</h1>
+    <h1 class="text-center">@Loc["I am a"]</h1>
     <div class="text-center">
-        <a class="big-button" asp-area="" asp-page="/Registreren/Gebruiker">Gebruiker</a>
-        <a class="big-button" asp-area="" asp-page="/Registreren/Kunstenaar">Kunstenaar</a>
+        <a class="big-button" asp-area="" asp-page="/Registreren/Gebruiker">@Loc["User"]</a>
+        <a class="big-button" asp-area="" asp-page="/Registreren/Kunstenaar">@Loc["Artist"]</a>
+        <a class="big-button" asp-area="" asp-page="/Registreren/Kunstenaar">@Loc["Youth Artist"]</a>
     </div>
 </div>
 
-@code {
-
-}
+@code { }

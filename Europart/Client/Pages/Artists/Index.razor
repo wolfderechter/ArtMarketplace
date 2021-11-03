@@ -2,7 +2,7 @@
 @using EuropArt.Shared.Artist
 @using System.Globalization
 @inject IArtistService ArtistService
-@inject IStringLocalizer<Resources.Artist> Loc
+@inject IStringLocalizer<Resources.Artists.Index> Loc
 
 <h3>@Loc["titel"]</h3>
 
@@ -22,7 +22,7 @@
                     </div>
                     <h2>@artist.Name</h2>
                     <span class="locatie"><img src="images/locate.svg" /> @artist.City</span><br />
-                    <span class="kunstwerken">@artist.Artworks.Count() kunstwerken</span>
+                    <span class="kunstwerken">@artist.Artworks.Count() @Loc["artworks"]</span>
                 </div>
             </div>
         }
