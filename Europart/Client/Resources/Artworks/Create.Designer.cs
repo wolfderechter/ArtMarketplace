@@ -59,5 +59,59 @@ namespace EuropArt.Client.Resources.Artworks {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add artwork.
+        /// </summary>
+        public static string Add_Artwork {
+            get {
+                return ResourceManager.GetString("Add Artwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an artwork.
+        /// </summary>
+        public static string AddArtwork {
+            get {
+                return ResourceManager.GetString("AddArtwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choos Artwork.
+        /// </summary>
+        public static string ChooseArtwork {
+            get {
+                return ResourceManager.GetString("ChooseArtwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
     }
 }

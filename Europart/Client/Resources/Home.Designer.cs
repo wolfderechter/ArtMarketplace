@@ -22,14 +22,14 @@ namespace EuropArt.Client.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Login {
+    public class Home {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Login() {
+        internal Home() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EuropArt.Client.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Client.Resources.Login", typeof(Login).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Client.Resources.Home", typeof(Home).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,47 @@ namespace EuropArt.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Don&apos;t have an account yet?.
+        ///   Looks up a localized string similar to Art brings life.
         /// </summary>
-        public static string Don_t_Have_An_Account_Yet {
+        public static string ArtBringsLive {
             get {
-                return ResourceManager.GetString("Don\'t Have An Account Yet", resourceCulture);
+                return ResourceManager.GetString("ArtBringsLive", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email.
+        ///   Looks up a localized string similar to Featured artists.
         /// </summary>
-        public static string Email {
+        public static string FeaturedArtists {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("FeaturedArtists", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Or.
+        ///   Looks up a localized string similar to Featured artworks.
         /// </summary>
-        public static string Or {
+        public static string FeaturedArtworks {
             get {
-                return ResourceManager.GetString("Or", resourceCulture);
+                return ResourceManager.GetString("FeaturedArtworks", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password.
+        ///   Looks up a localized string similar to For real....
         /// </summary>
-        public static string Password {
+        public static string ForReal {
             get {
-                return ResourceManager.GetString("Password", resourceCulture);
+                return ResourceManager.GetString("ForReal", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign In.
+        ///   Looks up a localized string similar to Latsest artworks.
         /// </summary>
-        public static string Sign_In {
+        public static string Latest {
             get {
-                return ResourceManager.GetString("Sign In", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Welcome Back.
-        /// </summary>
-        public static string Welcome_Back {
-            get {
-                return ResourceManager.GetString("Welcome Back", resourceCulture);
+                return ResourceManager.GetString("Latest", resourceCulture);
             }
         }
     }

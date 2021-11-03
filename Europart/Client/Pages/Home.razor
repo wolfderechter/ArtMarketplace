@@ -5,19 +5,20 @@
 
 @using EuropArt.Shared.Artworks
 @inject IArtworkService ArtworkService
+@inject IStringLocalizer<Resources.Home> Loc 
 
 <div id="homepage">
     <div class="row">
         <div class="col-12">
             <div class="banner mb-5" style="background-image:url(images/banner.jpg);">
                 <div class="text">
-                    <h1>Kunst doet leven!</h1>
-                    <span class="small-banner-text">Echt waar...</span>
+                    <h1>@Loc["ArtBringsLive"]</h1>
+                    <span class="small-banner-text">@Loc["ForReal"]</span>
                 </div>
             </div>
         </div>
         <div class="col-12 text-center">
-            <h2>Latest artworks</h2>
+            <h2>@Loc["Latest"]</h2>
         </div>
         <div class="col-4">
             <div class="badge-kunstwerk">
@@ -54,7 +55,7 @@
 
 
         <div class="col-12 text-center">
-            <h2>Featured artworks</h2>
+            <h2>@Loc["FeaturedArtworks"]</h2>
         </div>
         <div class="row">
             @if (_artworks is null)
@@ -85,7 +86,7 @@
 
 
         <div class="col-12 text-center">
-            <h2>Featured artists</h2>
+            <h2>@Loc["FeaturedArtists"]</h2>
         </div>
         <div class="row">
             @if (_artists is null)

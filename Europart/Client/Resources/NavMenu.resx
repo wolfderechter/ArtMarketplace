@@ -117,22 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Don't Have An Account Yet" xml:space="preserve">
-    <value>Don't have an account yet?</value>
+  <data name="AboutUs" xml:space="preserve">
+    <value>AboutUs</value>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
+  <data name="Artists" xml:space="preserve">
+    <value>Artists</value>
   </data>
-  <data name="Or" xml:space="preserve">
-    <value>Or</value>
+  <data name="Artworks" xml:space="preserve">
+    <value>Artworks</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
   </data>
-  <data name="Sign In" xml:space="preserve">
-    <value>Sign In</value>
-  </data>
-  <data name="Welcome Back" xml:space="preserve">
-    <value>Welcome Back</value>
+  <data name="Youth" xml:space="preserve">
+    <value>Youth</value>
   </data>
 </root>

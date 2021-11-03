@@ -2,36 +2,36 @@
 @inject IStringLocalizer<Resources.Artworks.Create> Loc
 
 
-<h1 class="text-center">Add an artwork</h1>
+<h1 class="text-center">@Loc["AddArtwork"]</h1>
 
 <div class="row">
     <div class="col-8 offset-2">
         <EditForm Model="@newArtwork" OnValidSubmit="CreateNewArtwork" class="form">
             <DataAnnotationsValidator />
             <div class="mb-3">
-                <h6>Title</h6>
+                <h6>@Loc["Title"]</h6>
                 <InputText class="form-control" id="exampleInputTitle" @bind-Value="newArtwork.Name"
                            aria-describedby="titleHelp" placeholder="Enter title" />
                 <ValidationMessage For="@(() => newArtwork.Name)" />
             </div>
             <div class="mb-3">
-                <h6>Description</h6>
+                <h6>@Loc["Description"]</h6>
                 <InputText @bind-Value="newArtwork.Description" class="form-control" id="exampleInputDescription1"
                            placeholder="Enter description" />
             </div>
             <div class="mb-3">
-                <h6>Price</h6>
+                <h6>@Loc["Price"]</h6>
                 <InputNumber @bind-Value="newArtwork.Price" class="form-control" placeholder="Enter price" />
                 <ValidationMessage For="@(() => newArtwork.Price)" />
             </div>
             <div class="mb-3">
-                <h6>Choose artwork</h6>
+                <h6>@Loc["ChooseArtwork"]</h6>
                 <input type="file" id="artwork" name="artwork" />
                 <ValidationMessage For="@(() => newArtwork.ImagePath)" />
 
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Add artwork</button>
+                <button type="submit" class="btn btn-primary">@Loc["Add Artwork"]</button>
             </div>
         </EditForm>
     </div>

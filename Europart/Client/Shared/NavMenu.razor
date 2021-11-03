@@ -1,4 +1,5 @@
-﻿<div class="round-nav fixed-top"></div>
+﻿@inject IStringLocalizer<Resources.NavMenu> Loc
+<div class="round-nav fixed-top"></div>
 <nav class="navbar navbar-second navbar-dark navbar-expand-lg fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">EuropArt</a>
@@ -13,22 +14,22 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <NavLink class="nav-link" href="artwork">Artworks</NavLink>
+                        <NavLink class="nav-link" href="artwork">@Loc["Artworks"]</NavLink>
                     </li>
                     <li class="nav-item">
-                        <NavLink class="nav-link" href="artist">Artists</NavLink>
+                        <NavLink class="nav-link" href="artist">@Loc["Artists"]</NavLink>
                     </li>
                     <li class="nav-item">
-                        <NavLink class="nav-link" href="youth" >Youth</NavLink>
+                        <NavLink class="nav-link" href="youth" >@Loc["Youth"]</NavLink>
                     </li>
                     <li class="nav-item">
-                        <NavLink class="nav-link" href="AboutUs">About us</NavLink>
+                        <NavLink class="nav-link" href="AboutUs">@Loc["AboutUs"]</NavLink>
                     </li>
                 </ul>
                 <ul class="navbar-nav justify-content-end pe-3">
                     <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Zoeken">
-                        <button class="btn btn-outline-white" type="submit">Search</button>
+                        <input class="form-control me-2" type="search" placeholder="@Loc["Search"]" aria-label="Zoeken">
+                        <button class="btn btn-outline-white" type="submit">@Loc["Search"]</button>
                     </form>
                 </ul>
             </div>

@@ -59,5 +59,32 @@ namespace EuropArt.Client.Resources.Artworks {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buy now.
+        /// </summary>
+        public static string BuyNow {
+            get {
+                return ResourceManager.GetString("BuyNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By.
+        /// </summary>
+        public static string By {
+            get {
+                return ResourceManager.GetString("By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add to shoppingcart.
+        /// </summary>
+        public static string Shoppingcart {
+            get {
+                return ResourceManager.GetString("Shoppingcart", resourceCulture);
+            }
+        }
     }
 }

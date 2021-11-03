@@ -21,15 +21,15 @@ else
                 <img src="@_artwork.ImagePath" style="width:auto;">
             </div>
             <h2 class="mb-1">@_artwork.Name</h2>
-            <h4 class="kunstenaar"><a href="/artist/@_artwork.Artist.Id"><span style="color:#b1b4b7">by</span> @_artwork.Artist.Name</a></h4>
+            <h4 class="kunstenaar"><a href="/artist/@_artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @_artwork.Artist.Name</a></h4>
             <p>@_artwork.Description</p>
         </div>
         <div class="col-4">
             <div class="bieden">
                 <span class="prijs-groot">@_artwork.Price.ToString("C")</span>
                 <form>
-                    <button class="btn btn-winkelmand mb-3">In winkelmand</button>
-                    <button class="btn btn-bieden mb-3">Nu kopen</button>
+                    <button class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
+                    <button class="btn btn-bieden mb-3">@Loc["BuyNow"]</button>
                 </form>
             </div>
         </div>
