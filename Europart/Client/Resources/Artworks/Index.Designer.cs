@@ -124,6 +124,15 @@ namespace EuropArt.Client.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Filters.
+        /// </summary>
+        public static string Hide_Filters {
+            get {
+                return ResourceManager.GetString("Hide Filters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max.
         /// </summary>
         public static string Max {

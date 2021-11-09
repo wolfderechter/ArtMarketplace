@@ -6,7 +6,7 @@
 <h1>@Loc["Artworks"]</h1>
 <div class="row">
     <div class="col-6">
-        <button id="filters" type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">@Loc["Show Filters"]</button>
+        <button @onclick="ShowFilters" id="filters" type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">@Loc[textOnButton]</button>
     </div>
     <div class="col-6 text-end">
         @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-12">
         <div class="row">
-            <div id="f-row" class="filters col-3">
+            <div id="f-row" class="filters @showColFilters col-3">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                     <label class="form-check-label" for="flexSwitchCheckDefault">@Loc["Auctions"]</label>
@@ -68,7 +68,7 @@
 <p>Loading...</p> }
 else
 {
-<div class="kol col-4">
+<div class="kol @cols">
     @foreach (var artwork in _artworks)
     {
 @if (artwork.Id % 3 == 0)
@@ -82,7 +82,7 @@ else
     <span class="naam">@artwork.Name</span>
 </div>}}
 </div>
-                <div class="kol col-4">
+                <div class="kol @cols">
                     @foreach (var artwork in _artworks)
                     {
     @if (artwork.Id % 3 == 1)
@@ -96,7 +96,7 @@ else
     <span class="naam">@artwork.Name</span>
 </div>              }}
                 </div>
-                                <div class="kol col-4">
+                                <div class="kol @cols">
                                     @foreach (var artwork in _artworks)
                                     {
                     @if (artwork.Id % 3 == 2)
@@ -114,9 +114,30 @@ else
     </div>
 </div>
 
-@code { private IEnumerable<ArtworkDto.Index> _artworks;
+@code { 
+    private String cols = "col-4";
+    private String showColFilters = "";
+    private String textOnButton = "Show Filters";
+
+    private IEnumerable<ArtworkDto.Index> _artworks;
 
     protected override async Task OnInitializedAsync()
     {
         _artworks = await ArtworkService.GetIndexAsync();
-    } }
+    }
+
+    private void ShowFilters()
+    {
+        if (showColFilters == "show")
+        {
+            cols = "col-4";
+            showColFilters = "";
+            textOnButton = "Show Filters";
+        } else
+        {
+            cols = "col-3";
+            showColFilters = "show";
+            textOnButton = "Hide Filters";
+        }
+    }
+}

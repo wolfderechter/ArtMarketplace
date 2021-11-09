@@ -138,6 +138,9 @@
   <data name="Classic" xml:space="preserve">
     <value>Klassiek</value>
   </data>
+  <data name="Hide Filters" xml:space="preserve">
+    <value>Verberg Filters</value>
+  </data>
   <data name="Max" xml:space="preserve">
     <value>Max</value>
   </data>
