@@ -432,6 +432,7 @@ form.form {
 
 .intermetzo span a{
     text-decoration: none;
+    color: var(--bs-body-color);
 }
 #dashboard > a {
     text-align: center;
