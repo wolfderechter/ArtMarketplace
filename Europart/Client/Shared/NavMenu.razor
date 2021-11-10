@@ -25,12 +25,17 @@
                     <li class="nav-item">
                         <NavLink class="nav-link" href="AboutUs">@Loc["AboutUs"]</NavLink>
                     </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="dashboard">Dashboard</NavLink>
+                    </li>
                 </ul>
                 <ul class="navbar-nav justify-content-end pe-3">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="@Loc["Search"]" aria-label="Zoeken">
-                        <button class="btn btn-outline-white" type="submit">@Loc["Search"]</button>
+                    <form class="d-flex form-search">
+                        <input class="form-control me-2" type="text" placeholder="@Loc["Search"]" aria-label="Zoeken">
+                        <button class="btn" type="submit"><img src="/images/search.svg" /></button>
                     </form>
+
+                    <NavLink class="shoppingcart" href="shoppingcart"><img src="/images/shoppingcart.svg" /></NavLink>
                 </ul>
             </div>
         </div>

@@ -92,15 +92,33 @@ footer {
     z-index: 9999;
 }
 
-.btn-outline-white {
-    color: white;
-    border-color: white;
+.form-search {
+    position: relative;
 }
 
-.btn-outline-white:hover {
-    color: black;
-    border-color: white;
-    background-color: white;
+.form-search input {
+    padding-right: 2.6rem !important;
+    width: 175px;
+}
+
+.form-search button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.form-search button img {
+    width: 25px;
+}
+
+.shoppingcart {
+    padding: 0.5rem;
+}
+
+.shoppingcart img {
+    filter: invert(1);
+    width: 30px;
 }
 
 .content {
@@ -459,8 +477,8 @@ form.form {
     font-weight: 600;
 }
 
-#dashboard-list > * {
-    
+#dashboard-list span {
+    margin-left: 2rem;
 }
 
 #dashboard-list a.block {
@@ -476,10 +494,6 @@ form.form {
 #dashboard-list img {
     width: 25px;
     border-radius: 100%;
-}
-
-#dashboard-list span {
-    margin-left: 2rem;
 }
 
 #dashboard-list .buttons {
