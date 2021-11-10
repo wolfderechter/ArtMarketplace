@@ -15,7 +15,8 @@ namespace EuropArt.Shared.Artist
             public string Name { get; set; }
             public string City { get; set; }
             public string ImagePath { get; set; }
-            public IEnumerable<ArtworkDto.Detail> Artworks = Enumerable.Empty<ArtworkDto.Detail>();
+
+            public IEnumerable<ArtworkDto.Detail> Artworks = new List<ArtworkDto.Detail>();
         }
 
         public class Detail : Index
