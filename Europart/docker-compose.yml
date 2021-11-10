@@ -1,0 +1,24 @@
+---
+version: "3.9"  # optional since v1.27.0
+services:
+  web:
+    depends_on:
+      - mongo
+    build: .
+    image: img_europart_server
+    container_name: con_europart_server
+    ports:
+      - "5001:80"
+      - "5002:443"
+    volumes:
+      - .:/home/vagrant/project
+  mongo:
+    image: mongo:4.4.10
+    container_name: con_mongo
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Admin123
+volumes:
+    mongo-data: {}
