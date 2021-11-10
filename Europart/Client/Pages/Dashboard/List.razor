@@ -1,0 +1,81 @@
+﻿@page "/dashboard/{listview}"
+@using EuropArt.Shared.Artist
+@using System.Globalization
+@inject IArtistService ArtistService
+
+@using EuropArt.Shared.Artworks
+@inject IArtworkService ArtworkService
+
+<h1>@ListView</h1>
+
+<div id="dashboard-list" class="row">
+    <div class="col-12">
+        <a href="/dashboard">&laquo; Dashboard</a>
+    </div>
+@if (ListView == "artists")
+{
+    @if (_artists is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        @foreach (var artist in _artists)
+        {
+            <div class="col-12">
+                <a href="#" class="block">
+                    <img src="@artist.ImagePath" />
+                    <span>@artist.Name</span>
+                    <div class="buttons">
+                        <a href="#"><img class="good" src="/images/good.svg" /></a>
+                        <a href="#"><img class="bad" src="/images/bad.svg" /></a>
+                    </div>
+                </a>
+            </div>
+        }
+    }
+} else if (ListView == "artworks")
+{
+    @if (_artworks is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        @foreach (var artwork in _artworks)
+        {
+            <div class="col-12">
+                <a href="#" class="block">
+                    <img src="@artwork.ImagePath" />
+                    <span>@artwork.Name</span>
+                    <span>@artwork.Artist.Name</span>
+                    <span>@artwork.Price.ToString("C")</span>
+                    <div class="buttons">
+                        <a href="#"><img class="good" src="/images/good.svg" /></a>
+                        <a href="#"><img class="bad" src="/images/bad.svg" /></a>
+                    </div>
+                </a>
+            </div>
+        }
+    }
+}
+</div>
+
+@code {
+    [Parameter]
+    public string ListView { get; set; }
+
+    private IEnumerable<ArtistDto.Index> _artists;
+
+    private IEnumerable<ArtworkDto.Index> _artworks;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _artists = await ArtistService.GetIndexAsync();
+        _artworks = await ArtworkService.GetIndexAsync();
+    }
+
+
+
+
+}
