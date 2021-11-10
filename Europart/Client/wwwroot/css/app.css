@@ -108,17 +108,23 @@ footer {
     transform: translateY(-50%);
 }
 
+.shoppingcart img {
+    filter: invert(1);
+    width: 30px;
+}
+
+.badge-kunstwerk img {
+    max-width: 100%;
+    width: 100%;
+    transition: transform 0.15s ease-in-out;
+}
+
 .form-search button img {
     width: 25px;
 }
 
 .shoppingcart {
     padding: 0.5rem;
-}
-
-.shoppingcart img {
-    filter: invert(1);
-    width: 30px;
 }
 
 .content {
@@ -151,12 +157,6 @@ footer {
     position: absolute;
     top: 0;
     right: 0;
-}
-
-.badge-kunstwerk img {
-    max-width: 100%;
-    width: 100%;
-    transition: transform 0.15s ease-in-out;
 }
 
 .badge-kunstwerk img:hover {
@@ -471,14 +471,14 @@ form.form {
     text-decoration: none;
 }
 
+#dashboard-list span {
+    margin-left: 2rem;
+}
+
 #dashboard a .badge span {
     font-size: 3rem;
     color: #212529;
     font-weight: 600;
-}
-
-#dashboard-list span {
-    margin-left: 2rem;
 }
 
 #dashboard-list a.block {
