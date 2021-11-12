@@ -4,8 +4,9 @@
 @inject IArtistService ArtistService
 
 @using EuropArt.Shared.Artworks
+@using EuropArt.Shared.Resources
 @inject IArtworkService ArtworkService
-@inject IStringLocalizer<Resources.Home> Loc 
+@inject IStringLocalizer<EuropArt.Shared.Resources.Home> Loc 
 
 <div id="homepage">
     <div class="row">
@@ -70,7 +71,7 @@
                         <div class="badge-kunstwerk">
                             <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePath"></a>
                             <div class="k-p">
-                                <h2 class="kunstenaar">by @*@_artworks.ElementAt(i).Name*@</h2>
+                                <h2 class="kunstenaar">by @artworks.ElementAt(i).Artist.Name</h2>
                                 <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
                             </div>
                             <span class="naam">@artworks.ElementAt(i).Name</span>
@@ -104,7 +105,7 @@
                             </div>
                             <h2>@artists.ElementAt(i).Name</h2>
                             <span class="locatie"><img src="images/locate.svg" /> @artists.ElementAt(i).City</span><br />
-                            <span class="kunstwerken">50 kunstwerken</span>
+                            <span class="kunstwerken">@artists.ElementAt(i).Artworks.Count() @Loc["Artworks"]</span>
                         </div>
                     </div>
                 }

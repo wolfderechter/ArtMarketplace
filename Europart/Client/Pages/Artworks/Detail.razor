@@ -1,7 +1,7 @@
 ﻿@page "/artwork/{id:int}"
 @inject NavigationManager NavigationManager
 @using EuropArt.Shared.Artworks
-@inject IStringLocalizer<Resources.Artworks.Detail> Loc
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Detail> Loc
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavManager
 @if (artwork == null || artwork.Artist == null)
