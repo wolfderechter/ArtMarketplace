@@ -18,5 +18,18 @@ namespace EuropArt.Shared.Artworks
         {
             public string Description { get; set; }
         }
+
+        public class Create
+        {
+            public string Name { get; set; }
+            public decimal Price { get; set; }
+            public string Description { get; set; }
+
+            //public IEnumerable<string> ImagePaths { get; set; }
+            public string ImagePath { get; set; }
+            //public ArtistDto.Detail Artist { get; set; }
+
+
+        }
     }
 }

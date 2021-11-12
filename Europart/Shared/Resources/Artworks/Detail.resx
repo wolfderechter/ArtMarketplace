@@ -123,6 +123,9 @@
   <data name="By" xml:space="preserve">
     <value>By</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="Shoppingcart" xml:space="preserve">
     <value>Add to shoppingcart</value>
   </data>

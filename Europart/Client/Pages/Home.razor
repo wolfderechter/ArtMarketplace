@@ -58,7 +58,7 @@
             <h2>@Loc["FeaturedArtworks"]</h2>
         </div>
         <div class="row">
-            @if (_artworks is null)
+            @if (artworks is null)
             {
                 <p>Loading...</p>
             }
@@ -68,12 +68,12 @@
                 {
                     <div class="kol col-4">
                         <div class="badge-kunstwerk">
-                            <a href="artwork/@_artworks.ElementAt(i).Id"><img src="@_artworks.ElementAt(i).ImagePath"></a>
+                            <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePath"></a>
                             <div class="k-p">
                                 <h2 class="kunstenaar">by @*@_artworks.ElementAt(i).Name*@</h2>
-                                <span class="prijs">@_artworks.ElementAt(i).Price.ToString("C")</span>
+                                <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
                             </div>
-                            <span class="naam">@_artworks.ElementAt(i).Name</span>
+                            <span class="naam">@artworks.ElementAt(i).Name</span>
                         </div>
                     </div>
                 }
@@ -89,7 +89,7 @@
             <h2>@Loc["FeaturedArtists"]</h2>
         </div>
         <div class="row">
-            @if (_artists is null)
+            @if (artists is null)
             {
                 <p>Loading...</p>
             }
@@ -100,10 +100,10 @@
                     <div class="col-4 text-center">
                         <div class="badge-kunstenaars">
                             <div class="profile-pic">
-                                <a href="/artist/@_artists.ElementAt(i).Id"><img src="@_artists.ElementAt(i).ImagePath" /></a>
+                                <a href="/artist/@artists.ElementAt(i).Id"><img src="@artists.ElementAt(i).ImagePath" /></a>
                             </div>
-                            <h2>@_artists.ElementAt(i).Name</h2>
-                            <span class="locatie"><img src="images/locate.svg" /> @_artists.ElementAt(i).City</span><br />
+                            <h2>@artists.ElementAt(i).Name</h2>
+                            <span class="locatie"><img src="images/locate.svg" /> @artists.ElementAt(i).City</span><br />
                             <span class="kunstwerken">50 kunstwerken</span>
                         </div>
                     </div>
@@ -121,14 +121,14 @@
 
 
 @code {
-    private IEnumerable<ArtistDto.Index> _artists;
+    private IEnumerable<ArtistDto.Index> artists;
 
-    private IEnumerable<ArtworkDto.Index> _artworks;
+    private IEnumerable<ArtworkDto.Index> artworks;
 
     protected override async Task OnInitializedAsync()
     {
-        _artists = await ArtistService.GetIndexAsync();
-        _artworks = await ArtworkService.GetIndexAsync();
+        artists = await ArtistService.GetIndexAsync();
+        artworks = await ArtworkService.GetIndexAsync();
     }
 
 

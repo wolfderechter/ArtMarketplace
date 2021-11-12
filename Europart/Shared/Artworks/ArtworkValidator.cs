@@ -4,7 +4,7 @@ using Microsoft.Extensions.Localization;
 
 namespace EuropArt.Shared.Artworks
 {
-    public class ArtworkValidator : AbstractValidator<ArtworkDto.Detail>
+    public class ArtworkValidator : AbstractValidator<ArtworkDto.Create>
     {
         public ArtworkValidator(IStringLocalizer<Resources.Artworks.Validation> Loc)
         {
