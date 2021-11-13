@@ -5,6 +5,7 @@ namespace EuropArt.Shared.Artworks
     public interface IArtworkService
     {
         Task<IEnumerable<ArtworkDto.Index>> GetIndexAsync();
+        Task<IEnumerable<ArtworkDto.Index>> GetIndexAsync(string searchterm);
         Task<ArtworkDto.Detail> GetDetailAsync(int id);
         Task CreateAsync(ArtworkDto.Create model);
         Task DeleteAsync(int id);

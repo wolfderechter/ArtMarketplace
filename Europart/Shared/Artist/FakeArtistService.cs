@@ -50,5 +50,11 @@ namespace EuropArt.Shared.Artist
         {
             return _artists;
         }
+
+        public async Task<IEnumerable<ArtistDto.Index>> GetIndexAsync(string searchterm)
+        {
+            await Task.Delay(100);
+            return _artists.AsEnumerable().Where(a => a.Name.ToLower().Contains(searchterm) || a.Biography.ToLower().Contains(searchterm));
+        }
     }
 }

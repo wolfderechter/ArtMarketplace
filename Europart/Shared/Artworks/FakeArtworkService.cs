@@ -90,5 +90,14 @@ namespace EuropArt.Shared.Artworks
 
             return Task.CompletedTask;
         }
+
+        public async Task<IEnumerable<ArtworkDto.Index>> GetIndexAsync(string searchterm)
+        {
+            await Task.Delay(100);
+            return artworks.AsEnumerable().Where(a => 
+                a.Description.ToLower().Contains(searchterm) ||
+                a.Name.ToLower().Contains(searchterm)
+                );
+        }
     }
 }

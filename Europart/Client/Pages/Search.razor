@@ -1,0 +1,108 @@
+﻿@page "/search"
+@using EuropArt.Shared.Artworks
+@using EuropArt.Shared.Artist
+@inject IArtworkService ArtworkService
+@inject IArtistService ArtistService
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Index> Loc
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <div id="f-row">
+                <h3>Type Results:</h3>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" @bind="artworkValue" @onclick="SearchOperation">
+                    <label class="form-check-label" for="inlineCheckbox1">Artwork</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" @bind="artistValue" @onclick="SearchOperation">
+                    <label class="form-check-label" for="inlineCheckbox1">Artists</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option3" @bind="youthValue" @onclick="SearchOperation">
+                    <label class="form-check-label" for="inlineCheckbox1">Youth artworks</label>
+                </div>
+                <input placeholder="Search" type="search" @onchange="OnInputChanged" />
+            </div>
+            @if (artworks is null && artists is null)
+            {
+                <p>No results</p>
+            }
+            else
+            {
+                @if (artworks != null)
+                {
+                    @foreach (var artwork in artworks)
+                    {
+                        <div class="col-4">
+                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                            <div class="k-p">
+                                <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
+                                <span class="prijs">@artwork.Price.ToString("C")</span>
+                            </div>
+                            <span class="naam">@artwork.Name</span>
+                        </div>
+                    }
+                }
+
+
+                @if (artists != null)
+                {
+                    @foreach (var artist in artists)
+                    {
+                        <div class="col-4 text-center">
+                            <div class="badge-kunstenaars">
+                                <div class="profile-pic">
+                                    <a href="/artist/@artist.Id"><img src="@artist.ImagePath" /></a>
+                                </div>
+                                <h2>@artist.Name</h2>
+                                <span class="locatie"><img src="images/locate.svg" /> @artist.City</span><br />
+                                <span class="kunstwerken">@artist.Artworks.Count() @Loc["artworks"]</span>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool artworkValue = true;
+    private bool artistValue = true;
+    private bool youthValue = true;
+
+    private IEnumerable<ArtworkDto.Index> artworks;
+    private IEnumerable<ArtistDto.Index> artists;
+
+    public string Searchterm = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+@*        artworks = await ArtworkService.GetIndexAsync(Searchterm);
+        artists = await ArtistService.GetIndexAsync(Searchterm);*@
+        artists = await ArtistService.GetIndexAsync();
+        artworks = await ArtworkService.GetIndexAsync();
+
+    }
+
+    private async Task OnInputChanged(ChangeEventArgs args)
+    {
+        this.Searchterm = args.Value.ToString().ToLower();
+        await SearchOperation();
+    }
+
+    private async Task SearchOperation()
+    {
+        artists = null;        
+        artworks = null;
+
+        if(artistValue)
+            artists = await ArtistService.GetIndexAsync(Searchterm);
+
+        if(artworkValue)
+            artworks = await ArtworkService.GetIndexAsync(Searchterm);
+
+        //if(youthValue)
+            //youthArtworks = await YouthService.GetIndexAsync(searchterm);
+    }
+}

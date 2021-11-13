@@ -69,13 +69,13 @@
                     <label class="form-check-label" for="inlineCheckbox1">@Loc["Other"]</label>
                 </div>
             </div>
-            @if (_artworks is null)
+            @if (artworks is null)
             {
                 <p>Loading...</p> }
             else
             {
                 <div class="kol @cols">
-                    @foreach (var artwork in _artworks)
+                    @foreach (var artwork in artworks)
                     {
                         @if (artwork.Id % 3 == 0)
                         {
@@ -89,7 +89,7 @@
                             </div>}}
                 </div>
                 <div class="kol @cols">
-                    @foreach (var artwork in _artworks)
+                    @foreach (var artwork in artworks)
                     {
                         @if (artwork.Id % 3 == 1)
                         {
@@ -103,7 +103,7 @@
                             </div>              }}
                 </div>
                 <div class="kol @cols">
-                    @foreach (var artwork in _artworks)
+                    @foreach (var artwork in artworks)
                     {
                         @if (artwork.Id % 3 == 2)
                         {
@@ -125,11 +125,11 @@
     private String showColFilters = "";
     private String textOnButton = "Show Filters";
 
-    private IEnumerable<ArtworkDto.Index> _artworks;
+    private IEnumerable<ArtworkDto.Index> artworks;
 
     protected override async Task OnInitializedAsync()
     {
-        _artworks = await ArtworkService.GetIndexAsync();
+        artworks = await ArtworkService.GetIndexAsync();
     }
 
     private void ShowFilters()
