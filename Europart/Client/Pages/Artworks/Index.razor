@@ -46,75 +46,81 @@
                 <h3>@Loc["Style"]:</h3>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Abstract"]</label></div>
+                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Abstract"]</label>
+                </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Classic"]</label></div>
+                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Classic"]</label>
+                </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Minimalism"]</label></div>
+                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Minimalism"]</label>
+                </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Modern"]</label></div>
+                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Modern"]</label>
+                </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Surrealism"]</label></div>
+                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Surrealism"]</label>
+                </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Other"]</label></div>
+                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Other"]</label>
+                </div>
             </div>
             @if (_artworks is null)
             {
-<p>Loading...</p> }
-else
-{
-<div class="kol @cols">
-    @foreach (var artwork in _artworks)
-    {
-@if (artwork.Id % 3 == 0)
-{
-<div class="badge-kunstwerk">
-    <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-    <div class="k-p">
-        <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
-        <span class="prijs">@artwork.Price.ToString("C")</span>
-    </div>
-    <span class="naam">@artwork.Name</span>
-</div>}}
-</div>
+                <p>Loading...</p> }
+            else
+            {
                 <div class="kol @cols">
                     @foreach (var artwork in _artworks)
                     {
-    @if (artwork.Id % 3 == 1)
-    {
-<div class="badge-kunstwerk">
-    <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-    <div class="k-p">
-        <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
-        <span class="prijs">@artwork.Price.ToString("C")</span>
-    </div>
-    <span class="naam">@artwork.Name</span>
-</div>              }}
+                        @if (artwork.Id % 3 == 0)
+                        {
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
+                                    <span class="prijs">@artwork.Price.ToString("C")</span>
+                                </div>
+                                <span class="naam">@artwork.Name</span>
+                            </div>}}
                 </div>
-                                <div class="kol @cols">
-                                    @foreach (var artwork in _artworks)
-                                    {
-                    @if (artwork.Id % 3 == 2)
+                <div class="kol @cols">
+                    @foreach (var artwork in _artworks)
                     {
-<div class="badge-kunstwerk">
-    <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-    <div class="k-p">
-        <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
-        <span class="prijs">@artwork.Price.ToString("C")</span>
-    </div>
-    <span class="naam">@artwork.Name</span>
-</div>              }}
-                                </div>}
+                        @if (artwork.Id % 3 == 1)
+                        {
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
+                                    <span class="prijs">@artwork.Price.ToString("C")</span>
+                                </div>
+                                <span class="naam">@artwork.Name</span>
+                            </div>              }}
+                </div>
+                <div class="kol @cols">
+                    @foreach (var artwork in _artworks)
+                    {
+                        @if (artwork.Id % 3 == 2)
+                        {
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
+                                    <span class="prijs">@artwork.Price.ToString("C")</span>
+                                </div>
+                                <span class="naam">@artwork.Name</span>
+                            </div>              }}
+                </div>}
         </div>
     </div>
 </div>
 
-@code { 
+@code {
     private String cols = "col-4";
     private String showColFilters = "";
     private String textOnButton = "Show Filters";
@@ -133,7 +139,8 @@ else
             cols = "col-4";
             showColFilters = "";
             textOnButton = "Show Filters";
-        } else
+        }
+        else
         {
             cols = "col-3";
             showColFilters = "show";

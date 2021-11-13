@@ -129,6 +129,9 @@
   <data name="Description" xml:space="preserve">
     <value>Beschrijving</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Kunstwerk wijzigen</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>Prijs</value>
   </data>

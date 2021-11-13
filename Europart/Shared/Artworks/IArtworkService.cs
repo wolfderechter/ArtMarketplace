@@ -8,5 +8,6 @@ namespace EuropArt.Shared.Artworks
         Task<ArtworkDto.Detail> GetDetailAsync(int id);
         Task CreateAsync(ArtworkDto.Create model);
         Task DeleteAsync(int id);
+        Task UpdateAsync(ArtworkDto.Detail model, int id); 
     }
 }

@@ -2,6 +2,7 @@
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
 @inject IArtworkService ArtworkService
 @using EuropArt.Shared.Artworks
+@inject NavigationManager NavigationManager 
 
 <h1 class="text-center">@Loc["AddArtwork"]</h1>
 
@@ -45,5 +46,6 @@
     {
         await ArtworkService.CreateAsync(newArtwork);
         Console.WriteLine("Created new artwork!");
+        NavigationManager.NavigateTo("/artwork");
     }
 }
