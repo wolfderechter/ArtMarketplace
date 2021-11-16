@@ -400,6 +400,7 @@ button.btn.btn-winkelmand {
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
+    padding: 2rem;
 }
 
 #homepage .banner .text h1 {
