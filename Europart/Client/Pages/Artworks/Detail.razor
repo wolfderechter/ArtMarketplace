@@ -15,8 +15,14 @@ else
         <p>@_artwork.Price.ToString("C")</p>
         <img src="@_artwork.ImagePath" />*@
     <div class="row">
+        <div class="col-12 text-end mb-3">
+            <div class="admin-buttons">
+                <a class="edit" href="/artwork/edit/@artwork.Id"><img src="/images/edit.svg" /></a>
+                <button class="delete" @onclick="ConfirmDelete"><img src="/images/delete.svg" /></button>
+            </div>
+        </div>
         <div class="col-8">
-            <div class="badge-kunstwerk text-center">
+            <div class="badge-kunstwerk text-center" style="padding: 0;">
                 <img src="@artwork.ImagePath" style="width:auto;">
             </div>
             <h2 class="mb-1">@artwork.Name</h2>
@@ -30,8 +36,6 @@ else
                     <button class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
                     <button class="btn btn-bieden mb-3">@Loc["BuyNow"]</button>
                 </form>
-                <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["Delete"]</button>
-                <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
             </div>
         </div>
     </div>
