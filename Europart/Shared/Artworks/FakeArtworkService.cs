@@ -35,7 +35,6 @@ namespace EuropArt.Shared.Artworks
             await Task.Delay(100);
             return artworks.SingleOrDefault(x => x.Id == id);
         }
-
         public async Task<IEnumerable<ArtworkDto.Index>> GetIndexAsync()
         {
             await Task.Delay(100);
@@ -65,7 +64,7 @@ namespace EuropArt.Shared.Artworks
                 Price = model.Price,
                 Description = model.Description,
                 //MOCK
-                ImagePath = "/images/artworks/1.jpg",
+                ImagePath = "/images/NewArtwork.jpg",
                 Artist = artists.First()
             };
             
@@ -77,6 +76,13 @@ namespace EuropArt.Shared.Artworks
         {
             var a = artworks.SingleOrDefault(x => x.Id == id);
             artworks.Remove(a);
+            return Task.CompletedTask;
+        }
+        
+        public Task DeleteArtistAsync(int id)
+        {
+            //var a = artworks.Where(x => x.Artist.Id == id);
+            artworks.RemoveAll(a => a.Artist.Id == id);
             return Task.CompletedTask;
         }
 

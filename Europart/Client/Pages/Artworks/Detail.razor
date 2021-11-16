@@ -36,6 +36,17 @@ else
                     <button class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
                     <button class="btn btn-bieden mb-3">@Loc["BuyNow"]</button>
                 </form>
+                <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
+
+                @if (RequestingDelete)
+                {
+                        <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
+                        <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
+                }
+                else
+                {
+                    <button class="btn btn-bieden mb-3" @onclick="RequestDelete">@Loc["Delete"]</button>
+                }
             </div>
         </div>
     </div>
@@ -45,6 +56,7 @@ else
 
 @code {
     private ArtworkDto.Detail artwork = new();
+    private bool RequestingDelete;
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
@@ -56,9 +68,16 @@ else
 
     private async Task ConfirmDelete()
     {
-        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete the artwork?"))
-            return;
         await ArtworkService.DeleteAsync(artwork.Id);
         NavigationManager.NavigateTo("/artwork");
+    }
+
+    private void RequestDelete()
+    {
+        RequestingDelete = true;
+    }
+    private void CancelRequestDelete()
+    {
+        RequestingDelete = false;
     }
 }

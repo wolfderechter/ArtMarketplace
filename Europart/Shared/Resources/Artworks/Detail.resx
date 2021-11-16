@@ -123,6 +123,12 @@
   <data name="By" xml:space="preserve">
     <value>By</value>
   </data>
+  <data name="CancelDelete" xml:space="preserve">
+    <value>Cancel delete</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Confirm delete</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>

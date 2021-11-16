@@ -61,7 +61,7 @@ namespace EuropArt.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AboutUs.
+        ///   Looks up a localized string similar to About us.
         /// </summary>
         public static string AboutUs {
             get {

@@ -17,18 +17,18 @@
             <div class="mb-3">
                 <h6>@Loc["City"]</h6>
                 <InputText @bind-Value="artist.City" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter description" />
+                           placeholder="Enter city" />
                            <ValidationMessage For="@(() => artist.City)" />
             </div>
             <div class="mb-3">
                 <h6>@Loc["Bio"]</h6>
                 <InputText @bind-Value="artist.Biography" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter description" />
+                           placeholder="Enter biography" />
             </div>
             <div class="mb-3">
                 <h6>@Loc["Web"]</h6>
-                <InputText @bind-Value="artist.City" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter description" />
+                <InputText @bind-Value="artist.Website" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter portfolio website" />
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">@Loc["Edit"]</button>

@@ -120,6 +120,9 @@
   <data name="Length" xml:space="preserve">
     <value>Title can not be longer than 100 characters!</value>
   </data>
+  <data name="Negative" xml:space="preserve">
+    <value>Price has to be greater than 0</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>You have to fill in a price!</value>
   </data>

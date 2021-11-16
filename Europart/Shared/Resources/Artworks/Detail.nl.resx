@@ -123,8 +123,14 @@
   <data name="AddArtwork" xml:space="preserve">
     <value>Voeg kunstwerk toe</value>
   </data>
+  <data name="CancelDelete" xml:space="preserve">
+    <value>Annuleer verwijderen</value>
+  </data>
   <data name="ChooseArtwork" xml:space="preserve">
     <value>Kies afbeelding</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Bevestig verwijderen</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Beschrijving</value>
