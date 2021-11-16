@@ -1,0 +1,58 @@
+﻿@page "/artist/edit/{id:int}"
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Edit> Loc
+@inject NavigationManager NavigationManager
+@using EuropArt.Shared.Artist
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <EditForm Model="@artist" OnValidSubmit="EditArtist" class="form">
+            <FluentValidationValidator />
+            <DataAnnotationsValidator />
+            <div class="mb-3">
+                <h6>@Loc["Name"]</h6>
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="artist.Name"
+                           aria-describedby="titleHelp" placeholder="Enter title" />
+                <ValidationMessage For="@(() => artist.Name)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["City"]</h6>
+                <InputText @bind-Value="artist.City" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter description" />
+                           <ValidationMessage For="@(() => artist.City)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Bio"]</h6>
+                <InputText @bind-Value="artist.Biography" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter description" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Web"]</h6>
+                <InputText @bind-Value="artist.City" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter description" />
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">@Loc["Edit"]</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+@code {
+
+    private ArtistDto.Detail artist = new();
+
+    [Parameter] public int Id { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        artist = await ArtistService.GetDetailAsync(Id);
+    }
+
+    private async Task EditArtist()
+    {
+        await ArtistService.UpdateArtistAsync(artist, Id);
+        NavigationManager.NavigateTo("/artist");
+
+    }
+
+}

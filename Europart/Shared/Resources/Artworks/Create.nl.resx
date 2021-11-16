@@ -132,6 +132,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Kunstwerk wijzigen</value>
   </data>
+  <data name="Negative" xml:space="preserve">
+    <value>Prijs kan niet lager dan 0 zijn!</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>Prijs</value>
   </data>

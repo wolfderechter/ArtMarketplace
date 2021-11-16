@@ -56,5 +56,17 @@ namespace EuropArt.Shared.Artist
             await Task.Delay(100);
             return _artists.AsEnumerable().Where(a => a.Name.ToLower().Contains(searchterm) || a.Biography.ToLower().Contains(searchterm));
         }
+
+        public Task UpdateArtistAsync(ArtistDto.Detail model, int id)
+        {
+            var a = _artists.SingleOrDefault(x => x.Id == id);
+
+            a.Name = model.Name;
+            a.City = model.City;
+
+            return Task.CompletedTask;
+        }
+
+       
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EuropArt.Shared.Resources.Artworks {
+namespace EuropArt.Shared.Resources.Artists {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EuropArt.Shared.Resources.Artworks {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Create {
+    public class Edit {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Create() {
+        internal Edit() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EuropArt.Shared.Resources.Artworks {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Shared.Resources.Artworks.Create", typeof(Create).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Shared.Resources.Artists.Edit", typeof(Edit).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,65 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add artwork.
+        ///   Looks up a localized string similar to Biography.
         /// </summary>
-        public static string Add_Artwork {
+        public static string Bio {
             get {
-                return ResourceManager.GetString("Add Artwork", resourceCulture);
+                return ResourceManager.GetString("Bio", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add an artwork.
+        ///   Looks up a localized string similar to City.
         /// </summary>
-        public static string AddArtwork {
+        public static string City {
             get {
-                return ResourceManager.GetString("AddArtwork", resourceCulture);
+                return ResourceManager.GetString("City", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choos Artwork.
+        ///   Looks up a localized string similar to City has to be filled in! .
         /// </summary>
-        public static string ChooseArtwork {
+        public static string CityError {
             get {
-                return ResourceManager.GetString("ChooseArtwork", resourceCulture);
+                return ResourceManager.GetString("CityError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Edit artist.
         /// </summary>
-        public static string Description {
+        public static string EditArtist {
             get {
-                return ResourceManager.GetString("Description", resourceCulture);
+                return ResourceManager.GetString("EditArtist", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit artwork.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
-        public static string Edit {
+        public static string Name {
             get {
-                return ResourceManager.GetString("Edit", resourceCulture);
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Price can not be lower than 0! .
+        ///   Looks up a localized string similar to Name has to be filled in! .
         /// </summary>
-        public static string Nagative {
+        public static string NameError {
             get {
-                return ResourceManager.GetString("Nagative", resourceCulture);
+                return ResourceManager.GetString("NameError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Price.
+        ///   Looks up a localized string similar to Website/portfolio.
         /// </summary>
-        public static string Price {
+        public static string Web {
             get {
-                return ResourceManager.GetString("Price", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Web", resourceCulture);
             }
         }
     }

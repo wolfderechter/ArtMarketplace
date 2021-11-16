@@ -25,6 +25,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Resources\Artists\Edit.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Edit.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Artists\Index.Designer.cs">
       <DependentUpon>Index.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -91,6 +96,13 @@
     <EmbeddedResource Update="Resources\Artists\Detail.resx">
       <LastGenOutput>Detail.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Artists\Edit.nl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Artists\Edit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Edit.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Artists\Index.nl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -25,7 +25,8 @@ namespace EuropArt.Server
             services.AddControllersWithViews();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddRazorPages();
-            
+           
+
         }
 
         private RequestLocalizationOptions GetLocalizationOptions()

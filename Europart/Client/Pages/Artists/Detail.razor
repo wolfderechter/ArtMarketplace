@@ -2,7 +2,8 @@
 @using EuropArt.Shared.Artist
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Detail> Loc
 
-<h2 class="Kunstenaar">@_artist.Name</h2>
+<h2 class="Kunstenaar">@_artist.Name</h2> 
+<a class="nav-link" href="/artist/edit/@_artist.Id">Edit</a>
 
 @if (_artist == null)
 {

@@ -12,6 +12,7 @@ using EuropArt.Shared.Artist;
 using System.Globalization;
 using Microsoft.JSInterop;
 
+
 namespace EuropArt.Client
 {
     public class Program
@@ -25,7 +26,6 @@ namespace EuropArt.Client
             builder.Services.AddScoped<IArtworkService, FakeArtworkService>();
             builder.Services.AddScoped<IArtistService, FakeArtistService>();
             /*await builder.Build().RunAsync();*/
-
             builder.Services.AddLocalization();
 
             var host = builder.Build();
