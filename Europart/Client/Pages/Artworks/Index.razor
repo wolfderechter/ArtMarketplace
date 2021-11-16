@@ -10,7 +10,7 @@
     </div>
     <div class="col-6 text-end">
         @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
-        <NavLink class="nav-link" href="/artwork/add">@Loc["Add Artwork"]</NavLink>
+        <NavLink class="btn btn-secondary" href="/artwork/add">@Loc["Add Artwork"]</NavLink>
     </div>
 </div>
 
@@ -18,12 +18,12 @@
     <div class="col-12">
         <div class="row">
             <div id="f-row" class="filters @showColFilters col-3">
-                <div class="form-check form-switch">
+                <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                     <label class="form-check-label" for="flexSwitchCheckDefault">@Loc["Auctions"]</label>
                 </div>
                 <h3>@Loc["Category"]:</h3>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select mb-3" aria-label="Default select example">
                     <option selected>Alles</option>
                     <option value="1">Collage</option>
                     <option value="2">Fotografie</option>
@@ -33,7 +33,7 @@
                     <option value="6">Andere</option>
                 </select>
                 <h3>@Loc["Price"]:</h3>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="form-floating col-6">
                         <input type="number" class="form-control" id="floatingInput" placeholder="0">
                         <label for="floatingInput">@Loc["Min"].</label>
@@ -49,24 +49,24 @@
                     <label class="form-check-label" for="inlineCheckbox1">@Loc["Abstract"]</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Classic"]</label>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox2">@Loc["Classic"]</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Minimalism"]</label>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox3">@Loc["Minimalism"]</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Modern"]</label>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox4">@Loc["Modern"]</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Surrealism"]</label>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox5">@Loc["Surrealism"]</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Other"]</label>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox6">@Loc["Other"]</label>
                 </div>
             </div>
             @if (artworks is null)

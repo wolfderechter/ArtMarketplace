@@ -31,10 +31,12 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav justify-content-end pe-3">
-                    <form class="d-flex form-search">
+                    @*<form class="d-flex form-search">
                         <input class="form-control me-2" type="text" placeholder="@Loc["Search"]" aria-label="Zoeken" @onchange="Search">
                         <a class="btn" href="/search"><img src="/images/search.svg" /></a>
-                    </form>
+                    </form>*@
+
+                    <NavLink class="shoppingcart mr-3" href="search"><img src="/images/search.svg" /></NavLink>
 
                     <NavLink class="shoppingcart" href="shoppingcart"><img src="/images/shoppingcart.svg" /></NavLink>
                 </ul>
