@@ -1,10 +1,13 @@
 ﻿@page "/dashboard/{listview}"
+@inject NavigationManager NavigationManager
 @using EuropArt.Shared.Artist
 @using System.Globalization
 @inject IArtistService ArtistService
 
 @using EuropArt.Shared.Artworks
 @inject IArtworkService ArtworkService
+
+@inject IJSRuntime JSRuntime
 
 <h1>@ListView</h1>
 
@@ -23,14 +26,15 @@
         @foreach (var artist in _artists)
         {
             <div class="col-12">
-                <a href="#" class="block">
+                <div class="block">
                     <img src="@artist.ImagePath" />
                     <span>@artist.Name</span>
                     <div class="buttons">
-                        <a href="#"><img class="good" src="/images/good.svg" /></a>
-                        <a href="#"><img class="bad" src="/images/bad.svg" /></a>
+                        <a><img class="good" src="/images/good.svg" /></a>
+                        <a @onclick="() => ConfirmDeleteArtist(artist.Id)"><img class="bad" src="/images/bad.svg" /></a>
+                        <a href="artist/@artist.Id"><img src="/images/more.svg" /></a>
                     </div>
-                </a>
+                </div>
             </div>
         }
     }
@@ -45,16 +49,45 @@
         @foreach (var artwork in _artworks)
         {
             <div class="col-12">
-                <a href="#" class="block">
+                <div class="block">
                     <img src="@artwork.ImagePath" />
                     <span>@artwork.Name</span>
                     <span>@artwork.Artist.Name</span>
                     <span>@artwork.Price.ToString("C")</span>
                     <div class="buttons">
-                        <a href="#"><img class="good" src="/images/good.svg" /></a>
-                        <a href="#"><img class="bad" src="/images/bad.svg" /></a>
+                        <a><img class="good" src="/images/good.svg" /></a>
+                        <a @onclick="() => ConfirmDeleteArtwork(artwork.Id)"><img class="bad" src="/images/bad.svg" /></a>
+                        <a href="artwork/@artwork.Id"><img src="/images/more.svg" /></a>
                     </div>
-                </a>
+                </div>
+            </div>
+        }
+    }
+} else if (ListView == "orders")
+{
+    @if (_artworks is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        @for (var i = 0; i < 3; i++)
+        {
+            <div class="col-12">
+                <div class="block">
+                    <img src="@_artworks.ElementAt(i).ImagePath" />
+                    <span>@_artworks.ElementAt(i).Artist.Name</span>
+                    <span>@_artworks.ElementAt(i).Price.ToString("C")</span>
+                    <span>door Gebruiker</span>
+                    <div class="buttons">
+                        <select class="form-control">
+                            <option value="0">Geld te ontvangen</option>
+                            <option value="1">Wachten op ophalen</option>
+                            <option value="2">Afgerond</option>
+                            <option value="3">Geannuleerd</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         }
     }
@@ -66,8 +99,10 @@
     public string ListView { get; set; }
 
     private IEnumerable<ArtistDto.Index> _artists;
+    private ArtistDto.Detail _artist = new();
 
     private IEnumerable<ArtworkDto.Index> _artworks;
+    private ArtworkDto.Detail _artwork = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -75,7 +110,19 @@
         _artworks = await ArtworkService.GetIndexAsync();
     }
 
+    private async Task ConfirmDeleteArtist(int Id)
+    {
+        _artist = await ArtistService.GetDetailAsync(Id);
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + _artist.Name + "?"))
+            return;
+        await ArtworkService.DeleteAsync(_artist.Id);
+    }
 
-
-
+    private async Task ConfirmDeleteArtwork(int Id)
+    {
+        _artwork = await ArtworkService.GetDetailAsync(Id);
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + _artwork.Name + "?"))
+            return;
+        await ArtworkService.DeleteAsync(_artwork.Id);
+    }
 }

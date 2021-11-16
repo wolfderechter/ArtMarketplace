@@ -485,7 +485,7 @@ form.form {
     font-weight: 600;
 }
 
-#dashboard-list a.block {
+#dashboard-list .block {
     text-decoration: none;
     color: var(--bs-body-color);
     display: block;
@@ -505,6 +505,10 @@ form.form {
     float: right;
 }
 
+#dashboard-list .buttons a {
+    cursor: pointer;
+}
+
 #dashboard-list .buttons a img {
     width: 15px;
     border-radius: 0;
@@ -516,5 +520,6 @@ form.form {
 }
 
 #dashboard-list .buttons a img.bad {
+    margin-right: 1rem;
     filter: invert(10%) sepia(89%) saturate(6889%) hue-rotate(9deg) brightness(92%) contrast(113%);
 }
