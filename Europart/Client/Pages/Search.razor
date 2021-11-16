@@ -6,23 +6,28 @@
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Index> Loc
 <div class="row">
     <div class="col-12">
+        <div class="row align-items-end">
+            
+                <div class="col-6">
+                    <h3>Type Results:</h3>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" @bind="artworkValue" @onclick="SearchOperation">
+                        <label class="form-check-label" for="inlineCheckbox1">Artwork</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" @bind="artistValue" @onclick="SearchOperation">
+                        <label class="form-check-label" for="inlineCheckbox2">Artists</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" @bind="youthValue" @onclick="SearchOperation">
+                        <label class="form-check-label" for="inlineCheckbox3">Youth artworks</label>
+                    </div>
+                </div>
+                <div class="col-4 offset-2">
+                    <input class="form-control" placeholder="Search" type="search" @onchange="OnInputChanged" />
+                </div>
+        </div>
         <div class="row">
-            <div id="f-row">
-                <h3>Type Results:</h3>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" @bind="artworkValue" @onclick="SearchOperation">
-                    <label class="form-check-label" for="inlineCheckbox1">Artwork</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" @bind="artistValue" @onclick="SearchOperation">
-                    <label class="form-check-label" for="inlineCheckbox1">Artists</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option3" @bind="youthValue" @onclick="SearchOperation">
-                    <label class="form-check-label" for="inlineCheckbox1">Youth artworks</label>
-                </div>
-                <input placeholder="Search" type="search" @onchange="OnInputChanged" />
-            </div>
             @if (artworks is null && artists is null)
             {
                 <p>No results</p>
@@ -34,12 +39,14 @@
                     @foreach (var artwork in artworks)
                     {
                         <div class="col-4">
-                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-                            <div class="k-p">
-                                <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
-                                <span class="prijs">@artwork.Price.ToString("C")</span>
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
+                                    <span class="prijs">@artwork.Price.ToString("C")</span>
+                                </div>
+                                <span class="naam">@artwork.Name</span>
                             </div>
-                            <span class="naam">@artwork.Name</span>
                         </div>
                     }
                 }
