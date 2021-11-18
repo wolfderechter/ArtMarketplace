@@ -86,7 +86,7 @@ namespace EuropArt.Shared.Artworks
             return Task.CompletedTask;
         }
 
-        public Task UpdateAsync(ArtworkDto.Detail model, int id)
+        public Task UpdateAsync(ArtworkDto.Edit model, int id)
         {
             var a = artworks.SingleOrDefault(x => x.Id == id);
 

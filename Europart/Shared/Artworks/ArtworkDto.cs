@@ -44,7 +44,7 @@ namespace EuropArt.Shared.Artworks
 
 
         }
-
+ 
         public class Edit
         {
             public string Name { get; set; }
@@ -53,7 +53,7 @@ namespace EuropArt.Shared.Artworks
 
             public string ImagePath { get; set; }
 
-            public class ArtworkValidator : AbstractValidator<Detail>
+            public class ArtworkValidator : AbstractValidator<Edit>
             {
                 public ArtworkValidator(IStringLocalizer<Resources.Artworks.Validation> Loc)
                 {
