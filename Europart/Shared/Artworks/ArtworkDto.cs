@@ -38,7 +38,6 @@ namespace EuropArt.Shared.Artworks
                     RuleFor(p => p.Name).MaximumLength(100).WithMessage(Loc["BuyNow"]);
                     RuleFor(p => p.Price).NotEmpty().WithMessage(Loc["Price"]);
                     RuleFor(p => p.Price).GreaterThan(0).WithMessage(Loc["Negative"]);
-
                 }
             }
 
@@ -57,11 +56,10 @@ namespace EuropArt.Shared.Artworks
             {
                 public ArtworkValidator(IStringLocalizer<Resources.Artworks.Validation> Loc)
                 {
-                    RuleFor(p => p.Name).NotEmpty().WithMessage(Loc["Title"]);
                     RuleFor(p => p.Name).MaximumLength(100).WithMessage(Loc["BuyNow"]);
-                    RuleFor(p => p.Price).NotEmpty().WithMessage(Loc["Price"]);
+                    RuleFor(p => p.Name).NotEmpty().WithMessage(Loc["Title"]);
                     RuleFor(p => p.Price).GreaterThan(0).WithMessage(Loc["Negative"]);
-
+                    RuleFor(p => p.Price).NotEmpty().WithMessage(Loc["Price"]);
                 }
             }
         }

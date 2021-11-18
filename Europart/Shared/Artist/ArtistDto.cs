@@ -33,14 +33,12 @@ namespace EuropArt.Shared.Artist
             public string City { get; set; }
             public string Biography { get; set; }
             public string Website { get; set; }
-            public class ArtistValidator : AbstractValidator<ArtistDto.Detail>
+            public class ArtistValidator : AbstractValidator<ArtistDto.Edit>
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
                 {
                     RuleFor(P => P.Name).NotEmpty().WithMessage(Loc["NameError"]);
                     RuleFor(p => p.City).NotEmpty().WithMessage(Loc["CityError"]);
-
-
                 }
             }
         }

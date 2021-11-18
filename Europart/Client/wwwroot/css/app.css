@@ -1,547 +1,553 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+﻿@import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
 
 html,
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a,
 .btn-link {
-    color: #0366d6;
+  color: #0366d6;
 }
 
 h2 {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 h2.kunstenaar {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 h2.kunstenaar a {
-    color: #212529;
-    text-decoration: none;
+  color: #212529;
+  text-decoration: none;
 }
 
 h4.kunstenaar a {
-    color: #212529;
-    text-decoration: none;
+  color: #212529;
+  text-decoration: none;
 }
 
 footer {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .mr-3 {
-    margin-right: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
 }
 
-.valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
+.valid.modified:not([type="checkbox"]) {
+  outline: 1px solid #26b050;
 }
 
 .invalid {
-    outline: 1px solid red;
+  outline: 1px solid red;
 }
 
 .validation-message {
-    color: red;
+  color: red;
 }
 
 #blazor-error-ui {
-    background: lightyellow;
-    bottom: 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
-    display: none;
-    left: 0;
-    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
+  background: lightyellow;
+  bottom: 0;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+  display: none;
+  left: 0;
+  padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
 }
 
 #blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
+  cursor: pointer;
+  position: absolute;
+  right: 0.75rem;
+  top: 0.5rem;
 }
 
 /* Custom css */
 
 .round-nav {
-    content: "";
-    display: block;
-    width: 130%;
-    padding-top: 75px;
-    position: fixed;
-    background-color: #372c2e;
-    z-index: 1000;
-    border-radius: 100%;
-    top: 4px;
-    left: -17%;
+  content: "";
+  display: block;
+  width: 130%;
+  padding-top: 75px;
+  position: fixed;
+  background-color: #372c2e;
+  z-index: 1000;
+  border-radius: 100%;
+  top: 4px;
+  left: -17%;
 }
 
 .navbar-second {
-    background-color: #372c2e;
+  background-color: #372c2e;
 }
 
 .dropdown-menu {
-    z-index: 9999;
+  z-index: 9999;
 }
 
 .form-search {
-    position: relative;
+  position: relative;
 }
 
 .form-search input {
-    padding-right: 2.6rem !important;
-    width: 175px;
+  padding-right: 2.6rem !important;
+  width: 175px;
 }
 
 .form-search button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .shoppingcart img {
-    filter: invert(1);
-    width: 30px;
+  filter: invert(1);
+  width: 30px;
 }
 
 .badge-kunstwerk img {
-    max-width: 100%;
-    width: 100%;
-    transition: transform 0.15s ease-in-out;
+  max-width: 100%;
+  width: 100%;
+  transition: transform 0.15s ease-in-out;
 }
 
 .form-search button img {
-    width: 25px;
+  width: 25px;
 }
 
 .shoppingcart {
-    padding: 0.5rem;
+  padding: 0.5rem;
 }
 
 .content {
-    margin-top: 11rem;
+  margin-top: 11rem;
 }
 
 .badge-kunstwerk {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 2rem;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .badge-kunstwerk .k-p {
-    position: relative;
+  position: relative;
 }
 
 .badge-kunstenaars h2 {
-    font-size: 1.4rem;
-    margin-top: 1rem;
-    margin-bottom: 0.1rem;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  margin-bottom: 0.1rem;
 }
 
 .badge-kunstwerk .k-p h2 {
-    margin-top: 0.5rem;
-    font-size: 1.2rem;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .badge-kunstwerk .k-p span.prijs {
-    color: #606060;
-    position: absolute;
-    top: 0;
-    right: 0;
+  color: #606060;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .badge-kunstwerk img:hover {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }
 
 .content .row img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .filters {
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #dfdfdf;
-    padding-bottom: 2rem;
-    display: none;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: 2rem;
+  display: none;
 }
 
 .filters.show {
-    display: block;
+  display: block;
 }
 
 .filters .form-floating > label {
-    padding: 0.4rem 1.75rem;
+  padding: 0.4rem 1.75rem;
 }
 
 .filters .form-floating > .form-control {
-    height: calc(2.5rem + -2px);
+  height: calc(2.5rem + -2px);
 }
 
 .badge-kunstenaars {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .badge-kunstenaars .profile-pic {
-    height: 200px;
-    width: 200px;
-    min-width: 100px;
-    min-height: 100px;
-    max-height: 200px;
-    max-width: 200px;
-    margin: auto;
+  height: 200px;
+  width: 200px;
+  min-width: 100px;
+  min-height: 100px;
+  max-height: 200px;
+  max-width: 200px;
+  margin: auto;
 }
 
 .badge-kunstenaars .profile-pic img {
-    border-radius: 100%;
-    width: 100%;
-    max-height: 100%;
+  border-radius: 100%;
+  width: 100%;
+  max-height: 100%;
 }
 
 .badge-kunstenaars span.locatie,
 .badge-kunstenaars span.kunstwerken {
-    color: #6a6a6a;
+  color: #6a6a6a;
 }
 
 .badge-kunstenaars span.locatie img {
-    max-height: 15px;
-    transform: translateY(-2px);
+  max-height: 15px;
+  transform: translateY(-2px);
 }
 
 form input.form-control {
-    padding: 0.675rem 1.15rem;
-    border-radius: 25px;
+  padding: 0.675rem 1.15rem;
+  border-radius: 25px;
 }
 
 form .btn-own {
-    width: 100%;
-    border: none;
-    padding: 0.775rem 0.75rem;
-    background-color: #372c2e;
-    font-weight: 600;
-    border-radius: 0;
+  width: 100%;
+  border: none;
+  padding: 0.775rem 0.75rem;
+  background-color: #372c2e;
+  font-weight: 600;
+  border-radius: 0;
 }
 
 form .btn-own:hover {
-    background-color: #3d3537;
+  background-color: #3d3537;
 }
 
 a.big-button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background-color: #372c2e;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.5rem;
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #372c2e;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 a.big-button:hover {
-    background-color: #3d3537;
+  background-color: #3d3537;
 }
 
 .content div.bieden {
-    text-align: center;
-    padding: 2rem;
-    background-color: #ebebeb;
+  text-align: center;
+  padding: 2rem;
+  background-color: #ebebeb;
 }
 
 .content div.bieden span.timer {
-    font-size: 2.5rem;
-    font-weight: 600;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
 .content div.bieden .btn.btn-bieden {
-    background-color: #372c2e;
-    color: white;
-    border-radius: 0;
-    font-size: 1.5rem;
-    font-weight: 400;
-    padding: 0.4rem 2rem;
-    width: 100%;
+  background-color: #372c2e;
+  color: white;
+  border-radius: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 0.4rem 2rem;
+  width: 100%;
 }
 
 button.btn.btn-winkelmand {
-    background-color: #fff3ec;
-    font-size: 1.5rem;
-    width: 100%;
-    font-weight: 500;
-    padding: 0.4rem 0;
+  background-color: #fff3ec;
+  font-size: 1.5rem;
+  width: 100%;
+  font-weight: 500;
+  padding: 0.4rem 0;
 }
 
 .bieden-input {
-    position: relative;
+  position: relative;
 }
 
 .bieden-input input {
-    padding-left: 2.5rem !important;
-    font-weight: 700;
+  padding-left: 2.5rem !important;
+  font-weight: 700;
 }
 
 .bieden-input::after {
-    content: "€";
-    position: absolute;
-    top: 5px;
-    left: 1rem;
-    color: #7a7a7a;
-    font-size: 1.5rem;
-    font-weight: 700;
+  content: "€";
+  position: absolute;
+  top: 5px;
+  left: 1rem;
+  color: #7a7a7a;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .bieden span.prijs-groot {
-    font-weight: 700;
-    font-size: 2rem;
+  font-weight: 700;
+  font-size: 2rem;
 }
 
 .shopping-cart > div {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .shopping-cart .img-cart {
-    width: 100%;
-    padding-top: 150px;
-    min-width: 100px;
-    min-height: 100px;
-    max-width: 150px;
-    max-height: 150px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  width: 100%;
+  padding-top: 150px;
+  min-width: 100px;
+  min-height: 100px;
+  max-width: 150px;
+  max-height: 150px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .shopping-cart span.artist {
-    font-weight: 400;
-    font-size: 1.2rem;
+  font-weight: 400;
+  font-size: 1.2rem;
 }
 
 .shopping-cart-total span.total-price {
-    font-size: 1.5rem;
-    font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .shopping-cart-total .btn.btn-bestellen {
-    background-color: #372c2e;
-    border-radius: 0;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 400;
-    padding: 0.3rem 3rem;
+  background-color: #372c2e;
+  border-radius: 0;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 0.3rem 3rem;
 }
 
 .artist-detail .detail-profile-pic {
-    width: 100%;
-    max-width: 200px !important;
-    max-height: 200px;
-    height: 100%;
-    border-radius: 100%;
+  width: 100%;
+  max-width: 200px !important;
+  max-height: 200px;
+  height: 100%;
+  border-radius: 100%;
 }
 
 .artist-detail img.location {
-    max-height: 15px;
-    transform: translateY(-2px);
+  max-height: 15px;
+  transform: translateY(-2px);
 }
 
 .fixed-language-user {
-    position: fixed;
-    bottom: 35px;
-    right: 35px;
-    text-align: center;
-    z-index: 1000;
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  text-align: center;
+  z-index: 1000;
 }
 
 .fixed-language-user a.user-profile {
-    background-color: white;
-    border-radius: 100%;
-    box-shadow: 0 3px 6px #00000052;
-    padding: 1.3rem 1.2rem;
-    transition: box-shadow 0.2s ease-in-out;
+  background-color: white;
+  border-radius: 100%;
+  box-shadow: 0 3px 6px #00000052;
+  padding: 1.3rem 1.2rem;
+  transition: box-shadow 0.2s ease-in-out;
 }
 
 .fixed-language-user a.user-profile:hover {
-    box-shadow: 0 1px 6px #000;
+  box-shadow: 0 1px 6px #000;
 }
 
 .fixed-language-user a.user-profile img {
-    width: 25px;
+  width: 25px;
 }
 
 .fixed-language-user .language-selector {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 #homepage .banner {
-    width: 100%;
-    padding-top: calc(100% / 16 * 3);
-    display: block;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
+  width: 100%;
+  padding-top: calc(100% / 16 * 3);
+  display: block;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
 #homepage .banner .text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 100%;
-    padding: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  padding: 2rem;
 }
 
 #homepage .banner .text h1 {
-    color: black;
-    font-weight: 600;
-    text-shadow: 0 0 10px white;
+  color: black;
+  font-weight: 600;
+  text-shadow: 0 0 10px white;
 }
 
 #homepage .banner .text span.small-banner-text {
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px white;
+  font-size: 1.2rem;
+  text-shadow: 0 0 10px white;
 }
 
 form.form {
-    padding: 3rem 4rem;
-    background-color: #e4e4e4;
-    border-radius: 10px;
+  padding: 3rem 4rem;
+  background-color: #e4e4e4;
+  border-radius: 10px;
 }
 
 .intermetzo {
-    display: block;
-    text-align: center;
-    margin: 3rem 0;
-    font-size: 1.2rem;
+  display: block;
+  text-align: center;
+  margin: 3rem 0;
+  font-size: 1.2rem;
 }
 
 .intermetzo span {
-    position: relative;
+  position: relative;
 }
 
 .intermetzo span::before {
-    content: "";
-    background-color: #212529;
-    width: 40px;
-    height: 1px;
-    position: absolute;
-    left: -50px;
-    top: 50%;
-    transform: translateY(-50%);
+  content: "";
+  background-color: #212529;
+  width: 40px;
+  height: 1px;
+  position: absolute;
+  left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .intermetzo span::after {
-    content: "";
-    background-color: #212529;
-    width: 40px;
-    height: 1px;
-    position: absolute;
-    right: -50px;
-    top: 50%;
-    transform: translateY(-50%);
+  content: "";
+  background-color: #212529;
+  width: 40px;
+  height: 1px;
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .intermetzo span a {
-    text-decoration: none;
-    color: var(--bs-body-color);
+  text-decoration: none;
+  color: var(--bs-body-color);
 }
 
-.admin-buttons a, .admin-buttons button {
-    display: inline-block;
-    padding: 0.5rem 1.2rem;
-    background-color: #e8d3af;
-    border-radius: 10px;
-    border: 0;
-    transition: background-color 0.25s ease-in-out;
+.admin-buttons a,
+.admin-buttons button {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  background-color: #e8d3af;
+  border-radius: 10px;
+  border: 0;
+  transition: background-color 0.25s ease-in-out;
 }
 
-.admin-buttons a img, .admin-buttons button img {
-    width: 20px;
+.admin-buttons a img,
+.admin-buttons button img {
+  width: 20px;
 }
 
-.admin-buttons a:hover, .admin-buttons button:hover {
-    background-color: #372c2e;
+.admin-buttons a:hover,
+.admin-buttons button:hover {
+  background-color: #372c2e;
 }
 
-.admin-buttons a:hover img, .admin-buttons button:hover img {
-    filter: invert(1);
+.admin-buttons a:hover img,
+.admin-buttons button:hover img {
+  filter: invert(1);
 }
 
 #dashboard > a {
-    text-align: center;
-    padding: 1rem;
-    text-decoration: none;
+  text-align: center;
+  padding: 1rem;
+  text-decoration: none;
 }
 
 #dashboard a .badge {
-    background-color: #f4f4f4;
-    display: block;
-    padding: 2rem;
+  background-color: #f4f4f4;
+  display: block;
+  padding: 2rem;
 }
 
 #dashboard a .badge h2 {
-    color: #212529;
-    font-size: 1.2rem;
-    text-decoration: none;
+  color: #212529;
+  font-size: 1.2rem;
+  text-decoration: none;
 }
 
 #dashboard-list span {
-    margin-left: 2rem;
+  margin-left: 2rem;
 }
 
 #dashboard a .badge span {
-    font-size: 3rem;
-    color: #212529;
-    font-weight: 600;
+  font-size: 3rem;
+  color: #212529;
+  font-weight: 600;
 }
 
 #dashboard-list .block {
-    text-decoration: none;
-    color: var(--bs-body-color);
-    display: block;
-    padding: 1rem 2rem;
-    background-color: #f4f4f4;
-    border-radius: 7px;
-    margin-bottom: 1rem;
+  text-decoration: none;
+  color: var(--bs-body-color);
+  display: block;
+  padding: 1rem 2rem;
+  background-color: #f4f4f4;
+  border-radius: 7px;
+  margin-bottom: 1rem;
 }
 
 #dashboard-list img {
-    width: 25px;
-    border-radius: 100%;
+  width: 25px;
+  border-radius: 100%;
 }
 
 #dashboard-list .buttons {
-    display: inline-block;
-    float: right;
+  display: inline-block;
+  float: right;
 }
 
 #dashboard-list .buttons a {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #dashboard-list .buttons a img {
-    width: 15px;
-    border-radius: 0;
+  width: 15px;
+  border-radius: 0;
 }
 
 #dashboard-list .buttons a img.good {
-    margin-right: 1rem;
-    filter: invert(51%) sepia(94%) saturate(1436%) hue-rotate(86deg) brightness(90%) contrast(111%);
+  margin-right: 1rem;
+  filter: invert(51%) sepia(94%) saturate(1436%) hue-rotate(86deg)
+    brightness(90%) contrast(111%);
 }
 
 #dashboard-list .buttons a img.bad {
-    margin-right: 1rem;
-    filter: invert(10%) sepia(89%) saturate(6889%) hue-rotate(9deg) brightness(92%) contrast(113%);
+  margin-right: 1rem;
+  filter: invert(10%) sepia(89%) saturate(6889%) hue-rotate(9deg)
+    brightness(92%) contrast(113%);
 }

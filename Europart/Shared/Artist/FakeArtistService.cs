@@ -57,12 +57,14 @@ namespace EuropArt.Shared.Artist
             return artists.AsEnumerable().Where(a => a.Name.ToLower().Contains(searchterm) || a.Biography.ToLower().Contains(searchterm));
         }
 
-        public Task UpdateArtistAsync(ArtistDto.Detail model, int id)
+        public Task UpdateArtistAsync(ArtistDto.Edit model, int id)
         {
             var a = artists.SingleOrDefault(x => x.Id == id);
 
             a.Name = model.Name;
             a.City = model.City;
+            a.Website = model.Website;
+            a.Biography = model.Biography;
 
             return Task.CompletedTask;
         }
