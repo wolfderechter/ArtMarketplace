@@ -117,13 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BuyNow" xml:space="preserve">
-    <value>Nu kopen</value>
+  <data name="Add Artwork" xml:space="preserve">
+    <value>Voeg toe</value>
   </data>
-  <data name="By" xml:space="preserve">
-    <value>Door</value>
+  <data name="AddArtwork" xml:space="preserve">
+    <value>Voeg kunstwerk toe</value>
   </data>
-  <data name="Shoppingcart" xml:space="preserve">
-    <value>In winkelmand</value>
+  <data name="CancelDelete" xml:space="preserve">
+    <value>Annuleer verwijderen</value>
+  </data>
+  <data name="ChooseArtwork" xml:space="preserve">
+    <value>Kies afbeelding</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Bevestig verwijderen</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beschrijving</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Kunstwerk wijzigen</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Prijs</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titel</value>
   </data>
 </root>

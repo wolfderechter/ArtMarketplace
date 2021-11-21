@@ -117,10 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="artworks" xml:space="preserve">
-    <value>kunstwerken</value>
+  <data name="Bio" xml:space="preserve">
+    <value>Biography</value>
   </data>
-  <data name="titel" xml:space="preserve">
-    <value>Artiest</value>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="CityError" xml:space="preserve">
+    <value>City has to be filled in! </value>
+  </data>
+  <data name="EditArtist" xml:space="preserve">
+    <value>Edit artist</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NameError" xml:space="preserve">
+    <value>Name has to be filled in! </value>
+  </data>
+  <data name="Web" xml:space="preserve">
+    <value>Website/portfolio</value>
   </data>
 </root>

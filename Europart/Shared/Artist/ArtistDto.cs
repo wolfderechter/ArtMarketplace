@@ -1,4 +1,6 @@
 ﻿using EuropArt.Shared.Artworks;
+using FluentValidation;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,22 @@ namespace EuropArt.Shared.Artist
         {
             public string Biography { get; set; }
             public string Website { get; set; }
+        }
+
+        public class Edit
+        {
+            public string Name { get; set; }
+            public string City { get; set; }
+            public string Biography { get; set; }
+            public string Website { get; set; }
+            public class ArtistValidator : AbstractValidator<ArtistDto.Edit>
+            {
+                public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
+                {
+                    RuleFor(P => P.Name).NotEmpty().WithMessage(Loc["NameError"]);
+                    RuleFor(p => p.City).NotEmpty().WithMessage(Loc["CityError"]);
+                }
+            }
         }
     }
 }

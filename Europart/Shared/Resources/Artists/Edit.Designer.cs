@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EuropArt.Client.Resources.Artists {
+namespace EuropArt.Shared.Resources.Artists {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EuropArt.Client.Resources.Artists {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Detail {
+    public class Edit {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Detail() {
+        internal Edit() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EuropArt.Client.Resources.Artists {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Client.Resources.Artists.Detail", typeof(Detail).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Shared.Resources.Artists.Edit", typeof(Edit).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,65 @@ namespace EuropArt.Client.Resources.Artists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to artworks.
+        ///   Looks up a localized string similar to Biography.
         /// </summary>
-        public static string artworks {
+        public static string Bio {
             get {
-                return ResourceManager.GetString("artworks", resourceCulture);
+                return ResourceManager.GetString("Bio", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Latest Artworks.
+        ///   Looks up a localized string similar to City.
         /// </summary>
-        public static string Latest_Artworks {
+        public static string City {
             get {
-                return ResourceManager.GetString("Latest Artworks", resourceCulture);
+                return ResourceManager.GetString("City", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No artworks yet.
+        ///   Looks up a localized string similar to City has to be filled in! .
         /// </summary>
-        public static string No_artworks_yet {
+        public static string CityError {
             get {
-                return ResourceManager.GetString("No artworks yet", resourceCulture);
+                return ResourceManager.GetString("CityError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View all.
+        ///   Looks up a localized string similar to Edit artist.
         /// </summary>
-        public static string View_all {
+        public static string EditArtist {
             get {
-                return ResourceManager.GetString("View all", resourceCulture);
+                return ResourceManager.GetString("EditArtist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name has to be filled in! .
+        /// </summary>
+        public static string NameError {
+            get {
+                return ResourceManager.GetString("NameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website/portfolio.
+        /// </summary>
+        public static string Web {
+            get {
+                return ResourceManager.GetString("Web", resourceCulture);
             }
         }
     }

@@ -117,19 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ArtBringsLive" xml:space="preserve">
-    <value>Art brings life</value>
+  <data name="Bio" xml:space="preserve">
+    <value>Biografie</value>
   </data>
-  <data name="FeaturedArtists" xml:space="preserve">
-    <value>Featured artists</value>
+  <data name="City" xml:space="preserve">
+    <value>Stad</value>
   </data>
-  <data name="FeaturedArtworks" xml:space="preserve">
-    <value>Featured artworks</value>
+  <data name="CityError" xml:space="preserve">
+    <value>Stad moet ingevuld zijn! </value>
   </data>
-  <data name="ForReal" xml:space="preserve">
-    <value>For real...</value>
+  <data name="EditArtist" xml:space="preserve">
+    <value>Bewerk artist</value>
   </data>
-  <data name="Latest" xml:space="preserve">
-    <value>Latsest artworks</value>
+  <data name="Name" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="NameError" xml:space="preserve">
+    <value>Naam moet ingevuld zijn!</value>
+  </data>
+  <data name="Web" xml:space="preserve">
+    <value>Website/portfolio</value>
   </data>
 </root>

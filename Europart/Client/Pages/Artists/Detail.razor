@@ -1,39 +1,57 @@
 ﻿@page "/artist/{id:int}"
 @using EuropArt.Shared.Artist
-@inject IStringLocalizer<Resources.Artists.Detail> Loc
+@using EuropArt.Shared.Artworks
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Detail> Loc
 
-<h2 class="Kunstenaar">@_artist.Name</h2>
+<div class="row">
+    <div class="col-6">
+        <h2 class="Kunstenaar">@artist.Name</h2>
+    </div>
+    <div class="col-6 text-end">
+        <div class="admin-buttons">
+            <a href="artist/edit/@Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
+            @if(RequestingDelete)
+            {
+                <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="ConfirmDelete" class="edit">@Loc["ConfirmDelete"]</a>
+                <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="CancelRequestDelete" class="edit">@Loc["CancelDelete"]</a>
+            }
+            else
+            {
+                <a style="color: var(--bs-body-color); text-decoration:none;" class="edit" @onclick="RequestDelete">@Loc["Delete"]</a>
+            }
+        </div>
+    </div>
 
-@if (_artist == null)
+</div>
+
+
+@if (artist == null)
 {
 <p><em>Loading...</em></p> }
-
-
-
 else
 {
     <div class="row artist-detail align-items-center">
         <div class="col-4 text-center mb-5">
-            <img src="@_artist.ImagePath" class="detail-profile-pic" />
+            <img src="@artist.ImagePath" class="detail-profile-pic" />
         </div>
         <div class="col-8 mb-5">
             <p>
-                <img src="images/locate.svg" class="location" /> @_artist.City
+                <img src="images/locate.svg" class="location" /> @artist.City
             </p>
             <p>
-                @_artist.Biography
+                @artist.Biography
             </p>
-            <p><a href="http://www.@_artist.Website" target="_blank">@_artist.Website</a></p>
+            <p><a href="http://www.@artist.Website" target="_blank">@artist.Website</a></p>
         </div>
         <div class="col-8">
             <h3>@Loc["Latest Artworks"]</h3>
         </div>
         <div class="col-4 text-end">
-            <a href="#">@Loc["View all"] @_artist.Artworks.Count() @Loc["artworks"]</a>
+            <a href="#">@Loc["View all"] @artist.Artworks.Count() @Loc["artworks"]</a>
         </div>
-        @if (_artist.Artworks != null)
+        @if (artist.Artworks != null)
         {
-            @foreach (var artwork in _artist.Artworks)
+            @foreach (var artwork in artist.Artworks)
             {
             <div class="kol col-4">
                 <div class="badge-kunstwerk">
@@ -54,13 +72,33 @@ else
 }
 
 @code { 
-    private ArtistDto.Detail _artist = new();
+    private ArtistDto.Detail artist = new();
+    private bool RequestingDelete;
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtistService ArtistService { get; set; }
+    [Inject] public IArtworkService ArtworkService { get; set; }
+    [Inject] NavigationManager NavigationManager { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        _artist = await ArtistService.GetDetailAsync(Id);
-    } }
+        artist = await ArtistService.GetDetailAsync(Id);
+    }
+
+    private async Task ConfirmDelete()
+    {
+        await ArtistService.DeleteAsync(artist.Id);
+        await ArtworkService.DeleteArtistAsync(artist.Id);
+        NavigationManager.NavigateTo("/artist");
+    }
+
+    private void RequestDelete()
+    {
+        RequestingDelete = true;
+    }
+    private void CancelRequestDelete()
+    {
+        RequestingDelete = false;
+    }
+    }
 

@@ -15,9 +15,16 @@ namespace EuropArt.Server.Models
         public string Description { get; set; }
         public IEnumerable<string> ImagePaths { get; set; }
 
-        public Artwork()
+        private Artwork()
         {
 
+        }
+        
+        public Artwork(string name, decimal price, string description)
+        {
+            Name = name;
+            Price = price;
+            Description = description;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace EuropArt.Shared.Artist
 {
     public class FakeArtistService : IArtistService
     {
-        private static List<ArtistDto.Detail> _artists = new();
+        private static List<ArtistDto.Detail> artists = new();
 
         static FakeArtistService()
         {
@@ -30,25 +30,50 @@ namespace EuropArt.Shared.Artist
                 .RuleFor(x => x.Biography, f => f.Lorem.Sentence(5))
                 .RuleFor(x => x.Name, f => f.Name.FullName());
 
-            _artists.AddRange(faker.Generate(5));
-            _artists.ForEach(a => a.Artworks = artworks.Where(aw => aw.Artist.Id == a.Id));
+            artists.AddRange(faker.Generate(5));
+            artists.ForEach(a => a.Artworks = artworks.Where(aw => aw.Artist.Id == a.Id));
         }
 
         public async Task<ArtistDto.Detail> GetDetailAsync(int id)
         {
             await Task.Delay(100);
-            return _artists.SingleOrDefault(x => x.Id == id);
+            return artists.SingleOrDefault(x => x.Id == id);
         }
 
         public async Task<IEnumerable<ArtistDto.Index>> GetIndexAsync()
         {
             await Task.Delay(100);
-            return _artists.AsEnumerable();
+            return artists.AsEnumerable();
         }
 
         public IEnumerable<ArtistDto.Detail> GetArtists()
         {
-            return _artists;
+            return artists;
+        }
+
+        public async Task<IEnumerable<ArtistDto.Index>> GetIndexAsync(string searchterm)
+        {
+            await Task.Delay(100);
+            return artists.AsEnumerable().Where(a => a.Name.ToLower().Contains(searchterm) || a.Biography.ToLower().Contains(searchterm));
+        }
+
+        public Task UpdateArtistAsync(ArtistDto.Edit model, int id)
+        {
+            var a = artists.SingleOrDefault(x => x.Id == id);
+
+            a.Name = model.Name;
+            a.City = model.City;
+            a.Website = model.Website;
+            a.Biography = model.Biography;
+
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteAsync(int id)
+        {
+            var a = artists.SingleOrDefault(x => x.Id == id);
+            artists.Remove(a);
+            return Task.CompletedTask;
         }
     }
 }

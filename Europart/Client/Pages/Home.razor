@@ -4,8 +4,9 @@
 @inject IArtistService ArtistService
 
 @using EuropArt.Shared.Artworks
+@using EuropArt.Shared.Resources
 @inject IArtworkService ArtworkService
-@inject IStringLocalizer<Resources.Home> Loc 
+@inject IStringLocalizer<EuropArt.Shared.Resources.Home> Loc 
 
 <div id="homepage">
     <div class="row">
@@ -24,30 +25,30 @@
             <div class="badge-kunstwerk">
                 <a href="#"><img src="images/img_x300_615b0f51057766-33663549-37540512.jpg"></a>
                 <div class="k-p">
-                    <h2 class="kunstenaar">by Toon Decock</h2>
+                    <h2 class="kunstenaar">Unbranded Fresh Cheese</h2>
                     <span class="prijs">&euro; 100</span>
                 </div>
-                <span class="naam">Unbranded Fresh Cheese</span>
+                <span class="naam">by Toon Decock</span>
             </div>
         </div>
         <div class="col-4">
             <div class="badge-kunstwerk">
                 <a href="#"><img src="images/img_x500_615acf2b92d903-60438090-38681861.jpg"></a>
                 <div class="k-p">
-                    <h2 class="kunstenaar">by Toon Decock</h2>
+                    <h2 class="kunstenaar">Unbranded Fresh Cheese</h2>
                     <span class="prijs">&euro; 100</span>
                 </div>
-                <span class="naam">Unbranded Fresh Cheese</span>
+                <span class="naam">by Toon Decock</span>
             </div>
         </div>
         <div class="col-4">
             <div class="badge-kunstwerk">
                 <a href="#"><img src="images/img_x500_615ad73aa4ac97-98988702-54431046.jpg"></a>
                 <div class="k-p">
-                    <h2 class="kunstenaar">by Toon Decock</h2>
+                    <h2 class="kunstenaar">Unbranded Fresh Cheese</h2>
                     <span class="prijs">&euro; 100</span>
                 </div>
-                <span class="naam">Unbranded Fresh Cheese</span>
+                <span class="naam">by Toon Decock</span>
             </div>
         </div>
 
@@ -58,7 +59,7 @@
             <h2>@Loc["FeaturedArtworks"]</h2>
         </div>
         <div class="row">
-            @if (_artworks is null)
+            @if (artworks is null)
             {
                 <p>Loading...</p>
             }
@@ -68,12 +69,12 @@
                 {
                     <div class="kol col-4">
                         <div class="badge-kunstwerk">
-                            <a href="artwork/@_artworks.ElementAt(i).Id"><img src="@_artworks.ElementAt(i).ImagePath"></a>
+                            <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePath"></a>
                             <div class="k-p">
-                                <h2 class="kunstenaar">by @*@_artworks.ElementAt(i).Name*@</h2>
-                                <span class="prijs">@_artworks.ElementAt(i).Price.ToString("C")</span>
+                                <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
+                                <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
                             </div>
-                            <span class="naam">@_artworks.ElementAt(i).Name</span>
+                            <span class="naam">by @artworks.ElementAt(i).Artist.Name</span>
                         </div>
                     </div>
                 }
@@ -89,7 +90,7 @@
             <h2>@Loc["FeaturedArtists"]</h2>
         </div>
         <div class="row">
-            @if (_artists is null)
+            @if (artists is null)
             {
                 <p>Loading...</p>
             }
@@ -100,11 +101,11 @@
                     <div class="col-4 text-center">
                         <div class="badge-kunstenaars">
                             <div class="profile-pic">
-                                <a href="/artist/@_artists.ElementAt(i).Id"><img src="@_artists.ElementAt(i).ImagePath" /></a>
+                                <a href="/artist/@artists.ElementAt(i).Id"><img src="@artists.ElementAt(i).ImagePath" /></a>
                             </div>
-                            <h2>@_artists.ElementAt(i).Name</h2>
-                            <span class="locatie"><img src="images/locate.svg" /> @_artists.ElementAt(i).City</span><br />
-                            <span class="kunstwerken">50 kunstwerken</span>
+                            <h2>@artists.ElementAt(i).Name</h2>
+                            <span class="locatie"><img src="images/locate.svg" /> @artists.ElementAt(i).City</span><br />
+                            <span class="kunstwerken">@artists.ElementAt(i).Artworks.Count() @Loc["Artworks"]</span>
                         </div>
                     </div>
                 }
@@ -121,14 +122,14 @@
 
 
 @code {
-    private IEnumerable<ArtistDto.Index> _artists;
+    private IEnumerable<ArtistDto.Index> artists;
 
-    private IEnumerable<ArtworkDto.Index> _artworks;
+    private IEnumerable<ArtworkDto.Index> artworks;
 
     protected override async Task OnInitializedAsync()
     {
-        _artists = await ArtistService.GetIndexAsync();
-        _artworks = await ArtworkService.GetIndexAsync();
+        artists = await ArtistService.GetIndexAsync();
+        artworks = await ArtworkService.GetIndexAsync();
     }
 
 

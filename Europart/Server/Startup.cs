@@ -22,11 +22,11 @@ namespace EuropArt.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddRazorPages();
-            
+           
+
         }
 
         private RequestLocalizationOptions GetLocalizationOptions()

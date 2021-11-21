@@ -1,0 +1,64 @@
+﻿@page "/artwork/edit/{id:int}"
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
+@inject NavigationManager NavigationManager
+@using EuropArt.Shared.Artworks
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <EditForm Model="@model" OnValidSubmit="EditArtwork" class="form">
+            <FluentValidationValidator />
+            <DataAnnotationsValidator />
+            <div class="mb-3">
+                <h6>@Loc["Title"]</h6>
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="model.Name"
+                           aria-describedby="titleHelp" placeholder="Enter title" />
+                <ValidationMessage For="@(() => model.Name)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Description"]</h6>
+                <InputText @bind-Value="model.Description" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter description" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Price"]</h6>
+                <InputNumber @bind-Value="model.Price" class="form-control" placeholder="Enter price" />
+                <ValidationMessage For="@(() => model.Price)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["ChooseArtwork"]</h6>
+                <input type="file" id="artwork" name="artwork" />
+                <ValidationMessage For="@(() => model.ImagePath)" />
+
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">@Loc["Edit"]</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+@code {
+
+    private ArtworkDto.Edit model = new();
+
+    [Parameter] public int Id { get; set; }
+    [Inject] public IArtworkService ArtworkService { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var artwork = await ArtworkService.GetDetailAsync(Id);
+        model = new ArtworkDto.Edit
+        {
+            Description = artwork.Description,
+            ImagePath = artwork.ImagePath,
+            Name = artwork.Name,
+            Price = artwork.Price,
+        };
+    }
+
+    private async Task EditArtwork()
+    {
+        await ArtworkService.UpdateAsync(model, Id);
+        NavigationManager.NavigateTo("/artwork");
+
+    }
+}

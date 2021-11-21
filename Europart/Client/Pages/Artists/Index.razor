@@ -2,18 +2,18 @@
 @using EuropArt.Shared.Artist
 @using System.Globalization
 @inject IArtistService ArtistService
-@inject IStringLocalizer<Resources.Artists.Index> Loc
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Index> Loc
 
 <h3>@Loc["titel"]</h3>
 
 <div class="row">
-    @if (_artists is null)
+    @if (artists is null)
     {
         <p>Loading...</p>
     }
     else
     {
-        @foreach (var artist in _artists)
+        @foreach (var artist in artists)
         {
             <div class="col-4 text-center">
                 <div class="badge-kunstenaars">
@@ -30,10 +30,10 @@
 </div>
 
 @code {
-    private IEnumerable<ArtistDto.Index> _artists;
+    private IEnumerable<ArtistDto.Index> artists;
 
     protected override async Task OnInitializedAsync()
     {
-        _artists = await ArtistService.GetIndexAsync();
+        artists = await ArtistService.GetIndexAsync();
     }
 }
