@@ -1,6 +1,6 @@
 ﻿@page "/dashboard/{listview}"
 @inject NavigationManager NavigationManager
-@using EuropArt.Shared.Artist
+@using EuropArt.Shared.Artists
 @using System.Globalization
 @inject IArtistService ArtistService
 
@@ -176,25 +176,34 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _artists = await ArtistService.GetIndexAsync();
-        _artworks = await ArtworkService.GetIndexAsync();
+        ArtistRequest.GetIndex request = new();
+        var response = await ArtistService.GetIndexAsync(request);
+        _artists = response.Artists;
+
+        ArtworkRequest.GetIndex request2 = new();
+        var response2 = await ArtworkService.GetIndexAsync(request2);
+        _artworks = response2.Artworks;
     }
 
     private async Task ConfirmDeleteArtist(int Id)
     {
-        _artist = await ArtistService.GetDetailAsync(Id);
+        //_artist = await ArtistService.GetDetailAsync(Id);
         if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + _artist.Name + "?"))
             return;
-        await ArtworkService.DeleteAsync(_artist.Id);
+        var request = new ArtworkRequest.Delete { ArtworkId = Id };
+        await ArtworkService.DeleteAsync(request);
     }
 
     private async Task ConfirmDeleteArtwork(int Id)
     {
-        _artwork = await ArtworkService.GetDetailAsync(Id);
+        ArtworkRequest.GetDetail request = new() { ArtworkId = Id };
+        var response = await ArtworkService.GetDetailAsync(request);
+        _artwork = response.Artwork;
         if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + _artwork.Name + "?"))
             return;
-        await ArtworkService.DeleteAsync(_artwork.Id);
+        var request2 = new ArtworkRequest.Delete { ArtworkId = Id };
+        await ArtworkService.DeleteAsync(request2);
     }
 
-    
+
 }

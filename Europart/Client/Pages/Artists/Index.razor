@@ -1,5 +1,5 @@
 ﻿@page "/artist"
-@using EuropArt.Shared.Artist
+@using EuropArt.Shared.Artists
 @using System.Globalization
 @inject IArtistService ArtistService
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Index> Loc
@@ -30,10 +30,12 @@
 </div>
 
 @code {
-    private IEnumerable<ArtistDto.Index> artists;
+    private List<ArtistDto.Index> artists;
 
     protected override async Task OnInitializedAsync()
     {
-        artists = await ArtistService.GetIndexAsync();
+        ArtistRequest.GetIndex request = new();
+        var response = await ArtistService.GetIndexAsync(request);
+        artists = response.Artists;
     }
 }

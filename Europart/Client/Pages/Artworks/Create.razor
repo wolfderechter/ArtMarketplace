@@ -44,8 +44,14 @@
     ArtworkDto.Create newArtwork = new() {};
     private async Task CreateNewArtwork()
     {
-        await ArtworkService.CreateAsync(newArtwork);
-        Console.WriteLine("Created new artwork!");
+        //Fake image toevoegen
+        newArtwork.ImagePath = "/images/NewArtwork.jpg";
+        ArtworkRequest.Create request = new()
+        {
+            Artwork = newArtwork
+        };
+
+        var response = await ArtworkService.CreateAsync(request);
         NavigationManager.NavigateTo("/artwork");
     }
 }

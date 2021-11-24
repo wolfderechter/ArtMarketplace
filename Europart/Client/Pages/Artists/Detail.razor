@@ -1,5 +1,5 @@
 ﻿@page "/artist/{id:int}"
-@using EuropArt.Shared.Artist
+@using EuropArt.Shared.Artists
 @using EuropArt.Shared.Artworks
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Detail> Loc
 
@@ -49,7 +49,7 @@ else
         <div class="col-4 text-end">
             <a href="#">@Loc["View all"] @artist.Artworks.Count() @Loc["artworks"]</a>
         </div>
-        @if (artist.Artworks != null)
+        @if (artist.Artworks.Count > 0)
         {
             @foreach (var artwork in artist.Artworks)
             {
@@ -82,13 +82,18 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        artist = await ArtistService.GetDetailAsync(Id);
+        ArtistRequest.GetDetail request = new() { ArtistId = Id };
+        var response = await ArtistService.GetDetailAsync(request);
+        artist = response.Artist;
     }
 
     private async Task ConfirmDelete()
     {
-        await ArtistService.DeleteAsync(artist.Id);
-        await ArtworkService.DeleteArtistAsync(artist.Id);
+        var request = new ArtistRequest.Delete { ArtistId = Id };
+        await ArtistService.DeleteAsync(request);
+
+        //nog uitwerken: artiest zijn kunstwerken verwijderen via api call
+        //await ArtworkService.DeleteArtistAsync(Id);
         NavigationManager.NavigateTo("/artist");
     }
 

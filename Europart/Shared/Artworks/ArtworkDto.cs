@@ -1,7 +1,6 @@
-﻿using EuropArt.Shared.Artist;
+﻿using EuropArt.Shared.Artists;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using System.ComponentModel.DataAnnotations;
 
 namespace EuropArt.Shared.Artworks
 {
@@ -10,6 +9,7 @@ namespace EuropArt.Shared.Artworks
         public class Index
         {
             public int Id { get; set; }
+            //veranderen naar index
             public ArtistDto.Detail Artist { get; set; }
             public string Name { get; set; }
             public decimal Price { get; set; }
@@ -43,7 +43,7 @@ namespace EuropArt.Shared.Artworks
 
 
         }
- 
+
         public class Edit
         {
             public string Name { get; set; }

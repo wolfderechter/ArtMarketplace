@@ -1,4 +1,5 @@
 ﻿using EuropArt.Shared.Artworks;
+using EuropArt.Shared;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EuropArt.Shared.Artist
+namespace EuropArt.Shared.Artists
 {
     public static class ArtistDto
     {
@@ -18,8 +19,8 @@ namespace EuropArt.Shared.Artist
             public string City { get; set; }
             public string ImagePath { get; set; }
 
-            public IEnumerable<ArtworkDto.Detail> Artworks = new List<ArtworkDto.Detail>();
-        }
+            public List<ArtworkDto.Detail> Artworks { get; set; } = new();
+    }
 
         public class Detail : Index
         {

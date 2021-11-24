@@ -1,7 +1,8 @@
 ﻿@page "/artist/edit/{id:int}"
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Edit> Loc
 @inject NavigationManager NavigationManager
-@using EuropArt.Shared.Artist
+@using EuropArt.Shared.Artists
+@using EuropArt.Shared.Resources
 
 <div class="row">
     <div class="col-8 offset-2">
@@ -40,26 +41,40 @@
 
     private ArtistDto.Edit model = new();
 
-    [Parameter] public int Id { get; set; }
+    [Parameter] public int ArtistId { get; set; }
+    [Parameter] public EventCallback OnArtistChanged { get; set; }
     [Inject] public IArtistService ArtistService { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        var artist = await ArtistService.GetDetailAsync(Id);
+        ArtistRequest.GetDetail request = new()
+        {
+            ArtistId = ArtistId
+        };
+
+        var response = await ArtistService.GetDetailAsync(request);
         model = new ArtistDto.Edit
         {
-            Name = artist.Name,
-            Biography = artist.Biography,
-            City = artist.City,
-            Website = artist.Website
+            Name = response.Artist.Name,
+            Biography = response.Artist.Biography,
+            City = response.Artist.City,
+            Website = response.Artist.Website
         };
     }
 
     private async Task EditArtist()
     {
-        await ArtistService.UpdateArtistAsync(model, Id);
-        NavigationManager.NavigateTo("/artist");
+        //await ArtistService.UpdateArtistAsync(model, Id);
+        //NavigationManager.NavigateTo("/artist");
 
+        ArtistRequest.Edit request = new ArtistRequest.Edit
+        {
+            Artist = model,
+            ArtistId = ArtistId
+        };
+
+        var response = await ArtistService.EditAsync(request);
+        await OnArtistChanged.InvokeAsync();
     }
 
 }

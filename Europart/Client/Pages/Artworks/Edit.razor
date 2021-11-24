@@ -1,11 +1,11 @@
-﻿@page "/artwork/edit/{id:int}"
+﻿@page "/artwork/edit/{ArtworkId:int}"
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
 @inject NavigationManager NavigationManager
 @using EuropArt.Shared.Artworks
 
 <div class="row">
     <div class="col-8 offset-2">
-        <EditForm Model="@model" OnValidSubmit="EditArtwork" class="form">
+        <EditForm Model="@model" OnValidSubmit="EditArtworkAsync" class="form">
             <FluentValidationValidator />
             <DataAnnotationsValidator />
             <div class="mb-3">
@@ -40,25 +40,40 @@
 
     private ArtworkDto.Edit model = new();
 
-    [Parameter] public int Id { get; set; }
+    [Parameter] public int ArtworkId { get; set; }
+    [Parameter] public EventCallback OnArtworkChanged { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        var artwork = await ArtworkService.GetDetailAsync(Id);
+        ArtworkRequest.GetDetail request = new()
+        {
+            ArtworkId = ArtworkId
+        };
+        var response = await ArtworkService.GetDetailAsync(request);
+
         model = new ArtworkDto.Edit
         {
-            Description = artwork.Description,
-            ImagePath = artwork.ImagePath,
-            Name = artwork.Name,
-            Price = artwork.Price,
+            Description = response.Artwork.Description,
+            ImagePath = response.Artwork.ImagePath,
+            Name = response.Artwork.Name,
+            Price = response.Artwork.Price,
         };
     }
 
-    private async Task EditArtwork()
+    private async Task EditArtworkAsync()
     {
-        await ArtworkService.UpdateAsync(model, Id);
-        NavigationManager.NavigateTo("/artwork");
+        //await ArtworkService.UpdateAsync(model, Id);
+        //NavigationManager.NavigateTo("/artwork");
+        Console.WriteLine("Edited artwork");
+        ArtworkRequest.Edit request = new ArtworkRequest.Edit
+        {
+            Artwork = model,
+            ArtworkId = ArtworkId
+        };
 
+        var response = await ArtworkService.EditAsync(request);
+        await OnArtworkChanged.InvokeAsync();
+        NavigationManager.NavigateTo($"/artwork/{ArtworkId}");
     }
 }

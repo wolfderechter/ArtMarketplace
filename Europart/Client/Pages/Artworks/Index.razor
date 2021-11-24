@@ -125,11 +125,13 @@
     private String showColFilters = "";
     private String textOnButton = "Show Filters";
 
-    private IEnumerable<ArtworkDto.Index> artworks;
+    private List<ArtworkDto.Index> artworks;
 
     protected override async Task OnInitializedAsync()
     {
-        artworks = await ArtworkService.GetIndexAsync();
+        ArtworkRequest.GetIndex request = new();
+        var response = await ArtworkService.GetIndexAsync(request);
+        artworks = response.Artworks;
     }
 
     private void ShowFilters()

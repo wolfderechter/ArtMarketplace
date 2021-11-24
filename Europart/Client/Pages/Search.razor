@@ -1,6 +1,6 @@
 ﻿@page "/search"
 @using EuropArt.Shared.Artworks
-@using EuropArt.Shared.Artist
+@using EuropArt.Shared.Artists
 @inject IArtworkService ArtworkService
 @inject IArtistService ArtistService
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Index> Loc
@@ -87,8 +87,8 @@
     {
 @*        artworks = await ArtworkService.GetIndexAsync(Searchterm);
         artists = await ArtistService.GetIndexAsync(Searchterm);*@
-        artists = await ArtistService.GetIndexAsync();
-        artworks = await ArtworkService.GetIndexAsync();
+        //artists = await ArtistService.GetIndexAsync();
+        //artworks = await ArtworkService.GetIndexAsync();
 
     }
 

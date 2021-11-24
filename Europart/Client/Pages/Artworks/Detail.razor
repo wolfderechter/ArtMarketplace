@@ -63,12 +63,15 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        artwork = await ArtworkService.GetDetailAsync(Id);
+        ArtworkRequest.GetDetail request = new() { ArtworkId = Id };
+        var response = await ArtworkService.GetDetailAsync(request);
+        artwork = response.Artwork;
     }
 
     private async Task ConfirmDelete()
     {
-        await ArtworkService.DeleteAsync(artwork.Id);
+        var request = new ArtworkRequest.Delete { ArtworkId = Id };
+        await ArtworkService.DeleteAsync(request);
         NavigationManager.NavigateTo("/artwork");
     }
 
