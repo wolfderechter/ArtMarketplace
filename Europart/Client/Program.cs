@@ -1,3 +1,4 @@
+using Bogus;
 using EuropArt.Client.Artists;
 using EuropArt.Client.Artworks;
 using EuropArt.Shared.Artists;

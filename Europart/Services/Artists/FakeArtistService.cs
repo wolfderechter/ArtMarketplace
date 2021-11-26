@@ -14,31 +14,8 @@ namespace EuropArt.Services.Artists
 {
     public class FakeArtistService : IArtistService
     {
-        private static List<Artist> artists = new();
-        private static List<Artwork> artworks = new();
-
-        static FakeArtistService()
-        {
-            var artistIds = 0;
-
-
-
-            var faker = new Faker<Artist>("en")
-                .RuleFor(x => x.Id, _ => artistIds++)
-                .RuleFor(x => x.ImagePath, f => f.Internet.Avatar())
-                .RuleFor(x => x.City, f => f.Address.City())
-                //.RuleFor(x => x.Artworks, f => artworks.Where(a => a.Artist.Id == artistIds))
-                .RuleFor(x => x.Website, f => f.Person.Website)
-                .RuleFor(x => x.Biography, f => f.Lorem.Sentence(5))
-                .RuleFor(x => x.Name, f => f.Name.FullName());
-
-            //Task.Delay(400);
-            //var artworkFaker = new FakeArtworkService();
-            //artworks = artworkFaker.GetArtworks();
-
-            artists.AddRange(faker.Generate(5));
-            artists.ForEach(a => a.Artworks = artworks.Where(aw => aw.Artist.Id == a.Id));
-        }
+        private static List<Artwork> artworks => FakeDataStore.Artworks;
+        private static List<Artist> artists => FakeDataStore.Artists;
 
         public async Task DeleteAsync(ArtistRequest.Delete request)
         {
@@ -72,8 +49,6 @@ namespace EuropArt.Services.Artists
         public async Task<ArtistResponse.GetDetail> GetDetailAsync(ArtistRequest.GetDetail request)
         {
             await Task.Delay(100);
-            var artworkFaker = new FakeArtworkService();
-            artworks = artworkFaker.GetArtworks();
             ArtistResponse.GetDetail response = new();
 
             response.Artist = artists.Select(x => new ArtistDto.Detail

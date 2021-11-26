@@ -13,27 +13,9 @@ namespace EuropArt.Services.Artworks
 {
     public class FakeArtworkService : IArtworkService
     {
-        private static List<Artwork> artworks = new();
-        private static List<Artist> artists = new();
+        private static List<Artwork> artworks => FakeDataStore.Artworks;
+        private static List<Artist> artists => FakeDataStore.Artists;
 
-        static FakeArtworkService()
-        {
-
-            var artworkIds = 0;
-            var artistFaker = new FakeArtistService();
-            artists = artistFaker.GetArtists();
-
-            var faker = new Faker<Artwork>("en")
-                .RuleFor(x => x.Id, _ => artworkIds++)
-                .RuleFor(x => x.Name, f => f.Commerce.ProductName())
-                //Name en Id van een Artist is enige belangrijke
-                .RuleFor(x => x.Artist, f => f.PickRandom(artists))
-                .RuleFor(x => x.Description, f => f.Commerce.ProductDescription())
-                .RuleFor(x => x.Price, f => Decimal.Round(f.Random.Decimal(0, 250), 2))
-                .RuleFor(x => x.ImagePath, _ => $"/images/artworks/{artworkIds}.jpg");
-
-            artworks.AddRange(faker.Generate(29));
-        }
 
         //public async Task<ArtworkDto.Detail> GetDetailAsync(int id)
         //{
@@ -57,7 +39,6 @@ namespace EuropArt.Services.Artworks
                     Name = x.Artist.Name,
                     ImagePath = x.Artist.ImagePath,
                     Biography = x.Artist.Biography,
-                    //Artworks = (List<ArtworkDto.Detail>)x.Artist.Artworks,
                     City = x.Artist.City,
                     Website = x.Artist.Website,
                 },
@@ -92,7 +73,6 @@ namespace EuropArt.Services.Artworks
                     Name = x.Artist.Name,
                     ImagePath = x.Artist.ImagePath,
                     Biography = x.Artist.Biography,
-                    //Artworks = (List<ArtworkDto.Detail>)x.Artist.Artworks,
                     City = x.Artist.City,
                     Website = x.Artist.Website,
                 },
