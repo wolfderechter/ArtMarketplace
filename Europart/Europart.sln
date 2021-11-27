@@ -8,9 +8,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuropArt.Client", "Client\E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuropArt.Shared", "Shared\EuropArt.Shared.csproj", "{0F197415-86FE-4C02-804B-B29D0558C5EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuropArt.Domain", "Domain\EuropArt.Domain.csproj", "{F161DD8E-BA1B-47E0-B4F7-4676FE496A5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuropArt.Domain", "Domain\EuropArt.Domain.csproj", "{F161DD8E-BA1B-47E0-B4F7-4676FE496A5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuropArt.Services", "Services\EuropArt.Services.csproj", "{694F5041-A037-4A86-8A64-3E3C105DFE47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuropArt.Services", "Services\EuropArt.Services.csproj", "{694F5041-A037-4A86-8A64-3E3C105DFE47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

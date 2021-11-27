@@ -30,16 +30,23 @@
                         <NavLink class="nav-link" href="dashboard">Dashboard</NavLink>
                     </li>
                 </ul>
-                <ul class="navbar-nav justify-content-end pe-3">
+               
                     @*<form class="d-flex form-search">
-                        <input class="form-control me-2" type="text" placeholder="@Loc["Search"]" aria-label="Zoeken" @onchange="Search">
-                        <a class="btn" href="/search"><img src="/images/search.svg" /></a>
-                    </form>*@
+            <input class="form-control me-2" type="text" placeholder="@Loc["Search"]" aria-label="Zoeken" @onchange="Search">
+            <a class="btn" href="/search"><img src="/images/search.svg" /></a>
+        </form>*@
 
                     <NavLink class="shoppingcart mr-3" href="search"><img src="/images/search.svg" /></NavLink>
 
-                    <NavLink class="shoppingcart" href="shoppingcart"><img src="/images/shoppingcart.svg" /></NavLink>
-                </ul>
+                    
+@*                    <NavLink class="shoppingcart" href="shoppingcart"><img src="/images/shoppingcart.svg" /></NavLink>
+*@                    <button class="button is-white" @onclick="OpenShoppingCart">
+                        <span class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </span>
+@*                       <span class="tag">@Cart.Items.Count</span>
+*@                    </button>
+
             </div>
         </div>
     </div>
@@ -51,18 +58,3 @@
     <CultureSelector />
 </div>
 
-
-@code { private bool collapseNavMenu = true;
-
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-
-    private void Search(ChangeEventArgs args)
-    {
-        NavigationManager.NavigateTo("/artwork");
-    } 
-}

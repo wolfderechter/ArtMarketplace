@@ -1,41 +1,77 @@
 ﻿@page "/shoppingcart"
 @inject IStringLocalizer<EuropArt.Shared.Resources.Shoppingcart> Loc
-
+@inject IArtworkService ArtworkService
+@inject NavigationManager NavManager
+@using EuropArt.Shared.Artworks
+@using EuropArt.Domain.Shoppingcarts
 
 <h1>Jouw winkelmand</h1>
-<div class="row shopping-cart align-items-center">
-    <div class="col-4">
-        <div class="img-cart" style="background-image:url('/images/img_x300_615b0f51057766-33663549-37540512.jpg');">
-        </div>
-    </div>
-    <div class="col-6">
-        <h2>Genietende vrouw</h2>
-        <span class="artist">Parein Angélina</span><br />
-        <span class="price">&euro; 650</span>
-    </div>
-    <div class="col-2">
-        <a href="#"><img src="/images/delete.svg" style="width:15px;" /></a>
-    </div>
-    <div class="col-4">
-        <div class="img-cart" style="background-image: url('/images/img_x500_615ad37c59a247-12819984-77357969.jpg');">
-        </div>
-    </div>
-    <div class="col-6">
-        <h2>Zonder twijfel</h2>
-        <span class="artist">Carline Booghs</span><br />
-        <span class="price">&euro; 350</span>
-    </div>
-    <div class="col-2">
-        <a href="#"><img src="/images/delete.svg" style="width:15px;" /></a>
-    </div>
-</div>
-<div class="row text-end shopping-cart-total">
-    <div class="col-12 mb-4">
-        <span class="total-price">Totale prijs: &euro; 1000</span>
-    </div>
-    <div class="col-12">
-        <button class="btn btn-bestellen">Bestel</button>
-    </div>
-</div>
 
-@code { }
+@if (Cart.Items is null)
+{
+    <p>Loading...</p>
+}
+else
+
+    @foreach (var item in Cart.Items)
+    {
+        <div class="row shopping-cart align-items-center">
+            <div class="col-4">
+              
+                      <div class="badge-kunstwerk text-center" style="padding: 0;">
+                <img src="@item.ImagePath" style="width:auto;">
+          
+                </div>
+            </div>
+            <div class="col-6">
+                <h2>@item.Name</h2>
+                
+               <span class="price">&euro; @item.Price.ToString("C")</span>
+            </div>
+           <div class="col-2">
+                @if (RequestingDelete)
+                {
+                   <button class="btn btn-bieden mb-3" @onclick="() => ConfirmDelete(item)">@Loc["ConfirmDelete"]</button>
+              <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
+                }
+                else
+                {
+                    <button class="btn btn-bieden mb-3" @onclick="RequestDelete">@Loc["Delete"]</button>
+                }
+            </div> 
+        </div>
+    }
+    <div class="row text-end shopping-cart-total">
+        <div class="col-12 mb-4">
+            <span class="total-price">Totale prijs: &euro; @Cart.Items.Sum(x => x.Price)</span>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-bestellen">Bestel</button>
+        </div>
+    </div>
+
+
+
+@code {
+
+    [Parameter] public int Id { get; set; }
+    private IEnumerable<ArtworkDto.Detail> artworks;
+    private ArtworkDto.Detail artwork = new();
+    private bool RequestingDelete;
+
+    private void ConfirmDelete(Item item)
+    {
+
+        Cart.Items.Remove(item);
+    }
+
+
+    private void RequestDelete()
+    {
+        RequestingDelete = true;
+    }
+    private void CancelRequestDelete()
+    {
+        RequestingDelete = false;
+    }
+}

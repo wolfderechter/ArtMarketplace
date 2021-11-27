@@ -1,5 +1,6 @@
 using EuropArt.Client.Artists;
 using EuropArt.Client.Artworks;
+using EuropArt.Domain.Shoppingcarts;
 using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -22,6 +23,7 @@ namespace EuropArt.Client
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<IArtworkService, ArtworkService>();
             builder.Services.AddScoped<IArtistService, ArtistService>();
+            builder.Services.AddScoped<Shoppingcart>();
             /*await builder.Build().RunAsync();*/
             builder.Services.AddLocalization();
 

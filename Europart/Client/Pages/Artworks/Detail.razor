@@ -3,6 +3,7 @@
 @using EuropArt.Shared.Artworks
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Detail> Loc
 @inject IJSRuntime JSRuntime
+@using EuropArt.Domain.Shoppingcarts
 @if (artwork == null || artwork.Artist == null)
 {
     <p><em>Loading...</em></p>
@@ -32,16 +33,17 @@ else
         <div class="col-4">
             <div class="bieden">
                 <span class="prijs-groot">@artwork.Price.ToString("C")</span>
+                <button @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
                 <form>
-                    <button class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
+
                     <button class="btn btn-bieden mb-3">@Loc["BuyNow"]</button>
                 </form>
                 <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
 
                 @if (RequestingDelete)
                 {
-                        <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
-                        <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
+                    <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
+                    <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
                 }
                 else
                 {
@@ -60,6 +62,7 @@ else
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
+    [Inject] public Shoppingcart Cart { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -82,5 +85,11 @@ else
     private void CancelRequestDelete()
     {
         RequestingDelete = false;
+    }
+
+    private void AddToCart()
+    {
+        Cart.AddItem(artwork.Id, artwork.Name, artwork.Price, artwork.ImagePath);
+        Console.WriteLine(Cart.Items.Count);
     }
 }
