@@ -11,7 +11,7 @@ using EuropArt.Shared.Artworks;
 using EuropArt.Shared.Artist;
 using System.Globalization;
 using Microsoft.JSInterop;
-
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 namespace EuropArt.Client
 {
@@ -28,7 +28,7 @@ namespace EuropArt.Client
             {
                 builder.Configuration.Bind("Auth0", options.ProviderOptions);
                 options.ProviderOptions.ResponseType = "code";
-            });
+            }).AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
 
             builder.Services.AddScoped<IArtworkService, FakeArtworkService>();
             builder.Services.AddScoped<IArtistService, FakeArtistService>();
