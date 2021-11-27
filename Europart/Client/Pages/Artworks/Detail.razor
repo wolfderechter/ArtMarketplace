@@ -4,7 +4,7 @@
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Detail> Loc
 @inject IJSRuntime JSRuntime
 @using EuropArt.Domain.Shoppingcarts
-@if (artwork == null || artwork.Artist == null)
+@if (artwork == null)
 {
     <p><em>Loading...</em></p>
 }
