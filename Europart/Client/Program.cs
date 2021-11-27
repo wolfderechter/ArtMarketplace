@@ -11,6 +11,8 @@ using System;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
 
 namespace EuropArt.Client
 {
@@ -21,10 +23,18 @@ namespace EuropArt.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddScoped<IArtworkService, ArtworkService>();
-            builder.Services.AddScoped<IArtistService, ArtistService>();
+            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            builder.Services.AddOidcAuthentication(options =>
+            {
+                builder.Configuration.Bind("Auth0", options.ProviderOptions);
+                options.ProviderOptions.ResponseType = "code";
+            }).AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
+
+            builder.Services.AddScoped<IArtworkService, FakeArtworkService>();
+            builder.Services.AddScoped<IArtistService, FakeArtistService>();
             builder.Services.AddScoped<Shoppingcart>();
+
             /*await builder.Build().RunAsync();*/
             builder.Services.AddLocalization();
 
