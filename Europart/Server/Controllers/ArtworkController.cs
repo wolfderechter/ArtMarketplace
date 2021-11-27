@@ -46,7 +46,7 @@ namespace EuropArt.Server.Controllers
         //}
 
         [HttpPut]
-        public Task<ArtworkResponse.Edit> EditAsyn([FromBody]ArtworkRequest.Edit request)
+        public Task<ArtworkResponse.Edit> EditAsync([FromBody]ArtworkRequest.Edit request)
         {
             return artworkService.EditAsync(request);
         }

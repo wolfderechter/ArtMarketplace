@@ -18,14 +18,15 @@ namespace EuropArt.Shared.Artists
             public string Name { get; set; }
             public string City { get; set; }
             public string ImagePath { get; set; }
+            public int AmountOfArtworks { get; set; }
 
-            public List<ArtworkDto.Detail> Artworks { get; set; } = new();
-    }
+        }
 
         public class Detail : Index
         {
             public string Biography { get; set; }
             public string Website { get; set; }
+            public List<ArtworkDto.Detail> Artworks { get; set; } = new();
         }
 
         public class Edit

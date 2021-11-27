@@ -74,7 +74,7 @@
                                 <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
                                 <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
                             </div>
-                            <span class="naam">by @artworks.ElementAt(i).Artist.Name</span>
+                            <span class="naam">by @artworks.ElementAt(i).ArtistName</span>
                         </div>
                     </div>
                 }
@@ -96,7 +96,7 @@
             }
             else
             {
-                @for (var i = 0; i < 3; i++)
+@*                @for (var i = 0; i < 3; i++)
                 {
                     <div class="col-4 text-center">
                         <div class="badge-kunstenaars">
@@ -108,6 +108,9 @@
                             <span class="kunstwerken">@artists.ElementAt(i).Artworks.Count() @Loc["Artworks"]</span>
                         </div>
                     </div>
+                    TODO:Fix this stuff...
+                    *@
+
                 }
             }
         </div>
