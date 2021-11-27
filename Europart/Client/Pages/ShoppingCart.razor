@@ -26,7 +26,7 @@ else
             <div class="col-6">
                 <h2>@item.Name</h2>
                 
-               <span class="price">&euro; @item.Price.ToString("C")</span>
+               <span class="price">@item.Price.ToString("C")</span>
             </div>
            <div class="col-2">
                 @if (RequestingDelete)
@@ -43,7 +43,7 @@ else
     }
     <div class="row text-end shopping-cart-total">
         <div class="col-12 mb-4">
-            <span class="total-price">Totale prijs: &euro; @Cart.Items.Sum(x => x.Price)</span>
+            <span class="total-price">Totale prijs: @Cart.Items.Sum(x => x.Price).ToString("C")</span>
         </div>
         <div class="col-12">
             <button class="btn btn-bestellen">Bestel</button>

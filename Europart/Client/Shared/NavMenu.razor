@@ -36,16 +36,16 @@
             <a class="btn" href="/search"><img src="/images/search.svg" /></a>
         </form>*@
 
-                    <NavLink class="shoppingcart mr-3" href="search"><img src="/images/search.svg" /></NavLink>
+                    <NavLink class="shoppingcart mr-3" href="search"><img src="/images/search.svg" /</NavLink>
 
                     
 @*                    <NavLink class="shoppingcart" href="shoppingcart"><img src="/images/shoppingcart.svg" /></NavLink>
-*@                    <button class="button is-white" @onclick="OpenShoppingCart">
+*@                    <button  @onclick="OpenShoppingCart">
                         <span class="icon">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fa fa-shopping-cart" style="font-size:24px"></i>
                         </span>
-@*                       <span class="tag">@Cart.Items.Count</span>
-*@                    </button>
+                       <span class="tag">@Cart.Items.Count</span>
+                  </button>
 
             </div>
         </div>
