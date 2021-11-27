@@ -70,6 +70,15 @@ namespace EuropArt.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Artworks.
+        /// </summary>
+        public static string Artworks {
+            get {
+                return ResourceManager.GetString("Artworks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Featured artists.
         /// </summary>
         public static string FeaturedArtists {
@@ -97,7 +106,7 @@ namespace EuropArt.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Latsest artworks.
+        ///   Looks up a localized string similar to Latest artworks.
         /// </summary>
         public static string Latest {
             get {

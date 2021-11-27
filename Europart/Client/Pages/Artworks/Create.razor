@@ -1,6 +1,8 @@
 ﻿@page "/artwork/add"
-@inject IStringLocalizer<Resources.Artworks.Create> Loc
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
+@inject IArtworkService ArtworkService
 @using EuropArt.Shared.Artworks
+@inject NavigationManager NavigationManager 
 
 <h1 class="text-center">@Loc["AddArtwork"]</h1>
 
@@ -38,8 +40,18 @@
     </div>
 </div>
 
-@code { EuropArt.Shared.Artworks.ArtworkDto.Detail newArtwork = new EuropArt.Shared.Artworks.ArtworkDto.Detail();
-            void CreateNewArtwork()
-            {
-                Console.WriteLine("Created new artwork!");
-            } }
+@code { 
+    ArtworkDto.Create newArtwork = new() {};
+    private async Task CreateNewArtwork()
+    {
+        //Fake image toevoegen
+        newArtwork.ImagePath = "/images/NewArtwork.jpg";
+        ArtworkRequest.Create request = new()
+        {
+            Artwork = newArtwork
+        };
+
+        var response = await ArtworkService.CreateAsync(request);
+        NavigationManager.NavigateTo("/artwork");
+    }
+}

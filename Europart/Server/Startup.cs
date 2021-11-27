@@ -1,10 +1,13 @@
+using EuropArt.Services.Artists;
+using EuropArt.Services.Artworks;
+using EuropArt.Shared.Artists;
+using EuropArt.Shared.Artworks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System.Linq;
 
 namespace EuropArt.Server
@@ -22,11 +25,17 @@ namespace EuropArt.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews();
+            services.AddSwaggerGen(c =>
+            {
+                c.CustomSchemaIds(x => $"{x.DeclaringType.Name}.{x.Name}");
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "EuropArt API", Version = "v1" });
+            });
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddRazorPages();
-            
+            services.AddScoped<IArtworkService, FakeArtworkService>();
+            services.AddScoped<IArtistService, FakeArtistService>();
+
         }
 
         private RequestLocalizationOptions GetLocalizationOptions()
@@ -44,6 +53,8 @@ namespace EuropArt.Server
             {
                 app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EuropArt API"));
             }
             else
             {

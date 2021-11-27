@@ -1,0 +1,79 @@
+﻿@page "/artwork/edit/{ArtworkId:int}"
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
+@inject NavigationManager NavigationManager
+@using EuropArt.Shared.Artworks
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <EditForm Model="@model" OnValidSubmit="EditArtworkAsync" class="form">
+            <FluentValidationValidator />
+            <DataAnnotationsValidator />
+            <div class="mb-3">
+                <h6>@Loc["Title"]</h6>
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="model.Name"
+                           aria-describedby="titleHelp" placeholder="Enter title" />
+                <ValidationMessage For="@(() => model.Name)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Description"]</h6>
+                <InputText @bind-Value="model.Description" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter description" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Price"]</h6>
+                <InputNumber @bind-Value="model.Price" class="form-control" placeholder="Enter price" />
+                <ValidationMessage For="@(() => model.Price)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["ChooseArtwork"]</h6>
+                <input type="file" id="artwork" name="artwork" />
+                <ValidationMessage For="@(() => model.ImagePath)" />
+
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">@Loc["Edit"]</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+@code {
+
+    private ArtworkDto.Edit model = new();
+
+    [Parameter] public int ArtworkId { get; set; }
+    [Parameter] public EventCallback OnArtworkChanged { get; set; }
+    [Inject] public IArtworkService ArtworkService { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        ArtworkRequest.GetDetail request = new()
+        {
+            ArtworkId = ArtworkId
+        };
+        var response = await ArtworkService.GetDetailAsync(request);
+
+        model = new ArtworkDto.Edit
+        {
+            Description = response.Artwork.Description,
+            ImagePath = response.Artwork.ImagePath,
+            Name = response.Artwork.Name,
+            Price = response.Artwork.Price,
+        };
+    }
+
+    private async Task EditArtworkAsync()
+    {
+        //await ArtworkService.UpdateAsync(model, Id);
+        //NavigationManager.NavigateTo("/artwork");
+        Console.WriteLine("Edited artwork");
+        ArtworkRequest.Edit request = new ArtworkRequest.Edit
+        {
+            Artwork = model,
+            ArtworkId = ArtworkId
+        };
+
+        var response = await ArtworkService.EditAsync(request);
+        await OnArtworkChanged.InvokeAsync();
+        NavigationManager.NavigateTo($"/artwork/{ArtworkId}");
+    }
+}

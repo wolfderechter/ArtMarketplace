@@ -120,6 +120,9 @@
   <data name="ArtBringsLive" xml:space="preserve">
     <value>Kunst doet leven</value>
   </data>
+  <data name="Artworks" xml:space="preserve">
+    <value>Kunstwerken</value>
+  </data>
   <data name="FeaturedArtists" xml:space="preserve">
     <value>Aanbevolen artiesten</value>
   </data>

@@ -1,16 +1,16 @@
-using System;
-using System.Net.Http;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Text;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Bogus;
+using EuropArt.Client.Artists;
+using EuropArt.Client.Artworks;
+using EuropArt.Domain.Shoppingcarts;
+using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
-using EuropArt.Shared.Artist;
-using System.Globalization;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
+using System;
+using System.Globalization;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace EuropArt.Client
 {
@@ -22,10 +22,10 @@ namespace EuropArt.Client
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddScoped<IArtworkService, FakeArtworkService>();
-            builder.Services.AddScoped<IArtistService, FakeArtistService>();
+            builder.Services.AddScoped<IArtworkService, ArtworkService>();
+            builder.Services.AddScoped<IArtistService, ArtistService>();
+            builder.Services.AddScoped<Shoppingcart>();
             /*await builder.Build().RunAsync();*/
-
             builder.Services.AddLocalization();
 
             var host = builder.Build();

@@ -1,7 +1,7 @@
 ﻿@page "/artwork"
 @using EuropArt.Shared.Artworks
 @inject IArtworkService ArtworkService
-@inject IStringLocalizer<Resources.Artworks.Index> Loc
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Index> Loc
 
 <h1>@Loc["Artworks"]</h1>
 <div class="row">
@@ -10,7 +10,7 @@
     </div>
     <div class="col-6 text-end">
         @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
-        <NavLink class="nav-link" href="/artwork/add">@Loc["Add Artwork"]</NavLink>
+        <a class="btn btn-secondary" href="/artwork/add">@Loc["Add Artwork"]</a>
     </div>
 </div>
 
@@ -18,12 +18,12 @@
     <div class="col-12">
         <div class="row">
             <div id="f-row" class="filters @showColFilters col-3">
-                <div class="form-check form-switch">
+                <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                     <label class="form-check-label" for="flexSwitchCheckDefault">@Loc["Auctions"]</label>
                 </div>
                 <h3>@Loc["Category"]:</h3>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select mb-3" aria-label="Default select example">
                     <option selected>Alles</option>
                     <option value="1">Collage</option>
                     <option value="2">Fotografie</option>
@@ -33,7 +33,7 @@
                     <option value="6">Andere</option>
                 </select>
                 <h3>@Loc["Price"]:</h3>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="form-floating col-6">
                         <input type="number" class="form-control" id="floatingInput" placeholder="0">
                         <label for="floatingInput">@Loc["Min"].</label>
@@ -46,84 +46,92 @@
                 <h3>@Loc["Style"]:</h3>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Abstract"]</label></div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Classic"]</label></div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Minimalism"]</label></div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Modern"]</label></div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Surrealism"]</label></div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Other"]</label></div>
-            </div>
-            @if (_artworks is null)
-            {
-<p>Loading...</p> }
-else
-{
-<div class="kol @cols">
-    @foreach (var artwork in _artworks)
-    {
-@if (artwork.Id % 3 == 0)
-{
-<div class="badge-kunstwerk">
-    <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-    <div class="k-p">
-        <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
-        <span class="prijs">@artwork.Price.ToString("C")</span>
-    </div>
-    <span class="naam">@artwork.Name</span>
-</div>}}
-</div>
-                <div class="kol @cols">
-                    @foreach (var artwork in _artworks)
-                    {
-    @if (artwork.Id % 3 == 1)
-    {
-<div class="badge-kunstwerk">
-    <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-    <div class="k-p">
-        <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
-        <span class="prijs">@artwork.Price.ToString("C")</span>
-    </div>
-    <span class="naam">@artwork.Name</span>
-</div>              }}
+                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Abstract"]</label>
                 </div>
-                                <div class="kol @cols">
-                                    @foreach (var artwork in _artworks)
-                                    {
-                    @if (artwork.Id % 3 == 2)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox2">@Loc["Classic"]</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox3">@Loc["Minimalism"]</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox4">@Loc["Modern"]</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox5">@Loc["Surrealism"]</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox6">@Loc["Other"]</label>
+                </div>
+            </div>
+            @if (artworks is null)
+            {
+                <p>Loading...</p> }
+            else
+            {
+                <div class="kol @cols">
+                    @foreach (var artwork in artworks)
                     {
-<div class="badge-kunstwerk">
-    <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-    <div class="k-p">
-        <h2 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h2>
-        <span class="prijs">@artwork.Price.ToString("C")</span>
-    </div>
-    <span class="naam">@artwork.Name</span>
-</div>              }}
-                                </div>}
+                        @if (artwork.Id % 3 == 0)
+                        {
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                                    <span class="prijs">@artwork.Price.ToString("C")</span>
+                                </div>
+                                <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
+                            </div>}}
+                </div>
+                <div class="kol @cols">
+                    @foreach (var artwork in artworks)
+                    {
+                        @if (artwork.Id % 3 == 1)
+                        {
+                    <div class="badge-kunstwerk">
+                        <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                        <div class="k-p">
+                            <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                            <span class="prijs">@artwork.Price.ToString("C")</span>
+                        </div>
+                        <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
+                    </div>              }}
+                </div>
+                <div class="kol @cols">
+                    @foreach (var artwork in artworks)
+                    {
+                        @if (artwork.Id % 3 == 2)
+                        {
+                    <div class="badge-kunstwerk">
+                        <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                        <div class="k-p">
+                            <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                            <span class="prijs">@artwork.Price.ToString("C")</span>
+                        </div>
+                        <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
+                    </div>              }}
+                </div>}
         </div>
     </div>
 </div>
 
-@code { 
+@code {
     private String cols = "col-4";
     private String showColFilters = "";
     private String textOnButton = "Show Filters";
 
-    private IEnumerable<ArtworkDto.Index> _artworks;
+    private List<ArtworkDto.Index> artworks;
 
     protected override async Task OnInitializedAsync()
     {
-        _artworks = await ArtworkService.GetIndexAsync();
+        ArtworkRequest.GetIndex request = new();
+        var response = await ArtworkService.GetIndexAsync(request);
+        artworks = response.Artworks;
     }
 
     private void ShowFilters()
@@ -133,7 +141,8 @@ else
             cols = "col-4";
             showColFilters = "";
             textOnButton = "Show Filters";
-        } else
+        }
+        else
         {
             cols = "col-3";
             showColFilters = "show";

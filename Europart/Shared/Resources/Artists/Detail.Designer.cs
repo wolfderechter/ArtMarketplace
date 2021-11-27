@@ -70,6 +70,24 @@ namespace EuropArt.Shared.Resources.Artists {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel delete.
+        /// </summary>
+        public static string CancelDelete {
+            get {
+                return ResourceManager.GetString("CancelDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm delete.
+        /// </summary>
+        public static string ConfirmDelete {
+            get {
+                return ResourceManager.GetString("ConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latest Artworks.
         /// </summary>
         public static string Latest_Artworks {

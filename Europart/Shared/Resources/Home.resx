@@ -120,6 +120,9 @@
   <data name="ArtBringsLive" xml:space="preserve">
     <value>Art brings life</value>
   </data>
+  <data name="Artworks" xml:space="preserve">
+    <value>Artworks</value>
+  </data>
   <data name="FeaturedArtists" xml:space="preserve">
     <value>Featured artists</value>
   </data>
@@ -130,6 +133,6 @@
     <value>For real...</value>
   </data>
   <data name="Latest" xml:space="preserve">
-    <value>Latsest artworks</value>
+    <value>Latest artworks</value>
   </data>
 </root>

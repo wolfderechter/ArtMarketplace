@@ -1,10 +1,13 @@
 ﻿@page "/dashboard/{listview}"
-@using EuropArt.Shared.Artist
+@inject NavigationManager NavigationManager
+@using EuropArt.Shared.Artists
 @using System.Globalization
 @inject IArtistService ArtistService
 
 @using EuropArt.Shared.Artworks
 @inject IArtworkService ArtworkService
+
+@inject IJSRuntime JSRuntime
 
 <h1>@ListView</h1>
 
@@ -23,14 +26,15 @@
         @foreach (var artist in _artists)
         {
             <div class="col-12">
-                <a href="#" class="block">
+                <div class="block">
                     <img src="@artist.ImagePath" />
                     <span>@artist.Name</span>
                     <div class="buttons">
-                        <a href="#"><img class="good" src="/images/good.svg" /></a>
-                        <a href="#"><img class="bad" src="/images/bad.svg" /></a>
+                        <a><img class="good" src="/images/good.svg" /></a>
+                        <a @onclick="() => ConfirmDeleteArtist(artist.Id)"><img class="bad" src="/images/bad.svg" /></a>
+                        <a href="artist/@artist.Id"><img src="/images/more.svg" /></a>
                     </div>
-                </a>
+                </div>
             </div>
         }
     }
@@ -45,19 +49,110 @@
         @foreach (var artwork in _artworks)
         {
             <div class="col-12">
-                <a href="#" class="block">
+                <div class="block">
                     <img src="@artwork.ImagePath" />
                     <span>@artwork.Name</span>
-                    <span>@artwork.Artist.Name</span>
+                    <span>@artwork.ArtistName</span>
                     <span>@artwork.Price.ToString("C")</span>
                     <div class="buttons">
-                        <a href="#"><img class="good" src="/images/good.svg" /></a>
-                        <a href="#"><img class="bad" src="/images/bad.svg" /></a>
+                        <a><img class="good" src="/images/good.svg" /></a>
+                        <a @onclick="() => ConfirmDeleteArtwork(artwork.Id)"><img class="bad" src="/images/bad.svg" /></a>
+                        <a href="artwork/@artwork.Id"><img src="/images/more.svg" /></a>
                     </div>
-                </a>
+                </div>
             </div>
         }
     }
+} else if (ListView == "orders")
+{
+    @if (_artworks is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        @for (var i = 0; i < 3; i++)
+        {
+            <div class="col-12">
+                <div class="block">
+                    <img src="@_artworks.ElementAt(i).ImagePath" />
+                    <span>@_artworks.ElementAt(i).ArtistName</span>
+                    <span>@_artworks.ElementAt(i).Price.ToString("C")</span>
+                    <span>door Gebruiker</span>
+                    <div class="buttons">
+                        <select class="form-control">
+                            <option value="0">Geld te ontvangen</option>
+                            <option value="1">Wachten op ophalen</option>
+                            <option value="2">Afgerond</option>
+                            <option value="3">Geannuleerd</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+} else if (ListView == "homepage")
+{
+    <div id="homepage">
+        <div class="row">
+            <div class="col-12">
+                <div class="banner mb-5" style="background-image:url(images/banner.jpg);padding-top: calc(100% / 16 * @Height);">
+                    <div class="text" style="color: @ColorText;text-align: @Position;">
+                        <h1 style="color: @ColorText;font-size: @(TitelSize)px">@Titel</h1>
+                        <span style="margin-left: 0;font-size: @(SubTitleSize)px" class="small-banner-text">@SubTitle</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-8">
+                        <label for="titleInput" class="form-label">Titel</label>
+                        <input type="text" class="form-control" @bind-value="Titel" placeholder="Titel" id="titleInput" aria-describedby="titleHelp" />
+                    </div>
+                    <div class="col-4">
+                        <label for="sizeTitleInput" class="form-label">Text grootte</label>
+                        <input type="number" class="form-control" min="12" @bind-value="TitelSize" />
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-8">
+                        <label for="subTitleInput" class="form-label">Ondertitel</label>
+                        <input type="text" class="form-control" @bind-value="SubTitle" placeholder="Subtitle" id="subTitleInput" aria-describedby="subTitleHelp" />
+                    </div>
+                    <div class="col-4">
+                        <label for="sizeSubTitleInput" class="form-label">Text grootte</label>
+                        <input type="number" class="form-control" min="8" @bind-value="SubTitleSize" />
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <label for="colorInput" class="form-label">Kleur</label>
+                        <input type="color" @bind-value="ColorText" id="colorInput" aria-describedby="colorInputHelp" />
+                    </div>
+                    <div class="col-6">
+                        <label for="heightInput" class="form-label">Hoogte</label>
+                        <input type="number" @bind-value="Height" min="3" id="heightInput" aria-describedby="heightInputHelp" />
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="positionSelect" class="form-label">Positie van de tekst</label>
+                <select @bind="Position" id="positionSelect" aria-describedby="positionSelectHelp">
+                    <option value="start">Links</option>
+                    <option value="center">Midden</option>
+                    <option value="end">Rechts</option>
+                </select>
+            </div>
+        </div>
+    </div>
 }
 </div>
 
@@ -65,17 +160,50 @@
     [Parameter]
     public string ListView { get; set; }
 
+    private string Titel = "Title";
+    private int TitelSize = 36;
+    private string SubTitle = "Subtitle";
+    private int SubTitleSize = 19;
+    private string ColorText = "#000000";
+    private int Height = 3;
+    private string Position = "center";
+
     private IEnumerable<ArtistDto.Index> _artists;
+    private ArtistDto.Detail _artist = new();
 
     private IEnumerable<ArtworkDto.Index> _artworks;
+    private ArtworkDto.Detail _artwork = new();
 
     protected override async Task OnInitializedAsync()
     {
-        _artists = await ArtistService.GetIndexAsync();
-        _artworks = await ArtworkService.GetIndexAsync();
+        ArtistRequest.GetIndex request = new();
+        var response = await ArtistService.GetIndexAsync(request);
+        _artists = response.Artists;
+
+        ArtworkRequest.GetIndex request2 = new();
+        var response2 = await ArtworkService.GetIndexAsync(request2);
+        _artworks = response2.Artworks;
     }
 
+    private async Task ConfirmDeleteArtist(int Id)
+    {
+        //_artist = await ArtistService.GetDetailAsync(Id);
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + _artist.Name + "?"))
+            return;
+        var request = new ArtworkRequest.Delete { ArtworkId = Id };
+        await ArtworkService.DeleteAsync(request);
+    }
 
+    private async Task ConfirmDeleteArtwork(int Id)
+    {
+        ArtworkRequest.GetDetail request = new() { ArtworkId = Id };
+        var response = await ArtworkService.GetDetailAsync(request);
+        _artwork = response.Artwork;
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + _artwork.Name + "?"))
+            return;
+        var request2 = new ArtworkRequest.Delete { ArtworkId = Id };
+        await ArtworkService.DeleteAsync(request2);
+    }
 
 
 }

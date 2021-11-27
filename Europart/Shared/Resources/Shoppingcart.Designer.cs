@@ -59,5 +59,7 @@ namespace EuropArt.Shared.Resources {
                 resourceCulture = value;
             }
         }
+
+       
     }
 }

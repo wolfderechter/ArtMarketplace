@@ -70,6 +70,15 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price has to be greater than 0.
+        /// </summary>
+        public static string Negative {
+            get {
+                return ResourceManager.GetString("Negative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have to fill in a price!.
         /// </summary>
         public static string Price {

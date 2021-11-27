@@ -1,36 +1,54 @@
 ﻿@page "/artwork/{id:int}"
+@inject NavigationManager NavigationManager
 @using EuropArt.Shared.Artworks
-@inject IStringLocalizer<Resources.Artworks.Detail> Loc
-
-
-@if (_artwork == null || _artwork.Artist == null)
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Detail> Loc
+@inject IJSRuntime JSRuntime
+@using EuropArt.Domain.Shoppingcarts
+@if (artwork == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
     @*<p>@_artwork.Id</p>
-    <p>@_artwork.Name</p>
-    <p>@_artwork.Description</p>
-    <p>@_artwork.Price.ToString("C")</p>
-    <img src="@_artwork.ImagePath" />*@
-
+        <p>@_artwork.Name</p>
+        <p>@_artwork.Description</p>
+        <p>@_artwork.Price.ToString("C")</p>
+        <img src="@_artwork.ImagePath" />*@
     <div class="row">
-        <div class="col-8">
-            <div class="badge-kunstwerk text-center">
-                <img src="@_artwork.ImagePath" style="width:auto;">
+        <div class="col-12 text-end mb-3">
+            <div class="admin-buttons">
+                <a class="edit" href="/artwork/edit/@artwork.Id"><img src="/images/edit.svg" /></a>
+                <button class="delete" @onclick="ConfirmDelete"><img src="/images/delete.svg" /></button>
             </div>
-            <h2 class="mb-1">@_artwork.Name</h2>
-            <h4 class="kunstenaar"><a href="/artist/@_artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @_artwork.Artist.Name</a></h4>
-            <p>@_artwork.Description</p>
+        </div>
+        <div class="col-8">
+            <div class="badge-kunstwerk text-center" style="padding: 0;">
+                <img src="@artwork.ImagePath" style="width:auto;">
+            </div>
+            <h2 class="mb-1">@artwork.Name</h2>
+            <h4 class="kunstenaar"><a href="/artist/@artwork.ArtistId"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.ArtistName</a></h4>
+            <p>@artwork.Description</p>
         </div>
         <div class="col-4">
             <div class="bieden">
-                <span class="prijs-groot">@_artwork.Price.ToString("C")</span>
+                <span class="prijs-groot">@artwork.Price.ToString("C")</span>
+                <button @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
                 <form>
-                    <button class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
+
                     <button class="btn btn-bieden mb-3">@Loc["BuyNow"]</button>
                 </form>
+                <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
+
+                @if (RequestingDelete)
+                {
+                    <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
+                    <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
+                }
+                else
+                {
+                    <button class="btn btn-bieden mb-3" @onclick="RequestDelete">@Loc["Delete"]</button>
+                }
             </div>
         </div>
     </div>
@@ -39,13 +57,39 @@ else
 
 
 @code {
-    private ArtworkDto.Detail _artwork = new();
+    private ArtworkDto.Detail artwork = new();
+    private bool RequestingDelete;
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
+    [Inject] public Shoppingcart Cart { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        _artwork = await ArtworkService.GetDetailAsync(Id);
+        ArtworkRequest.GetDetail request = new() { ArtworkId = Id };
+        var response = await ArtworkService.GetDetailAsync(request);
+        artwork = response.Artwork;
+    }
+
+    private async Task ConfirmDelete()
+    {
+        var request = new ArtworkRequest.Delete { ArtworkId = Id };
+        await ArtworkService.DeleteAsync(request);
+        NavigationManager.NavigateTo("/artwork");
+    }
+
+    private void RequestDelete()
+    {
+        RequestingDelete = true;
+    }
+    private void CancelRequestDelete()
+    {
+        RequestingDelete = false;
+    }
+
+    private void AddToCart()
+    {
+        Cart.AddItem(artwork.Id, artwork.Name, artwork.Price, artwork.ImagePath);
+        Console.WriteLine(Cart.Items.Count);
     }
 }

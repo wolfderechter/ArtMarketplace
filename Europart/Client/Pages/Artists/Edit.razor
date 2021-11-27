@@ -1,0 +1,80 @@
+﻿@page "/artist/edit/{id:int}"
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Edit> Loc
+@inject NavigationManager NavigationManager
+@using EuropArt.Shared.Artists
+@using EuropArt.Shared.Resources
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <EditForm Model="@model" OnValidSubmit="EditArtist" class="form">
+            <FluentValidationValidator />
+            <DataAnnotationsValidator />
+            <div class="mb-3">
+                <h6>@Loc["Name"]</h6>
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="model.Name"
+                           aria-describedby="titleHelp" placeholder="Enter title" />
+                <ValidationMessage For="@(() => model.Name)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["City"]</h6>
+                <InputText @bind-Value="model.City" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter city" />
+                           <ValidationMessage For="@(() => model.City)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Bio"]</h6>
+                <InputText @bind-Value="model.Biography" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter biography" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Web"]</h6>
+                <InputText @bind-Value="model.Website" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter portfolio website" />
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">@Loc["Edit"]</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+@code {
+
+    private ArtistDto.Edit model = new();
+
+    [Parameter] public int ArtistId { get; set; }
+    [Parameter] public EventCallback OnArtistChanged { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        ArtistRequest.GetDetail request = new()
+        {
+            ArtistId = ArtistId
+        };
+
+        var response = await ArtistService.GetDetailAsync(request);
+        model = new ArtistDto.Edit
+        {
+            Name = response.Artist.Name,
+            Biography = response.Artist.Biography,
+            City = response.Artist.City,
+            Website = response.Artist.Website
+        };
+    }
+
+    private async Task EditArtist()
+    {
+        //await ArtistService.UpdateArtistAsync(model, Id);
+        //NavigationManager.NavigateTo("/artist");
+
+        ArtistRequest.Edit request = new ArtistRequest.Edit
+        {
+            Artist = model,
+            ArtistId = ArtistId
+        };
+
+        var response = await ArtistService.EditAsync(request);
+        await OnArtistChanged.InvokeAsync();
+    }
+
+}
