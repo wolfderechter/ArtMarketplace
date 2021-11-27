@@ -32,16 +32,8 @@ namespace EuropArt.Services.Artworks
             {
                 Id = x.Id,
                 Name = x.Name,
-                //Artist = x.Artist,
-                Artist = new ArtistDto.Detail
-                {
-                    Id = x.Artist.Id,
-                    Name = x.Artist.Name,
-                    ImagePath = x.Artist.ImagePath,
-                    Biography = x.Artist.Biography,
-                    City = x.Artist.City,
-                    Website = x.Artist.Website,
-                },
+                ArtistId = x.Artist.Id,
+                ArtistName = x.Artist.Name,
                 Description = x.Description,
                 Price = x.Price,
                 ImagePath = x.ImagePath,
@@ -66,16 +58,8 @@ namespace EuropArt.Services.Artworks
                 Name = x.Name,
                 ImagePath = x.ImagePath,
                 Price = x.Price,
-                //Veranderen naar artistdto.index
-                Artist = new ArtistDto.Detail
-                {
-                    Id = x.Artist.Id,
-                    Name = x.Artist.Name,
-                    ImagePath = x.Artist.ImagePath,
-                    Biography = x.Artist.Biography,
-                    City = x.Artist.City,
-                    Website = x.Artist.Website,
-                },
+                ArtistId = x.Artist.Id,
+                ArtistName = x.Artist.Name
             }).ToList();
 
             return response;

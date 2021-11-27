@@ -82,7 +82,8 @@ namespace EuropArt.Services.Artists
                 Id = x.Id,
                 Name = x.Name,
                 City = x.City,
-                ImagePath = x.ImagePath
+                ImagePath = x.ImagePath,
+                AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count()
             }).ToList();
 
             return response;

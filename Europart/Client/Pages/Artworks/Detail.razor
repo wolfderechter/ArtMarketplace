@@ -3,7 +3,7 @@
 @using EuropArt.Shared.Artworks
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Detail> Loc
 @inject IJSRuntime JSRuntime
-@if (artwork == null || artwork.Artist == null)
+@if (artwork == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -26,7 +26,7 @@ else
                 <img src="@artwork.ImagePath" style="width:auto;">
             </div>
             <h2 class="mb-1">@artwork.Name</h2>
-            <h4 class="kunstenaar"><a href="/artist/@artwork.Artist.Id"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.Artist.Name</a></h4>
+            <h4 class="kunstenaar"><a href="/artist/@artwork.ArtistId"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.ArtistName</a></h4>
             <p>@artwork.Description</p>
         </div>
         <div class="col-4">

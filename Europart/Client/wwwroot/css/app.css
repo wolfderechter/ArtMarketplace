@@ -23,6 +23,11 @@ h2.kunstenaar a {
     text-decoration: none;
 }
 
+span.naam a {
+    color: #212529;
+    text-decoration: none;
+}
+
 h4.kunstenaar a {
     color: #212529;
     text-decoration: none;
