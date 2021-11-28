@@ -60,8 +60,8 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Resources\Login.Designer.cs">
-      <DependentUpon>Login.resx</DependentUpon>
+    <Compile Update="Resources\Account.Designer.cs">
+      <DependentUpon>Account.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -149,8 +149,8 @@
       <LastGenOutput>Home.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Login.resx">
-      <LastGenOutput>Login.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Resources\Account.resx">
+      <LastGenOutput>Account.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\NavMenu.resx">

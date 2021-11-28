@@ -39,12 +39,23 @@
                     <img src="/images/shoppingcart.svg" id="shoppingcart" />
                     <p id="counter" class="text-white float-left">@Cart.Items.Count</p>
                 </NavLink>
-                <NavLink class="user-profile" href="login">
-                    <img src="images/user.svg" />
-                </NavLink>
+                @*<NavLink class="shoppingcart mr-3" href="login">
+                    <img src="/images/user.svg" />
+                </NavLink>*@
+                <AuthorizeView>
+                    <Authorized>
+                        <NavLink class="shoppingcart mr-3" href="account">
+                            <img src="/images/user.svg" />
+                        </NavLink>
+                    </Authorized>
+                    <NotAuthorized>
+                        <NavLink class="shoppingcart mr-3" href="authentication/login">
+                            <img src="/images/user.svg" />
+                        </NavLink>
+                    </NotAuthorized>
+                </AuthorizeView>
                 <CultureSelector />
             </div>
         </div>
     </div>
 </nav>
-
