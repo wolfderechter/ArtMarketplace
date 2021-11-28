@@ -13,7 +13,7 @@
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>*@
             <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 pt-2">
+                <ul class="navbar-nav justify-content-center flex-grow-1 pt-2">
                     <li class="nav-item">
                         <NavLink class="nav-link" href="artwork">@Loc["Artworks"]</NavLink>
                     </li>
@@ -34,31 +34,17 @@
                         </Authorized>
                     </AuthorizeView>
                 </ul>
-               
-                    @*<form class="d-flex form-search">
-            <input class="form-control me-2" type="text" placeholder="@Loc["Search"]" aria-label="Zoeken" @onchange="Search">
-            <a class="btn" href="/search"><img src="/images/search.svg" /></a>
-        </form>*@
-
-                    <NavLink class="shoppingcart mr-3" href="search"><img src="/images/search.svg" /></NavLink>
-
-                    
-@*                    <NavLink class="shoppingcart" href="shoppingcart"><img src="/images/shoppingcart.svg" /></NavLink>
-*@                    <button  @onclick="OpenShoppingCart">
-                        <span class="icon">
-                            <i class="fa fa-shopping-cart" style="font-size:24px"></i>
-                        </span>
-                       <span class="tag">@Cart.Items.Count</span>
-                  </button>
-
+                <NavLink class="shoppingcart mr-3" href="search"><img src="/images/search.svg" /></NavLink>
+                <NavLink @onclick="OpenShoppingCart" class="shoppingcart text-decoration-none mr-3">
+                    <img src="/images/shoppingcart.svg" id="shoppingcart" />
+                    <p id="counter" class="text-white float-left">@Cart.Items.Count</p>
+                </NavLink>
+                <NavLink class="user-profile" href="login">
+                    <img src="images/user.svg" />
+                </NavLink>
+                <CultureSelector />
             </div>
         </div>
     </div>
 </nav>
-<div class="fixed-language-user">
-    <NavLink class="user-profile" href="login">
-        <img src="images/user.svg" />
-    </NavLink>
-    <CultureSelector />
-</div>
 

@@ -2,6 +2,7 @@ using EuropArt.Services.Artists;
 using EuropArt.Services.Artworks;
 using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -35,7 +36,15 @@ namespace EuropArt.Server
             services.AddRazorPages();
             services.AddScoped<IArtworkService, FakeArtworkService>();
             services.AddScoped<IArtistService, FakeArtistService>();
-
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration["Auth0:Authority"];
+                options.Audience = Configuration["Auth0:ApiIdentifier"];
+            });
         }
 
         private RequestLocalizationOptions GetLocalizationOptions()

@@ -34,8 +34,6 @@ namespace EuropArt.Client
                 options.ProviderOptions.ResponseType = "code";
             }).AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
 
-            
-
             /*await builder.Build().RunAsync();*/
             builder.Services.AddLocalization();
 
