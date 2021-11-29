@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using EuropArt.Shared.Common;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace EuropArt.Shared.Artists
         public class GetIndex
         {
             public string Searchterm { get; set; }
+            public OrderByArtist? OrderBy { get; set; }
         }
 
         public class GetDetail

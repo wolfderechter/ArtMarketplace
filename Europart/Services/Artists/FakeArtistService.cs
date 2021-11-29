@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EuropArt.Services.Artworks;
 using EuropArt.Domain.Artworks;
+using EuropArt.Shared.Common;
 
 namespace EuropArt.Services.Artists
 {
@@ -83,7 +84,42 @@ namespace EuropArt.Services.Artists
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
                 query = query.Where(x => x.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
 
-            response.Artists = query.Select(x => new ArtistDto.Index
+            var query2 = new List<Artist>();
+            if (request.OrderBy is not null)
+            {
+                switch (request.OrderBy.Value)
+                {
+                    case OrderByArtist.OrderByName:
+                        query2 = query.OrderBy(x => x.Name).ToList();
+                        break;
+                    //case OrderByArtist.OrderByNewest:
+                    //    query.OrderByDescending(x => x.);
+                    //    break;
+
+                    //case OrderByArtist.OrderByOldest:
+                    //    query.OrderBy(x => x.);
+                    //    break;
+
+                    default:
+                        query2 = query.ToList();
+                        break;
+                }
+            }
+            else
+            {
+                response.Artists = query.Select(x => new ArtistDto.Index
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    City = x.City,
+                    ImagePath = x.ImagePath,
+                    AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count()
+                }).ToList();
+
+                return response;
+            }
+
+            response.Artists = query2.Select(x => new ArtistDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,

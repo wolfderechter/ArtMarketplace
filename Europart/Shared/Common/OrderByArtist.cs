@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace EuropArt.Shared.Common
 {
-    public enum OrderByArtwork
+    public enum OrderByArtist
     {
-        OrderByPriceAscending,
-        OrderByPriceDescending,
         OrderByName,
         OrderByOldest,
         OrderByNewest

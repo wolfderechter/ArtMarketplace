@@ -132,10 +132,10 @@
     protected override async Task OnInitializedAsync()
     {
         Filter.OnArtworkFilterChanged += FilterArtworksAsync;
-
+        //set OrderBy to newest on startup
+        Filter.OrderBy = OrderByArtwork.OrderByNewest;
         //set checkbox for auctions checked on startup
         Filter.IncludingAuctions = true;
-        Filter.OrderBy = OrderByArtwork.OrderByNewest;
 
         ArtworkRequest.GetIndex request = new();
         var response = await ArtworkService.GetIndexAsync(request);

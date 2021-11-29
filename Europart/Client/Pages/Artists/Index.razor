@@ -1,7 +1,7 @@
 ﻿@page "/artist"
 @using EuropArt.Shared.Artists
 @using EuropArt.Client.Artists
-@using System.Globalization
+@using EuropArt.Shared.Common
 @inject IArtistService ArtistService
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Index> Loc
 
@@ -17,6 +17,11 @@
         <div class="row align-items-end text-end">
             <div class="col-4">
                 <input class="form-control" placeholder="Search" type="search" @bind="Filter.Searchterm" />
+                <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
+                    <option value="OrderByNewest">Newest Artist</option>
+                    <option value="OrderByOldest">Oldest Artist</option>
+                    <option value="OrderByName">Name</option>
+                </select>
             </div>
         </div>
         @foreach (var artist in artists)
@@ -42,6 +47,8 @@
     protected override async Task OnInitializedAsync()
     {
         Filter.OnArtworkFilterChanged += FilterArtistsAsync;
+        Filter.OrderBy = OrderByArtist.OrderByName;
+
         ArtistRequest.GetIndex request = new();
         var response = await ArtistService.GetIndexAsync(request);
         artists = response.Artists;
@@ -49,10 +56,10 @@
 
     private async void FilterArtistsAsync()
     {
-        Console.WriteLine("Filtered!!");
         ArtistRequest.GetIndex request = new()
         {
-            Searchterm = Filter.Searchterm
+            Searchterm = Filter.Searchterm,
+            OrderBy = Filter.OrderBy
         };
 
         var response = await ArtistService.GetIndexAsync(request);

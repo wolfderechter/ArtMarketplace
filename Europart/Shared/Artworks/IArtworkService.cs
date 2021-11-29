@@ -13,8 +13,6 @@ namespace EuropArt.Shared.Artworks
         //Task UpdateAsync(ArtworkDto.Edit model, int id); 
 
         Task<ArtworkResponse.GetIndex> GetIndexAsync(ArtworkRequest.GetIndex request);
-        //Search
-        Task<List<ArtworkDto.Index>> GetIndexAsync(string searchterm);
         Task<ArtworkResponse.GetDetail> GetDetailAsync(ArtworkRequest.GetDetail request);
         Task<ArtworkResponse.Create> CreateAsync(ArtworkRequest.Create request);
         Task DeleteAsync(ArtworkRequest.Delete request);

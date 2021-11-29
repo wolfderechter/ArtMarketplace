@@ -76,36 +76,51 @@ namespace EuropArt.Services.Artworks
             }
 
             //auctions includen TODO
-            //orderby TODO
+            var query2 = new List<Artwork>();
             if (request.OrderBy is not null)
             {
                 switch (request.OrderBy.Value)
                 {
                     case OrderByArtwork.OrderByPriceAscending:
-                        query.OrderBy(x => x.Price);
+                        query2 = query.OrderBy(x => x.Price).ToList();
                         break;
                     
                     case OrderByArtwork.OrderByPriceDescending:
-                        query.OrderByDescending(x => x.Price);
+                        query2 = query.OrderByDescending(x => x.Price).ToList();
                         break;
                         
                     case OrderByArtwork.OrderByName:
-                        query.OrderBy(x => x.Name);
+                        query2 = query.OrderBy(x => x.Name).ToList();
                         break;
 
                     //case OrderBy.OrderByOldest:
-                    //    query.OrderBy(x => x.);
+                    //    query2 = query.OrderBy(x => x.).ToList();
                     //    break;
                     
                     //case OrderBy.OrderByNewest:
-                    //     query.OrderBy(x => x.);
+                    //     query2 = query.OrderBy(x => x.).ToList();
                     //    break;
                     default:
+                        query2 = query.ToList();
                         break;
                 }
             }
+            else
+            {
+                response.Artworks = query.Select(x => new ArtworkDto.Index
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    ImagePath = x.ImagePath,
+                    Price = x.Price,
+                    ArtistId = x.Artist.Id,
+                    ArtistName = x.Artist.Name
+                }).ToList();
 
-            response.Artworks = query.Select(x => new ArtworkDto.Index
+                return response;
+            }
+
+            response.Artworks = query2.Select(x => new ArtworkDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -204,14 +219,5 @@ namespace EuropArt.Services.Artworks
             return response;
         }
 
-        //Zoeken via search
-        public async Task<List<ArtworkDto.Index>> GetIndexAsync(string searchterm)
-        {
-            await Task.Delay(100);
-            return (List<ArtworkDto.Index>)artworks.AsEnumerable().Where(a =>
-                a.Description.ToLower().Contains(searchterm) ||
-                a.Name.ToLower().Contains(searchterm)
-                );
-        }
     }
 }
