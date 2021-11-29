@@ -77,7 +77,13 @@ namespace EuropArt.Services.Artists
             await Task.Delay(100);
             ArtistResponse.GetIndex response = new();
 
-            response.Artists = artists.Select(x => new ArtistDto.Index
+            //Query om te filteren
+            var query = artists.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(request.Searchterm))
+                query = query.Where(x => x.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
+
+            response.Artists = query.Select(x => new ArtistDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,

@@ -11,6 +11,7 @@ namespace EuropArt.Shared.Artists
     {
         public class GetIndex
         {
+            public string Searchterm { get; set; }
         }
 
         public class GetDetail

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EuropArt.Shared.Common;
 
 namespace EuropArt.Services.Artworks
 {
@@ -52,7 +53,59 @@ namespace EuropArt.Services.Artworks
             await Task.Delay(100);
             ArtworkResponse.GetIndex response = new();
 
-            response.Artworks = artworks.Select(x => new ArtworkDto.Index
+            //Query om te filteren
+            var query = artworks.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(request.Searchterm))
+                query = query.Where(x => x.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase) ||
+                            x.Artist.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
+
+            if (request.MinimumPrice is not null)
+                query = query.Where(x => x.Price >= request.MinimumPrice);
+
+            if (request.MaximumPrice is not null)
+                query = query.Where(x => x.Price <= request.MaximumPrice);
+
+            if(request.Style is not null)
+            {
+                query = query.Where(x => x.Style.Equals(request.Style, StringComparison.OrdinalIgnoreCase));
+            }
+            if(request.Category is not null)
+            {
+                query = query.Where(x => x.Category.Equals(request.Category, StringComparison.OrdinalIgnoreCase));
+            }
+
+            //auctions includen TODO
+            //orderby TODO
+            if (request.OrderBy is not null)
+            {
+                switch (request.OrderBy.Value)
+                {
+                    case OrderByArtwork.OrderByPriceAscending:
+                        query.OrderBy(x => x.Price);
+                        break;
+                    
+                    case OrderByArtwork.OrderByPriceDescending:
+                        query.OrderByDescending(x => x.Price);
+                        break;
+                        
+                    case OrderByArtwork.OrderByName:
+                        query.OrderBy(x => x.Name);
+                        break;
+
+                    //case OrderBy.OrderByOldest:
+                    //    query.OrderBy(x => x.);
+                    //    break;
+                    
+                    //case OrderBy.OrderByNewest:
+                    //     query.OrderBy(x => x.);
+                    //    break;
+                    default:
+                        break;
+                }
+            }
+
+            response.Artworks = query.Select(x => new ArtworkDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,

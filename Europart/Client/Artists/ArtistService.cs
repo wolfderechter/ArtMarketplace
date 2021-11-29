@@ -1,4 +1,5 @@
-﻿using EuropArt.Shared.Artists;
+﻿using EuropArt.Client.Extensions;
+using EuropArt.Shared.Artists;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -18,7 +19,11 @@ namespace EuropArt.Client.Artists
 
         public async Task<ArtistResponse.GetIndex> GetIndexAsync(ArtistRequest.GetIndex request)
         {
-            var response = await client.GetFromJsonAsync<ArtistResponse.GetIndex>(endpoint);
+            //not doing anything with the request
+            //var response = await client.GetFromJsonAsync<ArtistResponse.GetIndex>(endpoint);
+
+            var queryParameters = request.GetQueryString();
+            var response = await client.GetFromJsonAsync<ArtistResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
         }
 

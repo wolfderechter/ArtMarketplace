@@ -23,11 +23,17 @@ namespace EuropArt.Services.Artworks
 
             Artists = testArtists.Generate(10);
 
+            //fake style en category
+            List<string> styles = new List<string>() { "modern", "classic", "other" };
+            List<string> categories = new List<string>() { "painting", "sculpture", "other" };
+
             var artworkIds = 0;
             var testArtworks = new Faker<Artwork>()
                 .RuleFor(o => o.Id, f => artworkIds++)
                 .RuleFor(x => x.Name, f => f.Commerce.ProductName())
                 .RuleFor(x => x.Artist, f => f.PickRandom(Artists))
+                .RuleFor(x => x.Style, f => f.PickRandom(styles))
+                .RuleFor(x => x.Category, f => f.PickRandom(categories))
                 .RuleFor(x => x.ImagePath, _ => $"/images/artworks/{artworkIds}.jpg");
 
 

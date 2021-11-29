@@ -1,4 +1,5 @@
-﻿using EuropArt.Shared.Artworks;
+﻿using EuropArt.Client.Extensions;
+using EuropArt.Shared.Artworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,6 @@ namespace EuropArt.Client.Artworks
             await client.DeleteAsync($"{endpoint}/{request.ArtworkId}");
         }
 
-        //Nog implementeren
         public async Task<ArtworkResponse.Edit> EditAsync(ArtworkRequest.Edit request)
         {
             var response = await client.PutAsJsonAsync(endpoint, request);
@@ -51,7 +51,10 @@ namespace EuropArt.Client.Artworks
         public async Task<ArtworkResponse.GetIndex> GetIndexAsync(ArtworkRequest.GetIndex request)
         {
             //not yet doing anything with the parameters from request
-            var response = await client.GetFromJsonAsync<ArtworkResponse.GetIndex>(endpoint);
+            //var response = await client.GetFromJsonAsync<ArtworkResponse.GetIndex>(endpoint);
+
+            var queryParameters = request.GetQueryString();
+            var response = await client.GetFromJsonAsync<ArtworkResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
         }
 

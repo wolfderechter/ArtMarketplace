@@ -1,5 +1,7 @@
 ﻿@page "/artwork"
 @using EuropArt.Shared.Artworks
+@using EuropArt.Shared.Common
+@using EuropArt.Client.Artworks
 @inject IArtworkService ArtworkService
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Index> Loc
 
@@ -10,7 +12,21 @@
     </div>
     <div class="col-6 text-end">
         @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
-        <a class="btn btn-secondary" href="/artwork/add">@Loc["Add Artwork"]</a>
+        <div class="row">
+            <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
+            <AuthorizeView>
+                <Authorized>
+                    <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
+                </Authorized>
+            </AuthorizeView>
+            <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
+                <option value="OrderByNewest">Newest Artwork</option>
+                <option value="OrderByOldest">Oldest Artwork</option>
+                <option value="OrderByName">Name</option>
+                <option value="OrderByPriceAscending">Price Ascending</option>
+                <option value="OrderByPriceDescending">Price Descending</option>
+            </select>
+        </div>
     </div>
 </div>
 
@@ -19,56 +35,41 @@
         <div class="row">
             <div id="f-row" class="filters @showColFilters col-3">
                 <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <input @bind="Filter.IncludingAuctions" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                     <label class="form-check-label" for="flexSwitchCheckDefault">@Loc["Auctions"]</label>
                 </div>
                 <h3>@Loc["Category"]:</h3>
-                <select class="form-select mb-3" aria-label="Default select example">
+                <select @bind="Filter.Category" class="form-select mb-3" aria-label="Default select example">
                     <option selected>Alles</option>
-                    <option value="1">Collage</option>
-                    <option value="2">Fotografie</option>
-                    <option value="3">Schilderijen</option>
-                    <option value="4">Sculpturen</option>
-                    <option value="5">Tekeningen</option>
-                    <option value="6">Andere</option>
+                    <option value="photography">Fotografie</option>
+                    <option value="painting">Schilderijen</option>
+                    <option value="sculpture">Sculpturen</option>
+                    <option value="drawing">Tekeningen</option>
+                    <option value="other">Andere</option>
                 </select>
                 <h3>@Loc["Price"]:</h3>
                 <div class="row mb-3">
                     <div class="form-floating col-6">
-                        <input type="number" class="form-control" id="floatingInput" placeholder="0">
+                        <input @bind="Filter.MinimumPrice" type="number" class="form-control" id="floatingInput" placeholder="0">
                         <label for="floatingInput">@Loc["Min"].</label>
                     </div>
                     <div class="form-floating col-6">
-                        <input type="number" class="form-control" id="floatingInput" placeholder="0">
+                        <input @bind="Filter.MaximumPrice" type="number" class="form-control" id="floatingInput" placeholder="0">
                         <label for="floatingInput">@Loc["Max"].</label>
                     </div>
                 </div>
                 <h3>@Loc["Style"]:</h3>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">@Loc["Abstract"]</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox2">@Loc["Classic"]</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox3">@Loc["Minimalism"]</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox4">@Loc["Modern"]</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox5">@Loc["Surrealism"]</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox6">@Loc["Other"]</label>
-                </div>
+                <select @bind="Filter.Style" class="form-select mb-3" aria-label="Default select example">
+                    <option selected>Alles</option>
+                    <option value="abstract">@Loc["Abstract"]</option>
+                    <option value="classic">@Loc["Classic"]</option>
+                    <option value="minimalism">@Loc["Minimalism"]</option>
+                    <option value="modern">@Loc["Modern"]</option>
+                    <option value="surrealism">@Loc["Surrealism"]</option>
+                    <option value="other">@Loc["Other"]</option>
+                </select>
             </div>
+
             @if (artworks is null)
             {
                 <p>Loading...</p> }
@@ -126,9 +127,16 @@
     private String textOnButton = "Show Filters";
 
     private List<ArtworkDto.Index> artworks;
+    private ArtworkFilter Filter = new();
 
     protected override async Task OnInitializedAsync()
     {
+        Filter.OnArtworkFilterChanged += FilterArtworksAsync;
+
+        //set checkbox for auctions checked on startup
+        Filter.IncludingAuctions = true;
+        Filter.OrderBy = OrderByArtwork.OrderByNewest;
+
         ArtworkRequest.GetIndex request = new();
         var response = await ArtworkService.GetIndexAsync(request);
         artworks = response.Artworks;
@@ -148,5 +156,29 @@
             showColFilters = "show";
             textOnButton = "Hide Filters";
         }
+    }
+
+    private async void FilterArtworksAsync()
+    {
+        Console.WriteLine("Filtered!");
+        ArtworkRequest.GetIndex request = new()
+        {
+            Searchterm = Filter.Searchterm,
+            MaximumPrice = Filter.MaximumPrice,
+            MinimumPrice = Filter.MinimumPrice,
+            IncludingAuctions = Filter.IncludingAuctions,
+            Style = Filter.Style,
+            Category = Filter.Category,
+            OrderBy = Filter.OrderBy
+        };
+
+        var response = await ArtworkService.GetIndexAsync(request);
+        artworks = response.Artworks;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        Filter.OnArtworkFilterChanged -= FilterArtworksAsync;
     }
 }

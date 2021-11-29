@@ -1,5 +1,6 @@
 ﻿@page "/artist"
 @using EuropArt.Shared.Artists
+@using EuropArt.Client.Artists
 @using System.Globalization
 @inject IArtistService ArtistService
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Index> Loc
@@ -13,6 +14,11 @@
     }
     else
     {
+        <div class="row align-items-end text-end">
+            <div class="col-4">
+                <input class="form-control" placeholder="Search" type="search" @bind="Filter.Searchterm" />
+            </div>
+        </div>
         @foreach (var artist in artists)
         {
             <div class="col-4 text-center">
@@ -31,11 +37,31 @@
 
 @code {
     private List<ArtistDto.Index> artists;
+    private ArtistFilter Filter = new();
 
     protected override async Task OnInitializedAsync()
     {
+        Filter.OnArtworkFilterChanged += FilterArtistsAsync;
         ArtistRequest.GetIndex request = new();
         var response = await ArtistService.GetIndexAsync(request);
         artists = response.Artists;
+    }
+
+    private async void FilterArtistsAsync()
+    {
+        Console.WriteLine("Filtered!!");
+        ArtistRequest.GetIndex request = new()
+        {
+            Searchterm = Filter.Searchterm
+        };
+
+        var response = await ArtistService.GetIndexAsync(request);
+        artists = response.Artists;
+        StateHasChanged();
+    }
+
+    public void Dispose() 
+    {
+        Filter.OnArtworkFilterChanged -= FilterArtistsAsync;
     }
 }

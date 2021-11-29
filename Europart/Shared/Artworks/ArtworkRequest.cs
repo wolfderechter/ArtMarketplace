@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using EuropArt.Shared.Common;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,13 @@ namespace EuropArt.Shared.Artworks
     {
         public class GetIndex
         {
+            public string Searchterm { get; set; }
             public string Category { get; set; }
             public decimal? MinimumPrice { get; set; }
             public decimal? MaximumPrice { get; set; }
             public bool IncludingAuctions { get; set; }
-            //public IEnumerable<StyleEnum> Style { get; set; } = new();
+            public string Style { get; set; }
+            public OrderByArtwork? OrderBy { get; set; }
         }
 
         public class GetDetail
