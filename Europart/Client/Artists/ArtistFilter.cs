@@ -12,6 +12,8 @@ namespace EuropArt.Client.Artists
         private string searchterm;
         private OrderByArtist orderBy;
         private void NotifyStateChanged() => OnArtworkFilterChanged.Invoke();
+        private int page;
+        private int amount = 25;
 
         public string Searchterm
         {
@@ -28,6 +30,26 @@ namespace EuropArt.Client.Artists
             set
             {
                 orderBy = value;
+                NotifyStateChanged();
+            }
+        }
+
+        public int Amount
+        {
+            get => amount;
+            set
+            {
+                amount = value;
+                NotifyStateChanged();
+            }
+        }
+
+        public int Page
+        {
+            get => page;
+            set
+            {
+                page = value;
                 NotifyStateChanged();
             }
         }

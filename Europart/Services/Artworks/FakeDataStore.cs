@@ -21,7 +21,7 @@ namespace EuropArt.Services.Artworks
                 .RuleFor(u => u.Name, (f, u) => f.Name.FirstName())
                 .RuleFor(u => u.ImagePath, f => f.Internet.Avatar());
 
-            Artists = testArtists.Generate(10);
+            Artists = testArtists.Generate(100);
 
             //fake style en category
             List<string> styles = new List<string>() { "modern", "classic", "other" };
@@ -37,7 +37,7 @@ namespace EuropArt.Services.Artworks
                 .RuleFor(x => x.ImagePath, _ => $"/images/artworks/{artworkIds}.jpg");
 
 
-            Artworks = testArtworks.Generate(10);
+            Artworks = testArtworks.Generate(100);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace EuropArt.Shared.Artists
         {
             public string Searchterm { get; set; }
             public OrderByArtist? OrderBy { get; set; }
+            public int Amount { get; set; } = 25;
+            public int Page { get; set; } = 0;
         }
 
         public class GetDetail

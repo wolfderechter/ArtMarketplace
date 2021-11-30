@@ -37,21 +37,33 @@
                 </div>
             </div>
         }
+        
+        <ArtistPager Filter="Filter" TotalAmount="totalFilteredAmount" />
+        
+        
     }
 </div>
 
+
 @code {
     private List<ArtistDto.Index> artists;
-    private ArtistFilter Filter = new();
+    private readonly ArtistFilter Filter = new();
+    private int totalFilteredAmount;
 
     protected override async Task OnInitializedAsync()
     {
         Filter.OnArtworkFilterChanged += FilterArtistsAsync;
         Filter.OrderBy = OrderByArtist.OrderByName;
 
-        ArtistRequest.GetIndex request = new();
+        ArtistRequest.GetIndex request = new()
+        {
+            Page = Filter.Page,
+            Amount = Filter.Amount,
+            OrderBy = Filter.OrderBy
+        };
         var response = await ArtistService.GetIndexAsync(request);
         artists = response.Artists;
+        totalFilteredAmount = response.TotalAmount;
     }
 
     private async void FilterArtistsAsync()
@@ -59,15 +71,18 @@
         ArtistRequest.GetIndex request = new()
         {
             Searchterm = Filter.Searchterm,
-            OrderBy = Filter.OrderBy
+            OrderBy = Filter.OrderBy,
+            Page = Filter.Page,
+            Amount = Filter.Amount
         };
 
         var response = await ArtistService.GetIndexAsync(request);
         artists = response.Artists;
+        totalFilteredAmount = response.TotalAmount;
         StateHasChanged();
     }
 
-    public void Dispose() 
+    public void Dispose()
     {
         Filter.OnArtworkFilterChanged -= FilterArtistsAsync;
     }

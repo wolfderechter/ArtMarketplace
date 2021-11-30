@@ -19,6 +19,8 @@ namespace EuropArt.Shared.Artworks
             public bool IncludingAuctions { get; set; }
             public string Style { get; set; }
             public OrderByArtwork? OrderBy { get; set; }
+            public int Amount { get; set; } = 25;
+            public int Page { get; set; } = 0;
         }
 
         public class GetDetail

@@ -120,6 +120,10 @@ namespace EuropArt.Services.Artworks
                 return response;
             }
 
+            response.TotalAmount = query2.Count();
+            query2 = query2.Skip(request.Amount * request.Page).ToList();
+            query2 = query2.Take(request.Amount).ToList();
+
             response.Artworks = query2.Select(x => new ArtworkDto.Index
             {
                 Id = x.Id,

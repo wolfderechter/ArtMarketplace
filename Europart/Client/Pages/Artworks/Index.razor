@@ -13,7 +13,7 @@
     <div class="col-6 text-end">
         @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
         <div class="row">
-            <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
+            <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc[" Search"]" type="search" />
             <AuthorizeView>
                 <Authorized>
                     <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
@@ -94,29 +94,33 @@
                     {
                         @if (artwork.Id % 3 == 1)
                         {
-                    <div class="badge-kunstwerk">
-                        <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-                        <div class="k-p">
-                            <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
-                            <span class="prijs">@artwork.Price.ToString("C")</span>
-                        </div>
-                        <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
-                    </div>              }}
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                                    <span class="prijs">@artwork.Price.ToString("C")</span>
+                                </div>
+                                <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
+                            </div>}}
                 </div>
                 <div class="kol @cols">
                     @foreach (var artwork in artworks)
                     {
                         @if (artwork.Id % 3 == 2)
                         {
-                    <div class="badge-kunstwerk">
-                        <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-                        <div class="k-p">
-                            <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
-                            <span class="prijs">@artwork.Price.ToString("C")</span>
-                        </div>
-                        <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
-                    </div>              }}
-                </div>}
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                                    <span class="prijs">@artwork.Price.ToString("C")</span>
+                                </div>
+                                <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
+                            </div>
+                        }
+                    }
+                </div>
+                <ArtworkPager Filter="Filter" TotalAmount="totalFilteredAmount" />
+            }
         </div>
     </div>
 </div>
@@ -125,6 +129,7 @@
     private String cols = "col-4";
     private String showColFilters = "";
     private String textOnButton = "Show Filters";
+    private int totalFilteredAmount;
 
     private List<ArtworkDto.Index> artworks;
     private ArtworkFilter Filter = new();
@@ -137,9 +142,15 @@
         //set checkbox for auctions checked on startup
         Filter.IncludingAuctions = true;
 
-        ArtworkRequest.GetIndex request = new();
+        ArtworkRequest.GetIndex request = new()
+        {
+            Page = Filter.Page,
+            Amount = Filter.Amount,
+            OrderBy = Filter.OrderBy
+        };
         var response = await ArtworkService.GetIndexAsync(request);
         artworks = response.Artworks;
+        totalFilteredAmount = response.TotalAmount;
     }
 
     private void ShowFilters()
@@ -169,11 +180,14 @@
             IncludingAuctions = Filter.IncludingAuctions,
             Style = Filter.Style,
             Category = Filter.Category,
-            OrderBy = Filter.OrderBy
+            OrderBy = Filter.OrderBy,
+            Page = Filter.Page,
+            Amount = Filter.Amount
         };
 
         var response = await ArtworkService.GetIndexAsync(request);
         artworks = response.Artworks;
+        totalFilteredAmount = response.TotalAmount;
         StateHasChanged();
     }
 

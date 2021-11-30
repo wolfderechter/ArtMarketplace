@@ -8,18 +8,21 @@
         <h2 class="Kunstenaar">@artist.Name</h2>
     </div>
     <div class="col-6 text-end">
-        <div class="admin-buttons">
-            <a href="artist/edit/@Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
-            @if(RequestingDelete)
-            {
-                <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="ConfirmDelete" class="edit">@Loc["ConfirmDelete"]</a>
-                <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="CancelRequestDelete" class="edit">@Loc["CancelDelete"]</a>
-            }
-            else
-            {
-                <a style="color: var(--bs-body-color); text-decoration:none;" class="edit" @onclick="RequestDelete">@Loc["Delete"]</a>
-            }
-        </div>
+        <AuthorizeView >
+            <div class="admin-buttons">
+                <a href="artist/edit/@Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
+                @if (RequestingDelete)
+                {
+                    <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="ConfirmDelete" class="edit">@Loc["ConfirmDelete"]</a>
+                    <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="CancelRequestDelete" class="edit">@Loc["CancelDelete"]</a>
+                }
+                else
+                {
+                    <a style="color: var(--bs-body-color); text-decoration:none;" class="edit" @onclick="RequestDelete">@Loc["Delete"]</a>
+                }
+            </div>
+        </AuthorizeView>
+        
     </div>
 
 </div>

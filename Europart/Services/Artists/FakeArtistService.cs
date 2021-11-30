@@ -105,6 +105,8 @@ namespace EuropArt.Services.Artists
                         break;
                 }
             }
+            //wanneer request komt van buiten artist page -> snel resultaten terugeven
+            //orderby niet opgevuld dus niet in artist index page
             else
             {
                 response.Artists = query.Select(x => new ArtistDto.Index
@@ -118,6 +120,9 @@ namespace EuropArt.Services.Artists
 
                 return response;
             }
+            response.TotalAmount = query2.Count();
+            query2 = query2.Skip(request.Amount * request.Page).ToList();
+            query2 = query2.Take(request.Amount).ToList();
 
             response.Artists = query2.Select(x => new ArtistDto.Index
             {
