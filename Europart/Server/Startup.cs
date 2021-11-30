@@ -1,5 +1,6 @@
 using EuropArt.Services.Artists;
 using EuropArt.Services.Artworks;
+using EuropArt.Services.Infrastructure;
 using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,6 +37,8 @@ namespace EuropArt.Server
             services.AddRazorPages();
             services.AddScoped<IArtworkService, FakeArtworkService>();
             services.AddScoped<IArtistService, FakeArtistService>();
+            services.AddScoped<IStorageService, BlobStorageService>();
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

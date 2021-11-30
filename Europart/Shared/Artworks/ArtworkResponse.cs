@@ -27,6 +27,7 @@ namespace EuropArt.Shared.Artworks
         public class Create
         {
             public int ArtworkId { get; set; }
+            public Uri UploadUri { get; set; }
         }
 
         public class Edit

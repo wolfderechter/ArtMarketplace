@@ -34,16 +34,12 @@ else
             <div class="bieden">
                 <span class="prijs-groot">@artwork.Price.ToString("C")</span>
                 <button @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
-                <form>
-
-                    <button class="btn btn-bieden mb-3">@Loc["BuyNow"]</button>
-                </form>
                 <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
 
                 @if (RequestingDelete)
                 {
-                    <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
                     <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
+                    <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
                 }
                 else
                 {

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EuropArt.Shared.Common;
+using EuropArt.Services.Infrastructure;
 
 namespace EuropArt.Services.Artworks
 {
@@ -17,12 +18,17 @@ namespace EuropArt.Services.Artworks
         private static List<Artwork> artworks => FakeDataStore.Artworks;
         private static List<Artist> artists => FakeDataStore.Artists;
 
+        private readonly IStorageService storageService;
 
-        //public async Task<ArtworkDto.Detail> GetDetailAsync(int id)
-        //{
-        //    await Task.Delay(100);
-        //    return artworks.SingleOrDefault(x => x.Id == id);
-        //}
+        public FakeArtworkService()
+        {
+
+        }
+        public FakeArtworkService(IStorageService storageService)
+        {
+            this.storageService = storageService;
+        }
+
         public async Task<ArtworkResponse.GetDetail> GetDetailAsync(ArtworkRequest.GetDetail request)
         {
             await Task.Delay(100);
@@ -43,11 +49,6 @@ namespace EuropArt.Services.Artworks
             return response;
         }
 
-        //public async Task<IEnumerable<ArtworkDto.Index>> GetIndexAsync()
-        //{
-        //    await Task.Delay(100);
-        //    return artworks.AsEnumerable();
-        //}
         public async Task<ArtworkResponse.GetIndex> GetIndexAsync(ArtworkRequest.GetIndex request)
         {
             await Task.Delay(100);
@@ -139,30 +140,6 @@ namespace EuropArt.Services.Artworks
             return artworks;
         }
 
-        //public async Task CreateAsync(ArtworkDto.Create model)
-        //{
-        //    await Task.Delay(100);
-        //    //var a = new Artwork(model.Name, model.Price, model.Description);
-        //    //api call doen
-
-        //    //MOCK
-        //    var artistFaker = new FakeArtistService();
-        //    var artists = artistFaker.GetArtists();
-
-        //    var mappedArtwork = new ArtworkDto.Detail
-        //    {
-        //        Id = artworks.Max(x => x.Id) + 1, //fake id
-        //        Name = model.Name,
-        //        Price = model.Price,
-        //        Description = model.Description,
-        //        //MOCK
-        //        ImagePath = "/images/NewArtwork.jpg",
-        //        Artist = artists.First()
-        //    };
-
-        //    artworks.Add(mappedArtwork);
-        //    //return model.Id;
-        //}
         public async Task<ArtworkResponse.Create> CreateAsync(ArtworkRequest.Create request)
         {
             await Task.Delay(100);
@@ -170,16 +147,22 @@ namespace EuropArt.Services.Artworks
 
             var model = request.Artwork;
             //var price = new Money(model.Price);
+            var imageFileName = Guid.NewGuid().ToString();
+            var imagePath = $"{storageService.StorageBaseUri}{imageFileName}";
+
             var artwork = new Artwork(model.Name, model.Price, model.Description)
             {
                 Id = artworks.Max(x => x.Id) + 1,
                 //Fake data opvullen
                 Artist = artists.First(),
-                ImagePath = model.ImagePath
+                ImagePath = imagePath
             };
 
             artworks.Add(artwork);
             response.ArtworkId = artwork.Id;
+
+            var uploadUri = storageService.CreateUploadUri(imageFileName, artwork.Artist.Id);
+            response.UploadUri = uploadUri;
 
             return response;
         }
