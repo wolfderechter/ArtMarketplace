@@ -138,6 +138,12 @@
   <data name="Classic" xml:space="preserve">
     <value>Classic</value>
   </data>
+  <data name="Drawings" xml:space="preserve">
+    <value>Drawings</value>
+  </data>
+  <data name="Everything" xml:space="preserve">
+    <value>Everything</value>
+  </data>
   <data name="Hide Filters" xml:space="preserve">
     <value>Hide Filters</value>
   </data>
@@ -153,11 +159,35 @@
   <data name="Modern" xml:space="preserve">
     <value>Modern</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewestArtwork" xml:space="preserve">
+    <value>Newest Artwork</value>
+  </data>
+  <data name="OldestArtwork" xml:space="preserve">
+    <value>Oldest Artwork</value>
+  </data>
   <data name="Other" xml:space="preserve">
     <value>Other</value>
   </data>
+  <data name="Paintings" xml:space="preserve">
+    <value>Paintings</value>
+  </data>
+  <data name="Photography" xml:space="preserve">
+    <value>Photography</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>Price</value>
+  </data>
+  <data name="PriceAscending" xml:space="preserve">
+    <value>Price Ascending</value>
+  </data>
+  <data name="PriceDescending" xml:space="preserve">
+    <value>Price Descending</value>
+  </data>
+  <data name="Sculptures" xml:space="preserve">
+    <value>Sculptures</value>
   </data>
   <data name="Show Filters" xml:space="preserve">
     <value>Show Filters</value>

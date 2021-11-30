@@ -20,11 +20,11 @@
                 </Authorized>
             </AuthorizeView>
             <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
-                <option value="OrderByNewest">Newest Artwork</option>
-                <option value="OrderByOldest">Oldest Artwork</option>
-                <option value="OrderByName">Name</option>
-                <option value="OrderByPriceAscending">Price Ascending</option>
-                <option value="OrderByPriceDescending">Price Descending</option>
+                <option value="OrderByNewest">@Loc["NewestArtwork"]</option>
+                <option value="OrderByOldest">@Loc["OldestArtwork"]</option>
+                <option value="OrderByName">@Loc["Name"]</option>
+                <option value="OrderByPriceAscending">@Loc["PriceAscending"]</option>
+                <option value="OrderByPriceDescending">@Loc["PriceDescending"]</option>
             </select>
         </div>
     </div>
@@ -41,11 +41,11 @@
                 <h3>@Loc["Category"]:</h3>
                 <select @bind="Filter.Category" class="form-select mb-3" aria-label="Default select example">
                     <option selected>Alles</option>
-                    <option value="photography">Fotografie</option>
-                    <option value="painting">Schilderijen</option>
-                    <option value="sculpture">Sculpturen</option>
-                    <option value="drawing">Tekeningen</option>
-                    <option value="other">Andere</option>
+                    <option value="photography">@Loc["Photography"]</option>
+                    <option value="painting">@Loc["Paintings"]</option>
+                    <option value="sculpture">@Loc["Sculptures"]</option>
+                    <option value="drawing">@Loc["Drawings"]</option>
+                    <option value="other">@Loc["Other"]</option>
                 </select>
                 <h3>@Loc["Price"]:</h3>
                 <div class="row mb-3">
@@ -60,7 +60,7 @@
                 </div>
                 <h3>@Loc["Style"]:</h3>
                 <select @bind="Filter.Style" class="form-select mb-3" aria-label="Default select example">
-                    <option selected>Alles</option>
+                    <option selected>@Loc["Everything"]</option>
                     <option value="abstract">@Loc["Abstract"]</option>
                     <option value="classic">@Loc["Classic"]</option>
                     <option value="minimalism">@Loc["Minimalism"]</option>

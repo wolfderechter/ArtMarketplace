@@ -9,6 +9,7 @@
 	</PropertyGroup>  	
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" Version="3.3.0" />
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.12" />
@@ -20,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\EuropArt.Domain.csproj" />
+    <ProjectReference Include="..\Services\EuropArt.Services.csproj" />
     <ProjectReference Include="..\Shared\EuropArt.Shared.csproj" />
   </ItemGroup>
 

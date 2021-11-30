@@ -63,7 +63,7 @@
 
         //response zal sas-token bevatten uiteindelijk
         var response = await ArtworkService.CreateAsync(request);
-        await StorageService.UploadImageAsync(response.UploadUri, image);
+      //  await StorageService.UploadImageAsync(response.UploadUri, image);
         NavigationManager.NavigateTo("/artwork");
     }
 

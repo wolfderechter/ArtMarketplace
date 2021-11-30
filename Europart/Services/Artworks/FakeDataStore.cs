@@ -3,6 +3,8 @@ using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
 using System.Collections.Generic;
 using EuropArt.Domain.Youths;
+using EuropArt.Domain.Common;
+
 namespace EuropArt.Services.Artworks
 {
     public static class FakeDataStore
@@ -31,7 +33,8 @@ namespace EuropArt.Services.Artworks
                 .RuleFor(x => x.Artist, f => f.PickRandom(Artists))
                 .RuleFor(x => x.Style, f => f.PickRandom(styles))
                 .RuleFor(x => x.Category, f => f.PickRandom(categories))
-                .RuleFor(x => x.ImagePath, _ => $"/images/artworks/{artworkIds}.jpg");
+                .RuleFor(x => x.ImagePath, _ => $"/images/artworks/{artworkIds}.jpg")
+                .RuleFor(x => x.Price, f => new Money(f.Random.Decimal(0, 200)));
 
             Artworks = testArtworks.Generate(100);
 

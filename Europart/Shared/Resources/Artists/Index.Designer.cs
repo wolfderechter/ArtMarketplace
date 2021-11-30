@@ -70,6 +70,33 @@ namespace EuropArt.Shared.Resources.Artists {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Newest Artist.
+        /// </summary>
+        public static string NewestArtist {
+            get {
+                return ResourceManager.GetString("NewestArtist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oldest Artist.
+        /// </summary>
+        public static string OldestArtist {
+            get {
+                return ResourceManager.GetString("OldestArtist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Artist.
         /// </summary>
         public static string titel {

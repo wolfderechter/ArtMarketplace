@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EuropArt.Shared.Common;
 using EuropArt.Services.Infrastructure;
+using EuropArt.Domain.Common;
 
 namespace EuropArt.Services.Artworks
 {
@@ -150,7 +151,7 @@ namespace EuropArt.Services.Artworks
             ArtworkResponse.Create response = new();
 
             var model = request.Artwork;
-            //var price = new Money(model.Price);
+            var price = new Money(model.Price);
             var imageFileName = Guid.NewGuid().ToString();
             var imagePath = $"{storageService.StorageBaseUri}{imageFileName}";
 

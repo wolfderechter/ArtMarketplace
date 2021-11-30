@@ -124,6 +124,24 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Drawings.
+        /// </summary>
+        public static string Drawings {
+            get {
+                return ResourceManager.GetString("Drawings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Everything.
+        /// </summary>
+        public static string Everything {
+            get {
+                return ResourceManager.GetString("Everything", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide Filters.
         /// </summary>
         public static string Hide_Filters {
@@ -169,6 +187,33 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Newest Artwork.
+        /// </summary>
+        public static string NewestArtwork {
+            get {
+                return ResourceManager.GetString("NewestArtwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oldest Artwork.
+        /// </summary>
+        public static string OldestArtwork {
+            get {
+                return ResourceManager.GetString("OldestArtwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other.
         /// </summary>
         public static string Other {
@@ -178,11 +223,56 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paintings.
+        /// </summary>
+        public static string Paintings {
+            get {
+                return ResourceManager.GetString("Paintings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photography.
+        /// </summary>
+        public static string Photography {
+            get {
+                return ResourceManager.GetString("Photography", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         public static string Price {
             get {
                 return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price Ascending.
+        /// </summary>
+        public static string PriceAscending {
+            get {
+                return ResourceManager.GetString("PriceAscending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price Descending.
+        /// </summary>
+        public static string PriceDescending {
+            get {
+                return ResourceManager.GetString("PriceDescending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sculptures.
+        /// </summary>
+        public static string Sculptures {
+            get {
+                return ResourceManager.GetString("Sculptures", resourceCulture);
             }
         }
         

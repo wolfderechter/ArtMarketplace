@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" Version="3.3.0" />
     <PackageReference Include="Bogus" Version="33.1.1" />
   </ItemGroup>
 

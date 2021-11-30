@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" Version="3.3.0" />
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
     <PackageReference Include="Bogus" Version="33.1.1" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.11" />

@@ -18,9 +18,9 @@
             <div class="col-4">
                 <input class="form-control" placeholder="Search" type="search" @bind="Filter.Searchterm" />
                 <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
-                    <option value="OrderByNewest">Newest Artist</option>
-                    <option value="OrderByOldest">Oldest Artist</option>
-                    <option value="OrderByName">Name</option>
+                    <option value="OrderByNewest">@Loc["NewestArtist"]</option>
+                    <option value="OrderByOldest">@Loc["OldestArtist"]</option>
+                    <option value="OrderByName">@Loc["Name"]</option>
                 </select>
             </div>
         </div>
