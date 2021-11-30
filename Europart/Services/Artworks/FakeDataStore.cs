@@ -1,18 +1,15 @@
 ﻿using Bogus;
 using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using EuropArt.Domain.Youths;
 namespace EuropArt.Services.Artworks
 {
-    public static  class FakeDataStore
+    public static class FakeDataStore
     {
         public static List<Artwork> Artworks = new();
         public static List<Artist> Artists = new();
+        public static List<Youth> YouthArtworks = new();
         static FakeDataStore()
         {
             var artistIds = 0;
@@ -38,6 +35,14 @@ namespace EuropArt.Services.Artworks
 
 
             Artworks = testArtworks.Generate(10);
+
+            var youthIds = 0;
+            var testYouth = new Faker<Youth>()
+                .RuleFor(z => z.Id, f => youthIds++)
+                .RuleFor(y => y.Name, f => f.Commerce.ProductName())
+                .RuleFor(y => y.ImagePath, _ => $"/images/youths/{youthIds}.jpg");
+
+            YouthArtworks = testYouth.Generate(10);
         }
     }
 }

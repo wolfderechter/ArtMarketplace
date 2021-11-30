@@ -1,0 +1,31 @@
+﻿@page "/youth"
+@using EuropArt.Shared.Youths;
+@inject IYouthService YouthService;
+
+@if (youthArtworks is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @foreach (var item in youthArtworks)
+    {
+        <div class="kol col-4">
+            <div class="badge-kunstwerk">
+                <a href="artwork/@item.Id"><img src="@item.ImagePath"></a>
+                <span class="naam">@item.Name</span>
+            </div>
+        </div>
+    }
+
+}
+
+@code {
+    private List<YouthDto.Index> youthArtworks;
+    protected override async Task OnInitializedAsync()
+    {
+        YouthRequest.GetIndex request = new();
+        var response = await YouthService.GetIndexAsync(request);
+        youthArtworks = response.YouthArtworks;
+    }
+}

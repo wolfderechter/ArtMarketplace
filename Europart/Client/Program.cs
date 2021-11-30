@@ -13,6 +13,10 @@ using System;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.Extensions.Configuration;
+using EuropArt.Shared.Youths;
+using EuropArt.Client.Youths;
 
 namespace EuropArt.Client
 {
@@ -26,8 +30,9 @@ namespace EuropArt.Client
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<IArtworkService, ArtworkService>();
             builder.Services.AddScoped<IArtistService, ArtistService>();
+            builder.Services.AddScoped<IYouthService, YouthService>();
             builder.Services.AddScoped<Shoppingcart>();
-            builder.Services.AddHttpClient<StorageService>();
+          
 
             builder.Services.AddOidcAuthentication(options =>
             {
