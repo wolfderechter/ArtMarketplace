@@ -15,31 +15,31 @@ else
 
     @foreach (var item in Cart.Items)
     {
-        <div class="row shopping-cart align-items-center">
-            <div class="col-4">
-              
-                      <div class="badge-kunstwerk text-center" style="padding: 0;">
-                <img src="@item.ImagePath" style="width:auto;">
-          
-                </div>
-            </div>
-            <div class="col-6">
-                <h2>@item.Name</h2>
-                
-               <span class="price">@item.Price.ToString("C")</span>
-            </div>
-           <div class="col-2">
-                @if (RequestingDelete)
-                {
-                   <button class="btn btn-bieden mb-3" @onclick="() => ConfirmDelete(item)">@Loc["ConfirmDelete"]</button>
-              <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
-                }
-                else
-                {
-                    <button class="btn btn-bieden mb-3" @onclick="RequestDelete">@Loc["Delete"]</button>
-                }
-            </div> 
+<div class="row shopping-cart align-items-center">
+    <div class="col-4">
+
+        <div class="badge-kunstwerk text-center" style="padding: 0;">
+            <img src="@item.ImagePath" style="width:auto;">
+
         </div>
+    </div>
+    <div class="col-6">
+        <h2>@item.Name</h2>
+
+        <span class="price">@item.Price.ToString("C")</span>
+    </div>
+    <div class="col-2">
+        @if (RequestingDelete)
+        {
+            <button class="btn btn-bieden mb-3" @onclick="() => ConfirmDelete(item)">@Loc["ConfirmDelete"]</button>
+            <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
+        }
+        else
+        {
+            <button class="btn btn-bieden mb-3" @onclick="RequestDelete">@Loc["Delete"]</button>
+        }
+    </div>
+</div>
     }
     <div class="row text-end shopping-cart-total">
         <div class="col-12 mb-4">

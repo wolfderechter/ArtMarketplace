@@ -1,10 +1,12 @@
-using Bogus;
 using EuropArt.Client.Artists;
 using EuropArt.Client.Artworks;
+using EuropArt.Client.Infrastructure;
 using EuropArt.Domain.Shoppingcarts;
 using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using System;
@@ -13,6 +15,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Extensions.Configuration;
+using EuropArt.Shared.Youths;
+using EuropArt.Client.Youths;
 
 namespace EuropArt.Client
 {
@@ -26,7 +30,9 @@ namespace EuropArt.Client
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<IArtworkService, ArtworkService>();
             builder.Services.AddScoped<IArtistService, ArtistService>();
+            builder.Services.AddScoped<IYouthService, YouthService>();
             builder.Services.AddScoped<Shoppingcart>();
+          
 
             builder.Services.AddOidcAuthentication(options =>
             {

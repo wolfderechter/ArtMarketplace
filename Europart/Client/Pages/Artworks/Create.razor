@@ -1,7 +1,9 @@
 ﻿@page "/artwork/add"
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
 @inject IArtworkService ArtworkService
+@inject StorageService StorageService
 @using EuropArt.Shared.Artworks
+@using EuropArt.Client.Infrastructure
 @inject NavigationManager NavigationManager 
 
 <h1 class="text-center">@Loc["AddArtwork"]</h1>
@@ -29,7 +31,13 @@
             </div>
             <div class="mb-3">
                 <h6>@Loc["ChooseArtwork"]</h6>
-                <input type="file" id="artwork" name="artwork" />
+                <InputFile OnChange="LoadImage" class="file-input" type="file" name="artwork" accept="image/*"/>
+                @if(image is not null)
+                {
+                    <span class="file-name">
+                        @image.Name
+                    </span>
+                }
                 <ValidationMessage For="@(() => newArtwork.ImagePath)" />
 
             </div>
@@ -42,16 +50,25 @@
 
 @code { 
     ArtworkDto.Create newArtwork = new() {};
+    private IBrowserFile image;
+
     private async Task CreateNewArtwork()
     {
         //Fake image toevoegen
-        newArtwork.ImagePath = "/images/NewArtwork.jpg";
+        //newArtwork.ImagePath = "/images/NewArtwork.jpg";
         ArtworkRequest.Create request = new()
         {
             Artwork = newArtwork
         };
 
+        //response zal sas-token bevatten uiteindelijk
         var response = await ArtworkService.CreateAsync(request);
+        await StorageService.UploadImageAsync(response.UploadUri, image);
         NavigationManager.NavigateTo("/artwork");
+    }
+
+    private void LoadImage(InputFileChangeEventArgs args)
+    {
+        image = args.File;
     }
 }
