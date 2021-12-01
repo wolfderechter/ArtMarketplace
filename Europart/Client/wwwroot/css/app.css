@@ -337,6 +337,7 @@ button.btn.btn-winkelmand {
 
 .shopping-cart > div {
     margin-bottom: 2rem;
+ 
 }
 
 .shopping-cart .img-cart {
@@ -576,4 +577,9 @@ form.form {
 #dashboard-list .buttons a img.bad {
     margin-right: 1rem;
     filter: invert(10%) sepia(89%) saturate(6889%) hue-rotate(9deg) brightness(92%) contrast(113%);
+}
+
+.delete {
+   
+    width: 25px;
 }
