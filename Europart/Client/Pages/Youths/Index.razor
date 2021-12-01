@@ -1,26 +1,135 @@
 ﻿@page "/youth"
 @using EuropArt.Shared.Youths;
 @inject IYouthService YouthService;
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Index> Loc
 
-@if (youthArtworks is null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    @foreach (var item in youthArtworks)
-    {
-        <div class="kol col-4">
-            <div class="badge-kunstwerk">
-                <a href="artwork/@item.Id"><img src="@item.ImagePath"></a>
-                <span class="naam">@item.Name</span>
-            </div>
+<h1>@Loc["YouthArtworks"]</h1>
+<!--<div class="row">
+    <div class="col-6">
+        <button @onclick="ShowFilters" id="filters" type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">@Loc[textOnButton]</button>
+    </div>
+    <div class="col-6 text-end">-->
+@*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
+<!--<div class="row">
+            <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
+            <AuthorizeView>
+                <Authorized>
+                    <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
+                </Authorized>
+            </AuthorizeView>
+            <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
+                <option value="OrderByNewest">@Loc["NewestArtwork"]</option>
+                <option value="OrderByOldest">@Loc["OldestArtwork"]</option>
+                <option value="OrderByName">@Loc["Name"]</option>
+                <option value="OrderByPriceAscending">@Loc["PriceAscending"]</option>
+                <option value="OrderByPriceDescending">@Loc["PriceDescending"]</option>
+            </select>
         </div>
-    }
+    </div>
+</div>-->
 
-}
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            @*<div id="f-row" class="filters @showColFilters col-3">
+                    <div class="form-check form-switch mb-3">
+                        <input @bind="Filter.IncludingAuctions" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">@Loc["Auctions"]</label>
+                    </div>
+                    <h3>@Loc["Category"]:</h3>
+                    <select @bind="Filter.Category" class="form-select mb-3" aria-label="Default select example">
+                        <option selected>Alles</option>
+                        <option value="photography">@Loc["Photography"]</option>
+                        <option value="painting">@Loc["Paintings"]</option>
+                        <option value="sculpture">@Loc["Sculptures"]</option>
+                        <option value="drawing">@Loc["Drawings"]</option>
+                        <option value="other">@Loc["Other"]</option>
+                    </select>
+                    <h3>@Loc["Price"]:</h3>
+                    <div class="row mb-3">
+                        <div class="form-floating col-6">
+                            <input @bind="Filter.MinimumPrice" type="number" class="form-control" id="floatingInput" placeholder="0">
+                            <label for="floatingInput">@Loc["Min"].</label>
+                        </div>
+                        <div class="form-floating col-6">
+                            <input @bind="Filter.MaximumPrice" type="number" class="form-control" id="floatingInput" placeholder="0">
+                            <label for="floatingInput">@Loc["Max"].</label>
+                        </div>
+                    </div>
+                    <h3>@Loc["Style"]:</h3>
+                    <select @bind="Filter.Style" class="form-select mb-3" aria-label="Default select example">
+                        <option selected>@Loc["Everything"]</option>
+                        <option value="abstract">@Loc["Abstract"]</option>
+                        <option value="classic">@Loc["Classic"]</option>
+                        <option value="minimalism">@Loc["Minimalism"]</option>
+                        <option value="modern">@Loc["Modern"]</option>
+                        <option value="surrealism">@Loc["Surrealism"]</option>
+                        <option value="other">@Loc["Other"]</option>
+                    </select>
+                </div>*@
+
+            @if (youthArtworks is null)
+            {
+                <p>Loading...</p>
+            }
+            else
+            {
+                <div class="kol @cols">
+                    @foreach (var artwork in youthArtworks)
+                    {
+                        @if (artwork.Id % 3 == 0)
+                        {
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                                    @*<span class="prijs">@artwork.Price.ToString("C")</span>*@
+                                </div>
+                                @*<span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>*@
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="kol @cols">
+                    @foreach (var artwork in youthArtworks)
+                    {
+                        @if (artwork.Id % 3 == 1)
+                        {
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                                    @*<span class="prijs">@artwork.Price.ToString("C")</span>*@
+                                </div>
+                                @*<span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>*@
+                            </div>
+                         }
+                     }
+                </div>
+                <div class="kol @cols">
+                    @foreach (var artwork in youthArtworks)
+                    {
+                        @if (artwork.Id % 3 == 2)
+                        {
+                            <div class="badge-kunstwerk">
+                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                                <div class="k-p">
+                                    <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                                    @*<span class="prijs">@artwork.Price.ToString("C")</span>*@
+                                </div>
+                                @*<span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>*@
+                            </div>
+                        }
+                    }
+                </div>
+                @*<ArtworkPager Filter="Filter" TotalAmount="totalFilteredAmount" />*@
+            }
+        </div>
+    </div>
+</div>
 
 @code {
+    private String cols = "col-4";
     private List<YouthDto.Index> youthArtworks;
     protected override async Task OnInitializedAsync()
     {

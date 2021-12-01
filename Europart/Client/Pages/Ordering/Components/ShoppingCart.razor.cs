@@ -17,7 +17,6 @@ namespace EuropArt.Client.Pages.Ordering.Components
             Cart.RemoveItem(item);
         }
 
-
         private void RequestDelete(Item item)
         {
             item.RequestingDelete = true;
