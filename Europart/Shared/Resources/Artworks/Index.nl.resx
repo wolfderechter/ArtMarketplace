@@ -184,10 +184,13 @@
     <value>Prijs stijgend</value>
   </data>
   <data name="PriceDescending" xml:space="preserve">
-    <value>Price Descending</value>
+    <value>Price Dalend</value>
   </data>
   <data name="Sculptures" xml:space="preserve">
     <value>Sculpturen</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Zoeken</value>
   </data>
   <data name="Show Filters" xml:space="preserve">
     <value>Toon Filters</value>

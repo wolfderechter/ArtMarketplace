@@ -6,7 +6,11 @@
 
 	<PropertyGroup>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
-	</PropertyGroup>  	
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\images\trash.svg" />
+	</ItemGroup>  	
 
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" Version="3.3.0" />

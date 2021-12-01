@@ -126,6 +126,9 @@
   <data name="Artworks" xml:space="preserve">
     <value>Artworks</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>

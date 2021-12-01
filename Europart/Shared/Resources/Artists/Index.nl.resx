@@ -129,6 +129,9 @@
   <data name="OldestArtist" xml:space="preserve">
     <value>Oudste artiest</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
   <data name="titel" xml:space="preserve">
     <value>Artiest</value>
   </data>

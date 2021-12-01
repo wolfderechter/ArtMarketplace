@@ -59,7 +59,32 @@ namespace EuropArt.Shared.Resources {
                 resourceCulture = value;
             }
         }
-
-       
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order.
+        /// </summary>
+        public static string OrderNow {
+            get {
+                return ResourceManager.GetString("OrderNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your shoppingcart.
+        /// </summary>
+        public static string Shoppingcart1 {
+            get {
+                return ResourceManager.GetString("Shoppingcart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total price.
+        /// </summary>
+        public static string TotalPrice {
+            get {
+                return ResourceManager.GetString("TotalPrice", resourceCulture);
+            }
+        }
     }
 }

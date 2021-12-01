@@ -13,7 +13,7 @@
     <div class="col-6 text-end">
         @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
         <div class="row">
-            <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc[" Search"]" type="search" />
+            <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
             <AuthorizeView>
                 <Authorized>
                     <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>

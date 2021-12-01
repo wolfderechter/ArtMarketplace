@@ -189,6 +189,9 @@
   <data name="Sculptures" xml:space="preserve">
     <value>Sculptures</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="Show Filters" xml:space="preserve">
     <value>Show Filters</value>
   </data>
