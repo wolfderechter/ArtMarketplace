@@ -1,5 +1,5 @@
 ﻿
-using EuropArt.Domain.Shoppingcarts;
+using EuropArt.Client.Pages.Ordering;
 using Microsoft.AspNetCore.Components;
 using System;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;

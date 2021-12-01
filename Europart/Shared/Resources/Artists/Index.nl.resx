@@ -120,6 +120,18 @@
   <data name="artworks" xml:space="preserve">
     <value>kunstwerken</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="NewestArtist" xml:space="preserve">
+    <value>Nieuwste artiest</value>
+  </data>
+  <data name="OldestArtist" xml:space="preserve">
+    <value>Oudste artiest</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
   <data name="titel" xml:space="preserve">
     <value>Artiest</value>
   </data>

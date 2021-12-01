@@ -3,7 +3,7 @@
 @using EuropArt.Shared.Artworks
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Detail> Loc
 @inject IJSRuntime JSRuntime
-@using EuropArt.Domain.Shoppingcarts
+@using EuropArt.Client.Pages.Ordering;
 @if (artwork == null)
 {
     <p><em>Loading...</em></p>
@@ -19,7 +19,7 @@ else
         <div class="col-12 text-end mb-3">
             <div class="admin-buttons">
                 <a class="edit" href="/artwork/edit/@artwork.Id"><img src="/images/edit.svg" /></a>
-                <button class="delete" @onclick="ConfirmDelete"><img src="/images/delete.svg" /></button>
+                <button  @onclick="ConfirmDelete"><img src="/images/delete.svg" /></button>
             </div>
         </div>
         <div class="col-8">

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EuropArt.Domain.Shoppingcarts
+namespace EuropArt.Client.Pages.Ordering
 {
     public class Shoppingcart
     {
@@ -38,6 +38,7 @@ namespace EuropArt.Domain.Shoppingcarts
         public decimal Price { get; init; }
         public string Name { get; init; }
         public string ImagePath { get; set; }
+        public bool RequestingDelete { get; set; }
 
         public Item(int artworkId, string name, decimal price, string imagepath)
         {
