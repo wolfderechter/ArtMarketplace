@@ -1,9 +1,13 @@
-﻿@inject IStringLocalizer<EuropArt.Shared.Resources.NavMenu> Loc
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject IStringLocalizer<EuropArt.Shared.Resources.NavMenu> Loc
 @inject NavigationManager NavigationManager
+@inject SignOutSessionStateManager SignOutManager
+
 <div class="round-nav fixed-top"></div>
 <nav class="navbar navbar-second navbar-dark navbar-expand-lg fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">EuropArt</a>
+        <a class="navbar-brand" href="/">Hooop Gallery</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,24 +38,32 @@
                         </Authorized>
                     </AuthorizeView>
                 </ul>
-                <NavLink class="shoppingcart mr-3" href="search"><img src="/images/search.svg" /></NavLink>
                 <NavLink @onclick="OpenShoppingCart" class="shoppingcart text-decoration-none mr-3">
                     <img src="/images/shoppingcart.svg" id="shoppingcart" />
                     <p id="counter" class="text-white float-left">@Cart.Items.Count</p>
                 </NavLink>
                 @*<NavLink class="shoppingcart mr-3" href="login">
-                    <img src="/images/user.svg" />
-                </NavLink>*@
+                        <img src="/images/user.svg" />
+                    </NavLink>*@
                 <AuthorizeView>
                     <Authorized>
-                        <NavLink class="shoppingcart mr-3" href="account">
-                            <img src="/images/user.svg" />
-                        </NavLink>
+                        <div class="dropdown show shoppingcart mr-3"   >
+                            <a class=" dropdown-toggle text-white" role="button" id="dropdownMenuLink" @onclick="ToggleAccountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="/images/user.svg" />
+                            </a>
+
+                            <div class="dropdown-menu @(show? "show":"")" aria-labelledby="dropdownMenuLink" >
+                                <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="account">@Loc["Profile"]</a>
+                                <a class="dropdown-item" href="messages">@Loc["Messages"]</a>
+                                <a class="dropdown-item" @onclick="BeginSignOut" href="#">@Loc["Logout"]</a>
+                            </div>
+                        </div>
                     </Authorized>
                     <NotAuthorized>
                         <NavLink class="shoppingcart mr-3" href="authentication/login">
                             <img src="/images/user.svg" />
                         </NavLink>
+
                     </NotAuthorized>
                 </AuthorizeView>
                 <CultureSelector />

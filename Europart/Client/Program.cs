@@ -32,7 +32,7 @@ namespace EuropArt.Client
             builder.Services.AddScoped<IArtistService, ArtistService>();
             builder.Services.AddScoped<IYouthService, YouthService>();
             builder.Services.AddScoped<Shoppingcart>();
-          
+            builder.Services.AddHttpClient<StorageService>();
 
             builder.Services.AddOidcAuthentication(options =>
             {

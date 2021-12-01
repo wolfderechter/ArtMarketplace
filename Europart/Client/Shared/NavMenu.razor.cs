@@ -2,6 +2,7 @@
 using EuropArt.Domain.Shoppingcarts;
 using Microsoft.AspNetCore.Components;
 using System;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 namespace EuropArt.Client.Shared
 {
@@ -9,7 +10,8 @@ namespace EuropArt.Client.Shared
     {
         private bool collapseNavMenu = true;
         [Inject] public Shoppingcart Cart { get; set; }
-        private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+        private string NavMenuCssClass => collapseNavMenu ? "collapse" : "";
+        private bool show = false;
 
         private void ToggleNavMenu()
         {
@@ -34,6 +36,18 @@ namespace EuropArt.Client.Shared
         public void Dispose()
         {
             Cart.OnCartChanged -= StateHasChanged;
+        }
+
+        public void ToggleAccountDropdown()
+        {
+            show = !show;
+        }
+
+        private void BeginSignOut()
+        {
+            ToggleAccountDropdown();
+            SignOutManager.SetSignOutState();
+            NavigationManager.NavigateTo("authentication/logout");
         }
     }
 }

@@ -1,5 +1,6 @@
 using EuropArt.Services.Artists;
 using EuropArt.Services.Artworks;
+using EuropArt.Services.Infrastructure;
 using EuropArt.Services.Youths;
 using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
@@ -39,6 +40,7 @@ namespace EuropArt.Server
             services.AddScoped<IArtworkService, FakeArtworkService>();
             services.AddScoped<IArtistService, FakeArtistService>();
             services.AddScoped<IYouthService, FakeYouthService>();
+            services.AddScoped<IStorageService, BlobStorageService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
