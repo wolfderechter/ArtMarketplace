@@ -44,7 +44,7 @@ namespace EuropArt.Services.Artworks
                 .RuleFor(y => y.Name, f => f.Commerce.ProductName())
                 .RuleFor(y => y.ImagePath, _ => $"/images/youths/{youthIds}.jpg");
 
-            YouthArtworks = testYouth.Generate(100);
+            YouthArtworks = testYouth.Generate(50);
         }
     }
 }
