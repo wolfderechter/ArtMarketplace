@@ -8,10 +8,13 @@ using EuropArt.Shared.Youths;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Persistence.Data;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace EuropArt.Server
@@ -29,6 +32,11 @@ namespace EuropArt.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("HoopDb"));
+            services.AddDbContext<HooopDbContext>(options =>
+                 options.UseSqlServer(builder.ConnectionString)
+                 .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
+
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
             {
