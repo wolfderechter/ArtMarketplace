@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Shared\EuropArt.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Artists\" />
+  </ItemGroup>
+
 </Project>

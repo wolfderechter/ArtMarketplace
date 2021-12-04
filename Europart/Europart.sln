@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuropArt.Domain", "Domain\E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuropArt.Services", "Services\EuropArt.Services.csproj", "{694F5041-A037-4A86-8A64-3E3C105DFE47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{853FF2BD-364A-408E-A1F1-FE4FD58B8471}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuropArt.Persistence", "Persistence\EuropArt.Persistence.csproj", "{853FF2BD-364A-408E-A1F1-FE4FD58B8471}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

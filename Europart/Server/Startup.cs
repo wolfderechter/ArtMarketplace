@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Persistence.Data;
+using EuropArt.Persistence.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -69,7 +69,7 @@ namespace EuropArt.Server
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, HooopDataInitializer dataInitializer, HooopDbContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -84,6 +84,8 @@ namespace EuropArt.Server
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            dataInitializer.SeedData();
 
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();

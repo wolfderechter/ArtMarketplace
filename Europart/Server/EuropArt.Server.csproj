@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Client\EuropArt.Client.csproj" />
-    <ProjectReference Include="..\Persistence\Persistence.csproj" />
+    <ProjectReference Include="..\Persistence\EuropArt.Persistence.csproj" />
     <ProjectReference Include="..\Services\EuropArt.Services.csproj" />
     <ProjectReference Include="..\Shared\EuropArt.Shared.csproj" />
   </ItemGroup>

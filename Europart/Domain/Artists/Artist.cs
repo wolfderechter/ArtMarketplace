@@ -29,6 +29,14 @@ namespace EuropArt.Domain.Artists
 
         }
 
+        public Artist(string name , string city, string biography, string website, string imagepath)
+        {
+            Name = name;
+            City = city;
+            Biography = biography;
+            Website = website;
+            ImagePath = imagepath;
+        }
 
     }
 }

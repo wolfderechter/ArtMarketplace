@@ -35,7 +35,7 @@ namespace EuropArt.Domain.Artworks
 
         }
 
-        public Artwork(string name, Money price, string description)
+        public Artwork(string name, Money price, string description, Artist artist)
         {
             Name = name;
             Price = Guard.Against.Null(price, nameof(price));

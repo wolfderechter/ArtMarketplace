@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Data
+namespace EuropArt.Persistence.Data
 {
     public class HooopDbContext : DbContext
     {
