@@ -23,8 +23,8 @@ namespace EuropArt.Services.Artworks
             Artists = testArtists.Generate(50);
 
             //fake style en category
-            List<string> styles = new List<string>() { "modern", "classic", "other" };
-            List<string> categories = new List<string>() { "painting", "sculpture", "other" };
+            List<string> styles = new List<string>() { "abstract", "minimalism", "modern", "classic", "surrealism", "other" };
+            List<string> categories = new List<string>() { "photography", "drawing", "painting", "sculpture", "other" };
 
             var artworkIds = 0;
             var testArtworks = new Faker<Artwork>()
@@ -34,7 +34,8 @@ namespace EuropArt.Services.Artworks
                 .RuleFor(x => x.Style, f => f.PickRandom(styles))
                 .RuleFor(x => x.Category, f => f.PickRandom(categories))
                 .RuleFor(x => x.ImagePath, _ => $"/images/artworks/{artworkIds}.jpg")
-                .RuleFor(x => x.Price, f => new Money(f.Random.Decimal(0, 200)));
+                .RuleFor(x => x.Price, f => new Money(f.Random.Decimal(0, 200)))
+                .RuleFor(x => x.DateCreated, f => f.Date.Past(1));
 
             Artworks = testArtworks.Generate(75);
 

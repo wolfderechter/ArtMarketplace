@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using EuropArt.Domain.Artworks;
+using System;
 using System.Collections.Generic;
 
 namespace EuropArt.Domain.Artists
@@ -23,19 +24,21 @@ namespace EuropArt.Domain.Artists
         public IEnumerable<Artwork> Artworks { get; set; }
         public string Biography { get; set; }
         public string Website { get; set; }
+        public DateTime DateCreated { get; set; }
 
         public Artist()
         {
 
         }
 
-        public Artist(string name , string city, string biography, string website, string imagepath)
+        public Artist(string name , string city, string biography, string website, string imagepath, DateTime dateCreated)
         {
             Name = name;
             City = city;
             Biography = biography;
             Website = website;
             ImagePath = imagepath;
+            DateCreated = dateCreated;
         }
 
     }

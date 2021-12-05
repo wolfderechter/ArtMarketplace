@@ -28,6 +28,7 @@ else
             </div>
             <h2 class="mb-1">@artwork.Name</h2>
             <h4 class="kunstenaar"><a href="/artist/@artwork.ArtistId"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.ArtistName</a></h4>
+            <h5 style="color:#b1b4b7">Uploaded on @artwork.DateCreated.ToString("dd MMMM yyyy")</h5>
             <p>@artwork.Description</p>
         </div>
         <div class="col-4">

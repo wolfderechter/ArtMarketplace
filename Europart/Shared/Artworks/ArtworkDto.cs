@@ -1,6 +1,7 @@
 ﻿using EuropArt.Shared.Artists;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
+using System;
 
 namespace EuropArt.Shared.Artworks
 {
@@ -14,6 +15,7 @@ namespace EuropArt.Shared.Artworks
             public string Name { get; set; }
             public decimal Price { get; set; }
             public string ImagePath { get; set; }
+            public DateTime DateCreated { get; set; }
         }
 
         public class Detail : Index
@@ -26,6 +28,7 @@ namespace EuropArt.Shared.Artworks
             public string Name { get; set; }
             public decimal Price { get; set; }
             public string Description { get; set; }
+            public DateTime DateCreated { get; set; }
 
             //public IEnumerable<string> ImagePaths { get; set; }
             public string ImagePath { get; set; }

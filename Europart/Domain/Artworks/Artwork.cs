@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using EuropArt.Domain.Artists;
 using EuropArt.Domain.Common;
+using System;
 
 namespace EuropArt.Domain.Artworks
 {
@@ -10,6 +11,7 @@ namespace EuropArt.Domain.Artworks
         public string name;
         public Money price;
         public string category;
+        public DateTime DateCreated;
         public int Id { get; set; }
         public Artist Artist { get; set; }
       
@@ -35,11 +37,20 @@ namespace EuropArt.Domain.Artworks
 
         }
 
-        public Artwork(string name, Money price, string description, Artist artist)
+        public Artwork(string name, Money price, string description, DateTime dateCreated)
         {
             Name = name;
             Price = Guard.Against.Null(price, nameof(price));
             Description = description;
+            DateCreated = dateCreated;
+        }
+        public Artwork(string name, Money price, string description, Artist artist, DateTime dateCreated)
+        {
+            Name = name;
+            Price = Guard.Against.Null(price, nameof(price));
+            Description = description;
+            Artist = artist;
+            DateCreated = dateCreated;
         }
     }
 }

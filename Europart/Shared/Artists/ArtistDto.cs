@@ -20,6 +20,7 @@ namespace EuropArt.Shared.Artists
             public string ImagePath { get; set; }
             public int AmountOfArtworks { get; set; }
             public string Email { get; set; }
+            public DateTime DateCreated { get; set; }
         }
 
         public class Detail : Index

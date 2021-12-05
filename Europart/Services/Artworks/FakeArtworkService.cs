@@ -44,6 +44,7 @@ namespace EuropArt.Services.Artworks
                 ArtistName = x.Artist.Name,
                 Description = x.Description,
                 Price = x.Price,
+                DateCreated = x.DateCreated,
                 ImagePath = x.ImagePath,
             }).SingleOrDefault(x => x.Id == request.ArtworkId);
 
@@ -107,6 +108,8 @@ namespace EuropArt.Services.Artworks
                         break;
                 }
             }
+            //wanneer request komt van buiten artwork page -> snel resultaten terugeven zonder ordening (vb homepage)
+            //else binnenkomen orderby niet opgevuld is dus request komt niet van artist index page
             else
             {
                 response.Artworks = query.Select(x => new ArtworkDto.Index
@@ -115,6 +118,7 @@ namespace EuropArt.Services.Artworks
                     Name = x.Name,
                     ImagePath = x.ImagePath,
                     Price = x.Price,
+                    DateCreated = x.DateCreated,
                     ArtistId = x.Artist.Id,
                     ArtistName = x.Artist.Name
                 }).ToList();
@@ -132,6 +136,7 @@ namespace EuropArt.Services.Artworks
                 Name = x.Name,
                 ImagePath = x.ImagePath,
                 Price = x.Price,
+                DateCreated = x.DateCreated,
                 ArtistId = x.Artist.Id,
                 ArtistName = x.Artist.Name
             }).ToList();
@@ -155,12 +160,12 @@ namespace EuropArt.Services.Artworks
             var imageFileName = Guid.NewGuid().ToString();
             var imagePath = $"{storageService.StorageBaseUri}{imageFileName}";
 
-            var artwork = new Artwork(model.Name, model.Price, model.Description)
+            var artwork = new Artwork(model.Name, model.Price, model.Description, model.DateCreated)
             {
                 Id = artworks.Max(x => x.Id) + 1,
                 //Fake data opvullen
                 Artist = artists.First(),
-                ImagePath = imagePath
+                ImagePath = imagePath,
             };
 
             artworks.Add(artwork);

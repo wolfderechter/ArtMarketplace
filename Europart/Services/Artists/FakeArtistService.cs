@@ -60,6 +60,7 @@ namespace EuropArt.Services.Artists
                 Name = x.Name,
                 Website = x.Website,
                 ImagePath = x.ImagePath,
+                DateCreated = x.DateCreated,
                 Artworks = artworks.Where(aw => aw.Artist.Id == x.Id).Select(y => new ArtworkDto.Detail
                 {
                     Id = y.Id,
@@ -115,7 +116,8 @@ namespace EuropArt.Services.Artists
                     Name = x.Name,
                     City = x.City,
                     ImagePath = x.ImagePath,
-                    AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count()
+                    AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count(),
+                    DateCreated = x.DateCreated
                 }).ToList();
 
                 return response;
@@ -130,63 +132,17 @@ namespace EuropArt.Services.Artists
                 Name = x.Name,
                 City = x.City,
                 ImagePath = x.ImagePath,
-                AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count()
+                AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count(),
+                DateCreated = x.DateCreated
             }).ToList();
 
             return response;
         }
 
-        //nog uitwerken
-        public Task<List<ArtistDto.Index>> GetIndexAsync(string searchterm)
-        {
-            throw new NotImplementedException();
-        }
-
+        //temp voor faker
         public List<Artist> GetArtists()
         {
             return artists;
         }
-
-        //public async Task<ArtistDto.Detail> GetDetailAsync(int id)
-        //{
-        //    await Task.Delay(100);
-        //    return artists.SingleOrDefault(x => x.Id == id);
-        //}
-
-        //public async Task<IEnumerable<ArtistDto.Index>> GetIndexAsync()
-        //{
-        //    await Task.Delay(100);
-        //    return artists.AsEnumerable();
-        //}
-
-        //public IEnumerable<ArtistDto.Detail> GetArtists()
-        //{
-        //    return artists;
-        //}
-
-        //public async Task<IEnumerable<ArtistDto.Index>> GetIndexAsync(string searchterm)
-        //{
-        //    await Task.Delay(100);
-        //    return artists.AsEnumerable().Where(a => a.Name.ToLower().Contains(searchterm) || a.Biography.ToLower().Contains(searchterm));
-        //}
-
-        //public Task UpdateArtistAsync(ArtistDto.Edit model, int id)
-        //{
-        //    var a = artists.SingleOrDefault(x => x.Id == id);
-
-        //    a.Name = model.Name;
-        //    a.City = model.City;
-        //    a.Website = model.Website;
-        //    a.Biography = model.Biography;
-
-        //    return Task.CompletedTask;
-        //}
-
-        //public Task DeleteAsync(int id)
-        //{
-        //    var a = artists.SingleOrDefault(x => x.Id == id);
-        //    artists.Remove(a);
-        //    return Task.CompletedTask;
-        //}
     }
 }

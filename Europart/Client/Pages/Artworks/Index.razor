@@ -40,7 +40,7 @@
                 </div>
                 <h3>@Loc["Category"]:</h3>
                 <select @bind="Filter.Category" class="form-select mb-3" aria-label="Default select example">
-                    <option selected>Alles</option>
+                    <option value="" selected>Alles</option>
                     <option value="photography">@Loc["Photography"]</option>
                     <option value="painting">@Loc["Paintings"]</option>
                     <option value="sculpture">@Loc["Sculptures"]</option>
@@ -60,7 +60,7 @@
                 </div>
                 <h3>@Loc["Style"]:</h3>
                 <select @bind="Filter.Style" class="form-select mb-3" aria-label="Default select example">
-                    <option selected>@Loc["Everything"]</option>
+                    <option value="" selected>@Loc["Everything"]</option>
                     <option value="abstract">@Loc["Abstract"]</option>
                     <option value="classic">@Loc["Classic"]</option>
                     <option value="minimalism">@Loc["Minimalism"]</option>
