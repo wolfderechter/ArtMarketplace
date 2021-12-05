@@ -1,5 +1,6 @@
 ﻿using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
+using EuropArt.Persistence.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
@@ -18,6 +19,14 @@ namespace EuropArt.Persistence.Data
         public HooopDbContext(DbContextOptions<HooopDbContext> options) : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new ArtistEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ArtworkEntityTypeConfiguration());
+            
         }
     }
 }

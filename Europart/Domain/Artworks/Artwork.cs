@@ -7,14 +7,13 @@ namespace EuropArt.Domain.Artworks
 {
     public class Artwork
     {
-
+        public int Id { get; set; }
         public string name;
         public Money price;
         public string category;
         public DateTime DateCreated;
-        public int Id { get; set; }
         public Artist Artist { get; set; }
-      
+        public int ArtistId { get; set; }
         public string Name { 
             get { return name;  }
             set {  name = Guard.Against.NullOrWhiteSpace(value, nameof(name)); }

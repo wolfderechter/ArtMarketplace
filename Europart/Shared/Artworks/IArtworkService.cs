@@ -16,7 +16,6 @@ namespace EuropArt.Shared.Artworks
         Task<ArtworkResponse.GetDetail> GetDetailAsync(ArtworkRequest.GetDetail request);
         Task<ArtworkResponse.Create> CreateAsync(ArtworkRequest.Create request);
         Task DeleteAsync(ArtworkRequest.Delete request);
-        Task DeleteArtistAsync(int id);
         Task<ArtworkResponse.Edit> EditAsync(ArtworkRequest.Edit request);
     }
 }

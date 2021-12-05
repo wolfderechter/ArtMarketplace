@@ -10,7 +10,10 @@ namespace EuropArt.Domain.Common
     public class Money : ValueObject
     {
         public decimal Value { get;}
+        private Money()
+        {
 
+        }
         public Money(decimal value)
         {
             Value = value;
