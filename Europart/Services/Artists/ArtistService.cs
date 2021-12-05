@@ -26,6 +26,10 @@ namespace EuropArt.Services.Artists
             artworks = dbContext.Artworks;
         }
 
+        private IQueryable<Artist> GetArtistById(int id) => artists
+            .AsNoTracking()
+            .Where(p => p.Id == id);
+
         public async Task DeleteAsync(ArtistRequest.Delete request)
         {
             await Task.Delay(100);
@@ -57,7 +61,7 @@ namespace EuropArt.Services.Artists
             await Task.Delay(100);
             ArtistResponse.GetDetail response = new();
 
-            response.Artist = artists.Select(x => new ArtistDto.Detail
+            response.Artist = artists.AsNoTracking().Include(p => p.Artworks).Where(p => p.Id == request.ArtistId).Select(x => new ArtistDto.Detail
             {
                 Id = x.Id,
                 Biography = x.Biography,
@@ -85,7 +89,7 @@ namespace EuropArt.Services.Artists
             ArtistResponse.GetIndex response = new();
 
             //Query om te filteren
-            var query = artists.AsQueryable();
+            var query = artists.AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
                 query = query.Where(x => x.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));

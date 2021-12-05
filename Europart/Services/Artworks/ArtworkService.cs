@@ -28,6 +28,10 @@ namespace EuropArt.Services.Artworks
             this.storageService = storageService;
 
         }
+
+        private IQueryable<Artwork> GetArtworkById(int id) => artworks
+            .AsNoTracking()
+            .Where(p => p.Id == id);
         public async Task<ArtworkResponse.Create> CreateAsync(ArtworkRequest.Create request)
         {
             await Task.Delay(100);
@@ -88,7 +92,7 @@ namespace EuropArt.Services.Artworks
 
             ArtworkResponse.GetDetail response = new();
 
-            response.Artwork = artworks.Select(x => new ArtworkDto.Detail
+            response.Artwork = GetArtworkById(request.ArtworkId).Select(x => new ArtworkDto.Detail
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -109,7 +113,7 @@ namespace EuropArt.Services.Artworks
             ArtworkResponse.GetIndex response = new();
 
             //Query om te filteren
-            var query = artworks.Include(x => x.Artist).AsQueryable();
+            var query = artworks.Include(x => x.Artist).AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
                 query = query.Where(x => x.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase) ||
