@@ -160,11 +160,9 @@ namespace EuropArt.Services.Artworks
             var imageFileName = Guid.NewGuid().ToString();
             var imagePath = $"{storageService.StorageBaseUri}{imageFileName}";
 
-            var artwork = new Artwork(model.Name, model.Price, model.Description, model.DateCreated)
+            var artwork = new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated)
             {
                 Id = artworks.Max(x => x.Id) + 1,
-                //Fake data opvullen
-                Artist = artists.First(),
                 ImagePath = imagePath,
             };
 

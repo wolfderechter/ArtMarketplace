@@ -17,7 +17,7 @@ namespace EuropArt.Persistence.Data.Configuration
             builder.Property(p => p.Name).IsRequired();
             builder.Property(p => p.ImagePath).IsRequired();
             
-            builder.HasOne(p => p.Artist).WithMany(p => p.Artworks).HasForeignKey(p => p.ArtistId);
+            builder.HasOne(p => p.Artist).WithMany(p => p.Artworks);
             builder.OwnsOne(p => p.Price, money =>
             {
                 money.Property(m => m.Value)
