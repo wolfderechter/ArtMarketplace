@@ -32,7 +32,7 @@ namespace EuropArt.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("HoopDb"));
+            var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("HooopDb"));
             services.AddDbContext<HooopDbContext>(options =>
                  options.UseSqlServer(builder.ConnectionString)
                  .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
@@ -45,10 +45,12 @@ namespace EuropArt.Server
             });
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddRazorPages();
-            services.AddScoped<IArtworkService, FakeArtworkService>();
-            services.AddScoped<IArtistService, FakeArtistService>();
+            services.AddScoped<IArtworkService, ArtworkService>();
+            services.AddScoped<IArtistService, ArtistService>();
             services.AddScoped<IYouthService, FakeYouthService>();
             services.AddScoped<IStorageService, BlobStorageService>();
+
+            services.AddScoped<HooopDataInitializer>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
