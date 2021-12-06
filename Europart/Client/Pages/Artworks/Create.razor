@@ -57,6 +57,8 @@
         //Fake image toevoegen
         //newArtwork.ImagePath = "/images/NewArtwork.jpg";
         newArtwork.DateCreated = DateTime.Now;
+        newArtwork.ImagePath = image.Name;
+
         ArtworkRequest.Create request = new()
         {
             Artwork = newArtwork
