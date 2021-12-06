@@ -28,7 +28,7 @@ namespace EuropArt.Client.Artists
         }
 
         //skip
-        public Task<List<ArtistDto.Index>> GetIndexAsync(string searchterm)
+        public Task<List<YouthArtistDto.Index>> GetIndexAsync(string searchterm)
         {
             throw new NotImplementedException();
         }

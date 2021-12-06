@@ -44,7 +44,7 @@ else
         </div>
         <div class="col-8 mb-5">
             <p>
-                <img src="images/locate.svg" class="location" /> @artist.City
+                <img src="images/locate.svg" class="location" /> @artist.Address.City
             </p>
             <p>
                 Joined on @artist.DateCreated.ToString("dd MMMM yyyy")
@@ -83,7 +83,7 @@ else
 }
 
 @code { 
-    private ArtistDto.Detail artist = new();
+    private YouthArtistDto.Detail artist = new();
     private bool RequestingDelete;
 
     [Parameter] public int Id { get; set; }

@@ -1,4 +1,4 @@
-﻿using Bogus;
+﻿/*using Bogus;
 using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
 using EuropArt.Domain.Artists;
@@ -146,3 +146,4 @@ namespace EuropArt.Services.Artists
         }
     }
 }
+*/

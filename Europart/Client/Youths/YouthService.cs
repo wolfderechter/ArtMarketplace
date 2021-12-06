@@ -1,4 +1,4 @@
-﻿using EuropArt.Shared.Youths;
+﻿using EuropArt.Shared.YouthArtworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EuropArt.Client.Youths
 {
-    public class YouthService : IYouthService
+    public class YouthService : IYouthArtworkService
     {
         private readonly HttpClient client;
         private const string endpoint = "api/Youth";
@@ -17,16 +17,16 @@ namespace EuropArt.Client.Youths
         {
             this.client = client;
         }
-        public async Task<YouthResponse.GetDetail> GetDetailAsync(YouthRequest.GetDetail request)
+        public async Task<YouthArtworkResponse.GetDetail> GetDetailAsync(YouthArtworkRequest.GetDetail request)
         {
-            var response = await client.GetFromJsonAsync<YouthResponse.GetDetail>($"{endpoint}/{request.YouthId}");
+            var response = await client.GetFromJsonAsync<YouthArtworkResponse.GetDetail>($"{endpoint}/{request.YouthId}");
             return response;
 
         }
 
-        public async Task<YouthResponse.GetIndex> GetIndexAsync(YouthRequest.GetIndex request)
+        public async Task<YouthArtworkResponse.GetIndex> GetIndexAsync(YouthArtworkRequest.GetIndex request)
         {
-            var response = await client.GetFromJsonAsync<YouthResponse.GetIndex>(endpoint);
+            var response = await client.GetFromJsonAsync<YouthArtworkResponse.GetIndex>(endpoint);
             return response;
         }
     }

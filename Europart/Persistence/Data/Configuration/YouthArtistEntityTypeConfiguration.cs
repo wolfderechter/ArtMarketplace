@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace EuropArt.Persistence.Data.Configuration
 {
-    public class ArtistEntityTypeConfiguration : IEntityTypeConfiguration<Artist>
+    public class YouthArtistEntityTypeConfiguration : IEntityTypeConfiguration<YouthArtist>
     {
-        public void Configure(EntityTypeBuilder<Artist> builder)
+        public void Configure(EntityTypeBuilder<YouthArtist> builder)
         {
-            builder.OwnsOne(p => p.Name, name =>
+            builder.HasKey(y => y.Id);
+            builder.OwnsOne(c => c.Name, name =>
             {
                 name.Property(n => n.FirstName).HasColumnName("Firstname").IsRequired();
                 name.Property(n => n.LastName).HasColumnName("Lastname").IsRequired();
@@ -21,13 +22,11 @@ namespace EuropArt.Persistence.Data.Configuration
 
             builder.OwnsOne(c => c.Address, address =>
             {
-                address.Property(a => a.Street).HasColumnName("Street").IsRequired();
-                address.Property(a => a.Postalcode).HasColumnName("Postalcode").IsRequired();
-                address.Property(a => a.City).HasColumnName("City").IsRequired();
-                address.Property(a => a.Country).HasColumnName("Country").IsRequired();
+                address.Property(a => a.Street).HasColumnName("Street");
+                address.Property(a => a.Postalcode).HasColumnName("Postalcode");
+                address.Property(a => a.City).HasColumnName("City");
+                address.Property(a => a.Country).HasColumnName("Country");
             }).Navigation(c => c.Address).IsRequired();
-
-            builder.HasMany(p => p.Artworks).WithOne().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -117,7 +117,7 @@ namespace EuropArt.Services.Artworks
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
                 query = query.Where(x => x.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase) ||
-                            x.Artist.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
+                            x.Artist.Name.ToString().Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
 
             if (request.MinimumPrice is not null)
                 query = query.Where(x => x.Price >= request.MinimumPrice);

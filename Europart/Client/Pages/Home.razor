@@ -94,7 +94,7 @@
                                 <a href="/artist/@artists.ElementAt(i).Id"><img src="@artists.ElementAt(i).ImagePath" /></a>
                             </div>
                             <h2>@artists.ElementAt(i).Name</h2>
-                            <span class="locatie"><img src="images/locate.svg" /> @artists.ElementAt(i).City</span><br />
+                            <span class="locatie"><img src="images/locate.svg" /> @artists.ElementAt(i).Address.City</span><br />
                             <span class="kunstwerken">@artists.ElementAt(i).AmountOfArtworks @Loc["Artworks"]</span>
                         </div>
                     </div>
@@ -108,18 +108,18 @@
     </div>
 </div>
     @code {
-private List<ArtistDto.Index> artists;
+        private List<YouthArtistDto.Index> artists;
 
-    private List<ArtworkDto.Index> artworks;
+        private List<ArtworkDto.Index> artworks;
 
-    protected override async Task OnInitializedAsync()
-    {
-        ArtistRequest.GetIndex request = new();
-        var response = await ArtistService.GetIndexAsync(request);
-        artists = response.Artists;
+        protected override async Task OnInitializedAsync()
+        {
+            ArtistRequest.GetIndex request = new();
+            var response = await ArtistService.GetIndexAsync(request);
+            artists = response.Artists;
 
-        ArtworkRequest.GetIndex request2 = new();
-        var response2 = await ArtworkService.GetIndexAsync(request2);
-        artworks = response2.Artworks;
-    }
+            ArtworkRequest.GetIndex request2 = new();
+            var response2 = await ArtworkService.GetIndexAsync(request2);
+            artworks = response2.Artworks;
+        }
     }

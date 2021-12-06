@@ -31,7 +31,7 @@ namespace EuropArt.Shared.Artists
         public class Edit
         {
             public int ArtistId { get; set; }
-            public ArtistDto.Edit Artist { get; set; }
+            public YouthArtistDto.Edit Artist { get; set; }
 
             public class Validator : AbstractValidator<Edit>
             {

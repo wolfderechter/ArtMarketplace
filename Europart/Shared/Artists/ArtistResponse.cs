@@ -10,13 +10,13 @@ namespace EuropArt.Shared.Artists
     {
         public class GetIndex
         {
-            public List<ArtistDto.Index> Artists { get; set; }
+            public List<YouthArtistDto.Index> Artists { get; set; }
             public int TotalAmount { get; set; }
         }
 
         public class GetDetail
         {
-            public ArtistDto.Detail Artist { get; set; }
+            public YouthArtistDto.Detail Artist { get; set; }
         }
 
         public class Delete

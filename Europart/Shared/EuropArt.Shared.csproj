@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -9,6 +9,10 @@
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
     <PackageReference Include="Bogus" Version="33.1.1" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\EuropArt.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -169,5 +173,9 @@
       <LastGenOutput>Shoppingcart.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="YouthArtists\" />
   </ItemGroup>
 </Project>

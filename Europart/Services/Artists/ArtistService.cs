@@ -47,7 +47,7 @@ namespace EuropArt.Services.Artists
             //artist aanpassen
             artist.Name = request.Artist.Name;
             artist.Biography = request.Artist.Biography;
-            artist.City = request.Artist.City;
+            artist.Address = request.Artist.Address;
             artist.Website = request.Artist.Website;
 
             //returnen
@@ -61,11 +61,11 @@ namespace EuropArt.Services.Artists
             await Task.Delay(100);
             ArtistResponse.GetDetail response = new();
 
-            response.Artist = artists.AsNoTracking().Include(p => p.Artworks).Where(p => p.Id == request.ArtistId).Select(x => new ArtistDto.Detail
+            response.Artist = artists.AsNoTracking().Include(p => p.Artworks).Where(p => p.Id == request.ArtistId).Select(x => new YouthArtistDto.Detail
             {
                 Id = x.Id,
                 Biography = x.Biography,
-                City = x.City,
+                Address = x.Address,
                 Name = x.Name,
                 Website = x.Website,
                 ImagePath = x.ImagePath,
@@ -92,7 +92,7 @@ namespace EuropArt.Services.Artists
             var query = artists.AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
-                query = query.Where(x => x.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
+                query = query.Where(x => x.Name.ToString().Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
 
             var query2 = new List<Artist>();
             if (request.OrderBy is not null)
@@ -100,7 +100,7 @@ namespace EuropArt.Services.Artists
                 switch (request.OrderBy.Value)
                 {
                     case OrderByArtist.OrderByName:
-                        query2 = query.OrderBy(x => x.Name).ToList();
+                        query2 = query.OrderBy(x => x.Name.ToString()).ToList();
                         break;
                     //case OrderByArtist.OrderByNewest:
                     //    query.OrderByDescending(x => x.);
@@ -119,11 +119,11 @@ namespace EuropArt.Services.Artists
             //orderby niet opgevuld dus niet in artist index page
             else
             {
-                response.Artists = query.Select(x => new ArtistDto.Index
+                response.Artists = query.Select(x => new YouthArtistDto.Index
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    City = x.City,
+                    Address = x.Address,
                     ImagePath = x.ImagePath,
                     AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count(),
                     DateCreated = x.DateCreated
@@ -135,11 +135,11 @@ namespace EuropArt.Services.Artists
             query2 = query2.Skip(request.Amount * request.Page).ToList();
             query2 = query2.Take(request.Amount).ToList();
 
-            response.Artists = query2.Select(x => new ArtistDto.Index
+            response.Artists = query2.Select(x => new YouthArtistDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,
-                City = x.City,
+                Address = x.Address,
                 ImagePath = x.ImagePath,
                 AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count(),
                 DateCreated = x.DateCreated

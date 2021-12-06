@@ -1,4 +1,5 @@
-﻿using EuropArt.Shared.Artists;
+﻿using EuropArt.Domain.Artists;
+using EuropArt.Shared.Artists;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using System;
@@ -11,7 +12,7 @@ namespace EuropArt.Shared.Artworks
         {
             public int Id { get; set; }
             public int ArtistId { get; set; }
-            public string ArtistName { get; set; }
+            public ArtistName ArtistName { get; set; }
             public string Name { get; set; }
             public decimal Price { get; set; }
             public string ImagePath { get; set; }

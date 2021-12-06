@@ -5,7 +5,6 @@ using EuropArt.Client.Youths;
 using EuropArt.Client.Pages.Ordering;
 using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
-using EuropArt.Shared.Youths;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +14,8 @@ using System;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
+using EuropArt.Services.Youths;
+using EuropArt.Shared.YouthArtworks;
 
 namespace EuropArt.Client
 {
@@ -28,7 +29,7 @@ namespace EuropArt.Client
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<IArtworkService, ArtworkService>();
             builder.Services.AddScoped<IArtistService, ArtistService>();
-            builder.Services.AddScoped<IYouthService, YouthService>();
+            builder.Services.AddScoped<IYouthArtworkService, YouthArtworkService>();
             builder.Services.AddHttpClient<StorageService>();
             builder.Services.AddScoped<Shoppingcart>();
             builder.Services.AddHttpClient<StorageService>();

@@ -1,4 +1,4 @@
-﻿using EuropArt.Domain.Youths;
+﻿/*using EuropArt.Domain.Youths;
 using EuropArt.Services.Artworks;
 using EuropArt.Shared.Youths;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace EuropArt.Services.Youths
 
             YouthResponse.GetDetail response = new();
 
-            response.YouthArtwork = youthArtworks.Select(x => new YouthDto.Detail
+            response.YouthArtwork = youthArtworks.Select(x => new YoutArtworkhDto.Detail
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -51,3 +51,4 @@ namespace EuropArt.Services.Youths
 
     }
 }
+*/

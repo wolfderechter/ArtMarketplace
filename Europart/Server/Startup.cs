@@ -4,7 +4,6 @@ using EuropArt.Services.Infrastructure;
 using EuropArt.Services.Youths;
 using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
-using EuropArt.Shared.Youths;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +15,8 @@ using Microsoft.OpenApi.Models;
 using EuropArt.Persistence.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using EuropArt.Client.Youths;
+using EuropArt.Shared.YouthArtworks;
 
 namespace EuropArt.Server
 {
@@ -47,7 +48,8 @@ namespace EuropArt.Server
             services.AddRazorPages();
             services.AddScoped<IArtworkService, ArtworkService>();
             services.AddScoped<IArtistService, ArtistService>();
-            services.AddScoped<IYouthService, FakeYouthService>();
+            services.AddScoped<IYouthArtworkService, YouthArtworkService>();
+            //services.AddScoped<IYouthArtistService, YouthArtistService>();
             services.AddScoped<IStorageService, BlobStorageService>();
 
             services.AddScoped<HooopDataInitializer>();

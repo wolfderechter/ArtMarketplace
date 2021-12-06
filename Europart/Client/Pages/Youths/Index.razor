@@ -1,6 +1,6 @@
 ﻿@page "/youth"
-@using EuropArt.Shared.Youths;
-@inject IYouthService YouthService;
+@using EuropArt.Shared.YouthArtworks;
+@inject IYouthArtworkService YouthArtworkService;
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Index> Loc
 
 <h1>@Loc["YouthArtworks"]</h1>
@@ -130,11 +130,11 @@
 
 @code {
     private String cols = "col-4";
-    private List<YouthDto.Index> youthArtworks;
+    private List<YouthArtworkDto.Index> youthArtworks;
     protected override async Task OnInitializedAsync()
     {
-        YouthRequest.GetIndex request = new();
-        var response = await YouthService.GetIndexAsync(request);
+        YouthArtworkRequest.GetIndex request = new();
+        var response = await YouthArtworkService.GetIndexAsync(request);
         youthArtworks = response.YouthArtworks;
     }
 }

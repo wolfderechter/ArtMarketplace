@@ -1,4 +1,4 @@
-﻿using EuropArt.Shared.Youths;
+﻿using EuropArt.Shared.YouthArtworks;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,23 +11,23 @@ namespace EuropArt.Server.Controllers
     [Route("api/[controller]")]
     public class YouthController : ControllerBase
     {
-        private readonly IYouthService youthService;
+        private readonly IYouthArtworkService youthArtworkService;
 
-        public YouthController(IYouthService youthService)
+        public YouthController(IYouthArtworkService youthService)
         {
-            this.youthService = youthService;
+            this.youthArtworkService = youthService;
         }
 
         [HttpGet]
-        public Task<YouthResponse.GetIndex> GetIndexAsync([FromQuery] YouthRequest.GetIndex request)
+        public Task<YouthArtworkResponse.GetIndex> GetIndexAsync([FromQuery] YouthArtworkRequest.GetIndex request)
         {
-            return youthService.GetIndexAsync(request);
+            return youthArtworkService.GetIndexAsync(request);
         }
 
         [HttpGet("{YouthId}")]
-        public Task<YouthResponse.GetDetail> GetDetailAsync([FromRoute] YouthRequest.GetDetail request)
+        public Task<YouthArtworkResponse.GetDetail> GetDetailAsync([FromRoute] YouthArtworkRequest.GetDetail request)
         {
-            return youthService.GetDetailAsync(request);
+            return youthArtworkService.GetDetailAsync(request);
         }
     }
 }

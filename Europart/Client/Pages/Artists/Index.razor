@@ -32,7 +32,7 @@
                         <a href="/artist/@artist.Id"><img src="@artist.ImagePath" /></a>
                     </div>
                     <h2>@artist.Name</h2>
-                    <span class="locatie"><img src="images/locate.svg" /> @artist.City</span><br />
+                    <span class="locatie"><img src="images/locate.svg" /> @artist.Address.City</span><br />
                     <span class="kunstwerken">@artist.AmountOfArtworks @Loc["artworks"]</span>
                 </div>
             </div>
@@ -46,7 +46,7 @@
 
 
 @code {
-    private List<ArtistDto.Index> artists;
+    private List<YouthArtistDto.Index> artists;
     private readonly ArtistFilter Filter = new();
     private int totalFilteredAmount;
 

@@ -7,16 +7,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EuropArt.Domain.Artists;
+using EuropArt.Domain.Common;
 
 namespace EuropArt.Shared.Artists
 {
-    public static class ArtistDto
+    public static class YouthArtistDto
     {
         public class Index
         {
             public int Id { get; set; }
-            public string Name { get; set; }
-            public string City { get; set; }
+            public ArtistName Name { get; set; }
+            public Address Address { get; set; }
             public string ImagePath { get; set; }
             public int AmountOfArtworks { get; set; }
             public string Email { get; set; }
@@ -32,16 +34,16 @@ namespace EuropArt.Shared.Artists
 
         public class Edit
         {
-            public string Name { get; set; }
-            public string City { get; set; }
+            public ArtistName Name { get; set; }
+            public Address Address { get; set; }
             public string Biography { get; set; }
             public string Website { get; set; }
-            public class ArtistValidator : AbstractValidator<ArtistDto.Edit>
+            public class ArtistValidator : AbstractValidator<YouthArtistDto.Edit>
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
                 {
                     RuleFor(P => P.Name).NotEmpty().WithMessage(Loc["NameError"]);
-                    RuleFor(p => p.City).NotEmpty().WithMessage(Loc["CityError"]);
+                    RuleFor(p => p.Address).NotEmpty().WithMessage(Loc["CityError"]);
                 }
             }
         }

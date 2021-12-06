@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EuropArt.Shared.Youths
+namespace EuropArt.Shared.YouthArtworks
 {
-    public class YouthRequest
+    public class YouthArtworkRequest
     {
         public class GetIndex
         {
@@ -17,6 +17,5 @@ namespace EuropArt.Shared.Youths
         {
             public int YouthId { get; set; }
         }
-
     }
 }

@@ -1,5 +1,5 @@
-﻿using Ardalis.GuardClauses;
-using EuropArt.Domain.Artworks;
+﻿using EuropArt.Domain.Artworks;
+using EuropArt.Domain.Common;
 using System;
 using System.Collections.Generic;
 
@@ -7,39 +7,33 @@ namespace EuropArt.Domain.Artists
 {
     public class Artist
     {
-        private string name;
-        private string city;
         public int Id { get; set; }
-        public string Name { 
-            get { return name; }
-            set { name = Guard.Against.NullOrWhiteSpace(value, nameof(name)); }
-        }
-        public string City { 
-            get { return city;  }
-            set { city = Guard.Against.NullOrWhiteSpace(value, nameof(city));  }
-        }
-
+        public ArtistName Name { get; set; }
+        public string Nickname { get; set; }
+        public Address Address { get; set; }
         //public IEnumerable<string> ImagePaths { get; set; }
         public string ImagePath { get; set; }
         public IEnumerable<Artwork> Artworks { get; set; }
+        public DateTime DateCreated { get; set; }
         public string Biography { get; set; }
         public string Website { get; set; }
-        public DateTime DateCreated { get; set; }
+        public string TelephoneNr { get; set; }
+        public bool IsVerified { get; set; }
 
         public Artist()
         {
 
         }
 
-        public Artist(string name , string city, string biography, string website, string imagepath, DateTime dateCreated)
+        public Artist(string firstname, string lastname, string country, string city, string postalcode, string street, string imagepath, DateTime dateCreated, string biography, string website)
         {
-            Name = name;
-            City = city;
-            Biography = biography;
-            Website = website;
+            Name = new ArtistName(firstname, lastname);
+            Address = new Address(country, city, postalcode, street);
             ImagePath = imagepath;
             DateCreated = dateCreated;
+            Biography = biography;
+            Website = website;
+            IsVerified = false;
         }
-
     }
 }
