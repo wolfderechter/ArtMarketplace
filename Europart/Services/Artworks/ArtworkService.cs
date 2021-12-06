@@ -39,7 +39,8 @@ namespace EuropArt.Services.Artworks
 
             var model = request.Artwork;
             var price = new Money(model.Price);
-            var imageFileName = Guid.NewGuid().ToString();
+            var imageExtension = model.ImagePath.Substring(model.ImagePath.LastIndexOf('.'));
+            var imageFileName = Guid.NewGuid().ToString() + request.Artwork.ImagePath + imageExtension;
             var imagePath = $"{storageService.StorageBaseUri}{imageFileName}";
 
             var artwork = new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated)
