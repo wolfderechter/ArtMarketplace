@@ -43,7 +43,7 @@ namespace EuropArt.Services.Artworks
             var imageFileName = Guid.NewGuid().ToString() + request.Artwork.ImagePath + imageExtension;
             var imagePath = $"{storageService.StorageBaseUri}{imageFileName}";
 
-            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated)
+            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated, model.Style, model.Category)
             {
                 //Id = artworks.Max(x => x.Id) + 1,
                 //Fake data opvullen
@@ -138,21 +138,21 @@ namespace EuropArt.Services.Artworks
             }
 
             //auctions includen TODO
-            var query2 = new List<Artwork>();
+
             if (request.OrderBy is not null)
             {
                 switch (request.OrderBy.Value)
                 {
                     case OrderByArtwork.OrderByPriceAscending:
-                        query2 = query.OrderBy(x => x.Price.Value).ToList();
+                        query = query.OrderBy(x => x.Price.Value);
                         break;
 
                     case OrderByArtwork.OrderByPriceDescending:
-                        query2 = query.OrderByDescending(x => x.Price.Value).ToList();
+                        query = query.OrderByDescending(x => x.Price.Value);
                         break;
 
                     case OrderByArtwork.OrderByName:
-                        query2 = query.OrderBy(x => x.Name).ToList();
+                        query = query.OrderBy(x => x.Name);
                         break;
 
                     //case OrderBy.OrderByOldest:
@@ -163,7 +163,7 @@ namespace EuropArt.Services.Artworks
                     //     query2 = query.OrderBy(x => x.).ToList();
                     //    break;
                     default:
-                        query2 = query.ToList();
+                        /*query = query;*/
                         break;
                 }
             }
@@ -185,11 +185,12 @@ namespace EuropArt.Services.Artworks
                 return response;
             }
 
-            response.TotalAmount = query2.Count();
-            query2 = query2.Skip(request.Amount * request.Page).ToList();
-            query2 = query2.Take(request.Amount).ToList();
+            response.TotalAmount = query.Count();
+            query = query.Take(request.Amount);
+            query = query.Skip(request.Amount * request.Page);
+            
 
-            response.Artworks = query2.Select(x => new ArtworkDto.Index
+            response.Artworks = query.Select(x => new ArtworkDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,

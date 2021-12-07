@@ -43,13 +43,15 @@ namespace EuropArt.Domain.Artworks
         //    Description = description;
         //    DateCreated = dateCreated;
         //}
-        public Artwork(string name, Money price, string description, Artist artist, DateTime dateCreated)
+        public Artwork(string name, Money price, string description, Artist artist, DateTime dateCreated, string style, string category)
         {
             Name = name;
             Price = Guard.Against.Null(price, nameof(price));
             Description = description;
             Artist = artist;
             DateCreated = dateCreated;
+            Style = style;
+            Category = category;
         }
     }
 }

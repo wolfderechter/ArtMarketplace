@@ -61,18 +61,40 @@ namespace EuropArt.Persistence.Data
                 _dbContext.Artists.AddRange(artists);
                 _dbContext.YouthArtists.AddRange(youthArtists);
 
-                Artwork artwork1 = new Artwork("kunstwerkje", new Money(3M), "dit is een test", artist2, DateTime.Now);
-                Artwork artwork2 = new Artwork("Test1", new Money(4M), "dit is een test", artist3, DateTime.Now);
-                Artwork artwork3 = new Artwork("Test2", new Money(30M), "dit is een test", artist3, DateTime.Now);
+                Artwork artwork1 = new Artwork("Emmer", new Money(3M), "dit is een test", artist2, DateTime.Now, "Abstract", "sculptures");
+                Artwork artwork2 = new Artwork("Zonnebloem", new Money(4M), "dit is een test", artist2, DateTime.Now, "Modern", "painting");
+                Artwork artwork3 = new Artwork("Boter", new Money(30M), "dit is een test", artist2, DateTime.Now, "Surrealism", "Sculptures");
+                Artwork artwork4 = new Artwork("Koffielepel", new Money(30M), "dit is een test", artist3, DateTime.Now, "Modern", "Painting");
+                Artwork artwork5 = new Artwork("Tas", new Money(30M), "dit is een test", artist3, DateTime.Now, "Abstract", "Photography");
+                Artwork artwork6 = new Artwork("Hesp", new Money(30M), "dit is een test", artist3, DateTime.Now, "Minimalism", "Drawings");
+                Artwork artwork7 = new Artwork("Kaas", new Money(30M), "dit is een test", artist6, DateTime.Now, "Surrealism", "Drawings");
+                Artwork artwork8 = new Artwork("Auto", new Money(30M), "dit is een test", artist3, DateTime.Now, "Modern", "Painting");
+                Artwork artwork9 = new Artwork("Maan", new Money(30M), "dit is een test", artist6, DateTime.Now, "Minimalism", "Photography");
+                Artwork artwork10 = new Artwork("Feest", new Money(30M), "dit is een test", artist3, DateTime.Now, "Abstract", "Painting");
+                Artwork artwork11 = new Artwork("Tafel", new Money(30M), "dit is een test", artist8, DateTime.Now, "Minimalism", "Painting");
+                Artwork artwork12 = new Artwork("Stoel", new Money(30M), "dit is een test", artist8, DateTime.Now, "Surrealism", "Photography");
+                Artwork artwork13 = new Artwork("Bank", new Money(30M), "dit is een test", artist8, DateTime.Now, "Minimalism", "Drawings");
+                Artwork artwork14 = new Artwork("Vliegtuig", new Money(30M), "dit is een test", artist14, DateTime.Now, "Abstract", "Drawings");
 
                 YouthArtwork youthArtwork1 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
 
                 artwork1.ImagePath = $"/images/artworks/1.jpg";
                 artwork2.ImagePath = $"/images/artworks/2.jpg";
                 artwork3.ImagePath = $"/images/artworks/3.jpg";
-                youthArtwork1.ImagePath = $"/images/artworks/1.jpg";
+                artwork4.ImagePath = $"/images/artworks/4.jpg";
+                artwork5.ImagePath = $"/images/artworks/5.jpg";
+                artwork6.ImagePath = $"/images/artworks/6.jpg";
+                artwork7.ImagePath = $"/images/artworks/7.jpg";
+                artwork8.ImagePath = $"/images/artworks/8.jpg";
+                artwork9.ImagePath = $"/images/artworks/9.jpg";
+                artwork10.ImagePath = $"/images/artworks/10.jpg";
+                artwork11.ImagePath = $"/images/artworks/11.jpg";
+                artwork12.ImagePath = $"/images/artworks/12.jpg";
+                artwork13.ImagePath = $"/images/artworks/13.jpg";
+                artwork14.ImagePath = $"/images/artworks/14.jpg";
+                youthArtwork1.ImagePath = $"/images/artworks/15.jpg";
 
-                List<Artwork> artworks = new List<Artwork> { artwork1, artwork2, artwork3};
+                List<Artwork> artworks = new List<Artwork> { artwork1, artwork2, artwork3, artwork4 , artwork5 , artwork6 , artwork7 , artwork8 , artwork9 , artwork10 , artwork11 , artwork12 , artwork13 , artwork14 };
 
                 _dbContext.YouthArtworks.Add(youthArtwork1);
                 _dbContext.Artworks.AddRange(artworks);

@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-8 offset-2">
         <EditForm Model="@newArtwork" OnValidSubmit="CreateNewArtwork" class="form">
-            <FluentValidationValidator/>
+            <FluentValidationValidator />
             <DataAnnotationsValidator />
             <div class="mb-3">
                 <h6>@Loc["Title"]</h6>
@@ -30,9 +30,31 @@
                 <ValidationMessage For="@(() => newArtwork.Price)" />
             </div>
             <div class="mb-3">
+                <h6>@Loc["Category"]:</h6>
+                <InputSelect @bind-Value="newArtwork.Category" class="form-select mb-3" aria-label="Default select example">
+                    <option value="photography">@Loc["Photography"]</option>
+                    <option value="painting">@Loc["Paintings"]</option>
+                    <option value="sculpture">@Loc["Sculptures"]</option>
+                    <option value="drawing">@Loc["Drawings"]</option>
+                    <option value="other">@Loc["Other"]</option>
+                </InputSelect>
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Style"]:</h6>
+                <InputSelect @bind-Value="newArtwork.Style" class="form-select mb-3" aria-label="Default select example">
+                    <option value="" selected>@Loc["Everything"]</option>
+                    <option value="abstract">@Loc["Abstract"]</option>
+                    <option value="classic">@Loc["Classic"]</option>
+                    <option value="minimalism">@Loc["Minimalism"]</option>
+                    <option value="modern">@Loc["Modern"]</option>
+                    <option value="surrealism">@Loc["Surrealism"]</option>
+                    <option value="other">@Loc["Other"]</option>
+                </InputSelect>
+            </div>
+            <div class="mb-3">
                 <h6>@Loc["ChooseArtwork"]</h6>
-                <InputFile OnChange="LoadImage" class="file-input" type="file" name="artwork" accept="image/*"/>
-                @if(image is not null)
+                <InputFile OnChange="LoadImage" class="file-input" type="file" name="artwork" accept="image/*" />
+                @if (image is not null)
                 {
                     <span class="file-name">
                         @image.Name

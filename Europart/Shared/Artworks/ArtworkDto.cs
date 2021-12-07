@@ -17,6 +17,7 @@ namespace EuropArt.Shared.Artworks
             public decimal Price { get; set; }
             public string ImagePath { get; set; }
             public DateTime DateCreated { get; set; }
+            
         }
 
         public class Detail : Index
@@ -30,6 +31,8 @@ namespace EuropArt.Shared.Artworks
             public decimal Price { get; set; }
             public string Description { get; set; }
             public DateTime DateCreated { get; set; }
+            public string Style { get; set; }
+            public string Category { get; set; }
 
             //public IEnumerable<string> ImagePaths { get; set; }
             public string ImagePath { get; set; }
