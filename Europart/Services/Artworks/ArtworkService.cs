@@ -38,7 +38,6 @@ namespace EuropArt.Services.Artworks
             ArtworkResponse.Create response = new();
 
             var model = request.Artwork;
-            var price = new Money(model.Price);
             var imageExtension = model.ImagePath.Substring(model.ImagePath.LastIndexOf('.'));
             var imageFileName = Guid.NewGuid().ToString() + request.Artwork.ImagePath + imageExtension;
             var imagePath = $"{storageService.StorageBaseUri}{imageFileName}";
@@ -100,7 +99,7 @@ namespace EuropArt.Services.Artworks
                 ArtistId = x.Artist.Id,
                 ArtistName = x.Artist.Name,
                 Description = x.Description,
-                Price = x.Price,
+                Price = x.Price.Value,
                 DateCreated = x.DateCreated,
                 ImagePath = x.ImagePath,
             })
@@ -193,7 +192,7 @@ namespace EuropArt.Services.Artworks
                 Id = x.Id,
                 Name = x.Name,
                 ImagePath = x.ImagePath,
-                Price = x.Price,
+                Price = x.Price.Value,
                 DateCreated = x.DateCreated,
                 ArtistId = x.Artist.Id,
                 ArtistName = x.Artist.Name

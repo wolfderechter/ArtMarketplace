@@ -21,7 +21,6 @@ namespace EuropArt.Persistence.Data.Configuration
             builder.OwnsOne(p => p.Price, money =>
             {
                 money.Property(m => m.Value)
-                    .HasPrecision(38, 10)
                     .HasColumnName("Price")
                     .IsRequired();
             }).Navigation(p => p.Price).IsRequired();
