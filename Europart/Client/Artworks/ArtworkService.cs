@@ -57,11 +57,5 @@ namespace EuropArt.Client.Artworks
             var response = await client.GetFromJsonAsync<ArtworkResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
         }
-
-        //nog te implementeren
-        public Task<List<ArtworkDto.Index>> GetIndexAsync(string searchterm)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

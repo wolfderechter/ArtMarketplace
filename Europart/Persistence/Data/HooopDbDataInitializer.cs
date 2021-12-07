@@ -61,9 +61,9 @@ namespace EuropArt.Persistence.Data
                 _dbContext.Artists.AddRange(artists);
                 _dbContext.YouthArtists.AddRange(youthArtists);
 
-                Artwork artwork1 = new Artwork("kunstwerkje", new Money(34M), "dit is een test", artist2, DateTime.Now);
-                Artwork artwork2 = new Artwork("Test1", new Money(34M), "dit is een test", artist3, DateTime.Now);
-                Artwork artwork3 = new Artwork("Test2", new Money(34M), "dit is een test", artist3, DateTime.Now);
+                Artwork artwork1 = new Artwork("kunstwerkje", new Money(3M), "dit is een test", artist2, DateTime.Now);
+                Artwork artwork2 = new Artwork("Test1", new Money(4M), "dit is een test", artist3, DateTime.Now);
+                Artwork artwork3 = new Artwork("Test2", new Money(30M), "dit is een test", artist3, DateTime.Now);
 
                 YouthArtwork youthArtwork1 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
 

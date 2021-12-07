@@ -17,7 +17,7 @@ namespace EuropArt.Services.Infrastructure
             connectionString = configuration.GetConnectionString("Storage");
         }
 
-        public Uri CreateUploadUri(string fileName, int artistId)
+        public Uri CreateUploadUri(string fileName)
         {
             var blobServiceClient = new BlobServiceClient(connectionString);
             var containerClient = blobServiceClient.GetBlobContainerClient(containerName);

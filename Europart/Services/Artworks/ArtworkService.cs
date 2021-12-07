@@ -43,17 +43,17 @@ namespace EuropArt.Services.Artworks
             var imageFileName = Guid.NewGuid().ToString() + request.Artwork.ImagePath + imageExtension;
             var imagePath = $"{storageService.StorageBaseUri}{imageFileName}";
 
-            var artwork = new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated)
+            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated)
             {
-                Id = artworks.Max(x => x.Id) + 1,
+                //Id = artworks.Max(x => x.Id) + 1,
                 //Fake data opvullen
                 ImagePath = imagePath,
-            };
+            });
 
-            artworks.Add(artwork);
-            response.ArtworkId = artwork.Id;
+            await dbContext.SaveChangesAsync();
+            response.ArtworkId = artwork.Entity.Id;
 
-            var uploadUri = storageService.CreateUploadUri(imageFileName, artwork.Artist.Id);
+            var uploadUri = storageService.CreateUploadUri(imageFileName);
             response.UploadUri = uploadUri;
 
             return response;
@@ -61,39 +61,39 @@ namespace EuropArt.Services.Artworks
 
         public async Task DeleteAsync(ArtworkRequest.Delete request)
         {
-            //var a = artworks.Where(x => x.Artist.Id == id);
-            await Task.Delay(100);
-            var a = artworks.SingleOrDefault(x => x.Id == request.ArtworkId);
-            artworks.Remove(a);
+            artworks.RemoveIf(x => x.Id == request.ArtworkId);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<ArtworkResponse.Edit> EditAsync(ArtworkRequest.Edit request)
         {
-            await Task.Delay(100);
-
-            //artwork exists?
-            var artwork = artworks.Single(x => x.Id == request.ArtworkId);
-
-            //artwork aanpassen
-            artwork.Name = request.Artwork.Name;
-            artwork.Description = request.Artwork.Description;
-            artwork.Price = request.Artwork.Price;
-            //artwork.ImagePath = request.Artwork.ImagePath;
-
-            //returnen
             ArtworkResponse.Edit response = new();
-            response.ArtworkId = artwork.Id;
+            //artwork exists?
+            var artwork = await GetArtworkById(request.ArtworkId).SingleOrDefaultAsync();
+
+            if(artwork is not null)
+            {
+                var model = request.Artwork;
+                //artwork aanpassen
+                artwork.Name = model.Name;
+                artwork.Description = model.Description;
+                artwork.Price = new Money(model.Price);
+                //artwork.ImagePath = request.Artwork.ImagePath;
+
+                //returnen
+                dbContext.Entry(artwork).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
+                response.ArtworkId = artwork.Id;
+            }
 
             return response;
         }
 
         public async Task<ArtworkResponse.GetDetail> GetDetailAsync(ArtworkRequest.GetDetail request)
         {
-           await Task.Delay(100);
-
             ArtworkResponse.GetDetail response = new();
 
-            response.Artwork = GetArtworkById(request.ArtworkId).Select(x => new ArtworkDto.Detail
+            response.Artwork = await GetArtworkById(request.ArtworkId).Select(x => new ArtworkDto.Detail
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -103,7 +103,8 @@ namespace EuropArt.Services.Artworks
                 Price = x.Price,
                 DateCreated = x.DateCreated,
                 ImagePath = x.ImagePath,
-            }).SingleOrDefault(x => x.Id == request.ArtworkId);
+            })
+            .SingleOrDefaultAsync(x => x.Id == request.ArtworkId);
 
             return response;
         }
@@ -121,10 +122,10 @@ namespace EuropArt.Services.Artworks
                             x.Artist.Name.ToString().Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
 
             if (request.MinimumPrice is not null)
-                query = query.Where(x => x.Price >= request.MinimumPrice);
+                query = query.Where(x => x.Price.Value >= request.MinimumPrice);
 
             if (request.MaximumPrice is not null)
-                query = query.Where(x => x.Price <= request.MaximumPrice);
+                query = query.Where(x => x.Price.Value <= request.MaximumPrice);
 
             if (request.Style is not null)
             {
@@ -142,11 +143,11 @@ namespace EuropArt.Services.Artworks
                 switch (request.OrderBy.Value)
                 {
                     case OrderByArtwork.OrderByPriceAscending:
-                        query2 = query.OrderBy(x => x.Price).ToList();
+                        query2 = query.OrderBy(x => x.Price.Value).ToList();
                         break;
 
                     case OrderByArtwork.OrderByPriceDescending:
-                        query2 = query.OrderByDescending(x => x.Price).ToList();
+                        query2 = query.OrderByDescending(x => x.Price.Value).ToList();
                         break;
 
                     case OrderByArtwork.OrderByName:

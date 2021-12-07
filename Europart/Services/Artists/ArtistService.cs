@@ -32,27 +32,32 @@ namespace EuropArt.Services.Artists
 
         public async Task DeleteAsync(ArtistRequest.Delete request)
         {
-            await Task.Delay(100);
-            var a = artists.SingleOrDefault(x => x.Id == request.ArtistId);
-            artists.Remove(a);
+            artists.RemoveIf(x => x.Id == request.ArtistId);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<ArtistResponse.Edit> EditAsync(ArtistRequest.Edit request)
         {
-            await Task.Delay(100);
-
-            //artist exists?
-            var artist = artists.Single(x => x.Id == request.ArtistId);
-
-            //artist aanpassen
-            artist.Name = request.Artist.Name;
-            artist.Biography = request.Artist.Biography;
-            artist.Address = request.Artist.Address;
-            artist.Website = request.Artist.Website;
-
-            //returnen
             ArtistResponse.Edit response = new();
-            response.ArtistId = artist.Id;
+            //artist exists?
+            var artist = await GetArtistById(request.ArtistId).SingleOrDefaultAsync();
+
+            if(artist is not null)
+            {
+                var model = request.Artist;
+                //artist aanpassen
+                artist.Name = model.Name;
+                artist.Biography = model.Biography;
+                artist.Address = model.Address;
+                artist.Website = model.Website;
+                //artist.ImagePath = model.ImagePath;
+
+                //returnen
+                dbContext.Entry(artist).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
+                response.ArtistId = artist.Id;
+            }
+
             return response;
         }
 
@@ -100,7 +105,8 @@ namespace EuropArt.Services.Artists
                 switch (request.OrderBy.Value)
                 {
                     case OrderByArtist.OrderByName:
-                        query2 = query.OrderBy(x => x.Name.ToString()).ToList();
+                        query2 = query.ToList();
+                        //query2 = query.OrderBy(x => x.Name.ToString()).ToList();
                         break;
                     //case OrderByArtist.OrderByNewest:
                     //    query.OrderByDescending(x => x.);
