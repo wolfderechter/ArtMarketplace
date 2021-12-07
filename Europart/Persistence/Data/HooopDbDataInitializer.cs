@@ -61,20 +61,20 @@ namespace EuropArt.Persistence.Data
                 _dbContext.Artists.AddRange(artists);
                 _dbContext.YouthArtists.AddRange(youthArtists);
 
-                Artwork artwork1 = new Artwork("Emmer", new Money(3M), "dit is een test", artist2, DateTime.Now, "Abstract", "sculptures");
-                Artwork artwork2 = new Artwork("Zonnebloem", new Money(4M), "dit is een test", artist2, DateTime.Now, "Modern", "painting");
-                Artwork artwork3 = new Artwork("Boter", new Money(30M), "dit is een test", artist2, DateTime.Now, "Surrealism", "Sculptures");
-                Artwork artwork4 = new Artwork("Koffielepel", new Money(30M), "dit is een test", artist3, DateTime.Now, "Modern", "Painting");
-                Artwork artwork5 = new Artwork("Tas", new Money(30M), "dit is een test", artist3, DateTime.Now, "Abstract", "Photography");
-                Artwork artwork6 = new Artwork("Hesp", new Money(30M), "dit is een test", artist3, DateTime.Now, "Minimalism", "Drawings");
-                Artwork artwork7 = new Artwork("Kaas", new Money(30M), "dit is een test", artist6, DateTime.Now, "Surrealism", "Drawings");
-                Artwork artwork8 = new Artwork("Auto", new Money(30M), "dit is een test", artist3, DateTime.Now, "Modern", "Painting");
-                Artwork artwork9 = new Artwork("Maan", new Money(30M), "dit is een test", artist6, DateTime.Now, "Minimalism", "Photography");
-                Artwork artwork10 = new Artwork("Feest", new Money(30M), "dit is een test", artist3, DateTime.Now, "Abstract", "Painting");
-                Artwork artwork11 = new Artwork("Tafel", new Money(30M), "dit is een test", artist8, DateTime.Now, "Minimalism", "Painting");
-                Artwork artwork12 = new Artwork("Stoel", new Money(30M), "dit is een test", artist8, DateTime.Now, "Surrealism", "Photography");
-                Artwork artwork13 = new Artwork("Bank", new Money(30M), "dit is een test", artist8, DateTime.Now, "Minimalism", "Drawings");
-                Artwork artwork14 = new Artwork("Vliegtuig", new Money(30M), "dit is een test", artist14, DateTime.Now, "Abstract", "Drawings");
+                Artwork artwork1 = new Artwork("Emmer", new Money(3M), "dit is een test", artist2, DateTime.Now, "abstract", "sculptures");
+                Artwork artwork2 = new Artwork("Zonnebloem", new Money(4M), "dit is een test", artist2, DateTime.Now, "modern", "painting");
+                Artwork artwork3 = new Artwork("Boter", new Money(30M), "dit is een test", artist2, DateTime.Now, "surrealism", "sculptures");
+                Artwork artwork4 = new Artwork("Koffielepel", new Money(30M), "dit is een test", artist3, DateTime.Now, "modern", "painting");
+                Artwork artwork5 = new Artwork("Tas", new Money(30M), "dit is een test", artist3, DateTime.Now, "abstract", "photography");
+                Artwork artwork6 = new Artwork("Hesp", new Money(30M), "dit is een test", artist3, DateTime.Now, "minimalism", "drawings");
+                Artwork artwork7 = new Artwork("Kaas", new Money(30M), "dit is een test", artist6, DateTime.Now, "surrealism", "drawings");
+                Artwork artwork8 = new Artwork("Auto", new Money(30M), "dit is een test", artist3, DateTime.Now, "modern", "painting");
+                Artwork artwork9 = new Artwork("Maan", new Money(30M), "dit is een test", artist6, DateTime.Now, "minimalism", "photography");
+                Artwork artwork10 = new Artwork("Feest", new Money(30M), "dit is een test", artist3, DateTime.Now, "abstract", "painting");
+                Artwork artwork11 = new Artwork("Tafel", new Money(30M), "dit is een test", artist8, DateTime.Now, "minimalism", "painting");
+                Artwork artwork12 = new Artwork("Stoel", new Money(30M), "dit is een test", artist8, DateTime.Now, "surrealism", "photography");
+                Artwork artwork13 = new Artwork("Bank", new Money(30M), "dit is een test", artist8, DateTime.Now, "minimalism", "drawings");
+                Artwork artwork14 = new Artwork("Vliegtuig", new Money(30M), "dit is een test", artist14, DateTime.Now, "abstract", "drawings");
 
                 YouthArtwork youthArtwork1 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
 

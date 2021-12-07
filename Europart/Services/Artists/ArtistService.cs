@@ -96,27 +96,24 @@ namespace EuropArt.Services.Artists
             var query = artists.AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
-                query = query.Where(x => x.Name.ToString().Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
+                query = query.Where(x => (x.Name.FirstName + " " + x.Name.LastName).Contains(request.Searchterm));
 
-            var query2 = new List<Artist>();
             if (request.OrderBy is not null)
             {
                 switch (request.OrderBy.Value)
                 {
                     case OrderByArtist.OrderByName:
-                        query2 = query.ToList();
-                        //query2 = query.OrderBy(x => x.Name.ToString()).ToList();
+                        query = query.OrderBy(x => x.Name.FirstName + " " + x.Name.LastName);
                         break;
-                    //case OrderByArtist.OrderByNewest:
-                    //    query.OrderByDescending(x => x.);
-                    //    break;
+                    case OrderByArtist.OrderByNewest:
+                        query = query.OrderByDescending(x => x.DateCreated);
+                        break;
 
-                    //case OrderByArtist.OrderByOldest:
-                    //    query.OrderBy(x => x.);
-                    //    break;
+                    case OrderByArtist.OrderByOldest:
+                        query = query.OrderBy(x => x.DateCreated);
+                        break;
 
                     default:
-                        query2 = query.ToList();
                         break;
                 }
             }
@@ -136,11 +133,11 @@ namespace EuropArt.Services.Artists
 
                 return response;
             }
-            response.TotalAmount = query2.Count();
-            query2 = query2.Skip(request.Amount * request.Page).ToList();
-            query2 = query2.Take(request.Amount).ToList();
+            response.TotalAmount = query.Count();
+            query = query.Take(request.Amount);
+            query = query.Skip(request.Amount * request.Page);
 
-            response.Artists = query2.Select(x => new ArtistDto.Index
+            response.Artists = query.Select(x => new ArtistDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,

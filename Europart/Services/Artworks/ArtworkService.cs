@@ -119,8 +119,7 @@ namespace EuropArt.Services.Artworks
             var query = artworks.Include(x => x.Artist).AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
-                query = query.Where(x => x.Name.Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase) ||
-                            x.Artist.Name.ToString().Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
+                query = query.Where(x => x.Name.Contains(request.Searchterm));
 
             if (request.MinimumPrice is not null)
                 query = query.Where(x => x.Price.Value >= request.MinimumPrice);
@@ -130,13 +129,12 @@ namespace EuropArt.Services.Artworks
 
             if (request.Style is not null)
             {
-                query = query.Where(x => x.Style.Equals(request.Style, StringComparison.OrdinalIgnoreCase));
+                query = query.Where(x => x.Style == request.Style);
             }
             if (request.Category is not null)
             {
-                query = query.Where(x => x.Category.Equals(request.Category, StringComparison.OrdinalIgnoreCase));
+                query = query.Where(x => x.Category == request.Category);
             }
-
             //auctions includen TODO
 
             if (request.OrderBy is not null)
@@ -155,15 +153,14 @@ namespace EuropArt.Services.Artworks
                         query = query.OrderBy(x => x.Name);
                         break;
 
-                    //case OrderBy.OrderByOldest:
-                    //    query2 = query.OrderBy(x => x.).ToList();
-                    //    break;
+                    case OrderByArtwork.OrderByOldest:
+                         query = query.OrderBy(x => x.DateCreated);
+                         break;
 
-                    //case OrderBy.OrderByNewest:
-                    //     query2 = query.OrderBy(x => x.).ToList();
-                    //    break;
+                    case OrderByArtwork.OrderByNewest:
+                         query = query.OrderByDescending(x => x.DateCreated);
+                         break;
                     default:
-                        /*query = query;*/
                         break;
                 }
             }
