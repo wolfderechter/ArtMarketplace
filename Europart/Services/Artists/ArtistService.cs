@@ -66,7 +66,7 @@ namespace EuropArt.Services.Artists
             await Task.Delay(100);
             ArtistResponse.GetDetail response = new();
 
-            response.Artist = artists.AsNoTracking().Include(p => p.Artworks).Where(p => p.Id == request.ArtistId).Select(x => new YouthArtistDto.Detail
+            response.Artist = artists.AsNoTracking().Include(p => p.Artworks).Where(p => p.Id == request.ArtistId).Select(x => new ArtistDto.Detail
             {
                 Id = x.Id,
                 Biography = x.Biography,
@@ -125,7 +125,7 @@ namespace EuropArt.Services.Artists
             //orderby niet opgevuld dus niet in artist index page
             else
             {
-                response.Artists = query.Select(x => new YouthArtistDto.Index
+                response.Artists = query.Select(x => new ArtistDto.Index
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -141,7 +141,7 @@ namespace EuropArt.Services.Artists
             query2 = query2.Skip(request.Amount * request.Page).ToList();
             query2 = query2.Take(request.Amount).ToList();
 
-            response.Artists = query2.Select(x => new YouthArtistDto.Index
+            response.Artists = query2.Select(x => new ArtistDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,

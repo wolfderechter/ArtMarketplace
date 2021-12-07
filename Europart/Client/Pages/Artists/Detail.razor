@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-6">
-        <h2 class="Kunstenaar">@artist.Name</h2>
+        <h2 class="Kunstenaar">@artist.Name.FirstName</h2>
     </div>
     <div class="col-6 text-end">
         <AuthorizeView>
@@ -21,7 +21,6 @@
                     {
 
                         <a style="color: var(--bs-body-color); text-decoration:none;" class="edit" @onclick="RequestDelete">@Loc["Delete"]</a>
-
 
                     }
                 </AuthorizeView>
@@ -52,7 +51,7 @@ else
             <p>
                 @artist.Biography
             </p>
-            <p><a href="http://www.@artist.Website" target="_blank">@artist.Website</a></p>
+            <p><a href="http://@artist.Website" target="_blank">@artist.Website</a></p>
         </div>
         <div class="col-8">
             <h3>@Loc["Latest Artworks"]</h3>
@@ -83,7 +82,7 @@ else
 }
 
 @code { 
-    private YouthArtistDto.Detail artist = new();
+    private ArtistDto.Detail artist = new();
     private bool RequestingDelete;
 
     [Parameter] public int Id { get; set; }

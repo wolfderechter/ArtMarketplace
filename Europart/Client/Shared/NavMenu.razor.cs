@@ -1,5 +1,4 @@
-﻿
-using EuropArt.Client.Pages.Ordering;
+﻿using EuropArt.Client.Pages.Ordering;
 using Microsoft.AspNetCore.Components;
 using System;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;

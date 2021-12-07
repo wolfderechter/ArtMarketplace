@@ -12,7 +12,7 @@ using EuropArt.Domain.Common;
 
 namespace EuropArt.Shared.Artists
 {
-    public static class YouthArtistDto
+    public static class ArtistDto
     {
         public class Index
         {
@@ -38,7 +38,7 @@ namespace EuropArt.Shared.Artists
             public Address Address { get; set; }
             public string Biography { get; set; }
             public string Website { get; set; }
-            public class ArtistValidator : AbstractValidator<YouthArtistDto.Edit>
+            public class ArtistValidator : AbstractValidator<ArtistDto.Edit>
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
                 {

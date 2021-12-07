@@ -45,7 +45,7 @@
 </div>
 @code {
 
-    private YouthArtistDto.Edit model = new();
+    private ArtistDto.Edit model = new();
 
     [Parameter] public int ArtistId { get; set; }
     [Parameter] public EventCallback OnArtistChanged { get; set; }
@@ -59,7 +59,7 @@
         };
 
         var response = await ArtistService.GetDetailAsync(request);
-        model = new YouthArtistDto.Edit
+        model = new ArtistDto.Edit
         {
             Name = response.Artist.Name,
             Biography = response.Artist.Biography,

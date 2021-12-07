@@ -32,6 +32,7 @@ namespace EuropArt.Services.Artworks
         private IQueryable<Artwork> GetArtworkById(int id) => artworks
             .AsNoTracking()
             .Where(p => p.Id == id);
+
         public async Task<ArtworkResponse.Create> CreateAsync(ArtworkRequest.Create request)
         {
             await Task.Delay(100);
