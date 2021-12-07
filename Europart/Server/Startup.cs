@@ -15,7 +15,6 @@ using Microsoft.OpenApi.Models;
 using EuropArt.Persistence.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using EuropArt.Client.Youths;
 using EuropArt.Shared.YouthArtworks;
 
 namespace EuropArt.Server

@@ -3,40 +3,42 @@
 @using EuropArt.Shared.Artworks
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Detail> Loc
 
-<div class="row">
-    <div class="col-6">
-        <h2 class="Kunstenaar">@artist.Name.FirstName</h2>
-    </div>
-    <div class="col-6 text-end">
-        <AuthorizeView>
-            <div class="admin-buttons">
-                <a href="artist/edit/@Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
-                <AuthorizeView Roles="Admin" Context="bruh">
-                    @if (RequestingDelete)
-                    {
-                        <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="ConfirmDelete" class="edit">@Loc["ConfirmDelete"]</a>
-                        <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="CancelRequestDelete" class="edit">@Loc["CancelDelete"]</a>
-                    }
-                    else
-                    {
-
-                        <a style="color: var(--bs-body-color); text-decoration:none;" class="edit" @onclick="RequestDelete">@Loc["Delete"]</a>
-
-                    }
-                </AuthorizeView>
-            </div>
-        </AuthorizeView>
-        
-    </div>
-
-</div>
 
 
-@if (artist == null)
+
+@if (artist is null)
 {
 <p><em>Loading...</em></p> }
 else
 {
+    <div class="row">
+        <div class="col-6">
+            <h2 class="Kunstenaar">@artist.Name.ToString()</h2>
+        </div>
+        <div class="col-6 text-end">
+            <AuthorizeView>
+                <div class="admin-buttons">
+                    <a href="artist/edit/@Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
+                    <AuthorizeView Roles="Admin" Context="bruh">
+                        @if (RequestingDelete)
+                        {
+                            <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="ConfirmDelete" class="edit">@Loc["ConfirmDelete"]</a>
+                            <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="CancelRequestDelete" class="edit">@Loc["CancelDelete"]</a>
+                        }
+                        else
+                        {
+
+                            <a style="color: var(--bs-body-color); text-decoration:none;" class="edit" @onclick="RequestDelete">@Loc["Delete"]</a>
+
+                        }
+                    </AuthorizeView>
+                </div>
+            </AuthorizeView>
+        
+        </div>
+
+    </div>
+
     <div class="row artist-detail align-items-center">
         <div class="col-4 text-center mb-5">
             <img src="@artist.ImagePath" class="detail-profile-pic" />
@@ -69,7 +71,7 @@ else
                     <div class="k-p">
                         <span class="prijs">@artwork.Price.ToString("C")</span>
                     </div>
-                    <span class="naam">@artwork.Name</span>
+                    <span class="naam">@artwork.Name.ToString()</span>
                 </div>
             </div>
             } 
@@ -82,7 +84,7 @@ else
 }
 
 @code { 
-    private ArtistDto.Detail artist = new();
+    private ArtistDto.Detail artist;
     private bool RequestingDelete;
 
     [Parameter] public int Id { get; set; }

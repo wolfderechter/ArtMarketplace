@@ -63,10 +63,9 @@ namespace EuropArt.Services.Artists
 
         public async Task<ArtistResponse.GetDetail> GetDetailAsync(ArtistRequest.GetDetail request)
         {
-            await Task.Delay(100);
             ArtistResponse.GetDetail response = new();
 
-            response.Artist = artists.AsNoTracking().Include(p => p.Artworks).Where(p => p.Id == request.ArtistId).Select(x => new ArtistDto.Detail
+            response.Artist = await artists.AsNoTracking().Where(p => p.Id == request.ArtistId).Select(x => new ArtistDto.Detail
             {
                 Id = x.Id,
                 Biography = x.Biography,
@@ -83,7 +82,7 @@ namespace EuropArt.Services.Artists
                     ImagePath = y.ImagePath,
                     Price = y.Price,
                 }).ToList(),
-            }).SingleOrDefault(x => x.Id == request.ArtistId);
+            }).SingleOrDefaultAsync();
 
             return response;
         }

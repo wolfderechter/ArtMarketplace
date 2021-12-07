@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace EuropArt.Client.Youths
 {
-    public class YouthService : IYouthArtworkService
+    public class YouthArtworkService : IYouthArtworkService
     {
         private readonly HttpClient client;
         private const string endpoint = "api/Youth";
 
-        public YouthService(HttpClient client)
+        public YouthArtworkService(HttpClient client)
         {
             this.client = client;
         }

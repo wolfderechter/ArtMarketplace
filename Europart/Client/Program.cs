@@ -14,7 +14,6 @@ using System;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
-using EuropArt.Services.Youths;
 using EuropArt.Shared.YouthArtworks;
 
 namespace EuropArt.Client
