@@ -68,7 +68,8 @@ namespace EuropArt.Services.Artworks
         {
             ArtworkResponse.Edit response = new();
             //artwork exists?
-            var artwork = await GetArtworkById(request.ArtworkId).SingleOrDefaultAsync();
+            var artwork = await artworks
+            .Where(p => p.Id == request.ArtworkId).SingleOrDefaultAsync();
 
             if(artwork is not null)
             {
