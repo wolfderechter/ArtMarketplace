@@ -21,36 +21,26 @@
         <div class="col-12 text-center">
             <h2>@Loc["Latest"]</h2>
         </div>
-        <div class="col-4">
-            <div class="badge-kunstwerk">
-                <a href="#"><img src="images/img_x300_615b0f51057766-33663549-37540512.jpg"></a>
-                <div class="k-p">
-                    <h2 class="kunstenaar">Unbranded Fresh Cheese</h2>
-                    <span class="prijs">&euro; 100</span>
+        @if (artworks is null)
+        {
+            <p>Loading...</p>
+        }
+        else
+        {
+            @for (var i = 3; i < 6; i++)
+            {
+                <div class="kol col-lg-4 col-sm-6 col-12">
+                    <div class="badge-kunstwerk">
+                        <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePath"></a>
+                        <div class="k-p">
+                            <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
+                            <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
+                        </div>
+                        <span class="naam">by @artworks.ElementAt(i).ArtistName</span>
+                    </div>
                 </div>
-                <span class="naam">by Toon Decock</span>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="badge-kunstwerk">
-                <a href="#"><img src="images/img_x500_615acf2b92d903-60438090-38681861.jpg"></a>
-                <div class="k-p">
-                    <h2 class="kunstenaar">Unbranded Fresh Cheese</h2>
-                    <span class="prijs">&euro; 100</span>
-                </div>
-                <span class="naam">by Toon Decock</span>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="badge-kunstwerk">
-                <a href="#"><img src="images/img_x500_615ad73aa4ac97-98988702-54431046.jpg"></a>
-                <div class="k-p">
-                    <h2 class="kunstenaar">Unbranded Fresh Cheese</h2>
-                    <span class="prijs">&euro; 100</span>
-                </div>
-                <span class="naam">by Toon Decock</span>
-            </div>
-        </div>
+            }
+        }
         <div class="col-12 text-center">
             <h2>@Loc["FeaturedArtworks"]</h2>
         </div>
@@ -63,7 +53,7 @@
             {
                 @for (var i = 0; i < 3; i++)
                 {
-                    <div class="kol col-4">
+                    <div class="kol col-lg-4 col-sm-6 col-12">
                         <div class="badge-kunstwerk">
                             <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePath"></a>
                             <div class="k-p">
@@ -88,7 +78,7 @@
             {
                 @for (var i = 1; i < 4; i++)
                 {
-                    <div class="col-4 text-center">
+                    <div class="col-lg-4 col-sm-6 col-12 text-center">
                         <div class="badge-kunstenaars">
                             <div class="profile-pic">
                                 <a href="/artist/@artists.ElementAt(i).Id"><img src="@artists.ElementAt(i).ImagePath" /></a>
