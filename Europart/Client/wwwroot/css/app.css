@@ -98,6 +98,7 @@ footer {
 }
 
 ul.navbar-nav-right {
+    list-style: none;
     margin-bottom: 0;
 }
 
