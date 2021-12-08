@@ -9,13 +9,11 @@ namespace EuropArt.Client.Shared
     {
         private bool collapseNavMenu = false;
         [Inject] public Shoppingcart Cart { get; set; }
-        private string baseMenuClass = "navbar-collapse ";
         private string NavMenuCssClass =>(collapseNavMenu ? " collapse" : "");
         private bool show = false;
 
         private void ToggleNavMenu()
         {
-            Console.WriteLine("Navmenu toggled!");
             collapseNavMenu = !collapseNavMenu;
         }
 

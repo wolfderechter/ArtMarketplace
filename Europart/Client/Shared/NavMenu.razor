@@ -59,7 +59,7 @@
 
                             <div class="dropdown-menu @(show? "show":"")" aria-labelledby="dropdownMenuLink" @onclick="ToggleNavMenu">
                                 <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="account">@Loc["Profile"]</a>
-                                <a class="dropdown-item" href="messages">@Loc["Messages"]</a>
+                                <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="messages">@Loc["Messages"]</a>
                                 <a class="dropdown-item" @onclick="BeginSignOut" href="#">@Loc["Logout"]</a>
                             </div>
                         </div>
