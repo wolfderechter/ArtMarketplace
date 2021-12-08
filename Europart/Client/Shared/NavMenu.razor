@@ -5,19 +5,19 @@
 @inject SignOutSessionStateManager SignOutManager
 
 <div class="round-nav fixed-top"></div>
-<nav class="navbar navbar-second navbar-dark navbar-expand-lg fixed-top">
+<nav class="navbar navbar-second navbar-dark navbar-expand-lg navbar-toggleable-lg fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Hooop Gallery</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        @*<button class="navbar-toggler" type="button" @onclick="ToggleNavMenu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">*@
+        <button class="navbar-toggler" type="button" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class=" @NavMenuCssClass navbar-collapse" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" @onclick="ToggleNavMenu">
             @*<div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">EuropArt</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>*@
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-center flex-grow-1 pt-2">
+                <ul class="navbar-nav justify-content-center flex-grow-1">
                     <li class="nav-item">
                         <NavLink class="nav-link" href="artwork">@Loc["Artworks"]</NavLink>
                     </li>
@@ -38,21 +38,26 @@
                         </Authorized>
                     </AuthorizeView>
                 </ul>
-                <NavLink @onclick="OpenShoppingCart" class="shoppingcart text-decoration-none mr-3">
-                    <img src="/images/shoppingcart.svg" id="shoppingcart" />
+            <ul class="d-flex align-items-center navbar-nav-right">
+                <li>
+                    <NavLink @onclick="OpenShoppingCart" class="shoppingcart text-decoration-none">
+                        <img src="/images/shoppingcart.svg" id="shoppingcart" 
+                    </NavLink>
+                </li>
+                <li>
                     <p id="counter" class="text-white float-left">@Cart.Items.Count</p>
-                </NavLink>
+                </li>
                 @*<NavLink class="shoppingcart mr-3" href="login">
                         <img src="/images/user.svg" />
                     </NavLink>*@
                 <AuthorizeView>
                     <Authorized>
-                        <div class="dropdown show shoppingcart mr-3"   >
-                            <a class=" dropdown-toggle text-white" role="button" id="dropdownMenuLink" @onclick="ToggleAccountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown show shoppingcart"   >
+                            <a class=" dropdown-toggle text-white" role="button" id="dropdownMenuLink" @onclick="ToggleAccountDropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="/images/user.svg" />
                             </a>
 
-                            <div class="dropdown-menu @(show? "show":"")" aria-labelledby="dropdownMenuLink" >
+                            <div class="dropdown-menu @(show? "show":"")" aria-labelledby="dropdownMenuLink" @onclick="ToggleNavMenu">
                                 <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="account">@Loc["Profile"]</a>
                                 <a class="dropdown-item" href="messages">@Loc["Messages"]</a>
                                 <a class="dropdown-item" @onclick="BeginSignOut" href="#">@Loc["Logout"]</a>
@@ -60,14 +65,17 @@
                         </div>
                     </Authorized>
                     <NotAuthorized>
-                        <NavLink class="shoppingcart mr-3" href="authentication/login">
-                            <img src="/images/user.svg" />
-                        </NavLink>
-
+                        <li>
+                            <NavLink class="shoppingcart" href="authentication/login">
+                                <img src="/images/user.svg" />
+                            </NavLink>
+                        </li>
                     </NotAuthorized>
                 </AuthorizeView>
-                <CultureSelector />
-            </div>
+                <li>
+                    <CultureSelector />
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
