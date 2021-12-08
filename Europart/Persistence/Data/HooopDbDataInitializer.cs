@@ -61,20 +61,20 @@ namespace EuropArt.Persistence.Data
                 _dbContext.Artists.AddRange(artists);
                 _dbContext.YouthArtists.AddRange(youthArtists);
 
-                Artwork artwork1 = new Artwork("Emmer", new Money(3M), "dit is een test", artist2, DateTime.Now, "abstract", "sculptures");
-                Artwork artwork2 = new Artwork("Zonnebloem", new Money(4M), "dit is een test", artist2, DateTime.Now, "modern", "painting");
-                Artwork artwork3 = new Artwork("Boter", new Money(30M), "dit is een test", artist2, DateTime.Now, "surrealism", "sculptures");
-                Artwork artwork4 = new Artwork("Koffielepel", new Money(30M), "dit is een test", artist3, DateTime.Now, "modern", "painting");
-                Artwork artwork5 = new Artwork("Tas", new Money(30M), "dit is een test", artist3, DateTime.Now, "abstract", "photography");
-                Artwork artwork6 = new Artwork("Hesp", new Money(30M), "dit is een test", artist3, DateTime.Now, "minimalism", "drawings");
-                Artwork artwork7 = new Artwork("Kaas", new Money(30M), "dit is een test", artist6, DateTime.Now, "surrealism", "drawings");
-                Artwork artwork8 = new Artwork("Auto", new Money(30M), "dit is een test", artist3, DateTime.Now, "modern", "painting");
-                Artwork artwork9 = new Artwork("Maan", new Money(30M), "dit is een test", artist6, DateTime.Now, "minimalism", "photography");
-                Artwork artwork10 = new Artwork("Feest", new Money(30M), "dit is een test", artist3, DateTime.Now, "abstract", "painting");
-                Artwork artwork11 = new Artwork("Tafel", new Money(30M), "dit is een test", artist8, DateTime.Now, "minimalism", "painting");
-                Artwork artwork12 = new Artwork("Stoel", new Money(30M), "dit is een test", artist8, DateTime.Now, "surrealism", "photography");
-                Artwork artwork13 = new Artwork("Bank", new Money(30M), "dit is een test", artist8, DateTime.Now, "minimalism", "drawings");
-                Artwork artwork14 = new Artwork("Vliegtuig", new Money(30M), "dit is een test", artist14, DateTime.Now, "abstract", "drawings");
+                Artwork artwork1 = new Artwork("Emmer", new Money(3M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-222), "abstract", "sculptures");
+                Artwork artwork2 = new Artwork("Zonnebloem", new Money(4M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-40), "modern", "painting");
+                Artwork artwork3 = new Artwork("Boter", new Money(12M), "dit is een beschrijving", artist2, DateTime.Now, "surrealism", "sculptures");
+                Artwork artwork4 = new Artwork("Koffielepel", new Money(65M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-80), "modern", "painting");
+                Artwork artwork5 = new Artwork("Tas", new Money(43M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-200), "abstract", "photography");
+                Artwork artwork6 = new Artwork("Hesp", new Money(543M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-25), "minimalism", "drawings");
+                Artwork artwork7 = new Artwork("Kaas", new Money(23M), "dit is een beschrijving", artist6, DateTime.Now.AddHours(-320), "surrealism", "drawings");
+                Artwork artwork8 = new Artwork("Auto", new Money(96M), "dit is een beschrijving", artist9, DateTime.Now.AddHours(-430), "modern", "painting");
+                Artwork artwork9 = new Artwork("Maan", new Money(58M), "dit is een beschrijving", artist6, DateTime.Now.AddHours(-290), "minimalism", "photography");
+                Artwork artwork10 = new Artwork("Feest", new Money(24M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-180), "abstract", "painting");
+                Artwork artwork11 = new Artwork("Tafel", new Money(38M), "dit is een beschrijving", artist8, DateTime.Now.AddHours(-90), "minimalism", "painting");
+                Artwork artwork12 = new Artwork("Stoel", new Money(10M), "dit is een beschrijving", artist8, DateTime.Now.AddHours(-60), "surrealism", "photography");
+                Artwork artwork13 = new Artwork("Bank", new Money(201M), "dit is een beschrijving", artist8, DateTime.Now.AddHours(-50), "minimalism", "drawings");
+                Artwork artwork14 = new Artwork("Vliegtuig", new Money(158M), "dit is een beschrijving", artist14, DateTime.Now.AddHours(-4), "abstract", "drawings");
 
                 YouthArtwork youthArtwork1 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
 
