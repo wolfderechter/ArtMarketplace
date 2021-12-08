@@ -1,0 +1,73 @@
+﻿@page "/youth"
+@using EuropArt.Shared.YouthArtworks;
+@inject IYouthArtworkService YouthArtworkService;
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Index> Loc
+
+<h1>@Loc["YouthArtworks"]</h1>
+<!--<div class="row">
+    <div class="col-6">
+        <button @onclick="ShowFilters" id="filters" type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">@Loc[textOnButton]</button>
+    </div>
+    <div class="col-6 text-end">-->
+@*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
+<!--<div class="row">
+            <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
+            <AuthorizeView>
+                <Authorized>
+                    <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
+                </Authorized>
+            </AuthorizeView>
+            <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
+                <option value="OrderByNewest">@Loc["NewestArtwork"]</option>
+                <option value="OrderByOldest">@Loc["OldestArtwork"]</option>
+                <option value="OrderByName">@Loc["Name"]</option>
+                <option value="OrderByPriceAscending">@Loc["PriceAscending"]</option>
+                <option value="OrderByPriceDescending">@Loc["PriceDescending"]</option>
+            </select>
+        </div>
+    </div>
+</div>-->
+<div class="row">
+    <div class="col-7">
+        <input style="margin-left: 18px" class="form-control col" placeholder="@Loc["Search"]" type="search" />
+    </div>
+</div>
+<div class="row" style="@cols">
+
+    @if (youthArtworks is null)
+    {
+        <p>Loading...</p> }
+    else if (youthArtworks.Count == 0)
+    {
+        <p>No artworks found</p>
+    }
+    else
+    {
+        @foreach (var artwork in youthArtworks)
+        {
+            <div class="col-4">
+                <div class="badge-kunstwerk">
+                    <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                    <div class="k-p">
+                        <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                    </div>
+                    @*      <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>*@
+                </div>
+            </div>
+        }
+        @*  <ArtworkPager Filter="Filter" TotalAmount="totalFilteredAmount" />*@
+    }
+</div>
+
+
+
+@code {
+    private String cols = "margin-left:0;";
+    private List<YouthArtworkDto.Index> youthArtworks;
+    protected override async Task OnInitializedAsync()
+    {
+        YouthArtworkRequest.GetIndex request = new();
+        var response = await YouthArtworkService.GetIndexAsync(request);
+        youthArtworks = response.YouthArtworks;
+    }
+}

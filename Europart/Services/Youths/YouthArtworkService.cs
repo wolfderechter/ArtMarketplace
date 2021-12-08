@@ -21,20 +21,22 @@ namespace EuropArt.Services.Youths
             this.storageService = storageService;
 
         }
+        private IQueryable<YouthArtwork> GetArtworkById(int id) => youthArtworks
+           .AsNoTracking()
+           .Where(p => p.Id == id);
 
         public async Task<YouthArtworkResponse.GetDetail> GetDetailAsync(YouthArtworkRequest.GetDetail request)
         {
-            await Task.Delay(100);
-
             YouthArtworkResponse.GetDetail response = new();
 
-            response.YouthArtwork = youthArtworks.Select(x => new YouthArtworkDto.Detail
+            response.YouthArtwork = await GetArtworkById(request.YouthArtworkId).Select(x => new YouthArtworkDto.Detail
             {
                 Id = x.Id,
                 Name = x.Name,
                 Description = x.Description,
                 ImagePath = x.ImagePath,
-            }).SingleOrDefault(x => x.Id == request.YouthId);
+            })
+            .SingleOrDefaultAsync(x => x.Id == request.YouthArtworkId);
 
             return response;
         }

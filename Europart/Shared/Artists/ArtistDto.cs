@@ -1,14 +1,10 @@
-﻿using EuropArt.Shared.Artworks;
-using EuropArt.Shared;
+﻿using EuropArt.Domain.Artists;
+using EuropArt.Domain.Common;
+using EuropArt.Shared.Artworks;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EuropArt.Domain.Artists;
-using EuropArt.Domain.Common;
 
 namespace EuropArt.Shared.Artists
 {

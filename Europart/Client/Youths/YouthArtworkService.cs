@@ -11,7 +11,7 @@ namespace EuropArt.Client.Youths
     public class YouthArtworkService : IYouthArtworkService
     {
         private readonly HttpClient client;
-        private const string endpoint = "api/Youth";
+        private const string endpoint = "api/YouthArtwork";
 
         public YouthArtworkService(HttpClient client)
         {
@@ -19,9 +19,8 @@ namespace EuropArt.Client.Youths
         }
         public async Task<YouthArtworkResponse.GetDetail> GetDetailAsync(YouthArtworkRequest.GetDetail request)
         {
-            var response = await client.GetFromJsonAsync<YouthArtworkResponse.GetDetail>($"{endpoint}/{request.YouthId}");
+            var response = await client.GetFromJsonAsync<YouthArtworkResponse.GetDetail>($"{endpoint}/{request.YouthArtworkId}");
             return response;
-
         }
 
         public async Task<YouthArtworkResponse.GetIndex> GetIndexAsync(YouthArtworkRequest.GetIndex request)

@@ -15,6 +15,7 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
 using EuropArt.Shared.YouthArtworks;
+using EuropArt.Shared.YouthArtists;
 
 namespace EuropArt.Client
 {
@@ -29,6 +30,7 @@ namespace EuropArt.Client
             builder.Services.AddScoped<IArtworkService, ArtworkService>();
             builder.Services.AddScoped<IArtistService, ArtistService>();
             builder.Services.AddScoped<IYouthArtworkService, YouthArtworkService>();
+            builder.Services.AddScoped<IYouthArtistService, YouthArtistService>();
             builder.Services.AddHttpClient<StorageService>();
             builder.Services.AddScoped<Shoppingcart>();
             builder.Services.AddHttpClient<StorageService>();
