@@ -311,5 +311,14 @@ namespace EuropArt.Shared.Resources.Artworks {
                 return ResourceManager.GetString("Surrealism", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youth artworks.
+        /// </summary>
+        public static string YouthArtworks {
+            get {
+                return ResourceManager.GetString("YouthArtworks", resourceCulture);
+            }
+        }
     }
 }

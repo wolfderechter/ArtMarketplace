@@ -9,11 +9,11 @@ namespace EuropArt.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class YouthController : ControllerBase
+    public class YouthArtworkController : ControllerBase
     {
         private readonly IYouthArtworkService youthArtworkService;
 
-        public YouthController(IYouthArtworkService youthService)
+        public YouthArtworkController(IYouthArtworkService youthService)
         {
             this.youthArtworkService = youthService;
         }
@@ -24,7 +24,7 @@ namespace EuropArt.Server.Controllers
             return youthArtworkService.GetIndexAsync(request);
         }
 
-        [HttpGet("{YouthId}")]
+        [HttpGet("{YouthArtworkId}")]  
         public Task<YouthArtworkResponse.GetDetail> GetDetailAsync([FromRoute] YouthArtworkRequest.GetDetail request)
         {
             return youthArtworkService.GetDetailAsync(request);

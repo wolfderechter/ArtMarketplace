@@ -15,7 +15,7 @@ namespace EuropArt.Shared.YouthArtworks
 
         public class GetDetail
         {
-            public int YouthId { get; set; }
+            public int YouthArtworkId { get; set; }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using EuropArt.Domain.Artists;
+using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
 using EuropArt.Domain.Common;
 using EuropArt.Domain.YouthArtworks;
@@ -77,6 +77,16 @@ namespace EuropArt.Persistence.Data
                 Artwork artwork14 = new Artwork("Vliegtuig", new Money(158M), "dit is een beschrijving", artist14, DateTime.Now.AddHours(-4), "abstract", "drawings");
 
                 YouthArtwork youthArtwork1 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork2 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork3 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork4 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork5 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork6 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork7 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork8 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork9 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork10 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
+                YouthArtwork youthArtwork11 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
 
                 artwork1.ImagePath = $"/images/artworks/1.jpg";
                 artwork2.ImagePath = $"/images/artworks/2.jpg";
@@ -93,10 +103,22 @@ namespace EuropArt.Persistence.Data
                 artwork13.ImagePath = $"/images/artworks/13.jpg";
                 artwork14.ImagePath = $"/images/artworks/14.jpg";
                 youthArtwork1.ImagePath = $"/images/artworks/15.jpg";
+                youthArtwork2.ImagePath = $"/images/artworks/16.jpg";
+                youthArtwork3.ImagePath = $"/images/artworks/17.jpg";
+                youthArtwork4.ImagePath = $"/images/artworks/18.jpg";
+                youthArtwork5.ImagePath = $"/images/artworks/19.jpg";
+                youthArtwork6.ImagePath = $"/images/artworks/20.jpg";
+                youthArtwork7.ImagePath = $"/images/artworks/21.jpg";
+                youthArtwork8.ImagePath = $"/images/artworks/22.jpg";
+                youthArtwork9.ImagePath = $"/images/artworks/23.jpg";
+                youthArtwork10.ImagePath = $"/images/artworks/24.jpg";
+                youthArtwork11.ImagePath = $"/images/artworks/25.jpg";
+          
+
 
                 List<Artwork> artworks = new List<Artwork> { artwork1, artwork2, artwork3, artwork4 , artwork5 , artwork6 , artwork7 , artwork8 , artwork9 , artwork10 , artwork11 , artwork12 , artwork13 , artwork14 };
 
-                _dbContext.YouthArtworks.Add(youthArtwork1);
+                _dbContext.YouthArtworks.AddRange(youthArtwork1, youthArtwork2, youthArtwork3, youthArtwork4, youthArtwork5, youthArtwork6, youthArtwork7, youthArtwork8, youthArtwork9, youthArtwork10, youthArtwork11);
                 _dbContext.Artworks.AddRange(artworks);
                 
                 _dbContext.SaveChanges();

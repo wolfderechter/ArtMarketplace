@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\YouthArtists\" />
     <Folder Include="wwwroot\images\Artists\" />
   </ItemGroup>
 

@@ -1,11 +1,12 @@
-﻿using Ardalis.GuardClauses;
+using Ardalis.GuardClauses;
+using Domain.Common;
 using EuropArt.Domain.Artists;
 using EuropArt.Domain.Common;
 using System;
 
 namespace EuropArt.Domain.Artworks
 {
-    public class Artwork
+    public class Artwork : Entity
     {
         public int Id { get; set; }
         public string name;

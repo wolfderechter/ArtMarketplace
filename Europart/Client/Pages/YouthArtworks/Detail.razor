@@ -1,0 +1,59 @@
+﻿@page "/youth/{id:int}"
+@using EuropArt.Shared.YouthArtworks
+
+@if (youthArtwork == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-12 text-end mb-3">
+            <div class="admin-buttons">
+                <a class="edit" ><img src="/images/edit.svg" /></a>
+                <button><img src="/images/delete.svg" /></button>
+            </div>
+        </div>
+        <div class="col-md-8 col-12">
+            <div class="badge-kunstwerk text-center" style="padding: 0;">
+                <img src="@youthArtwork.ImagePath" style=" height: 600px; width:auto;">
+            </div>
+            <h2 class="mb-1">@youthArtwork.Name</h2>
+@*            <h4 class="kunstenaar"><a href="/artist/@artwork.ArtistId"><span style="color:#b1b4b7">@Loc["By"]</span> @artwork.ArtistName</a></h4>
+*@            <!--<h5 style="color:#b1b4b7">Uploaded on @artwork.DateCreated.ToString("dd MMMM yyyy")</h5>-->
+            <p>@youthArtwork.Description</p>
+        </div>
+       @* <div class="col-md-4 col-12">
+            <div class="bieden">
+                <span class="prijs-groot">@artwork.Price.ToString("C")</span>
+                <button @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
+                <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
+
+                @if (RequestingDelete)
+                {
+                    <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
+                    <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
+                }
+                else
+                {
+                    <button class="btn btn-bieden mb-3" @onclick="RequestDelete">@Loc["Delete"]</button>
+                }
+            </div>
+        </div>*@
+    </div>
+}
+
+@code {
+    private YouthArtworkDto.Detail youthArtwork = new();
+    [Parameter] public int Id { get; set; }
+    [Inject] public IYouthArtworkService YouthArtworkService { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        YouthArtworkRequest.GetDetail request = new() { YouthArtworkId = Id };
+        var response = await YouthArtworkService.GetDetailAsync(request);
+        youthArtwork = response.YouthArtwork;
+        Console.WriteLine(youthArtwork);
+    }
+
+}

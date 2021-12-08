@@ -1,4 +1,5 @@
 ﻿using EuropArt.Domain.Artists;
+using EuropArt.Domain.Common;
 using EuropArt.Shared.Artists;
 using FluentValidation;
 using Microsoft.Extensions.Localization;

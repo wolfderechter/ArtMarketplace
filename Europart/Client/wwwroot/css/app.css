@@ -97,6 +97,15 @@ footer {
     background-color: #372c2e;
 }
 
+ul.navbar-nav-right {
+    list-style: none;
+    margin-bottom: 0;
+}
+
+ul.navbar-nav-right li {
+    padding: 0 1rem;
+}
+
 .dropdown-menu {
     z-index: 9999;
 }
@@ -119,18 +128,26 @@ footer {
 
 .shoppingcart img {
     filter: invert(1);
-    width: 30px;
-    height: 30px;
-}
-
-.shoppingcart #shoppingcart {
-    float: left;
+    width: 20px;
 }
 
 .shoppingcart #counter {
-    float: left;
     margin-left: 1rem;
     font-weight: bold;
+}
+
+span.shopping-cart-counter {
+    position: absolute;
+    color: white;
+    background-color: #c1710f;
+    border-radius: 100%;
+    padding: 0.2rem 0.3rem;
+    display: inline-block;
+    top: 0;
+    right: 4px;
+    font-size: 0.7rem;
+    line-height: 1;
+    font-weight: 600;
 }
 
 .badge-kunstwerk img {
@@ -139,14 +156,28 @@ footer {
     transition: transform 0.15s ease-in-out;
 }
 
+.mobile-filter-row {
+    position: absolute;
+    width: 25%;
+    display: none;
+}
+
+.mobile-filter-row a.close {
+    display:none;
+}
+
+.mobile-filter-row.show {
+    display:flex;
+}
+
 .form-search button img {
     width: 25px;
 }
 
 #flag-icons-be, 
 #flag-icons-gb {
-    height: 2rem;
-    padding-top: 1rem;
+    height: 1rem;
+    padding-top: 0;
     cursor: pointer;
 }
 
@@ -155,7 +186,6 @@ footer {
 }
 
 .shoppingcart {
-    padding-top: 0.5rem;
     cursor: pointer;
 }
 
@@ -582,4 +612,29 @@ form.form {
 .delete {
    
     width: 25px;
+}
+
+@media (max-width: 575px) {
+    .mobile-filter-row-artwork {
+        margin-left: 0 !important;
+    }
+
+    .mobile-filter-row {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: white;
+        z-index: 1031;
+        top:0;
+    }
+
+    .mobile-filter-row a.close {
+        display:inline-block;
+        position: absolute;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        padding: 0.5rem;
+        cursor:pointer;
+    }
 }

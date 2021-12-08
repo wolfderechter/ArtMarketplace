@@ -1,4 +1,4 @@
-﻿using EuropArt.Domain.Artists;
+using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
 using EuropArt.Persistence.Data;
 using EuropArt.Shared.Artworks;
