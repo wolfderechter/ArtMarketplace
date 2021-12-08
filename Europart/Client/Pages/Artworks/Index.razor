@@ -13,17 +13,17 @@
     <div class="col-6 text-end">
         @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
         <div class="row">
-            <div class="col-7">
+            <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
                 <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
             </div>
-            <div class="col-5">
+            <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
                 <AuthorizeView>
                     <Authorized>
                         <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
                     </Authorized>
                 </AuthorizeView>
             </div>
-            <div class="col-12">
+            <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
                 <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
                     <option value="OrderByNewest">@Loc["NewestArtwork"]</option>
                     <option value="OrderByOldest">@Loc["OldestArtwork"]</option>
@@ -38,8 +38,9 @@
 
 <div class="row">
     <div class="col-12" style="position:relative;">
-        <div class="row" style="position:absolute;width:100%;">
-            <div id="f-row" class="filters @showColFilters col-3">
+        <div class="row mobile-filter-row @showColFilters">
+            <a @onclick="ShowFilters" class="close"><img src="/images/close.png"</a>
+            <div id="f-row" class="filters @showColFilters col-12">
                 <div class="form-check form-switch mb-3">
                     <input @bind="Filter.IncludingAuctions" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                     <label class="form-check-label" for="flexSwitchCheckDefault">@Loc["Auctions"]</label>
@@ -76,7 +77,7 @@
                 </select>
             </div>
         </div>
-        <div class="row" style="@cols">
+        <div class="row mobile-filter-row-artwork" style="@colsFilter">
 
             @if (artworks is null)
             {
@@ -89,7 +90,7 @@
             {
                 @foreach (var artwork in artworks)
                 {
-                    <div class="col-4">
+                    <div class="@cols">
                         <div class="badge-kunstwerk">
                             <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
                             <div class="k-p">
@@ -107,8 +108,8 @@
 </div>
 
 @code {
-    private String cols = "margin-left:0;";
-    private String endCols = "</div>";
+    private String colsFilter = "margin-left:0;";
+    private String cols = "col-lg-4 col-sm-6 col-12";
     private String showColFilters = "";
     private String textOnButton = "Show Filters";
     private int totalFilteredAmount;
@@ -139,13 +140,15 @@
     {
         if (showColFilters == "show")
         {
-            cols = "margin-left:0;";
+            colsFilter = "margin-left:0;";
+            cols = "col-lg-4 col-sm-6 col-12";
             showColFilters = "";
             textOnButton = "Show Filters";
         }
         else
         {
-            cols = "margin-left:25%;";
+            colsFilter = "margin-left:25%;";
+            cols = "col-lg-4 col-md-6 col-12";
             showColFilters = "show";
             textOnButton = "Hide Filters";
         }
