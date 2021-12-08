@@ -13,26 +13,32 @@
     <div class="col-6 text-end">
         @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
         <div class="row">
-            <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
-            <AuthorizeView>
-                <Authorized>
-                    <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
-                </Authorized>
-            </AuthorizeView>
-            <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
-                <option value="OrderByNewest">@Loc["NewestArtwork"]</option>
-                <option value="OrderByOldest">@Loc["OldestArtwork"]</option>
-                <option value="OrderByName">@Loc["Name"]</option>
-                <option value="OrderByPriceAscending">@Loc["PriceAscending"]</option>
-                <option value="OrderByPriceDescending">@Loc["PriceDescending"]</option>
-            </select>
+            <div class="col-7">
+                <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
+            </div>
+            <div class="col-5">
+                <AuthorizeView>
+                    <Authorized>
+                        <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
+                    </Authorized>
+                </AuthorizeView>
+            </div>
+            <div class="col-12">
+                <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
+                    <option value="OrderByNewest">@Loc["NewestArtwork"]</option>
+                    <option value="OrderByOldest">@Loc["OldestArtwork"]</option>
+                    <option value="OrderByName">@Loc["Name"]</option>
+                    <option value="OrderByPriceAscending">@Loc["PriceAscending"]</option>
+                    <option value="OrderByPriceDescending">@Loc["PriceDescending"]</option>
+                </select>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-12">
-        <div class="row">
+    <div class="col-12" style="position:relative;">
+        <div class="row" style="position:absolute;width:100%;">
             <div id="f-row" class="filters @showColFilters col-3">
                 <div class="form-check form-switch mb-3">
                     <input @bind="Filter.IncludingAuctions" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -69,6 +75,8 @@
                     <option value="other">@Loc["Other"]</option>
                 </select>
             </div>
+        </div>
+        <div class="row" style="@cols">
 
             @if (artworks is null)
             {
@@ -79,51 +87,19 @@
             } 
             else
             {
-                
-                <div class="kol @cols">
-                    @foreach (var artwork in artworks)
-                    {
-                        @if (artwork.Id % 3 == 0)
-                        {
-                            <div class="badge-kunstwerk">
-                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-                                <div class="k-p">
-                                    <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
-                                    <span class="prijs">@artwork.Price.ToString("C")</span>
-                                </div>
-                                <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
-                            </div>}}
-                </div>
-                <div class="kol @cols">
-                    @foreach (var artwork in artworks)
-                    {
-                        @if (artwork.Id % 3 == 1)
-                        {
-                            <div class="badge-kunstwerk">
-                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-                                <div class="k-p">
-                                    <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
-                                    <span class="prijs">@artwork.Price.ToString("C")</span>
-                                </div>
-                                <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
-                            </div>}}
-                </div>
-                <div class="kol @cols">
-                    @foreach (var artwork in artworks)
-                    {
-                        @if (artwork.Id % 3 == 2)
-                        {
-                            <div class="badge-kunstwerk">
-                                <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
-                                <div class="k-p">
-                                    <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
-                                    <span class="prijs">@artwork.Price.ToString("C")</span>
-                                </div>
-                                <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
+                @foreach (var artwork in artworks)
+                {
+                    <div class="col-4">
+                        <div class="badge-kunstwerk">
+                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                            <div class="k-p">
+                                <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                                <span class="prijs">@artwork.Price.ToString("C")</span>
                             </div>
-                        }
-                    }
-                </div>
+                            <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
+                        </div>
+                    </div>
+                }
                 <ArtworkPager Filter="Filter" TotalAmount="totalFilteredAmount" />
             }
         </div>
@@ -131,7 +107,8 @@
 </div>
 
 @code {
-    private String cols = "col-4";
+    private String cols = "margin-left:0;";
+    private String endCols = "</div>";
     private String showColFilters = "";
     private String textOnButton = "Show Filters";
     private int totalFilteredAmount;
@@ -162,13 +139,13 @@
     {
         if (showColFilters == "show")
         {
-            cols = "col-4";
+            cols = "margin-left:0;";
             showColFilters = "";
             textOnButton = "Show Filters";
         }
         else
         {
-            cols = "col-3";
+            cols = "margin-left:25%;";
             showColFilters = "show";
             textOnButton = "Hide Filters";
         }
