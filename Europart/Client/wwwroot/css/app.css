@@ -103,7 +103,7 @@ ul.navbar-nav-right {
 }
 
 ul.navbar-nav-right li {
-    padding: 0 0.5rem;
+    padding: 0 1rem;
 }
 
 .dropdown-menu {
@@ -134,6 +134,20 @@ ul.navbar-nav-right li {
 .shoppingcart #counter {
     margin-left: 1rem;
     font-weight: bold;
+}
+
+span.shopping-cart-counter {
+    position: absolute;
+    color: white;
+    background-color: #c1710f;
+    border-radius: 100%;
+    padding: 0.2rem 0.3rem;
+    display: inline-block;
+    top: 0;
+    right: 4px;
+    font-size: 0.7rem;
+    line-height: 1;
+    font-weight: 600;
 }
 
 .badge-kunstwerk img {
