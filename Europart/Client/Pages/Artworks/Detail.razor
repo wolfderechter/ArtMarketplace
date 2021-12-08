@@ -22,7 +22,7 @@ else
                 <button  @onclick="ConfirmDelete"><img src="/images/delete.svg" /></button>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-md-8 col-12">
             <div class="badge-kunstwerk text-center" style="padding: 0;">
                 <img src="@artwork.ImagePath" style="width:auto;">
             </div>
@@ -31,7 +31,7 @@ else
             <h5 style="color:#b1b4b7">Uploaded on @artwork.DateCreated.ToString("dd MMMM yyyy")</h5>
             <p>@artwork.Description</p>
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-12">
             <div class="bieden">
                 <span class="prijs-groot">@artwork.Price.ToString("C")</span>
                 <button @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
