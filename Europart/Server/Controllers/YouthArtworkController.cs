@@ -1,4 +1,5 @@
 ﻿using EuropArt.Shared.YouthArtworks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace EuropArt.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [AllowAnonymous]
     public class YouthArtworkController : ControllerBase
     {
         private readonly IYouthArtworkService youthArtworkService;

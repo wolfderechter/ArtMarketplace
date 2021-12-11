@@ -1,5 +1,6 @@
 ﻿using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace EuropArt.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [AllowAnonymous]
     public class ArtistController : ControllerBase
     {
         private readonly IArtistService artistService;

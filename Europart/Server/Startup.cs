@@ -42,7 +42,7 @@ namespace EuropArt.Server
             services.AddSwaggerGen(c =>
             {
                 c.CustomSchemaIds(x => $"{x.DeclaringType.Name}.{x.Name}");
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "EuropArt API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hooop Gallery API", Version = "v1" });
             });
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddRazorPages();
@@ -80,7 +80,7 @@ namespace EuropArt.Server
                 app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EuropArt API"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hooop Gallery API"));
             }
             else
             {
