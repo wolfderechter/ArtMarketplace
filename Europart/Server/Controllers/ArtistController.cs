@@ -40,5 +40,11 @@ namespace EuropArt.Server.Controllers
         //{
         //    return artistService.CreateAsync(request);
         //}
+
+        [HttpPut]
+        public Task<ArtistResponse.Edit> EditAsync([FromBody] ArtistRequest.Edit request)
+        {
+            return artistService.EditAsync(request);
+        }
     }
 }

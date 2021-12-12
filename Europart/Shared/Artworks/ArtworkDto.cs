@@ -13,7 +13,8 @@ namespace EuropArt.Shared.Artworks
         {
             public int Id { get; set; }
             public int ArtistId { get; set; }
-            public ArtistName ArtistName { get; set; }
+            public string ArtistFirstName { get; set; }
+            public string ArtistLastName { get; set; }
             public string Name { get; set; }
             public decimal Price { get; set; }
             public string ImagePath { get; set; }
@@ -24,6 +25,8 @@ namespace EuropArt.Shared.Artworks
         public class Detail : Index
         {
             public string Description { get; set; }
+            public string Style { get; set; }
+            public string Category { get; set; }
         }
 
         public class Create

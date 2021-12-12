@@ -17,18 +17,18 @@
     </div>
 @if (ListView == "artists")
 {
-    @if (_artists is null)
+    @if (artists is null)
     {
         <p>Loading...</p>
     }
     else
     {
-        @foreach (var artist in _artists)
+        @foreach (var artist in artists)
         {
             <div class="col-12">
                 <div class="block">
                     <img src="@artist.ImagePath" />
-                    <span>@artist.Name</span>
+                    <span>@(artist.FirstName + " " + artist.LastName)</span>
                     <div class="buttons">
                         <a><img class="good" src="/images/good.svg" /></a>
                         <a @onclick="() => ConfirmDeleteArtist(artist.Id)"><img class="bad" src="/images/bad.svg" /></a>
@@ -40,19 +40,19 @@
     }
 } else if (ListView == "artworks")
 {
-    @if (_artworks is null)
+    @if (artworks is null)
     {
         <p>Loading...</p>
     }
     else
     {
-        @foreach (var artwork in _artworks)
+        @foreach (var artwork in artworks)
         {
             <div class="col-12">
                 <div class="block">
                     <img src="@artwork.ImagePath" />
                     <span>@artwork.Name</span>
-                    <span>@artwork.ArtistName</span>
+                    <span>@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</span>
                     <span>@artwork.Price.ToString("C")</span>
                     <div class="buttons">
                         <a><img class="good" src="/images/good.svg" /></a>
@@ -65,7 +65,7 @@
     }
 } else if (ListView == "orders")
 {
-    @if (_artworks is null)
+    @if (artworks is null)
     {
         <p>Loading...</p>
     }
@@ -75,9 +75,9 @@
         {
             <div class="col-12">
                 <div class="block">
-                    <img src="@_artworks.ElementAt(i).ImagePath" />
-                    <span>@_artworks.ElementAt(i).ArtistName</span>
-                    <span>@_artworks.ElementAt(i).Price.ToString("C")</span>
+                    <img src="@artworks.ElementAt(i).ImagePath" />
+                    <span>@(artworks.ElementAt(i).ArtistFirstName + " " + artworks.ElementAt(i).ArtistLastName)</span>
+                    <span>@artworks.ElementAt(i).Price.ToString("C")</span>
                     <span>door Gebruiker</span>
                     <div class="buttons">
                         <select class="form-control">
@@ -168,27 +168,27 @@
     private int Height = 3;
     private string Position = "center";
 
-    private IEnumerable<ArtistDto.Index> _artists;
-    private ArtistDto.Detail _artist = new();
+    private IEnumerable<ArtistDto.Index> artists;
+    private ArtistDto.Detail artist = new();
 
-    private IEnumerable<ArtworkDto.Index> _artworks;
-    private ArtworkDto.Detail _artwork = new();
+    private IEnumerable<ArtworkDto.Index> artworks;
+    private ArtworkDto.Detail artwork = new();
 
     protected override async Task OnInitializedAsync()
     {
         ArtistRequest.GetIndex request = new();
         var response = await ArtistService.GetIndexAsync(request);
-        _artists = response.Artists;
+        artists = response.Artists;
 
         ArtworkRequest.GetIndex request2 = new();
         var response2 = await ArtworkService.GetIndexAsync(request2);
-        _artworks = response2.Artworks;
+        artworks = response2.Artworks;
     }
 
     private async Task ConfirmDeleteArtist(int Id)
     {
         //_artist = await ArtistService.GetDetailAsync(Id);
-        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + _artist.Name + "?"))
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + artist.FirstName + " " + artist.LastName + "?"))
             return;
         var request = new ArtworkRequest.Delete { ArtworkId = Id };
         await ArtworkService.DeleteAsync(request);
@@ -198,8 +198,8 @@
     {
         ArtworkRequest.GetDetail request = new() { ArtworkId = Id };
         var response = await ArtworkService.GetDetailAsync(request);
-        _artwork = response.Artwork;
-        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + _artwork.Name + "?"))
+        artwork = response.Artwork;
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete " + artwork.Name + "?"))
             return;
         var request2 = new ArtworkRequest.Delete { ArtworkId = Id };
         await ArtworkService.DeleteAsync(request2);

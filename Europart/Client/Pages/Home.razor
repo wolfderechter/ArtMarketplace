@@ -36,7 +36,7 @@
                             <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
                             <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
                         </div>
-                        <span class="naam">by @artworks.ElementAt(i).ArtistName</span>
+                        <span class="naam">by @(artworks.ElementAt(i).ArtistFirstName + " " + artworks.ElementAt(i).ArtistLastName)</span>
                     </div>
                 </div>
             }
@@ -60,7 +60,7 @@
                                 <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
                                 <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
                             </div>
-                            <span class="naam">by @artworks.ElementAt(i).ArtistName</span>
+                            <span class="naam">by @(artworks.ElementAt(i).ArtistFirstName + " " + artworks.ElementAt(i).ArtistLastName)</span>
                         </div>
                     </div>
                 }
@@ -83,8 +83,8 @@
                             <div class="profile-pic">
                                 <a href="/artist/@artists.ElementAt(i).Id"><img src="@artists.ElementAt(i).ImagePath" /></a>
                             </div>
-                            <h2>@artists.ElementAt(i).Name</h2>
-                            <span class="locatie"><img src="images/locate.svg" /> @artists.ElementAt(i).Address.City</span><br />
+                            <h2>@(artists.ElementAt(i).FirstName + " " + artists.ElementAt(i).LastName)</h2>
+                            <span class="locatie"><img src="images/locate.svg" /> @artists.ElementAt(i).Postalcode</span><br />
                             <span class="kunstwerken">@artists.ElementAt(i).AmountOfArtworks @Loc["Artworks"]</span>
                         </div>
                     </div>

@@ -19,7 +19,7 @@ namespace EuropArt.Shared.Resources.Artists {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Edit {
@@ -88,6 +88,24 @@ namespace EuropArt.Shared.Resources.Artists {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country has to be filled in!.
+        /// </summary>
+        public static string CountryError {
+            get {
+                return ResourceManager.GetString("CountryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit artist.
         /// </summary>
         public static string EditArtist {
@@ -97,20 +115,74 @@ namespace EuropArt.Shared.Resources.Artists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to First name.
         /// </summary>
-        public static string Name {
+        public static string FirstName {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("FirstName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name has to be filled in! .
+        ///   Looks up a localized string similar to First name has to be filled in! .
         /// </summary>
-        public static string NameError {
+        public static string FirstNameError {
             get {
-                return ResourceManager.GetString("NameError", resourceCulture);
+                return ResourceManager.GetString("FirstNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name has to be filled in!.
+        /// </summary>
+        public static string LastnameError {
+            get {
+                return ResourceManager.GetString("LastnameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postalcode.
+        /// </summary>
+        public static string Postalcode {
+            get {
+                return ResourceManager.GetString("Postalcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postalcode has to be filled in!.
+        /// </summary>
+        public static string PostalcodeError {
+            get {
+                return ResourceManager.GetString("PostalcodeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street.
+        /// </summary>
+        public static string Street {
+            get {
+                return ResourceManager.GetString("Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street has to be filled in!.
+        /// </summary>
+        public static string StreetError {
+            get {
+                return ResourceManager.GetString("StreetError", resourceCulture);
             }
         }
         

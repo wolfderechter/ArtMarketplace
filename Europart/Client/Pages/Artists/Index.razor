@@ -36,8 +36,8 @@
                     <div class="profile-pic">
                         <a href="/artist/@artist.Id"><img src="@artist.ImagePath" /></a>
                     </div>
-                    <h2>@artist.Name</h2>
-                    <span class="locatie"><img src="images/locate.svg" /> @artist.Address.City</span><br />
+                    <h2>@(artist.FirstName + " " + artist.LastName)</h2>
+                    <span class="locatie"><img src="images/locate.svg" /> @artist.Postalcode</span><br />
                     <span class="kunstwerken">@artist.AmountOfArtworks @Loc["artworks"]</span>
                 </div>
             </div>

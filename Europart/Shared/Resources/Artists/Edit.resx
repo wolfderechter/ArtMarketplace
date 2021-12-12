@@ -126,14 +126,38 @@
   <data name="CityError" xml:space="preserve">
     <value>City has to be filled in! </value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CountryError" xml:space="preserve">
+    <value>Country has to be filled in!</value>
+  </data>
   <data name="EditArtist" xml:space="preserve">
     <value>Edit artist</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
   </data>
-  <data name="NameError" xml:space="preserve">
-    <value>Name has to be filled in! </value>
+  <data name="FirstNameError" xml:space="preserve">
+    <value>First name has to be filled in! </value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="LastnameError" xml:space="preserve">
+    <value>Last name has to be filled in!</value>
+  </data>
+  <data name="Postalcode" xml:space="preserve">
+    <value>Postalcode</value>
+  </data>
+  <data name="PostalcodeError" xml:space="preserve">
+    <value>Postalcode has to be filled in!</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="StreetError" xml:space="preserve">
+    <value>Street has to be filled in!</value>
   </data>
   <data name="Web" xml:space="preserve">
     <value>Website/portfolio</value>

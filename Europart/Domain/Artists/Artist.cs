@@ -8,9 +8,13 @@ namespace EuropArt.Domain.Artists
     public class Artist
     {
         public int Id { get; set; }
-        public ArtistName Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Nickname { get; set; }
-        public Address Address { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string Postalcode { get; set; }
+        public string Street { get; set; }
         //public IEnumerable<string> ImagePaths { get; set; }
         public string ImagePath { get; set; }
         public IEnumerable<Artwork> Artworks { get; set; }
@@ -27,8 +31,12 @@ namespace EuropArt.Domain.Artists
 
         public Artist(string firstname, string lastname, string country, string city, string postalcode, string street, string imagepath, DateTime dateCreated, string biography, string website)
         {
-            Name = new ArtistName(firstname, lastname);
-            Address = new Address(country, city, postalcode, street);
+            FirstName = firstname;
+            LastName = lastname;
+            Country = country;
+            City = city;
+            Postalcode = postalcode;
+            Street = street;
             ImagePath = imagepath;
             DateCreated = dateCreated;
             Biography = biography;
