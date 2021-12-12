@@ -28,6 +28,20 @@ namespace EuropArt.Shared.Artists
             public List<ArtworkDto.Detail> Artworks { get; set; } = new();
         }
 
+        public class Create
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Country { get; set; }
+            public string Street { get; set; }
+            public string City { get; set; }
+            public string PostalCode { get; set; }
+            public string Nickname { get; set; }
+            public string Biography { get; set; }
+            public string Website { get; set; }
+            public string TelephoneNr { get; set; }
+        }
+
         public class Edit
         {
             public ArtistName Name { get; set; }

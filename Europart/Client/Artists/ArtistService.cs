@@ -52,5 +52,11 @@ namespace EuropArt.Client.Artists
         {
             await client.DeleteAsync($"{endpoint}/{request.ArtistId}");
         }
+
+        public async Task<ArtistResponse.Create> CreateAsync(ArtistRequest.Create request)
+        {
+            var response = await client.PostAsJsonAsync(endpoint, request);
+            return await response.Content.ReadFromJsonAsync<ArtistResponse.Create>();
+        }
     }
 }

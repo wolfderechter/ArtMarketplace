@@ -24,6 +24,11 @@ namespace EuropArt.Shared.Artists
 
         }
 
+        public class Create
+        {
+            public int ArtistId { get; set; }
+        }
+
         public class Edit
         {
             public int ArtistId { get; set; }

@@ -13,6 +13,7 @@ namespace EuropArt.Shared.Artists
         Task<ArtistResponse.GetDetail> GetDetailAsync(ArtistRequest.GetDetail request);
         Task<ArtistResponse.Edit> EditAsync(ArtistRequest.Edit request);
         Task DeleteAsync(ArtistRequest.Delete request);
+        Task<ArtistResponse.Create> CreateAsync(ArtistRequest.Create request);
 
 
     }

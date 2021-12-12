@@ -149,5 +149,20 @@ namespace EuropArt.Services.Artists
 
             return response;
         }
+
+        public async Task<ArtistResponse.Create> CreateAsync(ArtistRequest.Create request)
+        {
+            await Task.Delay(100);
+            ArtistResponse.Create response = new();
+
+            var model = request.Artist;
+
+            var artist = artists.Add(new Artist(model.FirstName, model.LastName, model.Country, model.City, model.PostalCode, model.Street, "", DateTime.Now, model.Biography, model.Website, ""));
+
+            await dbContext.SaveChangesAsync();
+            response.ArtistId = artist.Entity.Id;
+
+            return response;
+        }
     }
 }

@@ -2,6 +2,9 @@
 {
     partial class ArtistRegistration
     {
-        
+        public void SignUp()
+        {
+
+        }
     }
 }

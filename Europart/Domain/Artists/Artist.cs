@@ -19,13 +19,14 @@ namespace EuropArt.Domain.Artists
         public string Website { get; set; }
         public string TelephoneNr { get; set; }
         public bool IsVerified { get; set; }
+        public string AuthId { get; set; }
 
         public Artist()
         {
 
         }
 
-        public Artist(string firstname, string lastname, string country, string city, string postalcode, string street, string imagepath, DateTime dateCreated, string biography, string website)
+        public Artist(string firstname, string lastname, string country, string city, string postalcode, string street, string imagepath, DateTime dateCreated, string biography, string website, string authid)
         {
             Name = new ArtistName(firstname, lastname);
             Address = new Address(country, city, postalcode, street);
@@ -34,6 +35,7 @@ namespace EuropArt.Domain.Artists
             Biography = biography;
             Website = website;
             IsVerified = false;
+            AuthId = authid;
         }
     }
 }
