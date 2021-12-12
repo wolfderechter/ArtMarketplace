@@ -14,9 +14,14 @@ namespace EuropArt.Domain.Artists
     {
 
         public int Id { get; set; }
-        public ArtistName Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         public string Nickname { get; set; }
-        public Address Address { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string Postalcode { get; set; }
+        public string Street { get; set; }
         public string ImagePath { get; set; }
         public IEnumerable<YouthArtwork> Artworks { get; set; }
         public DateTime DateCreated { get; set; }
@@ -26,9 +31,14 @@ namespace EuropArt.Domain.Artists
 
         public YouthArtist(string firstname, string lastname, string imagePath, DateTime dateCreated)
         {
-            Name = new ArtistName(firstname, lastname);
+            FirstName = firstname;
+            LastName = lastname;
             ImagePath = imagePath;
             DateCreated = dateCreated;
+            //Country = country;
+            //City = city;
+            //Postalcode = postalcode;
+            //Street = street;
         }
     }
 }

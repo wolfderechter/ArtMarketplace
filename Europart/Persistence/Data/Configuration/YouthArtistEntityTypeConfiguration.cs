@@ -14,19 +14,12 @@ namespace EuropArt.Persistence.Data.Configuration
         public void Configure(EntityTypeBuilder<YouthArtist> builder)
         {
             builder.HasKey(y => y.Id);
-            builder.OwnsOne(c => c.Name, name =>
-            {
-                name.Property(n => n.FirstName).HasColumnName("Firstname").IsRequired();
-                name.Property(n => n.LastName).HasColumnName("Lastname").IsRequired();
-            }).Navigation(c => c.Name).IsRequired();
-
-            builder.OwnsOne(c => c.Address, address =>
-            {
-                address.Property(a => a.Street).HasColumnName("Street");
-                address.Property(a => a.Postalcode).HasColumnName("Postalcode");
-                address.Property(a => a.City).HasColumnName("City");
-                address.Property(a => a.Country).HasColumnName("Country");
-            }).Navigation(c => c.Address).IsRequired();
+            builder.Property(n => n.FirstName).HasColumnName("Firstname").IsRequired();
+            builder.Property(n => n.LastName).HasColumnName("Lastname").IsRequired();
+            builder.Property(a => a.Street).HasColumnName("Street");
+            builder.Property(a => a.Postalcode).HasColumnName("Postalcode");
+            builder.Property(a => a.City).HasColumnName("City");
+            builder.Property(a => a.Country).HasColumnName("Country");
         }
     }
 }

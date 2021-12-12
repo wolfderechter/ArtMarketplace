@@ -42,10 +42,10 @@ namespace EuropArt.Client.Artists
             return response;
         }
 
-        //nog implementeren
-        public Task<ArtistResponse.Edit> EditAsync(ArtistRequest.Edit request)
+        public async Task<ArtistResponse.Edit> EditAsync(ArtistRequest.Edit request)
         {
-            throw new NotImplementedException();
+            var response = await client.PutAsJsonAsync(endpoint, request);
+            return await response.Content.ReadFromJsonAsync<ArtistResponse.Edit>();
         }
 
         public async Task DeleteAsync(ArtistRequest.Delete request)

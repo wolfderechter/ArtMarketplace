@@ -99,11 +99,14 @@ namespace EuropArt.Services.Artworks
                 Id = x.Id,
                 Name = x.Name,
                 ArtistId = x.Artist.Id,
-                ArtistName = x.Artist.Name,
+                ArtistFirstName = x.Artist.FirstName,
+                ArtistLastName = x.Artist.LastName,
                 Description = x.Description,
                 Price = x.Price.Value,
                 DateCreated = x.DateCreated,
                 ImagePath = x.ImagePath,
+                Style = x.Style,
+                Category = x.Category,
             })
             .SingleOrDefaultAsync(x => x.Id == request.ArtworkId);
 
@@ -176,7 +179,8 @@ namespace EuropArt.Services.Artworks
                     Price = x.Price,
                     DateCreated = x.DateCreated,
                     ArtistId = x.Artist.Id,
-                    ArtistName = x.Artist.Name
+                    ArtistFirstName = x.Artist.FirstName,
+                    ArtistLastName = x.Artist.LastName
                 }).ToList();
 
                 return response;
@@ -195,7 +199,8 @@ namespace EuropArt.Services.Artworks
                 Price = x.Price.Value,
                 DateCreated = x.DateCreated,
                 ArtistId = x.Artist.Id,
-                ArtistName = x.Artist.Name
+                ArtistFirstName = x.Artist.FirstName,
+                ArtistLastName = x.Artist.LastName
             }).ToList();
 
             return response;

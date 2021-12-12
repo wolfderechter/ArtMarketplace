@@ -13,12 +13,12 @@ else
 {
     <div class="row">
         <div class="col-6">
-            <h2 class="Kunstenaar">@artist.Name.ToString()</h2>
+            <h2 class="Kunstenaar">@(artist.FirstName + " " + artist.LastName)</h2>
         </div>
         <div class="col-6 text-end">
             <AuthorizeView>
                 <div class="admin-buttons">
-                    <a href="artist/edit/@Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
+                    <a href="artist/edit/@artist.Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
                     <AuthorizeView Roles="Admin" Context="bruh">
                         @if (RequestingDelete)
                         {
@@ -45,7 +45,7 @@ else
         </div>
         <div class="col-8 mb-5">
             <p>
-                <img src="images/locate.svg" class="location" /> @artist.Address.City
+                <img src="images/locate.svg" class="location" /> @artist.City
             </p>
             <p>
                 Joined on @artist.DateCreated.ToString("dd MMMM yyyy")
@@ -89,7 +89,6 @@ else
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtistService ArtistService { get; set; }
-    [Inject] public IArtworkService ArtworkService { get; set; }
     [Inject] NavigationManager NavigationManager { get; set; }
 
     protected override async Task OnParametersSetAsync()
@@ -104,8 +103,6 @@ else
         var request = new ArtistRequest.Delete { ArtistId = Id };
         await ArtistService.DeleteAsync(request);
 
-        //nog uitwerken: artiest zijn kunstwerken verwijderen via api call
-        //await ArtworkService.DeleteArtistAsync(Id);
         NavigationManager.NavigateTo("/artist");
     }
 

@@ -40,15 +40,19 @@ namespace EuropArt.Services.Artists
         {
             ArtistResponse.Edit response = new();
             //artist exists?
-            var artist = await GetArtistById(request.ArtistId).SingleOrDefaultAsync();
+            var artist = await artists.Where(p => p.Id == request.ArtistId).SingleOrDefaultAsync();
 
             if(artist is not null)
             {
                 var model = request.Artist;
                 //artist aanpassen
-                artist.Name = model.Name;
+                artist.FirstName = model.FirstName;
+                artist.LastName = model.LastName;
                 artist.Biography = model.Biography;
-                artist.Address = model.Address;
+                artist.Country = model.Country;
+                artist.City = model.City;
+                artist.Postalcode = model.Postalcode;
+                artist.Street = model.Street;
                 artist.Website = model.Website;
                 //artist.ImagePath = model.ImagePath;
 
@@ -56,6 +60,7 @@ namespace EuropArt.Services.Artists
                 dbContext.Entry(artist).State = EntityState.Modified;
                 await dbContext.SaveChangesAsync();
                 response.ArtistId = artist.Id;
+                Console.WriteLine("Artist editted in service");
             }
 
             return response;
@@ -69,8 +74,12 @@ namespace EuropArt.Services.Artists
             {
                 Id = x.Id,
                 Biography = x.Biography,
-                Address = x.Address,
-                Name = x.Name,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Postalcode = x.Postalcode,
+                Country = x.Country,
+                City = x.City,
+                Street = x.Street,
                 Website = x.Website,
                 ImagePath = x.ImagePath,
                 DateCreated = x.DateCreated,
@@ -96,14 +105,14 @@ namespace EuropArt.Services.Artists
             var query = artists.AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
-                query = query.Where(x => (x.Name.FirstName + " " + x.Name.LastName).Contains(request.Searchterm));
+                query = query.Where(x => (x.FirstName + " " + x.LastName).Contains(request.Searchterm));
 
             if (request.OrderBy is not null)
             {
                 switch (request.OrderBy.Value)
                 {
                     case OrderByArtist.OrderByName:
-                        query = query.OrderBy(x => x.Name.FirstName + " " + x.Name.LastName);
+                        query = query.OrderBy(x => x.FirstName + " " + x.LastName);
                         break;
                     case OrderByArtist.OrderByNewest:
                         query = query.OrderByDescending(x => x.DateCreated);
@@ -124,8 +133,9 @@ namespace EuropArt.Services.Artists
                 response.Artists = query.Select(x => new ArtistDto.Index
                 {
                     Id = x.Id,
-                    Name = x.Name,
-                    Address = x.Address,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Postalcode = x.Postalcode,
                     ImagePath = x.ImagePath,
                     AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count(),
                     DateCreated = x.DateCreated
@@ -140,8 +150,9 @@ namespace EuropArt.Services.Artists
             response.Artists = query.Select(x => new ArtistDto.Index
             {
                 Id = x.Id,
-                Name = x.Name,
-                Address = x.Address,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Postalcode = x.Postalcode,
                 ImagePath = x.ImagePath,
                 AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count(),
                 DateCreated = x.DateCreated

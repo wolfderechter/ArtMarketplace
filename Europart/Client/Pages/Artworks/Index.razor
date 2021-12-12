@@ -97,7 +97,7 @@
                                 <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
                                 <span class="prijs">@artwork.Price.ToString("C")</span>
                             </div>
-                            <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@artwork.ArtistName</a></span>
+                            <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></span>
                         </div>
                     </div>
                 }

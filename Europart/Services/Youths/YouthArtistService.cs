@@ -42,8 +42,12 @@ namespace EuropArt.Services.Youths
             response.Artist = await youthArtists.AsNoTracking().Where(p => p.Id == request.YouthArtistId).Select(x => new YouthArtistDto.Detail
             {
                 Id = x.Id,
-                Address = x.Address,
-                Name = x.Name,
+                //Country = x.Country;
+                //City = x.City;
+                //Postalcode = x.Postalcode;
+                //Street = x.Street;
+                FirstName = x.FirstName,
+                LastName = x.LastName,
                 ImagePath = x.ImagePath,
                 DateCreated = x.DateCreated,
                 Artworks = youthArtworks.Where(aw => aw.YouthArtist.Id == x.Id).Select(y => new YouthArtworkDto.Detail
@@ -67,7 +71,7 @@ namespace EuropArt.Services.Youths
             var query = youthArtists.AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
-                query = query.Where(x => x.Name.ToString().Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
+                query = query.Where(x => (x.FirstName + " " + x.LastName).Contains(request.Searchterm, StringComparison.OrdinalIgnoreCase));
 
             var query2 = new List<YouthArtist>(); 
             /*if (request.OrderBy is not null)
@@ -98,8 +102,9 @@ namespace EuropArt.Services.Youths
                 response.YouthArtists = query.Select(x => new YouthArtistDto.Index
                 {
                     Id = x.Id,
-                    Name = x.Name,
-                    Address = x.Address,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    //City = x.city, ..... nog uitwerken
                     ImagePath = x.ImagePath,
                     AmountOfArtworks = youthArtworks.Where(aw => aw.YouthArtist.Id == x.Id).Count(),
                     DateCreated = x.DateCreated
@@ -114,8 +119,9 @@ namespace EuropArt.Services.Youths
             response.YouthArtists = query2.Select(x => new YouthArtistDto.Index
             {
                 Id = x.Id,
-                Name = x.Name,
-                Address = x.Address,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                //Address = x.Address,
                 ImagePath = x.ImagePath,
                 AmountOfArtworks = youthArtworks.Where(aw => aw.YouthArtist.Id == x.Id).Count(),
                 DateCreated = x.DateCreated

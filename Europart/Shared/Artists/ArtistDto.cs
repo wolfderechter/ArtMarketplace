@@ -13,16 +13,20 @@ namespace EuropArt.Shared.Artists
         public class Index
         {
             public int Id { get; set; }
-            public ArtistName Name { get; set; }
-            public Address Address { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
             public string ImagePath { get; set; }
             public int AmountOfArtworks { get; set; }
             public string Email { get; set; }
+            public string Postalcode { get; set; }
             public DateTime DateCreated { get; set; }
         }
 
         public class Detail : Index
         {
+            public string Country { get; set; }
+            public string City { get; set; }
+            public string Street { get; set; }
             public string Biography { get; set; }
             public string Website { get; set; }
             public List<ArtworkDto.Detail> Artworks { get; set; } = new();
@@ -44,18 +48,28 @@ namespace EuropArt.Shared.Artists
 
         public class Edit
         {
-            public ArtistName Name { get; set; }
-            public Address Address { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            //address
+            public string Country { get; set; }
+            public string City { get; set; }
+            public string Postalcode { get; set; }
+            public string Street { get; set; }
             public string Biography { get; set; }
             public string Website { get; set; }
-            public class ArtistValidator : AbstractValidator<ArtistDto.Edit>
+            public class ArtistValidator : AbstractValidator<Edit>
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
                 {
-                    RuleFor(P => P.Name).NotEmpty().WithMessage(Loc["NameError"]);
-                    RuleFor(p => p.Address).NotEmpty().WithMessage(Loc["CityError"]);
+                    RuleFor(P => P.FirstName).NotEmpty().WithMessage(Loc["LastNameError"]);
+                    RuleFor(P => P.LastName).NotEmpty().WithMessage(Loc["FirstNameError"]);
+                    RuleFor(p => p.Country).NotEmpty().WithMessage(Loc["CountryError"]);
+                    RuleFor(p => p.City).NotEmpty().WithMessage(Loc["CityError"]);
+                    RuleFor(p => p.Postalcode).NotEmpty().WithMessage(Loc["PostalcodeError"]);
+                    RuleFor(p => p.Street).NotEmpty().WithMessage(Loc["StreetError"]);
                 }
             }
+
         }
     }
 }
