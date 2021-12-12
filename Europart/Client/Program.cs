@@ -35,8 +35,12 @@ namespace EuropArt.Client
             builder.Services.AddScoped<Shoppingcart>();
             builder.Services.AddHttpClient<StorageService>();
 
+            //private http client for authorized api calls
             builder.Services.AddHttpClient("HooopGalleryAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
             .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+            //public http client for unauthorized api calls
+            builder.Services.AddHttpClient<PublicClient>("PublicHooopGalleryAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("HooopGalleryAPI"));
 

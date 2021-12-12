@@ -7,7 +7,6 @@ namespace EuropArt.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [AllowAnonymous]
     public class ArtworkController : ControllerBase
     {
         private readonly IArtworkService artworkService;

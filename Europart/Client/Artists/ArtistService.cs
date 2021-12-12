@@ -1,4 +1,5 @@
 ﻿using EuropArt.Client.Extensions;
+using EuropArt.Client.Infrastructure;
 using EuropArt.Shared.Artists;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace EuropArt.Client.Artists
     public class ArtistService : IArtistService
     {
         private readonly HttpClient client;
+        private readonly PublicClient publicClient;
         private const string endpoint = "api/Artist";
-        public ArtistService(HttpClient client)
+        public ArtistService(HttpClient client, PublicClient publicClient)
         {
             this.client = client;
+            this.publicClient = publicClient;
         }
 
         public async Task<ArtistResponse.GetIndex> GetIndexAsync(ArtistRequest.GetIndex request)
@@ -23,7 +26,7 @@ namespace EuropArt.Client.Artists
             //var response = await client.GetFromJsonAsync<ArtistResponse.GetIndex>(endpoint);
 
             var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<ArtistResponse.GetIndex>($"{endpoint}?{queryParameters}");
+            var response = await publicClient.Client.GetFromJsonAsync<ArtistResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
         }
 
@@ -35,7 +38,7 @@ namespace EuropArt.Client.Artists
 
         public async Task<ArtistResponse.GetDetail> GetDetailAsync(ArtistRequest.GetDetail request)
         {
-            var response = await client.GetFromJsonAsync<ArtistResponse.GetDetail>($"{endpoint}/{request.ArtistId}");
+            var response = await publicClient.Client.GetFromJsonAsync<ArtistResponse.GetDetail>($"{endpoint}/{request.ArtistId}");
             return response;
         }
 
