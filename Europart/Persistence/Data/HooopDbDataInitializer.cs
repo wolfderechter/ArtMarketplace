@@ -22,10 +22,10 @@ namespace EuropArt.Persistence.Data
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
-                Artist artist1 = new Artist("Stef", "Boerjan", "Belgium", "Lokeren", "9160", "Park de Rode Poort 9", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/123.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Justine.be");
-                Artist artist2 = new Artist("Lander", "Steenput", "Belgium", "Zele", "3800", "Magda Cafmeyerstraat 2", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/124.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Lander.be");
-                Artist artist3 = new Artist("Alex", "De Cock", "Belgium", "Oudenaarde", "9300", "Paalstraat 3", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/125.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Alex.be");
-                Artist artist4 = new Artist("Gert", "Meert", "Belgium", "Aalst", "8700", "Pauverleutestraat 6", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/126.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Gert.be");
+                Artist artist1 = new Artist("Stef", "Boerjan", "Belgium", "Lokeren", "9160", "Park de Rode Poort 9", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/123.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Justine.be", "auth0|619aaf7421f2b9006fb6eeaa");
+                Artist artist2 = new Artist("Wolf", "De Rechter", "Belgium", "Zele", "3800", "Magda Cafmeyerstraat 2", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/124.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Lander.be", "auth0|619e6d8a8a4c39007207b719");
+                Artist artist3 = new Artist("Alex", "De Cock", "Belgium", "Oudenaarde", "9300", "Paalstraat 3", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/125.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Alex.be", "auth0|61b650bcfcbfe500716d6b1d");
+                Artist artist4 = new Artist("Gert", "Meert", "Belgium", "Aalst", "8700", "Pauverleutestraat 6", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/126.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Gert.be", "auth0|61b650d61c2b8d0069dc044e");
 
                 YouthArtist youthArtist1 = new YouthArtist("Logan", "De Vriend", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/146.jpg", DateTime.Now);
                 YouthArtist youthArtist2 = new YouthArtist("Jason", "Smet", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/156.jpg", DateTime.Now);
@@ -43,14 +43,14 @@ namespace EuropArt.Persistence.Data
                 Artwork artwork4 = new Artwork("Koffielepel", new Money(65M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-80), "modern", "painting");
                 Artwork artwork5 = new Artwork("Tas", new Money(43M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-200), "abstract", "photography");
                 Artwork artwork6 = new Artwork("Hesp", new Money(543M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-25), "minimalism", "drawings");
-                Artwork artwork7 = new Artwork("Kaas", new Money(23M), "dit is een beschrijving", artist6, DateTime.Now.AddHours(-320), "surrealism", "drawings");
-                Artwork artwork8 = new Artwork("Auto", new Money(96M), "dit is een beschrijving", artist9, DateTime.Now.AddHours(-430), "modern", "painting");
-                Artwork artwork9 = new Artwork("Maan", new Money(58M), "dit is een beschrijving", artist6, DateTime.Now.AddHours(-290), "minimalism", "photography");
+                Artwork artwork7 = new Artwork("Kaas", new Money(23M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-320), "surrealism", "drawings");
+                Artwork artwork8 = new Artwork("Auto", new Money(96M), "dit is een beschrijving", artist1, DateTime.Now.AddHours(-430), "modern", "painting");
+                Artwork artwork9 = new Artwork("Maan", new Money(58M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-290), "minimalism", "photography");
                 Artwork artwork10 = new Artwork("Feest", new Money(24M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-180), "abstract", "painting");
-                Artwork artwork11 = new Artwork("Tafel", new Money(38M), "dit is een beschrijving", artist8, DateTime.Now.AddHours(-90), "minimalism", "painting");
-                Artwork artwork12 = new Artwork("Stoel", new Money(10M), "dit is een beschrijving", artist8, DateTime.Now.AddHours(-60), "surrealism", "photography");
-                Artwork artwork13 = new Artwork("Bank", new Money(201M), "dit is een beschrijving", artist8, DateTime.Now.AddHours(-50), "minimalism", "drawings");
-                Artwork artwork14 = new Artwork("Vliegtuig", new Money(158M), "dit is een beschrijving", artist14, DateTime.Now.AddHours(-4), "abstract", "drawings");
+                Artwork artwork11 = new Artwork("Tafel", new Money(38M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-90), "minimalism", "painting");
+                Artwork artwork12 = new Artwork("Stoel", new Money(10M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-60), "surrealism", "photography");
+                Artwork artwork13 = new Artwork("Bank", new Money(201M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-50), "minimalism", "drawings");
+                Artwork artwork14 = new Artwork("Vliegtuig", new Money(158M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-4), "abstract", "drawings");
 
                 YouthArtwork youthArtwork1 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
                 YouthArtwork youthArtwork2 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
