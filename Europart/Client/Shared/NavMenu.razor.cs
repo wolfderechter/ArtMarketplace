@@ -11,6 +11,7 @@ namespace EuropArt.Client.Shared
         [Inject] public Shoppingcart Cart { get; set; }
         private string NavMenuCssClass =>(collapseNavMenu ? " collapse" : "");
         private bool show = false;
+        private string display = "none";
 
         private void ToggleNavMenu()
         {
@@ -41,6 +42,10 @@ namespace EuropArt.Client.Shared
         {
             collapseNavMenu = !collapseNavMenu;
             show = !show;
+            if (show)
+                display = "flex";
+            else
+                display = "none";
         }
 
         private void BeginSignOut()
@@ -48,6 +53,11 @@ namespace EuropArt.Client.Shared
             ToggleAccountDropdown();
             SignOutManager.SetSignOutState();
             NavigationManager.NavigateTo("authentication/logout");
+        }
+
+        public void OverlayClicked()
+        {
+            ToggleAccountDropdown();
         }
     }
 }
