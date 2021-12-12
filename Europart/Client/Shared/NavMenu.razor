@@ -17,7 +17,7 @@
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">EuropArt</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>*@
-                <ul class="navbar-nav justify-content-center flex-grow-1">
+                <ul class="navbar-nav justify-content-center flex-grow-1" style="padding-top:8px;">
                     <li class="nav-item">
                         <NavLink class="nav-link" href="artwork">@Loc["Artworks"]</NavLink>
                     </li>
@@ -51,16 +51,16 @@
                     </NavLink>*@
                 <AuthorizeView>
                     <Authorized>
-                        <div class="dropdown show shoppingcart"   >
+                        <div class="dropdown show shoppingcart" id="dropdown">
                             <a class=" dropdown-toggle text-white" role="button" id="dropdownMenuLink" @onclick="ToggleAccountDropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="/images/user.svg" />
                             </a>
-
+                            <div id="overlay" @onclick="OverlayClicked" style="display:@display;"></div>
                             <div class="dropdown-menu @(show? "show":"")" aria-labelledby="dropdownMenuLink" @onclick="ToggleNavMenu">
                                 <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="account">@Loc["Profile"]</a>
                                 <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="messages">@Loc["Messages"]</a>
                                 <a class="dropdown-item" @onclick="BeginSignOut" href="#">@Loc["Logout"]</a>
-                            </div>
+                            </div> 
                         </div>
                     </Authorized>
                     <NotAuthorized>
@@ -78,3 +78,4 @@
         </div>
     </div>
 </nav>
+
