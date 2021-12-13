@@ -168,7 +168,7 @@ namespace EuropArt.Services.Artists
 
             var model = request.Artist;
 
-            var artist = artists.Add(new Artist(model.FirstName, model.LastName, model.Country, model.City, model.PostalCode, model.Street, "", DateTime.Now, model.Biography, model.Website, ""));
+            var artist = artists.Add(new Artist(model.FirstName, model.LastName, model.Country, model.City, model.PostalCode, model.Street, "", DateTime.Now, model.Biography, model.Website, model.AuthId));
 
             await dbContext.SaveChangesAsync();
             response.ArtistId = artist.Entity.Id;

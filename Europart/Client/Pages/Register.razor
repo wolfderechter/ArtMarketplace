@@ -1,13 +1,29 @@
 ﻿@page "/register"
 @inject IStringLocalizer<EuropArt.Shared.Resources.Register> Loc
+@using System.Web
 
 <div class="container-lg content">
     <h1 class="text-center">@Loc["I am a"]</h1>
     <div class="text-center">
-        <NavLink class="big-button"  href="register/user">@Loc["User"]</NavLink>
-        <NavLink class="big-button" href="register/artist">@Loc["Artist"]</NavLink>
-        <NavLink class="big-button" href="register/artist">@Loc["Youth Artist"]</NavLink>
+        <NavLink class="big-button"  href="@userRef">@Loc["User"]</NavLink>
+        <NavLink class="big-button" href="@artistRef">@Loc["Artist"]</NavLink>
+        <NavLink class="big-button" href="@youthRef">@Loc["Youth Artist"]</NavLink>
     </div>
 </div>
 
-@code { }
+@code {
+    [Inject] NavigationManager navigationManager { get; set; }
+    public string userRef = "register/user/";
+    private string artistRef = "register/artist/";
+    private string youthRef = "register/youth/";
+    protected override async Task OnInitializedAsync()
+        {
+            Uri myUri = new Uri(navigationManager.Uri);
+            string originalState = HttpUtility.ParseQueryString(myUri.Query).Get("state");
+            Console.WriteLine(originalState);
+            userRef += originalState;
+            artistRef += originalState;
+            youthRef += originalState;
+            
+        }
+}

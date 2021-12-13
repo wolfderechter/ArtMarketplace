@@ -44,6 +44,23 @@ namespace EuropArt.Shared.Artists
             public string Biography { get; set; }
             public string Website { get; set; }
             public string TelephoneNr { get; set; }
+            public DateTime DateCreated { get; set; }
+            public string AuthId { get; set; }
+            public class ArtistValidator : AbstractValidator<Create>
+            {
+                public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
+                {
+                    RuleFor(P => P.FirstName).NotEmpty().WithMessage(Loc["LastNameError"]);
+                    RuleFor(P => P.LastName).NotEmpty().WithMessage(Loc["FirstNameError"]);
+                    RuleFor(p => p.Country).NotEmpty().WithMessage(Loc["CountryError"]);
+                    RuleFor(p => p.City).NotEmpty().WithMessage(Loc["CityError"]);
+                    RuleFor(p => p.PostalCode).NotEmpty().WithMessage(Loc["PostalcodeError"]);
+                    RuleFor(p => p.Street).NotEmpty().WithMessage(Loc["StreetError"]);
+                    RuleFor(p => p.Nickname).NotEmpty().WithMessage(Loc["NicknameError"]);
+                    RuleFor(p => p.TelephoneNr).NotEmpty().WithMessage(Loc["TelephoneNrError"]);
+                    
+                }
+            }
         }
 
         public class Edit
