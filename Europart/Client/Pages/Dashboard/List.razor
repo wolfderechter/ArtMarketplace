@@ -50,7 +50,7 @@
         {
             <div class="col-12">
                 <div class="block">
-                    <img src="@artwork.ImagePath" />
+                    <img src="@artwork.ImagePaths[0].imagePath" />
                     <span>@artwork.Name</span>
                     <span>@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</span>
                     <span>@artwork.Price.ToString("C")</span>
@@ -75,7 +75,7 @@
         {
             <div class="col-12">
                 <div class="block">
-                    <img src="@artworks.ElementAt(i).ImagePath" />
+                    <img src="@artworks.ElementAt(i).ImagePaths[0].imagePath" />
                     <span>@(artworks.ElementAt(i).ArtistFirstName + " " + artworks.ElementAt(i).ArtistLastName)</span>
                     <span>@artworks.ElementAt(i).Price.ToString("C")</span>
                     <span>door Gebruiker</span>

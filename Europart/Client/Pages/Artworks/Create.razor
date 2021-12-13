@@ -52,13 +52,16 @@
             </div>
             <div class="mb-3">
                 <h6>@Loc["ChooseArtwork"]</h6>
-                <InputFile OnChange="LoadImage" class="file-input" type="file" name="artwork" accept="image/*" />
-                @if (image is not null)
-                {
-                    <span class="file-name">
-                        @image.Name
-                    </span>
-                }
+                <InputFile OnChange="LoadImages" class="file-input" name="artwork" accept="image/*" multiple/>
+                <div class="col">
+                    @foreach(var file in images)
+                    {
+                        <span class="file-name row gx-0">
+                            @file.Name
+                        </span>
+                    }
+                </div>
+
                 <ValidationMessage For="@(() => newArtwork.ImagePath)" />
 
             </div>
@@ -69,9 +72,10 @@
     </div>
 </div>
 
-@code { 
+@code {
     ArtworkDto.Create newArtwork = new() {};
     private IBrowserFile image;
+    private List<IBrowserFile> images = new();
 
     private async Task CreateNewArtwork()
     {
@@ -79,6 +83,7 @@
         //newArtwork.ImagePath = "/images/NewArtwork.jpg";
         newArtwork.DateCreated = DateTime.Now;
         newArtwork.ImagePath = image.Name;
+        newArtwork.ImagePaths = images.Select(x => x.Name).ToList();
 
         ArtworkRequest.Create request = new()
         {
@@ -87,12 +92,20 @@
 
         //response zal sas-token bevatten uiteindelijk
         var response = await ArtworkService.CreateAsync(request);
-        await StorageService.UploadImageAsync(response.UploadUri, image);
+        for(var i = 0; i < response.UploadUris.Count(); i++)
+        {
+            var uploadUri = response.UploadUris[i];
+            await StorageService.UploadImageAsync(uploadUri, images[i]);
+
+        }
         NavigationManager.NavigateTo("/artwork");
     }
 
-    private void LoadImage(InputFileChangeEventArgs args)
+    private void LoadImages(InputFileChangeEventArgs args)
     {
-        image = args.File;
+        foreach(var file in args.GetMultipleFiles())
+        {
+            images.Add(file);
+        }
     }
 }

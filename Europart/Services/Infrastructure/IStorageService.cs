@@ -9,6 +9,9 @@ namespace EuropArt.Services.Infrastructure
     public interface IStorageService
     {
         string StorageBaseUri { get; }
-        Uri CreateUploadUri(string fileName);
+        Uri CreateUploadUriArtworks(string fileName);
+        Uri CreateUploadUriProfilePictures(string fileName);
+        void DeleteArtworksImage(string fileName);
+        void DeleteProfilePictureImage(string fileName);
     }
 }

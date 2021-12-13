@@ -27,12 +27,15 @@ namespace EuropArt.Shared.Artworks
         public class Create
         {
             public int ArtworkId { get; set; }
-            public Uri UploadUri { get; set; }
+            //public Uri UploadUri { get; set; }
+            public List<Uri> UploadUris { get; set; }
         }
 
         public class Edit
         {
             public int ArtworkId { get; set; }
+            public List<Uri> UploadUris { get; set; }
+
         }
     }
 }

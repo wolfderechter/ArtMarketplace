@@ -32,6 +32,8 @@ namespace EuropArt.Shared.Artists
         public class Edit
         {
             public int ArtistId { get; set; }
+            public Uri UploadUri { get; set; }
+
         }
     }
 }

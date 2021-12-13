@@ -64,20 +64,21 @@ namespace EuropArt.Persistence.Data
                 YouthArtwork youthArtwork10 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
                 YouthArtwork youthArtwork11 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
 
-                artwork1.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/1.jpg";
-                artwork2.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/2.jpg";
-                artwork3.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/3.jpg";
-                artwork4.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/4.jpg";
-                artwork5.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/5.jpg";
-                artwork6.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/6.jpg";
-                artwork7.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/7.jpg";
-                artwork8.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/8.jpg";
-                artwork9.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/9.jpg";
-                artwork10.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/10.jpg";
-                artwork11.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/11.jpg";
-                artwork12.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/12.jpg";
-                artwork13.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/13.jpg";
-                artwork14.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/14.jpg";
+                artwork1.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/1.jpg"));
+                artwork1.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/22.jpg"));
+                artwork2.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/2.jpg"));
+                artwork3.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/3.jpg"));
+                artwork4.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/4.jpg"));
+                artwork5.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/5.jpg"));
+                artwork6.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/6.jpg"));
+                artwork7.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/7.jpg"));
+                artwork8.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/8.jpg"));
+                artwork9.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/9.jpg"));
+                artwork10.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/10.jpg"));
+                artwork11.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/11.jpg"));
+                artwork12.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/12.jpg"));
+                artwork13.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/13.jpg"));
+                artwork14.ImagePaths.Add(new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/14.jpg"));
 
                 youthArtwork1.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/1.jpg";
                 youthArtwork2.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/2.jpg";

@@ -1,5 +1,6 @@
 ﻿@page "/artwork/{id:int}"
 @inject NavigationManager NavigationManager
+@using EuropArt.Domain.Common
 @using EuropArt.Shared.Artworks
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Detail> Loc
 @inject IJSRuntime JSRuntime
@@ -24,7 +25,19 @@ else
         </div>
         <div class="col-md-8 col-12">
             <div class="badge-kunstwerk text-center" style="padding: 0;">
-                <img src="@artwork.ImagePath" style="width:auto;">
+                @if(imagepaths is not null)
+                {
+                    if(imagepaths.Count() > 1)
+                    {
+                        <button @onclick="PreviousImage">&lt</button>
+                        <img src="@imagepaths[imageNumber].imagePath" style="width:auto;">
+                        <button @onclick="NextImage">&gt</button>
+
+                    }
+                    else {
+                        <img src="@imagepaths[imageNumber].imagePath" style="width:auto;">
+                    }
+                }
             </div>
             <h2 class="mb-1">@artwork.Name</h2>
             <h4 class="kunstenaar"><a href="/artist/@artwork.ArtistId"><span style="color:#b1b4b7">@Loc["By"]</span> @(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></h4>
@@ -56,6 +69,8 @@ else
 @code {
     private ArtworkDto.Detail artwork = new();
     private bool RequestingDelete;
+    private List<ImagePath> imagepaths;
+    private int imageNumber = 0;
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
@@ -66,6 +81,7 @@ else
         ArtworkRequest.GetDetail request = new() { ArtworkId = Id };
         var response = await ArtworkService.GetDetailAsync(request);
         artwork = response.Artwork;
+        imagepaths = response.Artwork.ImagePaths;
     }
 
     private async Task ConfirmDelete()
@@ -86,7 +102,16 @@ else
 
     private void AddToCart()
     {
-        Cart.AddItem(artwork.Id, artwork.Name, artwork.Price, artwork.ImagePath);
+        Cart.AddItem(artwork.Id, artwork.Name, artwork.Price, artwork.ImagePaths[0].imagePath);
         Console.WriteLine(Cart.Items.Count);
+    }
+
+    private void NextImage()
+    {
+        imageNumber = (imageNumber + 1) % artwork.ImagePaths.Count();
+    }
+    private void PreviousImage()
+    {
+        imageNumber = (imageNumber - 1 + artwork.ImagePaths.Count()) % artwork.ImagePaths.Count();
     }
 }

@@ -92,7 +92,7 @@
                 {
                     <div class="@cols">
                         <div class="badge-kunstwerk">
-                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePaths[0].imagePath"></a>
                             <div class="k-p">
                                 <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
                                 <span class="prijs">@artwork.Price.ToString("C")</span>

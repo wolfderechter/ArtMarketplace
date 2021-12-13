@@ -44,6 +44,8 @@ namespace EuropArt.Shared.Artists
             public string Biography { get; set; }
             public string Website { get; set; }
             public string TelephoneNr { get; set; }
+            public string ImagePath { get; set; }
+
         }
 
         public class Edit
@@ -57,6 +59,8 @@ namespace EuropArt.Shared.Artists
             public string Street { get; set; }
             public string Biography { get; set; }
             public string Website { get; set; }
+            public string ImagePath { get; set; }
+
             public class ArtistValidator : AbstractValidator<Edit>
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
