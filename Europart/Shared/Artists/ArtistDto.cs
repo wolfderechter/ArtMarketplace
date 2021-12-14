@@ -30,6 +30,7 @@ namespace EuropArt.Shared.Artists
             public string Biography { get; set; }
             public string Website { get; set; }
             public List<ArtworkDto.Detail> Artworks { get; set; } = new();
+            public string AuthId { get; set; }
         }
 
         public class Create
@@ -74,6 +75,7 @@ namespace EuropArt.Shared.Artists
             public string Street { get; set; }
             public string Biography { get; set; }
             public string Website { get; set; }
+            public string AuthId { get; set; }
             public class ArtistValidator : AbstractValidator<Edit>
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
@@ -84,6 +86,7 @@ namespace EuropArt.Shared.Artists
                     RuleFor(p => p.City).NotEmpty().WithMessage(Loc["CityError"]);
                     RuleFor(p => p.Postalcode).NotEmpty().WithMessage(Loc["PostalcodeError"]);
                     RuleFor(p => p.Street).NotEmpty().WithMessage(Loc["StreetError"]);
+                    RuleFor(p => p.AuthId).NotEmpty().WithMessage(Loc["AuthId"]);
                 }
             }
 

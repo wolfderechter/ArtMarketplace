@@ -13,7 +13,15 @@
 <AuthorizeView Roles="Buyer">
     <h1>Hello User! @context.User.Identity.Name!</h1>
 </AuthorizeView>
-
+<AuthorizeView>
+    <Authorized>
+        @foreach(var claim in context.User.Claims)
+        {
+            <p>@claim.Value</p>
+        }
+        @context.User.Claims.ElementAt(4).Value
+    </Authorized>
+</AuthorizeView>
 @code{
     private async Task BeginSignOut(MouseEventArgs args)
     {

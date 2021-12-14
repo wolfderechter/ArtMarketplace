@@ -91,6 +91,7 @@ namespace EuropArt.Services.Artists
                     ImagePath = y.ImagePath,
                     Price = y.Price,
                 }).ToList(),
+                AuthId = x.AuthId
             }).SingleOrDefaultAsync();
 
             return response;

@@ -29,13 +29,6 @@ namespace EuropArt.Client.Artists
             var response = await publicClient.Client.GetFromJsonAsync<ArtistResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
         }
-
-        //skip
-        public Task<List<ArtistDto.Index>> GetIndexAsync(string searchterm)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<ArtistResponse.GetDetail> GetDetailAsync(ArtistRequest.GetDetail request)
         {
             var response = await publicClient.Client.GetFromJsonAsync<ArtistResponse.GetDetail>($"{endpoint}/{request.ArtistId}");
