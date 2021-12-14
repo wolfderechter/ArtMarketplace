@@ -15,7 +15,6 @@ namespace EuropArt.Persistence.Data.Configuration
         {
             
             builder.Property(p => p.Name).IsRequired();
-            builder.Property(p => p.ImagePath).IsRequired();
             
             builder.HasOne(p => p.Artist).WithMany(p => p.Artworks);
             builder.OwnsOne(p => p.Price, money =>
@@ -26,6 +25,8 @@ namespace EuropArt.Persistence.Data.Configuration
                     .IsRequired();
             }).Navigation(p => p.Price).IsRequired();
             builder.Property(p => p.DateCreated);
+
+            builder.HasMany(p => p.ImagePaths).WithOne();
         }
     }
 }

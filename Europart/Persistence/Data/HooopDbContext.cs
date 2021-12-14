@@ -1,5 +1,6 @@
 ﻿using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
+using EuropArt.Domain.Common;
 using EuropArt.Domain.YouthArtworks;
 using EuropArt.Persistence.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace EuropArt.Persistence.Data
         public DbSet<YouthArtist> YouthArtists { get; set; }
         public DbSet<Artwork> Artworks { get; set; }
         public DbSet<YouthArtwork> YouthArtworks { get; set; }
+        public DbSet<ImagePath> ImagePaths { get; set; }
         public HooopDbContext(DbContextOptions<HooopDbContext> options) : base(options)
         {
 
@@ -31,6 +33,7 @@ namespace EuropArt.Persistence.Data
             modelBuilder.ApplyConfiguration(new ArtworkEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new YouthArtworkEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new YouthArtistEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ImagePathEntityTypeConfiguration());
             
         }
     }

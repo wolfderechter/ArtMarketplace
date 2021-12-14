@@ -45,6 +45,8 @@ namespace EuropArt.Shared.Artists
             public string Biography { get; set; }
             public string Website { get; set; }
             public string TelephoneNr { get; set; }
+            public string ImagePath { get; set; }
+
             public DateTime DateCreated { get; set; }
             public string AuthId { get; set; }
             public class ArtistValidator : AbstractValidator<Create>
@@ -75,7 +77,12 @@ namespace EuropArt.Shared.Artists
             public string Street { get; set; }
             public string Biography { get; set; }
             public string Website { get; set; }
+<<<<<<< HEAD
             public string AuthId { get; set; }
+=======
+            public string ImagePath { get; set; }
+
+>>>>>>> 5237150d5488e1dba8cd527b2429aaa92300ef1a
             public class ArtistValidator : AbstractValidator<Edit>
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)

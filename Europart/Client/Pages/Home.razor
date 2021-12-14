@@ -31,7 +31,7 @@
             {
                 <div class="kol col-lg-4 col-sm-6 col-12">
                     <div class="badge-kunstwerk">
-                        <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePath"></a>
+                        <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePaths[0].imagePath"></a>
                         <div class="k-p">
                             <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
                             <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
@@ -55,7 +55,7 @@
                 {
                     <div class="kol col-lg-4 col-sm-6 col-12">
                         <div class="badge-kunstwerk">
-                            <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePath"></a>
+                            <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePaths[0].imagePath"></a>
                             <div class="k-p">
                                 <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
                                 <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>

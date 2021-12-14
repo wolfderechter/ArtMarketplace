@@ -1,6 +1,7 @@
-﻿using EuropArt.Domain.Artists;
+using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
 using EuropArt.Persistence.Data;
+using EuropArt.Services.Infrastructure;
 using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
 using EuropArt.Shared.Common;
@@ -18,12 +19,13 @@ namespace EuropArt.Services.Artists
         private readonly HooopDbContext dbContext;
         private readonly DbSet<Artist> artists;
         private readonly DbSet<Artwork> artworks;
-        
-        public ArtistService(HooopDbContext dbContext)
+        private readonly IStorageService storageService;
+        public ArtistService(HooopDbContext dbContext, IStorageService storageService)
         {
             this.dbContext = dbContext;
             artists = dbContext.Artists;
             artworks = dbContext.Artworks;
+            this.storageService = storageService;
         }
 
         private IQueryable<Artist> GetArtistById(int id) => artists
@@ -32,6 +34,11 @@ namespace EuropArt.Services.Artists
 
         public async Task DeleteAsync(ArtistRequest.Delete request)
         {
+            var artist = artists
+                .AsNoTracking()
+                .Where(p => p.Id == request.ArtistId).SingleOrDefault();
+
+            storageService.DeleteProfilePictureImage(artist.ImagePath.Remove(0, artist.ImagePath.LastIndexOf('/') + 1));
             artists.RemoveIf(x => x.Id == request.ArtistId);
             await dbContext.SaveChangesAsync();
         }
@@ -42,9 +49,26 @@ namespace EuropArt.Services.Artists
             //artist exists?
             var artist = await artists.Where(p => p.Id == request.ArtistId).SingleOrDefaultAsync();
 
-            if(artist is not null)
+            if (artist is not null)
             {
                 var model = request.Artist;
+                //only when user wants to change profile picture => request.Artist.ImagePath is not null
+                if (request.Artist.ImagePath is not null)
+                {
+                    var imageExtension = model.ImagePath.Substring(model.ImagePath.LastIndexOf('.'));
+                    var imageFileName = Guid.NewGuid().ToString() + imageExtension;
+                    var imagePath = $"{storageService.StorageBaseUri}profilepictures/{imageFileName}";
+
+                    //Deleten van oude image in blobstorage, filename doorsturen via DeleteProfilePictureImage 
+                    storageService.DeleteProfilePictureImage(artist.ImagePath.Remove(0, artist.ImagePath.LastIndexOf('/') + 1));
+
+                    artist.ImagePath = imagePath;
+
+                    var uploadUri = storageService.CreateUploadUriProfilePictures(imageFileName);
+                    response.UploadUri = uploadUri;
+                }
+
+
                 //artist aanpassen
                 artist.FirstName = model.FirstName;
                 artist.LastName = model.LastName;
@@ -54,13 +78,12 @@ namespace EuropArt.Services.Artists
                 artist.Postalcode = model.Postalcode;
                 artist.Street = model.Street;
                 artist.Website = model.Website;
-                //artist.ImagePath = model.ImagePath;
 
                 //returnen
                 dbContext.Entry(artist).State = EntityState.Modified;
+
                 await dbContext.SaveChangesAsync();
                 response.ArtistId = artist.Id;
-                Console.WriteLine("Artist editted in service");
             }
 
             return response;
@@ -88,7 +111,7 @@ namespace EuropArt.Services.Artists
                     Id = y.Id,
                     Name = y.Name,
                     Description = y.Description,
-                    ImagePath = y.ImagePath,
+                    ImagePaths = y.ImagePaths,
                     Price = y.Price,
                 }).ToList(),
                 AuthId = x.AuthId
@@ -168,8 +191,11 @@ namespace EuropArt.Services.Artists
             ArtistResponse.Create response = new();
 
             var model = request.Artist;
+            var imageExtension = model.ImagePath.Substring(model.ImagePath.LastIndexOf('.'));
+            var imageFileName = Guid.NewGuid().ToString() + request.Artist.ImagePath + imageExtension;
+            var imagePath = $"{storageService.StorageBaseUri}profilepictures/{imageFileName}";
 
-            var artist = artists.Add(new Artist(model.FirstName, model.LastName, model.Country, model.City, model.PostalCode, model.Street, "", DateTime.Now, model.Biography, model.Website, model.AuthId));
+            var artist = artists.Add(new Artist(model.FirstName, model.LastName, model.Country, model.City, model.PostalCode, model.Street, model.ImagePath, DateTime.Now, model.Biography, model.Website, model.AuthId));
 
             await dbContext.SaveChangesAsync();
             response.ArtistId = artist.Entity.Id;

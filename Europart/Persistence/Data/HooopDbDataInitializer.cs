@@ -29,7 +29,7 @@ namespace EuropArt.Persistence.Data
 
                 YouthArtist youthArtist1 = new YouthArtist("Logan", "De Vriend", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/146.jpg", DateTime.Now);
                 YouthArtist youthArtist2 = new YouthArtist("Jason", "Smet", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/156.jpg", DateTime.Now);
-                YouthArtist youthArtist3 = new YouthArtist("Tuur", "Kwissens","https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/135.jpg", DateTime.Now);
+                YouthArtist youthArtist3 = new YouthArtist("Tuur", "Kwissens", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/135.jpg", DateTime.Now);
                 YouthArtist youthArtist4 = new YouthArtist("Patrik", "Goosens", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/165.jpg", DateTime.Now);
 
                 List<Artist> artists = new List<Artist> { artist1, artist2, artist3, artist2, artist4 };
@@ -37,20 +37,20 @@ namespace EuropArt.Persistence.Data
                 _dbContext.Artists.AddRange(artists);
                 _dbContext.YouthArtists.AddRange(youthArtists);
 
-                Artwork artwork1 = new Artwork("Emmer", new Money(3M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-222), "abstract", "sculptures");
-                Artwork artwork2 = new Artwork("Zonnebloem", new Money(4M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-40), "modern", "painting");
-                Artwork artwork3 = new Artwork("Boter", new Money(12M), "dit is een beschrijving", artist2, DateTime.Now, "surrealism", "sculptures");
-                Artwork artwork4 = new Artwork("Koffielepel", new Money(65M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-80), "modern", "painting");
-                Artwork artwork5 = new Artwork("Tas", new Money(43M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-200), "abstract", "photography");
-                Artwork artwork6 = new Artwork("Hesp", new Money(543M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-25), "minimalism", "drawings");
-                Artwork artwork7 = new Artwork("Kaas", new Money(23M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-320), "surrealism", "drawings");
-                Artwork artwork8 = new Artwork("Auto", new Money(96M), "dit is een beschrijving", artist1, DateTime.Now.AddHours(-430), "modern", "painting");
-                Artwork artwork9 = new Artwork("Maan", new Money(58M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-290), "minimalism", "photography");
-                Artwork artwork10 = new Artwork("Feest", new Money(24M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-180), "abstract", "painting");
-                Artwork artwork11 = new Artwork("Tafel", new Money(38M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-90), "minimalism", "painting");
-                Artwork artwork12 = new Artwork("Stoel", new Money(10M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-60), "surrealism", "photography");
-                Artwork artwork13 = new Artwork("Bank", new Money(201M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-50), "minimalism", "drawings");
-                Artwork artwork14 = new Artwork("Vliegtuig", new Money(158M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-4), "abstract", "drawings");
+                Artwork artwork1 = new Artwork("Emmer2", new Money(3M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-222), "abstract", "sculptures", new List<ImagePath>(){ new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/1.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/2.jpg") });
+                Artwork artwork2 = new Artwork("Zonnebloem", new Money(4M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-40), "modern", "painting", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/3.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/4.jpg") });
+                Artwork artwork3 = new Artwork("Boter", new Money(12M), "dit is een beschrijving", artist2, DateTime.Now, "surrealism", "sculptures", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/5.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/6.jpg") });
+                Artwork artwork4 = new Artwork("Koffielepel", new Money(65M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-80), "modern", "painting", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/7.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/8.jpg") });
+                Artwork artwork5 = new Artwork("Tas", new Money(43M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-200), "abstract", "photography", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/9.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/10.jpg") });
+                Artwork artwork6 = new Artwork("Hesp", new Money(543M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-25), "minimalism", "drawings", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/11.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/12.jpg") });
+                Artwork artwork7 = new Artwork("Kaas", new Money(23M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-320), "surrealism", "drawings", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/13.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/14.jpg") });
+                Artwork artwork8 = new Artwork("Auto", new Money(96M), "dit is een beschrijving", artist1, DateTime.Now.AddHours(-430), "modern", "painting", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/15.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/16.jpg") });
+                Artwork artwork9 = new Artwork("Maan", new Money(58M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-290), "minimalism", "photography", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/17.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/18.jpg") });
+                Artwork artwork10 = new Artwork("Feest", new Money(24M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-180), "abstract", "painting", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/19.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/20.jpg") });
+                Artwork artwork11 = new Artwork("Tafel", new Money(38M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-90), "minimalism", "painting", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/21.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/22.jpg") });
+                Artwork artwork12 = new Artwork("Stoel", new Money(10M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-60), "surrealism", "photography", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/23.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/24.jpg") });
+                Artwork artwork13 = new Artwork("Bank", new Money(201M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-50), "minimalism", "drawings", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/25.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/26.jpg") });
+                Artwork artwork14 = new Artwork("Vliegtuig", new Money(158M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-4), "abstract", "drawings", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/27.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/28.jpg") });
 
                 YouthArtwork youthArtwork1 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
                 YouthArtwork youthArtwork2 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
@@ -64,20 +64,6 @@ namespace EuropArt.Persistence.Data
                 YouthArtwork youthArtwork10 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
                 YouthArtwork youthArtwork11 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
 
-                artwork1.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/1.jpg";
-                artwork2.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/2.jpg";
-                artwork3.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/3.jpg";
-                artwork4.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/4.jpg";
-                artwork5.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/5.jpg";
-                artwork6.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/6.jpg";
-                artwork7.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/7.jpg";
-                artwork8.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/8.jpg";
-                artwork9.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/9.jpg";
-                artwork10.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/10.jpg";
-                artwork11.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/11.jpg";
-                artwork12.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/12.jpg";
-                artwork13.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/13.jpg";
-                artwork14.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeartworks/14.jpg";
 
                 youthArtwork1.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/1.jpg";
                 youthArtwork2.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/2.jpg";

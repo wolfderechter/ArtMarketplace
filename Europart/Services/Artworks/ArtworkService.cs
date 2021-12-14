@@ -39,22 +39,29 @@ namespace EuropArt.Services.Artworks
             ArtworkResponse.Create response = new();
 
             var model = request.Artwork;
-            var imageExtension = model.ImagePath.Substring(model.ImagePath.LastIndexOf('.'));
-            var imageFileName = Guid.NewGuid().ToString() + request.Artwork.ImagePath + imageExtension;
-            var imagePath = $"{storageService.StorageBaseUri}{imageFileName}";
-
-            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated, model.Style, model.Category)
+            List<ImagePath> imagePaths = new();
+            List<Uri> uploadUris = new();
+            foreach(var image in model.ImagePaths)
             {
-                //Id = artworks.Max(x => x.Id) + 1,
-                //Fake data opvullen
-                ImagePath = imagePath,
-            });
+                var imageExtension = image.Substring(image.LastIndexOf('.'));
+                var imageFileName = Guid.NewGuid().ToString() + imageExtension;
+                var imagePath = $"{storageService.StorageBaseUri}artworks/{imageFileName}";
+                imagePaths.Add(new ImagePath(imagePath));
+
+                var uploadUri = storageService.CreateUploadUriArtworks(imageFileName);
+                uploadUris.Add(uploadUri);
+            }
+            //var imageExtension = model.ImagePath.Substring(model.ImagePath.LastIndexOf('.'));
+            //var imageFileName = Guid.NewGuid().ToString() + request.Artwork.ImagePath + imageExtension;
+            //var imagePath = $"{storageService.StorageBaseUri}artworks/{imageFileName}";
+
+            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated, model.Style, model.Category, imagePaths));
 
             await dbContext.SaveChangesAsync();
             response.ArtworkId = artwork.Entity.Id;
 
-            var uploadUri = storageService.CreateUploadUri(imageFileName);
-            response.UploadUri = uploadUri;
+            //response.UploadUri = uploadUri;
+            response.UploadUris = uploadUris;
 
             return response;
         }
@@ -69,7 +76,7 @@ namespace EuropArt.Services.Artworks
         {
             ArtworkResponse.Edit response = new();
             //artwork exists?
-            var artwork = await artworks
+            var artwork = await artworks.Include(p => p.ImagePaths)
             .Where(p => p.Id == request.ArtworkId).SingleOrDefaultAsync();
 
             if(artwork is not null)
@@ -79,8 +86,33 @@ namespace EuropArt.Services.Artworks
                 artwork.Name = model.Name;
                 artwork.Description = model.Description;
                 artwork.Price = new Money(model.Price);
-                //artwork.ImagePath = request.Artwork.ImagePath;
 
+
+                //only when user wants to change images
+                if (model.ImagePaths.Count() > 0)
+                {
+                    List<ImagePath> imagePaths = new();
+                    List<Uri> uploadUris = new();
+                    foreach (var oldImage in artwork.ImagePaths)
+                    {
+                        //Deleten van oude images in blobstorage, filename doorsturen via DeleteProfilePictureImage 
+                        storageService.DeleteArtworksImage(oldImage.imagePath.Remove(0, oldImage.imagePath.LastIndexOf('/') + 1));
+                        dbContext.ImagePaths.RemoveIf(x => x.imagePath == oldImage.imagePath && x.ArtworkId == artwork.Id);
+                    }
+
+                    foreach (var image in model.ImagePaths)
+                    {
+                        var imageExtension = image.imagePath.Substring(image.imagePath.LastIndexOf('.'));
+                        var imageFileName = Guid.NewGuid().ToString() + imageExtension;
+                        var imagePath = $"{storageService.StorageBaseUri}artworks/{imageFileName}";
+                        imagePaths.Add(new ImagePath(imagePath));
+
+                        var uploadUri = storageService.CreateUploadUriArtworks(imageFileName);
+                        uploadUris.Add(uploadUri);
+                    }
+                    artwork.ImagePaths = imagePaths;
+                    response.UploadUris = uploadUris;
+                }
                 //returnen
                 dbContext.Entry(artwork).State = EntityState.Modified;
                 await dbContext.SaveChangesAsync();
@@ -104,7 +136,7 @@ namespace EuropArt.Services.Artworks
                 Description = x.Description,
                 Price = x.Price.Value,
                 DateCreated = x.DateCreated,
-                ImagePath = x.ImagePath,
+                ImagePaths = x.ImagePaths,
                 Style = x.Style,
                 Category = x.Category,
             })
@@ -119,7 +151,7 @@ namespace EuropArt.Services.Artworks
             ArtworkResponse.GetIndex response = new();
 
             //Query om te filteren
-            var query = artworks.Include(x => x.Artist).AsQueryable().AsNoTracking();
+            var query = artworks.Include(x => x.Artist).Include(x => x.ImagePaths).AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
                 query = query.Where(x => x.Name.Contains(request.Searchterm));
@@ -175,7 +207,7 @@ namespace EuropArt.Services.Artworks
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    ImagePath = x.ImagePath,
+                    ImagePaths = x.ImagePaths,
                     Price = x.Price,
                     DateCreated = x.DateCreated,
                     ArtistId = x.Artist.Id,
@@ -195,7 +227,7 @@ namespace EuropArt.Services.Artworks
             {
                 Id = x.Id,
                 Name = x.Name,
-                ImagePath = x.ImagePath,
+                ImagePaths = x.ImagePaths,
                 Price = x.Price.Value,
                 DateCreated = x.DateCreated,
                 ArtistId = x.Artist.Id,

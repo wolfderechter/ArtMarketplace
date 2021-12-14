@@ -1,7 +1,9 @@
 ﻿@page "/artist/edit/{ArtistId:int}"
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Edit> Loc
 @inject NavigationManager NavigationManager
+@inject StorageService StorageService
 @using EuropArt.Shared.Artists
+@using EuropArt.Client.Infrastructure
 
 <div class="row">
     <div class="col-8 offset-2">
@@ -54,6 +56,17 @@
                            placeholder="Enter portfolio website" />
             </div>
             <div class="mb-3">
+                <h6>@Loc["ChangeProfilePicture"]</h6>
+                <InputFile OnChange="LoadImage" class="file-input" type="file" name="profilePicture" accept="image/*" />
+@*                @if (image is not null)
+                {
+                    <span class="file-name">
+                        @image.Name
+                    </span>
+                }*@
+
+            </div>
+            <div class="mb-3">
                 <button type="submit" class="btn btn-primary">@Loc["Edit"]</button>
             </div>
         </EditForm>
@@ -66,6 +79,7 @@
     [Parameter] public int ArtistId { get; set; }
     [Parameter] public EventCallback OnArtistChanged { get; set; }
     [Inject] public IArtistService ArtistService { get; set; }
+    private IBrowserFile image;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -84,7 +98,8 @@
             City = response.Artist.City,
             Postalcode = response.Artist.Postalcode,
             Street = response.Artist.Street,
-            Website = response.Artist.Website
+            Website = response.Artist.Website,
+            //ImagePath = response.Artist.ImagePath
         };
     }
 
@@ -93,15 +108,29 @@
         //await ArtistService.UpdateArtistAsync(model, Id);
         //NavigationManager.NavigateTo("/artist");
         Console.WriteLine("Edited artist");
+        if(image != null)
+        {
+            model.ImagePath = image.Name;
+        }
+
         ArtistRequest.Edit request = new ArtistRequest.Edit
         {
             Artist = model,
             ArtistId = ArtistId
         };
 
+
         var response = await ArtistService.EditAsync(request);
-        await OnArtistChanged.InvokeAsync();
+
+        if(image != null){
+            await StorageService.UploadImageAsync(response.UploadUri, image);
+        }
+        //await OnArtistChanged.InvokeAsync();
         NavigationManager.NavigateTo($"/artist/{ArtistId}"); 
     }
 
+    private void LoadImage(InputFileChangeEventArgs args)
+    {
+        image = args.File;
+    }
 }

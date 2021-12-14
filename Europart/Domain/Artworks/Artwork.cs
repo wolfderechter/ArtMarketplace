@@ -3,6 +3,7 @@ using Domain.Common;
 using EuropArt.Domain.Artists;
 using EuropArt.Domain.Common;
 using System;
+using System.Collections.Generic;
 
 namespace EuropArt.Domain.Artworks
 {
@@ -24,13 +25,13 @@ namespace EuropArt.Domain.Artworks
             set { price = Guard.Against.Null(value, nameof(price)); }
         }
         public string Description { get; set; }
-        //public IEnumerable<string> ImagePaths { get; set; }
         public string Style { get; set; }
         public string Category {
             get => category;
             set { category = Guard.Against.Null(value, nameof(category));  }
         }
-        public string ImagePath { get; set; }
+        //public string ImagePath { get; set; }
+        public List<ImagePath> ImagePaths { get; set; } = new();
 
         public Artwork()
         {
@@ -44,7 +45,7 @@ namespace EuropArt.Domain.Artworks
         //    Description = description;
         //    DateCreated = dateCreated;
         //}
-        public Artwork(string name, Money price, string description, Artist artist, DateTime dateCreated, string style, string category)
+        public Artwork(string name, Money price, string description, Artist artist, DateTime dateCreated, string style, string category, List<ImagePath> imagePaths)
         {
             Name = name;
             Price = Guard.Against.Null(price, nameof(price));
@@ -53,6 +54,7 @@ namespace EuropArt.Domain.Artworks
             DateCreated = dateCreated;
             Style = style;
             Category = category;
+            ImagePaths = imagePaths;
         }
     }
 }

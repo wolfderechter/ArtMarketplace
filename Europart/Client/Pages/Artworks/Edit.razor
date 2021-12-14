@@ -1,7 +1,10 @@
 @page "/artwork/edit/{ArtworkId:int}"
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
 @inject NavigationManager NavigationManager
+@inject StorageService StorageService
+@using EuropArt.Domain.Common
 @using EuropArt.Shared.Artworks
+@using EuropArt.Client.Infrastructure
 
 <div class="row">
     <div class="col-md-8 offset-md-2 col-12 offset-0">
@@ -26,8 +29,16 @@
             </div>
             <div class="mb-3">
                 <h6>@Loc["ChooseArtwork"]</h6>
-                <input type="file" id="artwork" name="artwork" />
-                <ValidationMessage For="@(() => model.ImagePath)" />
+                <h6 class="text-muted">*This will overwrite previous uploaded images*</h6>
+                <InputFile OnChange="LoadImages" class="file-input" name="artwork" accept="image/*" multiple/>
+                <div class="col">
+                    @foreach(var file in images)
+                    {
+                        <span class="file-name row gx-0">
+                            @file.Name
+                        </span>
+                    }
+                </div>
 
             </div>
             <div class="mb-3">
@@ -43,6 +54,7 @@
     [Parameter] public int ArtworkId { get; set; }
     [Parameter] public EventCallback OnArtworkChanged { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
+    private List<IBrowserFile> images = new();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -55,7 +67,7 @@
         model = new ArtworkDto.Edit
         {
             Description = response.Artwork.Description,
-            ImagePath = response.Artwork.ImagePath,
+            ImagePaths = response.Artwork.ImagePaths,
             Name = response.Artwork.Name,
             Price = response.Artwork.Price,
         };
@@ -65,14 +77,34 @@
     {
         //await ArtworkService.UpdateAsync(model, Id);
         //NavigationManager.NavigateTo("/artwork");
+        model.ImagePaths = images.Select(x => new ImagePath(x.Name)).ToList();
         ArtworkRequest.Edit request = new ArtworkRequest.Edit
         {
             Artwork = model,
             ArtworkId = ArtworkId
         };
-
         var response = await ArtworkService.EditAsync(request);
+
+        if(response.UploadUris?.Count() > 0)
+        {
+            for(var i = 0; i < response.UploadUris.Count(); i++)
+            {
+                var uploadUri = response.UploadUris[i];
+                await StorageService.UploadImageAsync(uploadUri, images[i]);
+
+            }
+        }
+
         await OnArtworkChanged.InvokeAsync();
+
         NavigationManager.NavigateTo($"/artwork/{ArtworkId}");
+    }
+
+    private void LoadImages(InputFileChangeEventArgs args)
+    {
+        foreach(var file in args.GetMultipleFiles())
+        {
+            images.Add(file);
+        }
     }
 }
