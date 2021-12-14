@@ -66,8 +66,8 @@ namespace EuropArt.Services.Infrastructure
         {
             var blobServiceClient = new BlobServiceClient(connectionString);
             var containerClient = blobServiceClient.GetBlobContainerClient(containerNameArtworks);
-            containerClient.GetBlobClient(fileName).DeleteIfExists();
-
+            var blob = containerClient.GetBlobClient(fileName);
+            blob.DeleteIfExists();
         }
         public void DeleteProfilePictureImage(string fileName)
         {
@@ -75,12 +75,6 @@ namespace EuropArt.Services.Infrastructure
             var containerClient = blobServiceClient.GetBlobContainerClient(containerNameProfilePictures);
             var blob = containerClient.GetBlobClient(fileName);
             blob.DeleteIfExists();
-
-            //CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(connectionString);
-            //CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
-            //CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(containerNameProfilePictures);
-            //var blob = cloudBlobContainer.GetBlobReference(fileName);
-            //return await blob.DeleteIfExistsAsync();
         }
     }
 }

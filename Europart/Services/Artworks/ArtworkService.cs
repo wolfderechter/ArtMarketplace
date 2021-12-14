@@ -101,7 +101,7 @@ namespace EuropArt.Services.Artworks
                     foreach (var oldImage in artwork.ImagePaths)
                     {
                         //Deleten van oude images in blobstorage, filename doorsturen via DeleteProfilePictureImage 
-                        storageService.DeleteProfilePictureImage(oldImage.imagePath.Remove(0, oldImage.imagePath.LastIndexOf('/') + 1));
+                        storageService.DeleteArtworksImage(oldImage.imagePath.Remove(0, oldImage.imagePath.LastIndexOf('/') + 1));
                     }
 
                     foreach (var image in model.ImagePaths)
