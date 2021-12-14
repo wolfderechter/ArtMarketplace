@@ -194,7 +194,7 @@ namespace EuropArt.Services.Artists
             var imageFileName = Guid.NewGuid().ToString() + request.Artist.ImagePath + imageExtension;
             var imagePath = $"{storageService.StorageBaseUri}profilepictures/{imageFileName}";
 
-            var artist = artists.Add(new Artist(model.FirstName, model.LastName, model.Country, model.City, model.PostalCode, model.Street, model.ImagePath, DateTime.Now, model.Biography, model.Website, ""));
+            var artist = artists.Add(new Artist(model.FirstName, model.LastName, model.Country, model.City, model.PostalCode, model.Street, model.ImagePath, DateTime.Now, model.Biography, model.Website, model.AuthId));
 
             await dbContext.SaveChangesAsync();
             response.ArtistId = artist.Entity.Id;
