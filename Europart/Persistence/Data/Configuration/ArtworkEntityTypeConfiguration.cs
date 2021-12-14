@@ -26,7 +26,7 @@ namespace EuropArt.Persistence.Data.Configuration
             }).Navigation(p => p.Price).IsRequired();
             builder.Property(p => p.DateCreated);
 
-            builder.HasMany(p => p.ImagePaths).WithOne();
+            builder.HasMany(p => p.ImagePaths);
         }
     }
 }

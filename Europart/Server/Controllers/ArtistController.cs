@@ -35,11 +35,11 @@ namespace EuropArt.Server.Controllers
             return artistService.DeleteAsync(request);
         }
 
-        //[HttpPost]
-        //public Task<ArtistResponse.Create> CreateAsync(ArtistRequest.Create request)
-        //{
-        //    return artistService.CreateAsync(request);
-        //}
+        [HttpPost]
+        public Task<ArtistResponse.Create> CreateAsync(ArtistRequest.Create request)
+        {
+            return artistService.CreateAsync(request);
+        }
 
         [HttpPut]
         public Task<ArtistResponse.Edit> EditAsync([FromBody] ArtistRequest.Edit request)

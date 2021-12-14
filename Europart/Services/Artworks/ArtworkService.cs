@@ -155,7 +155,7 @@ namespace EuropArt.Services.Artworks
             ArtworkResponse.GetIndex response = new();
 
             //Query om te filteren
-            var query = artworks.Include(x => x.Artist).AsQueryable().AsNoTracking();
+            var query = artworks.Include(x => x.Artist).Include(x => x.ImagePaths).AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Searchterm))
                 query = query.Where(x => x.Name.Contains(request.Searchterm));

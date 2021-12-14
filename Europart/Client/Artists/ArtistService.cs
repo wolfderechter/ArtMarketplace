@@ -55,7 +55,7 @@ namespace EuropArt.Client.Artists
 
         public async Task<ArtistResponse.Create> CreateAsync(ArtistRequest.Create request)
         {
-            var response = await client.PostAsJsonAsync(endpoint, request);
+            var response = await publicClient.Client.PostAsJsonAsync(endpoint, request);
             return await response.Content.ReadFromJsonAsync<ArtistResponse.Create>();
         }
     }

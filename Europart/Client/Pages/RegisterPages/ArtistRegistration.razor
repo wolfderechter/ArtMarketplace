@@ -1,34 +1,71 @@
-﻿@page "/register/artist"
-@inject IStringLocalizer<EuropArt.Shared.Resources.Register> Loc
-
-<h1 class="text-center">@Loc["Welcome Back"]!</h1>
+﻿@page "/register/artist/{state}"
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
+@using EuropArt.Client.Infrastructure
 <div class="row">
-    <div class="col-6 offset-3">
-        <form class="form">
+    <div class="col-8 offset-2">
+        <EditForm Model="@newArtist" OnValidSubmit="SignUpAsync" class="form">
+            <FluentValidationValidator />
+            <DataAnnotationsValidator />
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Name"]">
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Street"]">
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["City"]">
+                <h6>@Loc["FirstName"]</h6>
+                <InputText class="form-control" @bind-Value="newArtist.FirstName"/>
+                <ValidationMessage For="@(() => newArtist.FirstName)" />
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Country"]">
+                <h6>@Loc["LastName"]</h6>
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="newArtist.LastName"
+                           aria-describedby="titleHelp" placeholder="Enter lastname" />
+                <ValidationMessage For="@(() => newArtist.LastName)" />
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Postalcode"]">
+                <h6>@Loc["Nickname"]</h6>
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="newArtist.Nickname"
+                           aria-describedby="titleHelp" placeholder="Enter nickname" />
+                <ValidationMessage For="@(() => newArtist.Nickname)" />
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Biography"]">
+                <h6>@Loc["TelephoneNr"]</h6>
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="newArtist.TelephoneNr"
+                           aria-describedby="titleHelp" placeholder="Enter telephone number" />
+                <ValidationMessage For="@(() => newArtist.TelephoneNr)" />
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Website"]">
+                <h6>@Loc["City"]</h6>
+                <InputText @bind-Value="newArtist.City" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter city" />
+                <ValidationMessage For="@(() => newArtist.City)" />
             </div>
-            <div>
-                <button type="submit" @onclick="SignUp" class="btn btn-primary btn-own">@Loc["Sign up"]</button>
+            <div class="mb-3">
+                <h6>@Loc["Country"]</h6>
+                <InputText @bind-Value="newArtist.Country" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter country" />
+                <ValidationMessage For="@(() => newArtist.Country)" />
             </div>
-        </form>
+            <div class="mb-3">
+                <h6>@Loc["Postalcode"]</h6>
+                <InputText @bind-Value="newArtist.PostalCode" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter postalcode" />
+                <ValidationMessage For="@(() => newArtist.PostalCode)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Street"]</h6>
+                <InputText @bind-Value="newArtist.Street" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter street" />
+                <ValidationMessage For="@(() => newArtist.Street)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Bio"]</h6>
+                <InputText @bind-Value="newArtist.Biography" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter biography" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Web"]</h6>
+                <InputText @bind-Value="newArtist.Website" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter portfolio website" />
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">@Loc["Register"]</button>
+            </div>
+        </EditForm>
     </div>
 </div>
