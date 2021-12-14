@@ -85,13 +85,17 @@
         };
         var response = await ArtworkService.EditAsync(request);
 
-        for(var i = 0; i < response.UploadUris.Count(); i++)
+        if(response.UploadUris?.Count() > 0)
         {
-            var uploadUri = response.UploadUris[i];
-            await StorageService.UploadImageAsync(uploadUri, images[i]);
+            for(var i = 0; i < response.UploadUris.Count(); i++)
+            {
+                var uploadUri = response.UploadUris[i];
+                await StorageService.UploadImageAsync(uploadUri, images[i]);
 
+            }
         }
-        //await OnArtworkChanged.InvokeAsync();
+
+        await OnArtworkChanged.InvokeAsync();
 
         NavigationManager.NavigateTo($"/artwork/{ArtworkId}");
     }

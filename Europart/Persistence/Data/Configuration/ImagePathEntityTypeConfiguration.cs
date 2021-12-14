@@ -13,7 +13,9 @@ namespace EuropArt.Persistence.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<ImagePath> builder)
         {
-            builder.HasKey(y => y.imagePath);
+            builder.ToTable("ImagePaths");
+            builder.HasKey(x => x.ImagePathId);
+            builder.Property(y => y.imagePath);
         }
     }
 }

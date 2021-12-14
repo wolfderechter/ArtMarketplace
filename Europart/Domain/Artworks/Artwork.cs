@@ -45,7 +45,7 @@ namespace EuropArt.Domain.Artworks
         //    Description = description;
         //    DateCreated = dateCreated;
         //}
-        public Artwork(string name, Money price, string description, Artist artist, DateTime dateCreated, string style, string category)
+        public Artwork(string name, Money price, string description, Artist artist, DateTime dateCreated, string style, string category, List<ImagePath> imagePaths)
         {
             Name = name;
             Price = Guard.Against.Null(price, nameof(price));
@@ -54,6 +54,7 @@ namespace EuropArt.Domain.Artworks
             DateCreated = dateCreated;
             Style = style;
             Category = category;
+            ImagePaths = imagePaths;
         }
     }
 }

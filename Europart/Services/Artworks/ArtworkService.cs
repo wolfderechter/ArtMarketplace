@@ -55,12 +55,7 @@ namespace EuropArt.Services.Artworks
             //var imageFileName = Guid.NewGuid().ToString() + request.Artwork.ImagePath + imageExtension;
             //var imagePath = $"{storageService.StorageBaseUri}artworks/{imageFileName}";
 
-            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated, model.Style, model.Category)
-            {
-                //Id = artworks.Max(x => x.Id) + 1,
-                //Fake data opvullen
-                ImagePaths = imagePaths,
-            });
+            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated, model.Style, model.Category, imagePaths));
 
             await dbContext.SaveChangesAsync();
             response.ArtworkId = artwork.Entity.Id;
@@ -94,7 +89,7 @@ namespace EuropArt.Services.Artworks
 
 
                 //only when user wants to change images
-                if (model.ImagePaths is not null)
+                if (model.ImagePaths.Count() > 0)
                 {
                     List<ImagePath> imagePaths = new();
                     List<Uri> uploadUris = new();
@@ -102,6 +97,7 @@ namespace EuropArt.Services.Artworks
                     {
                         //Deleten van oude images in blobstorage, filename doorsturen via DeleteProfilePictureImage 
                         storageService.DeleteArtworksImage(oldImage.imagePath.Remove(0, oldImage.imagePath.LastIndexOf('/') + 1));
+                        dbContext.ImagePaths.RemoveIf(x => x.imagePath == oldImage.imagePath && x.ArtworkId == artwork.Id);
                     }
 
                     foreach (var image in model.ImagePaths)
