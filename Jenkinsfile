@@ -1,10 +1,10 @@
-node('AcceptatieServer') {  
-    stage('Prepare') { 
-        build 'Acceptatie_cleanup'
-        build 'Acceptatie_pull_github' 
-        build 'Acceptatie_inject_dockerfiles' 
+node('ProductieServer') {
+    stage('Preparation') {
+        build 'Productie_Cleanup'
+        build 'Productie_pull_github'
+        build 'Productie_inject_dockerfiles'
     }
-    stage('Build') { 
-        build 'Acceptatie_buildWebApp'
+    stage('Build') {
+        build 'Productie_buildWebApp'
     }
 }
