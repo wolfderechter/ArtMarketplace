@@ -1,0 +1,31 @@
+﻿@page "/account"
+@attribute [Authorize]
+@inject IStringLocalizer<EuropArt.Shared.Resources.Account> Loc
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<AuthorizeView Roles="Admin">
+    <h1>Hello Admin! @context.User.Identity.Name!</h1>
+</AuthorizeView>
+<AuthorizeView Roles="Buyer">
+    <h1>Hello User! @context.User.Identity.Name!</h1>
+</AuthorizeView>
+<AuthorizeView>
+    <Authorized>
+        @foreach(var claim in context.User.Claims)
+        {
+            <p>@claim.Value</p>
+        }
+        @context.User.Claims.ElementAt(4).Value
+    </Authorized>
+</AuthorizeView>
+@code{
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}

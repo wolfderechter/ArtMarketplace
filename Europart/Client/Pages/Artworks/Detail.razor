@@ -1,50 +1,117 @@
 ﻿@page "/artwork/{id:int}"
+@inject NavigationManager NavigationManager
+@using EuropArt.Domain.Common
 @using EuropArt.Shared.Artworks
-@if (_artwork == null)
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Detail> Loc
+@inject IJSRuntime JSRuntime
+@using EuropArt.Client.Pages.Ordering;
+@if (artwork == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
     @*<p>@_artwork.Id</p>
-    <p>@_artwork.Name</p>
-    <p>@_artwork.Description</p>
-    <p>@_artwork.Price.ToString("C")</p>
-    <img src="@_artwork.ImagePath" />*@
-
+        <p>@_artwork.Name</p>
+        <p>@_artwork.Description</p>
+        <p>@_artwork.Price.ToString("C")</p>
+        <img src="@_artwork.ImagePath" />*@
     <div class="row">
-    <div class="row">
-        <div class="col-8">
-            <div class="badge-kunstwerk text-center">
-                <img src="@_artwork.ImagePath" style="width:auto;">
+        <div class="col-12 text-end mb-3">
+            <div class="admin-buttons">
+                <a class="edit" href="/artwork/edit/@artwork.Id"><img src="/images/edit.svg" /></a>
+                <button  @onclick="ConfirmDelete"><img src="/images/delete.svg" /></button>
             </div>
-            <h2 class="Kunstenaar">@_artwork.Name</h2>
-            <h4><span style="color:#b1b4b7">door</span> Stan De Doncker</h4>
-            <p>@_artwork.Description</p>
         </div>
-        <div class="col-4">
+        <div class="col-md-8 col-12">
+            <div class="badge-kunstwerk text-center" style="padding: 0;">
+                @if(imagepaths is not null)
+                {
+                    if(imagepaths.Count() > 1)
+                    {
+                        <button @onclick="PreviousImage">&lt</button>
+                        <img src="@imagepaths[imageNumber].imagePath" style="width:auto;">
+                        <button @onclick="NextImage">&gt</button>
+
+                    }
+                    else {
+                        <img src="@imagepaths[imageNumber].imagePath" style="width:auto;">
+                    }
+                }
+            </div>
+            <h2 class="mb-1">@artwork.Name</h2>
+            <h4 class="kunstenaar"><a href="/artist/@artwork.ArtistId"><span style="color:#b1b4b7">@Loc["By"]</span> @(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></h4>
+            <h5 style="color:#b1b4b7">Uploaded on @artwork.DateCreated.ToString("dd MMMM yyyy")</h5>
+            <p>@artwork.Description</p>
+        </div>
+        <div class="col-md-4 col-12">
             <div class="bieden">
-                <span class="prijs-groot">@_artwork.Price.ToString("C")</span>
-                <form>
-                    <button class="btn btn-winkelmand mb-3">In winkelmand</button>
-                    <button class="btn btn-bieden mb-3">Nu kopen</button>
-                </form>
+                <span class="prijs-groot">@artwork.Price.ToString("C")</span>
+                <button @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
+                <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
+
+                @if (RequestingDelete)
+                {
+                    <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
+                    <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
+                }
+                else
+                {
+                    <button class="btn btn-bieden mb-3" @onclick="RequestDelete">@Loc["Delete"]</button>
+                }
             </div>
         </div>
     </div>
-</div>
 }
 
 
 
 @code {
-    private ArtworkDto.Detail _artwork = new();
+    private ArtworkDto.Detail artwork = new();
+    private bool RequestingDelete;
+    private List<ImagePath> imagepaths;
+    private int imageNumber = 0;
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
+    [Inject] public Shoppingcart Cart { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        _artwork = await ArtworkService.GetDetailAsync(Id);
+        ArtworkRequest.GetDetail request = new() { ArtworkId = Id };
+        var response = await ArtworkService.GetDetailAsync(request);
+        artwork = response.Artwork;
+        imagepaths = response.Artwork.ImagePaths;
+    }
+
+    private async Task ConfirmDelete()
+    {
+        var request = new ArtworkRequest.Delete { ArtworkId = Id };
+        await ArtworkService.DeleteAsync(request);
+        NavigationManager.NavigateTo("/artwork");
+    }
+
+    private void RequestDelete()
+    {
+        RequestingDelete = true;
+    }
+    private void CancelRequestDelete()
+    {
+        RequestingDelete = false;
+    }
+
+    private void AddToCart()
+    {
+        Cart.AddItem(artwork.Id, artwork.Name, artwork.Price, artwork.ImagePaths[0].imagePath);
+        Console.WriteLine(Cart.Items.Count);
+    }
+
+    private void NextImage()
+    {
+        imageNumber = (imageNumber + 1) % artwork.ImagePaths.Count();
+    }
+    private void PreviousImage()
+    {
+        imageNumber = (imageNumber - 1 + artwork.ImagePaths.Count()) % artwork.ImagePaths.Count();
     }
 }

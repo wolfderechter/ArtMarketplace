@@ -1,0 +1,34 @@
+﻿@page "/dashboard"
+@attribute [Authorize(Roles ="Admin")]
+
+<h1>Dashboard admin</h1>
+
+<div id="dashboard" class="row">
+    <NavLink href="dashboard/artists" class="col-4">
+        <div class="badge">
+            <h2>Goed te keuren kunstenaars</h2>
+            <span>15</span>
+        </div>
+    </NavLink>
+    <NavLink href="dashboard/artworks" class="col-4">
+        <div class="badge">
+            <h2>Goed te keuren kunstwerken</h2>
+            <span>34</span>
+        </div>
+    </NavLink>
+    <NavLink href="dashboard/orders" class="col-4">
+        <div class="badge">
+            <h2>Verkopen afhandelen</h2>
+            <span>69</span>
+        </div>
+    </NavLink>
+    <NavLink href="dashboard/homepage" class="col-4">
+        <div class="badge">
+            <h2>Homepagina bewerken</h2>
+        </div>
+    </NavLink>
+</div>
+
+@code {
+
+}

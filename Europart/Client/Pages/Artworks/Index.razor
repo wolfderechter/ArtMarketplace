@@ -1,96 +1,183 @@
 ﻿@page "/artwork"
 @using EuropArt.Shared.Artworks
+@using EuropArt.Shared.Common
+@using EuropArt.Client.Artworks
 @inject IArtworkService ArtworkService
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Index> Loc
 
-<h1>Kunstwerken</h1>
-<button id="filters" type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">Toon filters</button>
-<button type="button" ><NavLink href="/artwork/add">Add artwork</NavLink></button>
+<h1>@Loc["Artworks"]</h1>
+<div class="row">
+    <div class="col-6">
+        <button @onclick="ShowFilters" id="filters" type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">@Loc[textOnButton]</button>
+    </div>
+    <div class="col-6 text-end">
+        @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
+        <div class="row">
+            <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
+                <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
+            </div>
+            <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
+                <AuthorizeView>
+                    <Authorized>
+                        <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
+                    </Authorized>
+                </AuthorizeView>
+            </div>
+            <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
+                <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
+                    <option value="OrderByNewest">@Loc["NewestArtwork"]</option>
+                    <option value="OrderByOldest">@Loc["OldestArtwork"]</option>
+                    <option value="OrderByName">@Loc["Name"]</option>
+                    <option value="OrderByPriceAscending">@Loc["PriceAscending"]</option>
+                    <option value="OrderByPriceDescending">@Loc["PriceDescending"]</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row">
-    <div class="col-12">
-        <div class="row">
-            <div id="f-row" class="filters col-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Veilingen</label>
+    <div class="col-12" style="position:relative;">
+        <div class="row mobile-filter-row @showColFilters">
+            <a @onclick="ShowFilters" class="close"><img src="/images/close.png"</a>
+            <div id="f-row" class="filters @showColFilters col-12">
+                <div class="form-check form-switch mb-3">
+                    <input @bind="Filter.IncludingAuctions" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">@Loc["Auctions"]</label>
                 </div>
-                <h3>Categorie:</h3>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Alles</option>
-                    <option value="1">Collage</option>
-                    <option value="2">Fotografie</option>
-                    <option value="3">Schilderijen</option>
-                    <option value="4">Sculpturen</option>
-                    <option value="5">Tekeningen</option>
-                    <option value="6">Andere</option>
+                <h3>@Loc["Category"]:</h3>
+                <select @bind="Filter.Category" class="form-select mb-3" aria-label="Default select example">
+                    <option value="" selected>Alles</option>
+                    <option value="photography">@Loc["Photography"]</option>
+                    <option value="painting">@Loc["Paintings"]</option>
+                    <option value="sculpture">@Loc["Sculptures"]</option>
+                    <option value="drawing">@Loc["Drawings"]</option>
+                    <option value="other">@Loc["Other"]</option>
                 </select>
-                <h3>Prijs:</h3>
-                <div class="row">
+                <h3>@Loc["Price"]:</h3>
+                <div class="row mb-3">
                     <div class="form-floating col-6">
-                        <input type="number" class="form-control" id="floatingInput" placeholder="0">
-                        <label for="floatingInput">Min.</label>
+                        <input @bind="Filter.MinimumPrice" type="number" class="form-control" id="floatingInput" placeholder="0">
+                        <label for="floatingInput">@Loc["Min"].</label>
                     </div>
                     <div class="form-floating col-6">
-                        <input type="number" class="form-control" id="floatingInput" placeholder="0">
-                        <label for="floatingInput">Max.</label>
+                        <input @bind="Filter.MaximumPrice" type="number" class="form-control" id="floatingInput" placeholder="0">
+                        <label for="floatingInput">@Loc["Max"].</label>
                     </div>
                 </div>
-                <h3>Stijl:</h3>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Abstract</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Klassiek</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Minimalisme</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Modernisme</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Surrealisme</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Andere</label>
-                </div>
+                <h3>@Loc["Style"]:</h3>
+                <select @bind="Filter.Style" class="form-select mb-3" aria-label="Default select example">
+                    <option value="" selected>@Loc["Everything"]</option>
+                    <option value="abstract">@Loc["Abstract"]</option>
+                    <option value="classic">@Loc["Classic"]</option>
+                    <option value="minimalism">@Loc["Minimalism"]</option>
+                    <option value="modern">@Loc["Modern"]</option>
+                    <option value="surrealism">@Loc["Surrealism"]</option>
+                    <option value="other">@Loc["Other"]</option>
+                </select>
             </div>
-            @if (_artworks is null)
+        </div>
+        <div class="row mobile-filter-row-artwork" style="@colsFilter">
+
+            @if (artworks is null)
             {
-                <p>Loading...</p>
-            }
+                <p>Loading...</p> }
+            else if (artworks.Count == 0)
+            {
+                <p style="height:500px;">No artworks found</p>
+            } 
             else
             {
-                @foreach (var artwork in _artworks)
+                @foreach (var artwork in artworks)
                 {
-                    <div class="kol col-4">
+                    <div class="@cols">
                         <div class="badge-kunstwerk">
-                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePath"></a>
+                            <a href="artwork/@artwork.Id"><img src="@artwork.ImagePaths[0].imagePath"></a>
                             <div class="k-p">
-                                <h2 class="kunstenaar">by @*@artwork.Artist.Name*@</h2>
+                                <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
                                 <span class="prijs">@artwork.Price.ToString("C")</span>
                             </div>
-                            <span class="naam">@artwork.Name</span>
+                            <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></span>
                         </div>
                     </div>
                 }
+                <ArtworkPager Filter="Filter" TotalAmount="totalFilteredAmount" />
             }
-
         </div>
     </div>
 </div>
 
 @code {
-    private IEnumerable<ArtworkDto.Index> _artworks;
+    private String colsFilter = "margin-left:0;";
+    private String cols = "col-lg-4 col-sm-6 col-12";
+    private String showColFilters = "";
+    private String textOnButton = "Show Filters";
+    private int totalFilteredAmount;
+
+    private List<ArtworkDto.Index> artworks;
+    private ArtworkFilter Filter = new();
 
     protected override async Task OnInitializedAsync()
     {
-        _artworks = await ArtworkService.GetIndexAsync();
+        Filter.OnArtworkFilterChanged += FilterArtworksAsync;
+        //set OrderBy to newest on startup
+        Filter.OrderBy = OrderByArtwork.OrderByNewest;
+        //set checkbox for auctions checked on startup
+        Filter.IncludingAuctions = true;
+
+        ArtworkRequest.GetIndex request = new()
+        {
+            Page = Filter.Page,
+            Amount = Filter.Amount,
+            OrderBy = Filter.OrderBy
+        };
+        var response = await ArtworkService.GetIndexAsync(request);
+        artworks = response.Artworks;
+        totalFilteredAmount = response.TotalAmount;
+    }
+
+    private void ShowFilters()
+    {
+        if (showColFilters == "show")
+        {
+            colsFilter = "margin-left:0;";
+            cols = "col-lg-4 col-sm-6 col-12";
+            showColFilters = "";
+            textOnButton = "Show Filters";
+        }
+        else
+        {
+            colsFilter = "margin-left:25%;";
+            cols = "col-lg-4 col-md-6 col-12";
+            showColFilters = "show";
+            textOnButton = "Hide Filters";
+        }
+    }
+
+    private async void FilterArtworksAsync()
+    {
+        Console.WriteLine("Filtered!");
+        ArtworkRequest.GetIndex request = new()
+        {
+            Searchterm = Filter.Searchterm,
+            MaximumPrice = Filter.MaximumPrice,
+            MinimumPrice = Filter.MinimumPrice,
+            IncludingAuctions = Filter.IncludingAuctions,
+            Style = Filter.Style,
+            Category = Filter.Category,
+            OrderBy = Filter.OrderBy,
+            Page = Filter.Page,
+            Amount = Filter.Amount
+        };
+
+        var response = await ArtworkService.GetIndexAsync(request);
+        artworks = response.Artworks;
+        totalFilteredAmount = response.TotalAmount;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        Filter.OnArtworkFilterChanged -= FilterArtworksAsync;
     }
 }

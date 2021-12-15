@@ -1,70 +1,81 @@
-﻿<div class="round-nav fixed-top"></div>
-<nav class="navbar navbar-first navbar-expand navbar-light fixed-top">
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject IStringLocalizer<EuropArt.Shared.Resources.NavMenu> Loc
+@inject NavigationManager NavigationManager
+@inject SignOutSessionStateManager SignOutManager
+
+<div class="round-nav fixed-top"></div>
+<nav class="navbar navbar-second navbar-dark navbar-expand-lg navbar-toggleable-lg fixed-top">
     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="/">Hooop Gallery</a>
+        @*<button class="navbar-toggler" type="button" @onclick="ToggleNavMenu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">*@
+        <button class="navbar-toggler" type="button" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <div class="navbar-nav justify-content-start flex-grow-1 pe-3 nav-item">
-                <p class="nav-link">Site Language</p>
-                <ChooseLanguage />
-            </div>
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="Login">Sign in</NavLink>
+        <div class=" @NavMenuCssClass navbar-collapse" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" @onclick="ToggleNavMenu">
+            @*<div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">EuropArt</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>*@
+                <ul class="navbar-nav justify-content-center flex-grow-1" style="padding-top:8px;">
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="artwork">@Loc["Artworks"]</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="artist">@Loc["Artists"]</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="youth">@Loc["Youth"]</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="AboutUs">@Loc["AboutUs"]</NavLink>
+                    </li>
+                    <AuthorizeView Roles="Admin">
+                        <Authorized>
+                            <li class="nav-item">
+                                <NavLink class="nav-link" href="dashboard">Dashboard</NavLink>
+                            </li>
+                        </Authorized>
+                    </AuthorizeView>
+                </ul>
+            <ul class="d-flex align-items-center navbar-nav-right">
+                <li style="position:relative">
+                    <NavLink @onclick="OpenShoppingCart" class="shoppingcart text-decoration-none">
+                        <img src="/images/shoppingcart.svg" id="shoppingcart" />
+                        <span class="shopping-cart-counter">@Cart.Items.Count</span>
+                    </NavLink>
+                    
                 </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="Register">Register</NavLink>
+                @*<NavLink class="shoppingcart mr-3" href="login">
+                        <img src="/images/user.svg" />
+                    </NavLink>*@
+                <AuthorizeView>
+                    <Authorized>
+                        <div class="dropdown show shoppingcart" id="dropdown">
+                            <a class=" dropdown-toggle text-white" role="button" id="dropdownMenuLink" @onclick="ToggleAccountDropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="/images/user.svg" />
+                            </a>
+                            <div id="overlay" @onclick="OverlayClicked" style="display:@display;"></div>
+                            <div class="dropdown-menu @(show? "show":"")" aria-labelledby="dropdownMenuLink" @onclick="ToggleNavMenu">
+                                <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="account">@Loc["Profile"]</a>
+                                <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="messages">@Loc["Messages"]</a>
+                                <a class="dropdown-item" @onclick="BeginSignOut" href="#">@Loc["Logout"]</a>
+                            </div> 
+                        </div>
+                    </Authorized>
+                    <NotAuthorized>
+                        <li>
+                            <NavLink class="shoppingcart" href="authentication/login">
+                                <img src="/images/user.svg" />
+                            </NavLink>
+                        </li>
+                    </NotAuthorized>
+                </AuthorizeView>
+                <li>
+                    <CultureSelector />
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<nav class="navbar navbar-second navbar-dark navbar-expand-lg fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">EuropArt</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            @*<div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">EuropArt</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>*@
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="artwork">Artworks</NavLink>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="artist">Artists</NavLink>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="youth" >Youth</NavLink>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="AboutUs">About us</NavLink>
-                    </li>
-                </ul>
-                <ul class="navbar-nav justify-content-end pe-3">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Zoeken" aria-label="Zoeken">
-                        <button class="btn btn-outline-white" type="submit">Zoeken</button>
-                    </form>
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav>
 
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}

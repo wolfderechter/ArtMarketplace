@@ -1,38 +1,94 @@
 ﻿@page "/artist"
-@using EuropArt.Shared.Artist
+@using EuropArt.Shared.Artists
+@using EuropArt.Client.Artists
+@using EuropArt.Shared.Common
 @inject IArtistService ArtistService
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Index> Loc
 
-
-<h3>Artist</h3>
+<h3>@Loc["titel"]</h3>
 
 <div class="row">
-    @if (_artists is null)
+    @if (artists is null)
     {
         <p>Loading...</p>
     }
+    else if(artists.Count == 0) 
+    { 
+        <p>No artists...</p>
+
+    }
     else
     {
-        @foreach (var artist in _artists)
+        <div class="row align-items-end text-end">
+            <div class="col-4">
+                <input class="form-control" placeholder="@Loc["Search"]" type="search" @bind="Filter.Searchterm" />
+                <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
+                    <option value="OrderByNewest">@Loc["NewestArtist"]</option>
+                    <option value="OrderByOldest">@Loc["OldestArtist"]</option>
+                    <option value="OrderByName">@Loc["Name"]</option>
+                </select>
+            </div>
+        </div>
+        @foreach (var artist in artists)
         {
             <div class="col-4 text-center">
                 <div class="badge-kunstenaars">
                     <div class="profile-pic">
-                        <a href="/artist/@artist.Id"><img src="@artist.ImagePath"/></a>
+                        <a href="/artist/@artist.Id"><img src="@artist.ImagePath" /></a>
                     </div>
-                    <h2>@artist.Name</h2>
-                    <span class="locatie"><img src="images/locate.svg" /> @artist.City</span><br />
-                    <span class="kunstwerken">50 kunstwerken</span>
+                    <h2>@(artist.FirstName + " " + artist.LastName)</h2>
+                    <span class="locatie"><img src="images/locate.svg" /> @artist.Postalcode</span><br />
+                    <span class="kunstwerken">@artist.AmountOfArtworks @Loc["artworks"]</span>
                 </div>
             </div>
         }
+        
+        <ArtistPager Filter="Filter" TotalAmount="totalFilteredAmount" />
+        
+        
     }
 </div>
 
+
 @code {
-    private IEnumerable<ArtistDto.Index> _artists;
+    private List<ArtistDto.Index> artists;
+    private readonly ArtistFilter Filter = new();
+    private int totalFilteredAmount;
 
     protected override async Task OnInitializedAsync()
     {
-        _artists = await ArtistService.GetIndexAsync();
+        Filter.OnArtworkFilterChanged += FilterArtistsAsync;
+        Filter.OrderBy = OrderByArtist.OrderByName;
+
+        ArtistRequest.GetIndex request = new()
+        {
+            Page = Filter.Page,
+            Amount = Filter.Amount,
+            OrderBy = Filter.OrderBy
+        };
+        var response = await ArtistService.GetIndexAsync(request);
+        artists = response.Artists;
+        totalFilteredAmount = response.TotalAmount;
+    }
+
+    private async void FilterArtistsAsync()
+    {
+        ArtistRequest.GetIndex request = new()
+        {
+            Searchterm = Filter.Searchterm,
+            OrderBy = Filter.OrderBy,
+            Page = Filter.Page,
+            Amount = Filter.Amount
+        };
+
+        var response = await ArtistService.GetIndexAsync(request);
+        artists = response.Artists;
+        totalFilteredAmount = response.TotalAmount;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        Filter.OnArtworkFilterChanged -= FilterArtistsAsync;
     }
 }

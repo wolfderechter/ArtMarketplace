@@ -1,0 +1,56 @@
+﻿@page "/shoppingcart"
+@inject IStringLocalizer<EuropArt.Shared.Resources.Shoppingcart> Loc
+@inject NavigationManager NavManager
+
+
+<h1>@Loc["Shoppingcart1"]</h1>
+
+@if (Cart.Items is null)
+{
+    <p>Loading...</p>
+}
+else
+
+    @foreach (var item in Cart.Items)
+    {
+
+        <div class="row shopping-cart align-items-center" style="height: 150px">
+            <div class="col-4">
+
+                <div class="badge-kunstwerk text-center" style="padding: 0;">
+                  @*  <img src="@item.ImagePath" style="width:auto;" height="150" width="30">*@
+                    <a href="artwork/@item.ArtworkId"><img src="@item.ImagePath" style="width:auto;" height="150" width="30"></a>
+                </div>
+            </div>
+            <div class="col-6">
+                <h2>@item.Name</h2>
+
+                <span class="price">@item.Price.ToString("C")</span>
+            </div>
+            <div class="col-2">
+                @if (item.RequestingDelete)
+                {
+
+                    <a  @onclick="() => CancelRequestDelete(item)"><img src="/images/close.png" style="width: 20px"/></a>
+                    <a  @onclick="() => ConfirmDelete(item)"><img class="delete" src="/images/delete.png" /></a>
+                    }
+                else
+                {
+                    <a  @onclick="() => RequestDelete(item)"><img class="delete" src="/images/delete.png"/></a>
+                    
+                }
+            </div>
+        </div>
+
+        <hr />
+    }
+
+<div class="row text-end shopping-cart-total">
+    <div class="col-12 mb-4">
+        <span class="total-price">@Loc["TotalPrice"] :@Cart.Items.Sum(x => x.Price).ToString("C")</span>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-bestellen">@Loc["Order"]</button>
+    </div>
+</div>
+

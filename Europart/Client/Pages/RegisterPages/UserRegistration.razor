@@ -1,0 +1,38 @@
+﻿@page "/register/user"
+@inject IStringLocalizer<EuropArt.Shared.Resources.User> Loc
+
+<h1 class="text-center">@Loc["Welcome Back"]!</h1>
+<div class="row">
+    <div class="col-6 offset-3">
+        <form class="form">
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="@Loc["Name"]">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="@Loc["Street"]">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="@Loc["City"]">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="@Loc["Country"]">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="@Loc["Postalcode"]">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="@Loc["Biography"]">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="@Loc["Website"]">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary btn-own">@Loc["Sign up"]</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@code {
+
+}

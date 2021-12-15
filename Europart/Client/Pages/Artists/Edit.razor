@@ -1,0 +1,138 @@
+﻿@page "/artist/edit/{ArtistId:int}"
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Edit> Loc
+@inject NavigationManager NavigationManager
+@inject StorageService StorageService
+@using EuropArt.Shared.Artists
+@using EuropArt.Client.Infrastructure
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <EditForm Model="@model" OnValidSubmit="EditArtist" class="form">
+            <FluentValidationValidator />
+            <DataAnnotationsValidator />
+            <div class="mb-3">
+                <h6>@Loc["FirstName"]</h6>
+                <InputText class="form-control" @bind-Value="model.FirstName"/>
+                <ValidationMessage For="@(() => model.FirstName)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["LastName"]</h6>
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="model.LastName"
+                           aria-describedby="titleHelp" placeholder="Enter lastname" />
+                <ValidationMessage For="@(() => model.LastName)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["City"]</h6>
+                <InputText @bind-Value="model.City" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter city" />
+                <ValidationMessage For="@(() => model.City)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Country"]</h6>
+                <InputText @bind-Value="model.Country" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter country" />
+                <ValidationMessage For="@(() => model.Country)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Postalcode"]</h6>
+                <InputText @bind-Value="model.Postalcode" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter postalcode" />
+                <ValidationMessage For="@(() => model.Postalcode)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Street"]</h6>
+                <InputText @bind-Value="model.Street" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter street" />
+                <ValidationMessage For="@(() => model.Street)" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Bio"]</h6>
+                <InputText @bind-Value="model.Biography" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter biography" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["Web"]</h6>
+                <InputText @bind-Value="model.Website" class="form-control" id="exampleInputDescription1"
+                           placeholder="Enter portfolio website" />
+            </div>
+            <div class="mb-3">
+                <h6>@Loc["ChangeProfilePicture"]</h6>
+                <InputFile OnChange="LoadImage" class="file-input" type="file" name="profilePicture" accept="image/*" />
+@*                @if (image is not null)
+                {
+                    <span class="file-name">
+                        @image.Name
+                    </span>
+                }*@
+
+            </div>
+            <div class="mb-3">
+                <button disabled="@(SaveButtonIsClicked)" type="submit" class="btn btn-primary">@Loc["Edit"]</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+@code {
+
+    private ArtistDto.Edit model = new();
+
+    [Parameter] public int ArtistId { get; set; }
+    [Parameter] public EventCallback OnArtistChanged { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
+    private IBrowserFile image;
+    private bool SaveButtonIsClicked = false;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        ArtistRequest.GetDetail request = new()
+        {
+            ArtistId = ArtistId
+        };
+
+        var response = await ArtistService.GetDetailAsync(request);
+        model = new ArtistDto.Edit
+        {
+            FirstName = response.Artist.FirstName,
+            LastName = response.Artist.LastName,
+            Biography = response.Artist.Biography,
+            Country = response.Artist.Country,
+            City = response.Artist.City,
+            Postalcode = response.Artist.Postalcode,
+            Street = response.Artist.Street,
+            Website = response.Artist.Website,
+            AuthId = response.Artist.AuthId
+            //ImagePath = response.Artist.ImagePath
+        };
+    }
+
+    private async Task EditArtist()
+    {
+        //await ArtistService.UpdateArtistAsync(model, Id);
+        //NavigationManager.NavigateTo("/artist");
+        SaveButtonIsClicked = true;
+        if(image != null)
+        {
+            model.ImagePath = image.Name;
+        }
+
+        ArtistRequest.Edit request = new ArtistRequest.Edit
+        {
+            Artist = model,
+            ArtistId = ArtistId
+        };
+
+
+        var response = await ArtistService.EditAsync(request);
+
+        if(image != null){
+            await StorageService.UploadImageAsync(response.UploadUri, image);
+        }
+        //await OnArtistChanged.InvokeAsync();
+        NavigationManager.NavigateTo($"/artist/{ArtistId}"); 
+    }
+
+    private void LoadImage(InputFileChangeEventArgs args)
+    {
+        image = args.File;
+    }
+}

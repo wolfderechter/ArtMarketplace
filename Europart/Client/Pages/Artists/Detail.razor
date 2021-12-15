@@ -1,31 +1,118 @@
 ﻿@page "/artist/{id:int}"
-@using EuropArt.Shared.Artist
+@using EuropArt.Shared.Artists
+@using EuropArt.Shared.Artworks
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Detail> Loc
 
 
 
-<h3>Detail Artist</h3>
 
-@if (_artist == null)
+@if (artist is null)
 {
-    <p><em>Loading...</em></p>
-}
+<p><em>Loading...</em></p> }
 else
 {
-    <p>@_artist.Id</p>
-    <p>@_artist.Name</p>
-    <p>@_artist.City</p>
-    <p>@_artist.Biography</p>
-    <a href="@_artist.Website">Portfolio</a>
-    <img src="@_artist.ImagePath" />
-}
+    <div class="row">
+        <div class="col-6">
+            <h2 class="Kunstenaar">@(artist.FirstName + " " + artist.LastName)</h2>
+        </div>
+        <div class="col-6 text-end">
+            <AuthorizeView>
+                <div class="admin-buttons">
+                    <a href="artist/edit/@artist.Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
+                    <AuthorizeView Roles="Admin" Context="bruh">
+                        @if (RequestingDelete)
+                        {
+                            <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="ConfirmDelete" class="edit">@Loc["ConfirmDelete"]</a>
+                            <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="CancelRequestDelete" class="edit">@Loc["CancelDelete"]</a>
+                        }
+                        else
+                        {
 
-@code { private ArtistDto.Detail _artist = new();
+                            <a style="color: var(--bs-body-color); text-decoration:none;" class="edit" @onclick="RequestDelete">@Loc["Delete"]</a>
 
-            [Parameter] public int Id { get; set; }
-            [Inject] public IArtistService ArtistService { get; set; }
+                        }
+                    </AuthorizeView>
+                </div>
+            </AuthorizeView>
+        
+        </div>
 
-            protected override async Task OnParametersSetAsync()
+    </div>
+
+    <div class="row artist-detail align-items-center">
+        <div class="col-4 text-center mb-5">
+            <img src="@artist.ImagePath" class="detail-profile-pic" />
+        </div>
+        <div class="col-8 mb-5">
+            <p>
+                <img src="images/locate.svg" class="location" /> @artist.City
+            </p>
+            <p>
+                Joined on @artist.DateCreated.ToString("dd MMMM yyyy")
+            </p>
+            <p>
+                @artist.Biography
+            </p>
+            <p><a href="http://@artist.Website" target="_blank">@artist.Website</a></p>
+        </div>
+        <div class="col-8">
+            <h3>@Loc["Latest Artworks"]</h3>
+        </div>
+        <div class="col-4 text-end">
+            <a href="#">@Loc["View all"] @artist.Artworks.Count() @Loc["artworks"]</a>
+        </div>
+        @if (artist.Artworks.Count > 0)
+        {
+            @foreach (var artwork in artist.Artworks)
             {
-                _artist = await ArtistService.GetDetailAsync(Id);
+            <div class="kol col-4">
+                <div class="badge-kunstwerk">
+                    <a href="artwork/@artwork.Id"><img src="@artwork.ImagePaths[0].imagePath"></a>
+                    <div class="k-p">
+                        <span class="prijs">@artwork.Price.ToString("C")</span>
+                    </div>
+                    <span class="naam">@artwork.Name.ToString()</span>
+                </div>
+            </div>
             } 
+         }
+         else
+         {
+            <p>@Loc["No artworks yet"]</p>
+         }
+    </div>
 }
+
+@code { 
+    private ArtistDto.Detail artist;
+    private bool RequestingDelete;
+
+    [Parameter] public int Id { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
+    [Inject] NavigationManager NavigationManager { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        ArtistRequest.GetDetail request = new() { ArtistId = Id };
+        var response = await ArtistService.GetDetailAsync(request);
+        artist = response.Artist;
+    }
+
+    private async Task ConfirmDelete()
+    {
+        var request = new ArtistRequest.Delete { ArtistId = Id };
+        await ArtistService.DeleteAsync(request);
+
+        NavigationManager.NavigateTo("/artist");
+    }
+
+    private void RequestDelete()
+    {
+        RequestingDelete = true;
+    }
+    private void CancelRequestDelete()
+    {
+        RequestingDelete = false;
+    }
+    }
+

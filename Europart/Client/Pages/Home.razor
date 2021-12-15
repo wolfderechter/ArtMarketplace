@@ -1,9 +1,115 @@
 ﻿@page "/"
-<button type="button"><NavLink href="/artwork">Artwork</NavLink></button>
-<button type="button"><NavLink href="/artist">Artist</NavLink></button>
+@using EuropArt.Shared.Artists
+@using System.Globalization
+@inject IArtistService ArtistService
+
+@using EuropArt.Shared.Artworks
+@using EuropArt.Shared.Resources
+@inject IArtworkService ArtworkService
+@inject IStringLocalizer<EuropArt.Shared.Resources.Home> Loc
+
+<div id="homepage">
+    <div class="row">
+        <div class="col-12">
+            <div class="banner mb-5" style="background-image:url(images/banner.jpg);">
+                <div class="text">
+                    <h1>@Loc["ArtBringsLive"]</h1>
+                    <span class="small-banner-text">@Loc["ForReal"]</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <h2>@Loc["Latest"]</h2>
+        </div>
+        @if (artworks is null)
+        {
+            <p>Loading...</p>
+        }
+        else
+        {
+            @for (var i = 3; i < 6; i++)
+            {
+                <div class="kol col-lg-4 col-sm-6 col-12">
+                    <div class="badge-kunstwerk">
+                        <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePaths[0].imagePath"></a>
+                        <div class="k-p">
+                            <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
+                            <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
+                        </div>
+                        <span class="naam">by @(artworks.ElementAt(i).ArtistFirstName + " " + artworks.ElementAt(i).ArtistLastName)</span>
+                    </div>
+                </div>
+            }
+        }
+        <div class="col-12 text-center">
+            <h2>@Loc["FeaturedArtworks"]</h2>
+        </div>
+        <div class="row">
+            @if (artworks is null)
+            {
+                <p>Loading...</p>
+            }
+            else
+            {
+                @for (var i = 0; i < 3; i++)
+                {
+                    <div class="kol col-lg-4 col-sm-6 col-12">
+                        <div class="badge-kunstwerk">
+                            <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePaths[0].imagePath"></a>
+                            <div class="k-p">
+                                <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
+                                <span class="prijs">@artworks.ElementAt(i).Price.ToString("C")</span>
+                            </div>
+                            <span class="naam">by @(artworks.ElementAt(i).ArtistFirstName + " " + artworks.ElementAt(i).ArtistLastName)</span>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-12 text-center">
+            <h2>@Loc["FeaturedArtists"]</h2>
+        </div>
+        <div class="row">
+            @if (artists is null)
+            {
+                <p>Loading...</p>
+            }
+            else
+            {
+                @for (var i = 1; i < 4; i++)
+                {
+                    <div class="col-lg-4 col-sm-6 col-12 text-center">
+                        <div class="badge-kunstenaars">
+                            <div class="profile-pic">
+                                <a href="/artist/@artists.ElementAt(i).Id"><img src="@artists.ElementAt(i).ImagePath" /></a>
+                            </div>
+                            <h2>@(artists.ElementAt(i).FirstName + " " + artists.ElementAt(i).LastName)</h2>
+                            <span class="locatie"><img src="images/locate.svg" /> @artists.ElementAt(i).Postalcode</span><br />
+                            <span class="kunstwerken">@artists.ElementAt(i).AmountOfArtworks @Loc["Artworks"]</span>
+                        </div>
+                    </div>
+                    //TODO:Fix this stuff...
+
+                }
+            }
 
 
+        </div>
+    </div>
+</div>
+    @code {
+        private List<ArtistDto.Index> artists;
 
-@code {
+        private List<ArtworkDto.Index> artworks;
 
-}
+        protected override async Task OnInitializedAsync()
+        {
+            ArtistRequest.GetIndex request = new();
+            var response = await ArtistService.GetIndexAsync(request);
+            artists = response.Artists;
+
+            ArtworkRequest.GetIndex request2 = new();
+            var response2 = await ArtworkService.GetIndexAsync(request2);
+            artworks = response2.Artworks;
+        }
+    }

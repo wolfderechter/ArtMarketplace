@@ -1,11 +1,22 @@
+using EuropArt.Services.Artists;
+using EuropArt.Services.Artworks;
+using EuropArt.Services.Infrastructure;
+using EuropArt.Shared.Artists;
+using EuropArt.Shared.Artworks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using EuropArt.Persistence.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using EuropArt.Shared.YouthArtworks;
+using EuropArt.Services.Youths;
+using EuropArt.Shared.YouthArtists;
 
 namespace EuropArt.Server
 {
@@ -22,11 +33,35 @@ namespace EuropArt.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("HooopDb"));
+            services.AddDbContext<HooopDbContext>(options => options.UseSqlServer(builder.ConnectionString).EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
+
+            //services.AddDbContextPool<HooopDbContext>(options => options.UseMySql(builder.ConnectionString, ServerVersion.AutoDetect(builder.ConnectionString)));
 
             services.AddControllersWithViews();
+            services.AddSwaggerGen(c =>
+            {
+                c.CustomSchemaIds(x => $"{x.DeclaringType.Name}.{x.Name}");
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hooop Gallery API", Version = "v1" });
+            });
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddRazorPages();
-            
+            services.AddScoped<IArtworkService, ArtworkService>();
+            services.AddScoped<IArtistService, ArtistService>();
+            services.AddScoped<IYouthArtworkService, YouthArtworkService>();
+            services.AddScoped<IYouthArtistService, YouthArtistService>();
+            services.AddScoped<IStorageService, BlobStorageService>();
+
+            services.AddScoped<HooopDataInitializer>();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration["Auth0:Authority"];
+                options.Audience = Configuration["Auth0:ApiIdentifier"];
+            });
         }
 
         private RequestLocalizationOptions GetLocalizationOptions()
@@ -38,12 +73,14 @@ namespace EuropArt.Server
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, HooopDataInitializer dataInitializer, HooopDbContext dbContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hooop Gallery API"));
             }
             else
             {
@@ -51,6 +88,8 @@ namespace EuropArt.Server
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            dataInitializer.SeedData();
 
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
@@ -62,6 +101,9 @@ namespace EuropArt.Server
                 .AddSupportedUICultures(new[] { "en-US", "es-CL" }));
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
