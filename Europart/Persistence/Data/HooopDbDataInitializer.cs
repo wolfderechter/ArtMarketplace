@@ -35,7 +35,7 @@ namespace EuropArt.Persistence.Data
                 _dbContext.Artists.AddRange(artists);
                 _dbContext.YouthArtists.AddRange(youthArtists);
 
-                Artwork artwork1 = new Artwork("Emmer2", new Money(3M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-222), "abstract", "sculptures", new List<ImagePath>(){ new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/1.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/2.jpg") });
+                Artwork artwork1 = new Artwork("Emmer2", new Money(3M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-222), "abstract", "sculptures", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/1.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/2.jpg") });
                 Artwork artwork2 = new Artwork("Zonnebloem", new Money(4M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-40), "modern", "painting", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/3.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/4.jpg") });
                 Artwork artwork3 = new Artwork("Boter", new Money(12M), "dit is een beschrijving", artist2, DateTime.Now, "surrealism", "sculptures", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/5.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/6.jpg") });
                 Artwork artwork4 = new Artwork("Koffielepel", new Money(65M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-80), "modern", "painting", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/7.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/8.jpg") });
@@ -73,11 +73,10 @@ namespace EuropArt.Persistence.Data
                 youthArtwork10.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/10.jpg";
                 youthArtwork11.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/11.jpg";
 
-                List<Artwork> artworks = new List<Artwork> { artwork1, artwork2, artwork3, artwork4 , artwork5 , artwork6 , artwork7 , artwork8 , artwork9 , artwork10 , artwork11 , artwork12 , artwork13 , artwork14 };
+                List<Artwork> artworks = new List<Artwork> { artwork1, artwork2, artwork3, artwork4, artwork5, artwork6, artwork7, artwork8, artwork9, artwork10, artwork11, artwork12, artwork13, artwork14 };
 
                 _dbContext.YouthArtworks.AddRange(youthArtwork1, youthArtwork2, youthArtwork3, youthArtwork4, youthArtwork5, youthArtwork6, youthArtwork7, youthArtwork8, youthArtwork9, youthArtwork10, youthArtwork11);
                 _dbContext.Artworks.AddRange(artworks);
-                
                 _dbContext.SaveChanges();
             }
         }
