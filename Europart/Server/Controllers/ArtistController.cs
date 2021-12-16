@@ -46,5 +46,13 @@ namespace EuropArt.Server.Controllers
         {
             return artistService.EditAsync(request);
         }
+
+        [HttpGet("{AuthId}/{email}")]
+        public Task EditAuth0(string AuthId, string email)
+        {
+            var authid = AuthId;
+            var Email = email;
+            return null;
+        }
     }
 }

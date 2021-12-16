@@ -1,4 +1,7 @@
+@using EuropArt.Client.Infrastructure
 @inherits LayoutComponentBase
+@implements IDisposable
+
 
         <NavMenu />
 
@@ -11,3 +14,14 @@
     <div>
         <Footer />
     </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+       
+    }
+    public void Dispose()
+    {
+        
+    }
+}

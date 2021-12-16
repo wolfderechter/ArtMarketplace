@@ -1,4 +1,4 @@
-﻿@page "/register/artist/{state}"
+﻿@page "/register/artist/{AuthId}/{state}"
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
 @using EuropArt.Client.Infrastructure
 <div class="row">
@@ -66,6 +66,8 @@
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">@Loc["Register"]</button>
             </div>
+            <p>@AuthId</p>
         </EditForm>
     </div>
 </div>
+
