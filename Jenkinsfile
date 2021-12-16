@@ -1,6 +1,6 @@
 node('AcceptatieServer') {  
     stage('Build') { 
-        build 'dotnet_test'
+        build 'Acceptatie_dotnet_test'
     }
     stage('Deploy') { 
         build 'Acceptatie_cleanup'
