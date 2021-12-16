@@ -1,9 +1,9 @@
 node('AcceptatieServer') {  
     stage('Build') { 
-        Build 'pull_develop'
-        Build 'dotnet_restore'
-        Build 'dotnet_build'
-        Build 'dotnet_test'
+        build 'pull_develop'
+        build 'dotnet_restore'
+        build 'dotnet_build'
+        build 'dotnet_test'
     }
     stage('Deploy') { 
         build 'Acceptatie_cleanup'
