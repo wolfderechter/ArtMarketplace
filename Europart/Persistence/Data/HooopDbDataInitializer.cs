@@ -11,12 +11,10 @@ namespace EuropArt.Persistence.Data
     public class HooopDataInitializer
     {
         private readonly HooopDbContext _dbContext;
-
         public HooopDataInitializer(HooopDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-
         public void SeedData()
         {
             _dbContext.Database.EnsureDeleted();
@@ -51,7 +49,6 @@ namespace EuropArt.Persistence.Data
                 Artwork artwork12 = new Artwork("Stoel", new Money(10M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-60), "surrealism", "photography", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/23.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/24.jpg") });
                 Artwork artwork13 = new Artwork("Bank", new Money(201M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-50), "minimalism", "drawings", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/25.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/26.jpg") });
                 Artwork artwork14 = new Artwork("Vliegtuig", new Money(158M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-4), "abstract", "drawings", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/27.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/28.jpg") });
-
                 YouthArtwork youthArtwork1 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
                 YouthArtwork youthArtwork2 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
                 YouthArtwork youthArtwork3 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
@@ -64,7 +61,6 @@ namespace EuropArt.Persistence.Data
                 YouthArtwork youthArtwork10 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
                 YouthArtwork youthArtwork11 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
 
-
                 youthArtwork1.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/1.jpg";
                 youthArtwork2.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/2.jpg";
                 youthArtwork3.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/3.jpg";
@@ -76,8 +72,6 @@ namespace EuropArt.Persistence.Data
                 youthArtwork9.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/9.jpg";
                 youthArtwork10.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/10.jpg";
                 youthArtwork11.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/11.jpg";
-          
-
 
                 List<Artwork> artworks = new List<Artwork> { artwork1, artwork2, artwork3, artwork4 , artwork5 , artwork6 , artwork7 , artwork8 , artwork9 , artwork10 , artwork11 , artwork12 , artwork13 , artwork14 };
 
@@ -85,10 +79,7 @@ namespace EuropArt.Persistence.Data
                 _dbContext.Artworks.AddRange(artworks);
                 
                 _dbContext.SaveChanges();
-
             }
         }
-
-
     }
 }
