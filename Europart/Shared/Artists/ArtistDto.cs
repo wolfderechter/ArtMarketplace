@@ -79,10 +79,6 @@ namespace EuropArt.Shared.Artists
             public string Website { get; set; }
             public string AuthId { get; set; }
             public string ImagePath { get; set; }
-<<<<<<< HEAD
-
-=======
->>>>>>> de2289b02860e9819d8d0ba3a7df591bd05ef4d0
             public class ArtistValidator : AbstractValidator<Edit>
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
