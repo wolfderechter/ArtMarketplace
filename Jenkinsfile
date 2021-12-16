@@ -1,5 +1,6 @@
 node('AcceptatieServer') {  
     stage('Build') { 
+        Build 'pull_develop'
         Build 'dotnet_restore'
         Build 'dotnet_build'
         Build 'dotnet_test'
