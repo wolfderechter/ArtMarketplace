@@ -42,7 +42,7 @@
 
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">@Loc["Edit"]</button>
+                <button disabled="@(SaveButtonIsClicked)" type="submit" class="btn btn-primary">@Loc["Edit"]</button>
             </div>
         </EditForm>
     </div>
@@ -55,6 +55,7 @@
     [Parameter] public EventCallback OnArtworkChanged { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
     private List<IBrowserFile> images = new();
+    private bool SaveButtonIsClicked = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -75,8 +76,7 @@
 
     private async Task EditArtworkAsync()
     {
-        //await ArtworkService.UpdateAsync(model, Id);
-        //NavigationManager.NavigateTo("/artwork");
+        SaveButtonIsClicked = true;
         model.ImagePaths = images.Select(x => new ImagePath(x.Name)).ToList();
         ArtworkRequest.Edit request = new ArtworkRequest.Edit
         {

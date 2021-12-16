@@ -67,7 +67,7 @@
 
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">@Loc["Edit"]</button>
+                <button disabled="@(SaveButtonIsClicked)" type="submit" class="btn btn-primary">@Loc["Edit"]</button>
             </div>
         </EditForm>
     </div>
@@ -80,6 +80,7 @@
     [Parameter] public EventCallback OnArtistChanged { get; set; }
     [Inject] public IArtistService ArtistService { get; set; }
     private IBrowserFile image;
+    private bool SaveButtonIsClicked = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -99,6 +100,7 @@
             Postalcode = response.Artist.Postalcode,
             Street = response.Artist.Street,
             Website = response.Artist.Website,
+            AuthId = response.Artist.AuthId
             //ImagePath = response.Artist.ImagePath
         };
     }
@@ -107,7 +109,7 @@
     {
         //await ArtistService.UpdateArtistAsync(model, Id);
         //NavigationManager.NavigateTo("/artist");
-        Console.WriteLine("Edited artist");
+        SaveButtonIsClicked = true;
         if(image != null)
         {
             model.ImagePath = image.Name;
