@@ -1,8 +1,8 @@
 node('ProductieServer') {
-    stage('Preparation') {
+    stage('Build') {
         build 'Productie_dotnet_test'
     }
-    stage('Build') {
+    stage('Deploy') {
         build 'Productie_Cleanup'
         build 'Productie_pull_github'
         build 'Productie_inject_dockerfiles'
