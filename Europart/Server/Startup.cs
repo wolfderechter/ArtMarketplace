@@ -17,6 +17,8 @@ using System.Linq;
 using EuropArt.Shared.YouthArtworks;
 using EuropArt.Services.Youths;
 using EuropArt.Shared.YouthArtists;
+using EuropArt.Shared.Accounts;
+using EuropArt.Services.Accounts;
 
 namespace EuropArt.Server
 {
@@ -34,9 +36,9 @@ namespace EuropArt.Server
         public void ConfigureServices(IServiceCollection services)
         {
             var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("HooopDb"));
-            //services.AddDbContext<HooopDbContext>(options => options.UseSqlServer(builder.ConnectionString).EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
+            services.AddDbContext<HooopDbContext>(options => options.UseSqlServer(builder.ConnectionString).EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
 
-            services.AddDbContextPool<HooopDbContext>(options => options.UseMySql(builder.ConnectionString, ServerVersion.AutoDetect(builder.ConnectionString)));
+        //    services.AddDbContextPool<HooopDbContext>(options => options.UseMySql(builder.ConnectionString, ServerVersion.AutoDetect(builder.ConnectionString)));
 
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
@@ -50,6 +52,7 @@ namespace EuropArt.Server
             services.AddScoped<IArtistService, ArtistService>();
             services.AddScoped<IYouthArtworkService, YouthArtworkService>();
             services.AddScoped<IYouthArtistService, YouthArtistService>();
+            services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IStorageService, BlobStorageService>();
 
             services.AddScoped<HooopDataInitializer>();

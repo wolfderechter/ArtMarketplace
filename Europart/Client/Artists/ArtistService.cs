@@ -51,5 +51,13 @@ namespace EuropArt.Client.Artists
             var response = await publicClient.Client.PostAsJsonAsync(endpoint, request);
             return await response.Content.ReadFromJsonAsync<ArtistResponse.Create>();
         }
+
+        public async Task<ArtistResponse.GetDetailByAuthId> GetDetailByAuthIdAsync(ArtistRequest.GetDetailByAuthId request)
+        {
+            var response = await publicClient.Client.GetFromJsonAsync<ArtistResponse.GetDetailByAuthId>($"{endpoint}/{request.AuthId}");
+            return response;
+        }
+
+     
     }
 }

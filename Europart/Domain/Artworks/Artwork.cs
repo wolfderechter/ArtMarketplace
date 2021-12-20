@@ -2,6 +2,7 @@ using Ardalis.GuardClauses;
 using Domain.Common;
 using EuropArt.Domain.Artists;
 using EuropArt.Domain.Common;
+using EuropArt.Domain.Likes;
 using System;
 using System.Collections.Generic;
 
@@ -14,8 +15,10 @@ namespace EuropArt.Domain.Artworks
         public Money price;
         public string category;
         public DateTime DateCreated;
-        public Artist Artist { get; set; }
         public int ArtistId { get; set; }
+        public Artist Artist { get; set; }
+      //  public ICollection<Like> Likes { get; set; }
+       
         public string Name { 
             get { return name;  }
             set {  name = Guard.Against.NullOrWhiteSpace(value, nameof(name)); }

@@ -1,4 +1,6 @@
 ﻿@page "/artwork"
+@using EuropArt.Domain.Likes
+@using EuropArt.Shared.Accounts
 @using EuropArt.Shared.Artworks
 @using EuropArt.Shared.Common
 @using EuropArt.Client.Artworks
@@ -100,7 +102,19 @@
                             <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></span>
                         </div>
                     </div>
-                }
+                    @if (likedArtworksByUserLoggedIn is not null)
+                    {
+                        @if (likedArtworksByUserLoggedIn.Contains(artwork.Id))
+                        {
+                            <a><i class="fa fa-heart" aria-hidden="true"></i></a>
+                        } else
+                        {
+                            <a><i @onclick="(() => AddLike(artwork.Id))" class="fa fa-heart-o"></i> </a>
+                        }
+                    }
+
+
+            }
                 <ArtworkPager Filter="Filter" TotalAmount="totalFilteredAmount" />
             }
         </div>
@@ -113,6 +127,10 @@
     private String showColFilters = "";
     private String textOnButton = "Show Filters";
     private int totalFilteredAmount;
+
+    public List<int> likedArtworksByUserLoggedIn;
+    [Inject] public AuthenticationStateProvider auth { get; set; }
+    [Inject] public IAccountService accountService { get; set; }
 
     private List<ArtworkDto.Index> artworks;
     private ArtworkFilter Filter = new();
@@ -134,7 +152,23 @@
         var response = await ArtworkService.GetIndexAsync(request);
         artworks = response.Artworks;
         totalFilteredAmount = response.TotalAmount;
+
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+        var role = user.Claims.ElementAt(5).Value;
+        //  var role = user.Claims.
+        AccountRequest.GetLikes accountRequest = new()
+        {
+            AuthId = authId,
+           // Role = role
+        };
+
+         var likes = await accountService.GetLikesAsync(accountRequest);
+          likedArtworksByUserLoggedIn = likes.ArtworkIds; 
+
     }
+
 
     private void ShowFilters()
     {
@@ -174,6 +208,23 @@
         artworks = response.Artworks;
         totalFilteredAmount = response.TotalAmount;
         StateHasChanged();
+    }
+
+    public async Task AddLike(int artworkId)
+    {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+        //  var role = user.Claims.
+        Console.WriteLine("authId");
+        AccountRequest.AddLike request = new()
+        {
+            ArtworkId = artworkId,
+            AuthId = authId
+        };
+        
+        await accountService.AddLikeAsync(request);
+
     }
 
     public void Dispose()

@@ -1,5 +1,6 @@
 ﻿using EuropArt.Domain.Artworks;
 using EuropArt.Domain.Common;
+using EuropArt.Domain.Likes;
 using System;
 using System.Collections.Generic;
 
@@ -13,11 +14,13 @@ namespace EuropArt.Domain.Artists
         public string Nickname { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
+        public string Test { get; set; }
         public string Postalcode { get; set; }
         public string Street { get; set; }
         //public IEnumerable<string> ImagePaths { get; set; }
         public string ImagePath { get; set; }
-        public IEnumerable<Artwork> Artworks { get; set; }
+        public ICollection<Artwork> Artworks { get; set; }
+        public List<Like> Likes { get; set; } = new();
         public DateTime DateCreated { get; set; }
         public string Biography { get; set; }
         public string Website { get; set; }

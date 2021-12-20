@@ -26,15 +26,16 @@ namespace EuropArt.Domain.Artists
         public IEnumerable<YouthArtwork> Artworks { get; set; }
         public DateTime DateCreated { get; set; }
         //public bool IsVerified { get; set; }
-
+        public string AuthId { get; set; }
         public YouthArtist() { }
 
-        public YouthArtist(string firstname, string lastname, string imagePath, DateTime dateCreated)
+        public YouthArtist(string firstname, string lastname, string imagePath, DateTime dateCreated, string authId)
         {
             FirstName = firstname;
             LastName = lastname;
             ImagePath = imagePath;
             DateCreated = dateCreated;
+            AuthId = authId;
             //Country = country;
             //City = city;
             //Postalcode = postalcode;

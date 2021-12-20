@@ -80,6 +80,11 @@ else
          {
             <p>@Loc["No artworks yet"]</p>
          }
+        @foreach(var like in artist.Likes)
+        {
+         
+           <p>@like.Artwork.Name</p>
+        }
     </div>
 }
 

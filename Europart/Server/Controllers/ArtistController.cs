@@ -22,11 +22,17 @@ namespace EuropArt.Server.Controllers
         {
             return artistService.GetIndexAsync(request);
         }
-
+/*
         [HttpGet("{ArtistId}")]
         public Task<ArtistResponse.GetDetail> GetDetailAsync([FromRoute] ArtistRequest.GetDetail request)
         {
             return artistService.GetDetailAsync(request);
+        }*/
+
+        [HttpGet("{AuthId}")]
+        public Task<ArtistResponse.GetDetailByAuthId> GetDetailByAuthIdAsync([FromRoute] ArtistRequest.GetDetailByAuthId request)
+        {
+            return artistService.GetDetailByAuthIdAsync(request);
         }
 
         [HttpDelete("{ArtistId}")]
@@ -45,6 +51,14 @@ namespace EuropArt.Server.Controllers
         public Task<ArtistResponse.Edit> EditAsync([FromBody] ArtistRequest.Edit request)
         {
             return artistService.EditAsync(request);
+        }
+
+        [HttpGet("{AuthId}/{email}")]
+        public Task EditAuth0(string AuthId, string email)
+        {
+            var authid = AuthId;
+            var Email = email;
+            return null;
         }
     }
 }

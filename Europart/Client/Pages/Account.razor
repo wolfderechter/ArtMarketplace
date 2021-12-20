@@ -1,6 +1,8 @@
 ﻿@page "/account"
 @attribute [Authorize]
 @inject IStringLocalizer<EuropArt.Shared.Resources.Account> Loc
+@using EuropArt.Shared.Artists
+@using EuropArt.Shared.Artworks
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
@@ -22,10 +24,43 @@
         @context.User.Claims.ElementAt(4).Value
     </Authorized>
 </AuthorizeView>
+
+@if(artist is not null) {
+@foreach(var item in artist.Likes)
+{
+    
+    <p>@item.Artwork.Name</p>
+}
+}
+
+
+
+
+
 @code{
+    private ArtistDto.Detail artist;
+
+    [Parameter] public int Id { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
+    [Inject] public IArtworkService ArtworkService { get; set; }
+    [Inject] public AuthenticationStateProvider auth { get; set; }
+
     private async Task BeginSignOut(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+
+        ArtistRequest.GetDetailByAuthId request = new() { AuthId = authId };
+        var response = await ArtistService.GetDetailByAuthIdAsync(request);
+        artist = response.Artist;
+
+
     }
 }

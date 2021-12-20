@@ -1,4 +1,5 @@
-﻿using EuropArt.Shared.Common;
+﻿using EuropArt.Domain.Likes;
+using EuropArt.Shared.Common;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace EuropArt.Shared.Artists
             public OrderByArtist? OrderBy { get; set; }
             public int Amount { get; set; } = 25;
             public int Page { get; set; } = 0;
+        
+
         }
 
         public class GetDetail
@@ -23,6 +26,10 @@ namespace EuropArt.Shared.Artists
             public int ArtistId { get; set; }
         }
 
+        public class GetDetailByAuthId
+        {
+            public string AuthId { get; set; }
+        }
         public class Delete
         {
             public int ArtistId { get; set; }
@@ -46,5 +53,7 @@ namespace EuropArt.Shared.Artists
                 }
             }
         }
+
+        
     }
 }

@@ -66,7 +66,7 @@
 
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">@Loc["Add Artwork"]</button>
+                <button disabled="@(SaveButtonIsClicked)" type="submit" class="btn btn-primary">@Loc["Add Artwork"]</button>
             </div>
         </EditForm>
     </div>
@@ -76,11 +76,11 @@
     ArtworkDto.Create newArtwork = new() {};
     private IBrowserFile image;
     private List<IBrowserFile> images = new();
+    private bool SaveButtonIsClicked = false;
 
     private async Task CreateNewArtwork()
     {
-        //Fake image toevoegen
-        //newArtwork.ImagePath = "/images/NewArtwork.jpg";
+        SaveButtonIsClicked = true;
         newArtwork.DateCreated = DateTime.Now;
         newArtwork.ImagePath = image.Name;
         newArtwork.ImagePaths = images.Select(x => x.Name).ToList();

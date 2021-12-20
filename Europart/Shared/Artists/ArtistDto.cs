@@ -1,5 +1,6 @@
 ﻿using EuropArt.Domain.Artists;
 using EuropArt.Domain.Common;
+using EuropArt.Domain.Likes;
 using EuropArt.Shared.Artworks;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
@@ -20,6 +21,7 @@ namespace EuropArt.Shared.Artists
             public string Email { get; set; }
             public string Postalcode { get; set; }
             public DateTime DateCreated { get; set; }
+            public List<Like> Likes { get; set; }
         }
 
         public class Detail : Index
@@ -77,12 +79,8 @@ namespace EuropArt.Shared.Artists
             public string Street { get; set; }
             public string Biography { get; set; }
             public string Website { get; set; }
-<<<<<<< HEAD
             public string AuthId { get; set; }
-=======
             public string ImagePath { get; set; }
-
->>>>>>> 5237150d5488e1dba8cd527b2429aaa92300ef1a
             public class ArtistValidator : AbstractValidator<Edit>
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
