@@ -34,9 +34,9 @@ namespace EuropArt.Server
         public void ConfigureServices(IServiceCollection services)
         {
             var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("HooopDb"));
-            services.AddDbContext<HooopDbContext>(options => options.UseSqlServer(builder.ConnectionString).EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
+            //services.AddDbContext<HooopDbContext>(options => options.UseSqlServer(builder.ConnectionString).EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
 
-            //services.AddDbContextPool<HooopDbContext>(options => options.UseMySql(builder.ConnectionString, ServerVersion.AutoDetect(builder.ConnectionString)));
+            services.AddDbContextPool<HooopDbContext>(options => options.UseMySql(builder.ConnectionString, ServerVersion.AutoDetect(builder.ConnectionString)));
 
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
