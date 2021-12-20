@@ -12,6 +12,5 @@ namespace EuropArt.Shared.YouthArtists
         Task<YouthArtistResponse.GetDetail> GetDetailAsync(YouthArtistRequest.GetDetail request);
         Task<YouthArtistResponse.Edit> EditAsync(YouthArtistRequest.Edit request);
         Task DeleteAsync(YouthArtistRequest.Delete request);
-
     }
 }

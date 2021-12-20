@@ -165,9 +165,15 @@ namespace EuropArt.Services.Artists
                 {
                     Id = y.Id,
                     Name = y.Name,
+                    ArtistId = y.Artist.Id,
+                    ArtistFirstName = y.Artist.FirstName,
+                    ArtistLastName = y.Artist.LastName,
                     Description = y.Description,
+                    Price = y.Price.Value,
+                    DateCreated = y.DateCreated,
                     ImagePaths = y.ImagePaths,
-                    Price = y.Price,
+                    Style = y.Style,
+                    Category = y.Category,
                 }).ToList(),
                 AuthId = x.AuthId
             });

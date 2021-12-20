@@ -29,5 +29,11 @@ namespace EuropArt.Client.Youths
             var response = await publicClient.Client.GetFromJsonAsync<YouthArtworkResponse.GetIndex>(endpoint);
             return response;
         }
+
+        //only used by android
+        public async Task<List<YouthArtworkDto.Detail>> GetYouthArtworksAndroidAsync(YouthArtworkRequest.GetIndex request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

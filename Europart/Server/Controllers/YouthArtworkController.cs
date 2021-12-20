@@ -1,4 +1,5 @@
-﻿using EuropArt.Shared.YouthArtworks;
+﻿using EuropArt.Shared.YouthArtists;
+using EuropArt.Shared.YouthArtworks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,7 +26,11 @@ namespace EuropArt.Server.Controllers
         {
             return youthArtworkService.GetIndexAsync(request);
         }
-
+        [HttpGet("android/")]
+        public Task<List<YouthArtworkDto.Detail>> GetYouthArtworksAndroidAsync([FromQuery] YouthArtworkRequest.GetIndex request)
+        {
+            return youthArtworkService.GetYouthArtworksAndroidAsync(request);
+        }
         [HttpGet("{YouthArtworkId}")]  
         public Task<YouthArtworkResponse.GetDetail> GetDetailAsync([FromRoute] YouthArtworkRequest.GetDetail request)
         {
