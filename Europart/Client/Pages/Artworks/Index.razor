@@ -99,19 +99,22 @@
                                 <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
                                 <span class="prijs">@artwork.Price.ToString("C")</span>
                             </div>
-                            <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></span>
+                            <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a>
+                             @if (likedArtworksByUserLoggedIn is not null)
+                             {
+                                @if (likedArtworksByUserLoggedIn.Contains(artwork.Id))
+                                 {
+                                <a><i @onclick="(() => DeleteLike(artwork.Id))" style="margin-left: 83%" class="fa fa-heart icon-2x" aria-hidden="true"></i></a>
+                                } else
+                                {
+                                <a><i @onclick="(() => AddLike(artwork.Id))" style="margin-left: 83%" class="fa fa-heart-o"></i> </a>
+                                }
+                             }
+                             </span>
                         </div>
+                       
                     </div>
-                    @if (likedArtworksByUserLoggedIn is not null)
-                    {
-                        @if (likedArtworksByUserLoggedIn.Contains(artwork.Id))
-                        {
-                            <a><i class="fa fa-heart" aria-hidden="true"></i></a>
-                        } else
-                        {
-                            <a><i @onclick="(() => AddLike(artwork.Id))" class="fa fa-heart-o"></i> </a>
-                        }
-                    }
+                    
 
 
             }
@@ -137,7 +140,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        GetLikes();
         Filter.OnArtworkFilterChanged += FilterArtworksAsync;
+
         //set OrderBy to newest on startup
         Filter.OrderBy = OrderByArtwork.OrderByNewest;
         //set checkbox for auctions checked on startup
@@ -153,6 +158,13 @@
         artworks = response.Artworks;
         totalFilteredAmount = response.TotalAmount;
 
+
+
+
+    }
+
+    private async void GetLikes()
+    {
         var authState = await auth.GetAuthenticationStateAsync();
         var user = authState.User;
         var authId = user.Claims.ElementAt(4).Value.Substring(6);
@@ -164,11 +176,9 @@
            // Role = role
         };
 
-         var likes = await accountService.GetLikesAsync(accountRequest);
-          likedArtworksByUserLoggedIn = likes.ArtworkIds; 
-
+        var likes = await accountService.GetLikesAsync(accountRequest);
+        likedArtworksByUserLoggedIn = likes.ArtworkIds; 
     }
-
 
     private void ShowFilters()
     {
@@ -210,25 +220,41 @@
         StateHasChanged();
     }
 
+    public async Task DeleteLike(int artworkId)
+    {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+
+        AccountRequest.DeleteLike reauest = new()
+        {
+            ArtworkId = artworkId,
+            AuthId = authId
+        };
+
+        await accountService.DeleteLikeAsync(reauest);
+        likedArtworksByUserLoggedIn.Remove(artworkId);
+    }
+
     public async Task AddLike(int artworkId)
     {
         var authState = await auth.GetAuthenticationStateAsync();
         var user = authState.User;
         var authId = user.Claims.ElementAt(4).Value.Substring(6);
-        //  var role = user.Claims.
-        Console.WriteLine("authId");
+
         AccountRequest.AddLike request = new()
         {
             ArtworkId = artworkId,
             AuthId = authId
         };
-        
-        await accountService.AddLikeAsync(request);
 
+        await accountService.AddLikeAsync(request);
+        likedArtworksByUserLoggedIn.Add(artworkId);
     }
 
     public void Dispose()
     {
         Filter.OnArtworkFilterChanged -= FilterArtworksAsync;
+       
     }
 }

@@ -27,5 +27,10 @@ namespace EuropArt.Client.Accounts
             var response = await client.GetFromJsonAsync<AccountResponse.GetLikes>($"{endpoint}/{request.AuthId}");
             return response;
         }
+
+        public async Task DeleteLikeAsync(AccountRequest.DeleteLike request)
+        {
+            await client.DeleteAsync($"{endpoint}/{request.AuthId}/{request.ArtworkId}");
+        }
     }
 }

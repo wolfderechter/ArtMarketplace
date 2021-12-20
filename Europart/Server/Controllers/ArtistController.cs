@@ -29,7 +29,7 @@ namespace EuropArt.Server.Controllers
         {
             return artistService.GetArtistsAndroidAsync(request);
         }
-        [HttpGet("{ArtistId}")]
+      /*  [HttpGet("{ArtistId}")]
         public Task<ArtistResponse.GetDetail> GetDetailAsync([FromRoute] ArtistRequest.GetDetail request)
         {
             return artistService.GetDetailAsync(request);

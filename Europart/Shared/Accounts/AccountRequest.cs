@@ -20,5 +20,11 @@ namespace EuropArt.Shared.Accounts
      //       public string Role { get; set; }
             public string AuthId { get; set; }
         }
+
+        public class DeleteLike
+        {
+            public string AuthId { get; set; }
+            public int ArtworkId { get; set; }
+        }
     }
 }

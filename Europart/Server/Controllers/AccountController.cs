@@ -27,6 +27,12 @@ namespace EuropArt.Server.Controllers
             return accountService.GetLikesAsync(request);
         }
 
-       
+        [HttpDelete("{AuthId}/{ArtworkId}")]
+        public Task DeleteAsync([FromRoute] AccountRequest.DeleteLike request)
+        {
+            return accountService.DeleteLikeAsync(request);
+        }
+
+
     }
 }
