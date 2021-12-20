@@ -119,6 +119,61 @@ namespace EuropArt.Services.Artists
 
             return response;
         }
+        //only for android
+        public async Task<List<ArtistDto.Detail>> GetArtistsAndroidAsync(ArtistRequest.GetIndex request)
+        {
+            await Task.Delay(100);
+            //Query om te filteren
+            var query = artists.AsQueryable().AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(request.Searchterm))
+                query = query.Where(x => (x.FirstName + " " + x.LastName).Contains(request.Searchterm));
+
+            if (request.OrderBy is not null)
+            {
+                switch (request.OrderBy.Value)
+                {
+                    case OrderByArtist.OrderByName:
+                        query = query.OrderBy(x => x.FirstName + " " + x.LastName);
+                        break;
+                    case OrderByArtist.OrderByNewest:
+                        query = query.OrderByDescending(x => x.DateCreated);
+                        break;
+
+                    case OrderByArtist.OrderByOldest:
+                        query = query.OrderBy(x => x.DateCreated);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            var response = artists.AsNoTracking().Select(x => new ArtistDto.Detail
+            {
+                Id = x.Id,
+                Biography = x.Biography,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Postalcode = x.Postalcode,
+                Country = x.Country,
+                City = x.City,
+                Street = x.Street,
+                Website = x.Website,
+                ImagePath = x.ImagePath,
+                DateCreated = x.DateCreated,
+                Artworks = artworks.Where(aw => aw.Artist.Id == x.Id).Select(y => new ArtworkDto.Detail
+                {
+                    Id = y.Id,
+                    Name = y.Name,
+                    Description = y.Description,
+                    ImagePaths = y.ImagePaths,
+                    Price = y.Price,
+                }).ToList(),
+                AuthId = x.AuthId
+            });
+
+            return response.ToList();
+        }
 
         public async Task<ArtistResponse.GetIndex> GetIndexAsync(ArtistRequest.GetIndex request)
         {

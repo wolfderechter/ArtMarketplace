@@ -1,7 +1,9 @@
-﻿using EuropArt.Shared.Artists;
+﻿using EuropArt.Domain.Artists;
+using EuropArt.Shared.Artists;
 using EuropArt.Shared.Artworks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EuropArt.Server.Controllers
@@ -22,7 +24,11 @@ namespace EuropArt.Server.Controllers
         {
             return artistService.GetIndexAsync(request);
         }
-
+        [HttpGet("android/")]
+        public Task<List<ArtistDto.Detail>> GetArtistsAndroidAsync([FromQuery] ArtistRequest.GetIndex request)
+        {
+            return artistService.GetArtistsAndroidAsync(request);
+        }
         [HttpGet("{ArtistId}")]
         public Task<ArtistResponse.GetDetail> GetDetailAsync([FromRoute] ArtistRequest.GetDetail request)
         {

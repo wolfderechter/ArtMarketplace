@@ -1,6 +1,8 @@
-﻿using EuropArt.Shared.Artworks;
+﻿using EuropArt.Domain.Artworks;
+using EuropArt.Shared.Artworks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EuropArt.Server.Controllers
@@ -20,6 +22,11 @@ namespace EuropArt.Server.Controllers
         public Task<ArtworkResponse.GetIndex> GetIndexAsync([FromQuery] ArtworkRequest.GetIndex request)
         {
             return artworkService.GetIndexAsync(request);
+        }
+        [HttpGet("android/")]
+        public Task<List<ArtworkDto.Detail>> GetArtworksAndroidAsync([FromQuery] ArtworkRequest.GetIndex request)
+        {
+            return artworkService.GetArtworksAndroidAsync(request);
         }
 
         [HttpGet("{ArtworkId}")]

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using EuropArt.Domain.Artworks;
+using System.Collections.Generic;
 using System.Threading.Tasks; 
 namespace EuropArt.Shared.Artworks
 {
@@ -17,5 +18,7 @@ namespace EuropArt.Shared.Artworks
         Task<ArtworkResponse.Create> CreateAsync(ArtworkRequest.Create request);
         Task DeleteAsync(ArtworkRequest.Delete request);
         Task<ArtworkResponse.Edit> EditAsync(ArtworkRequest.Edit request);
+        //only used for android
+        Task<List<ArtworkDto.Detail>> GetArtworksAndroidAsync(ArtworkRequest.GetIndex request);
     }
 }
