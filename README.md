@@ -7,6 +7,7 @@
 
 ## How to run
 
+test
 > Fill in this information
 Instructions how to run the project (don't forget the DB Connection etc.)
 
