@@ -1,0 +1,44 @@
+﻿@page "/messages"
+@using EuropArt.Client.Accounts
+@using EuropArt.Domain.Messages
+@using EuropArt.Shared.Accounts
+
+
+@if(Conversations is not null)
+{
+    @foreach(var conversation in Conversations)
+    {
+    //  <span> @conversation.ArtistFirstName @conversation.ArtistLastName </span>
+      <p>@conversation.Artist.FirstName</p>   
+
+    }
+   @* @foreach(var message in Conversations.Messages)
+    {
+       message.
+    }*@
+}
+
+    
+
+
+@code {
+    private List<Conversation> Conversations { get; set; }
+    [Inject] public AuthenticationStateProvider auth { get; set; }
+    [Inject] public IAccountService AccountService { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+      {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+
+        AccountRequest.GetConversations request = new() { AuthId = authId };
+        var response = await AccountService.GetConversationsAsync(request);
+        Conversations = response.Conversations;
+
+
+      }
+
+
+}
