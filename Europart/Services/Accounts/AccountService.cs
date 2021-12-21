@@ -1,6 +1,7 @@
 ﻿using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
 using EuropArt.Domain.Likes;
+using EuropArt.Domain.Messages;
 using EuropArt.Persistence.Data;
 using EuropArt.Shared.Accounts;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace EuropArt.Services.Accounts
         private readonly DbSet<Artist> artists;
         private readonly DbSet<Artwork> artworks;
         private readonly DbSet<Like> likes;
+        private readonly DbSet<Conversation> conversations;
 
 
         public AccountService(HooopDbContext dbContext)
@@ -25,6 +27,7 @@ namespace EuropArt.Services.Accounts
             artists = dbContext.Artists;
             likes = dbContext.Likes;
             artworks = dbContext.Artworks;
+            conversations = dbContext.Conversations;
         }
         public async Task AddLikeAsync(AccountRequest.AddLike request)
         {
@@ -44,6 +47,14 @@ namespace EuropArt.Services.Accounts
 
             likes.Remove(like);
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<AccountResponse.GetConversations> GetConversationsAsync(AccountRequest.GetConversations request)
+        {
+            await Task.Delay(100);
+            AccountResponse.GetConversations response = new();
+            response.Conversations = conversations.Include(c => c.Messages).Where(l => l.UserAuthId == request.AuthId || l.ArtistAuthId == request.AuthId).ToList();
+            return response;
         }
 
         public async Task<AccountResponse.GetLikes> GetLikesAsync(AccountRequest.GetLikes request)

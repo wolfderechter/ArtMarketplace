@@ -32,5 +32,11 @@ namespace EuropArt.Client.Accounts
         {
             await client.DeleteAsync($"{endpoint}/{request.AuthId}/{request.ArtworkId}");
         }
+
+        public async Task<AccountResponse.GetConversations> GetConversationsAsync(AccountRequest.GetConversations request)
+        {
+            var response = await client.GetFromJsonAsync<AccountResponse.GetConversations>($"{endpoint}/messages/{request.AuthId}");
+            return response;
+        }
     }
 }

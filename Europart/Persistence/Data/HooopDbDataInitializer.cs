@@ -2,6 +2,8 @@ using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
 using EuropArt.Domain.Common;
 using EuropArt.Domain.Likes;
+using EuropArt.Domain.Messages;
+using EuropArt.Domain.Users;
 using EuropArt.Domain.YouthArtworks;
 using EuropArt.Persistence.Data;
 using System;
@@ -21,15 +23,20 @@ namespace EuropArt.Persistence.Data
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
+                User user = new User("Zowie", "DaBeast", "61c1f6a95d5b77007062b218", DateTime.Now);
+                _dbContext.Users.Add(user); 
+
+
+
                 Artist artist1 = new Artist("Stef", "Boerjan", "Belgium", "Lokeren", "9160", "Park de Rode Poort 9", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/123.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Justine.be", "619aaf7421f2b9006fb6eeaa");
                 Artist artist2 = new Artist("Wolf", "De Rechter", "Belgium", "Zele", "3800", "Magda Cafmeyerstraat 2", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/124.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Lander.be", "619e6d8a8a4c39007207b719");
                 Artist artist3 = new Artist("Alex", "De Cock", "Belgium", "Oudenaarde", "9300", "Paalstraat 3", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/125.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Alex.be", "61b650bcfcbfe500716d6b1d");
                 Artist artist4 = new Artist("Gert", "Meert", "Belgium", "Aalst", "8700", "Pauverleutestraat 6", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/126.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Gert.be", "61b650d61c2b8d0069dc044e");
 
-                YouthArtist youthArtist1 = new YouthArtist("Logan", "De Vriend", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/146.jpg", DateTime.Now, "auth0|61b650d61c2b8d0069dc044e");
-                YouthArtist youthArtist2 = new YouthArtist("Jason", "Smet", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/156.jpg", DateTime.Now, "auth0|61b650d61c2b8d0069dc044e");
-                YouthArtist youthArtist3 = new YouthArtist("Tuur", "Kwissens", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/135.jpg", DateTime.Now, "auth0|61b650d61c2b8d0069dc044e");
-                YouthArtist youthArtist4 = new YouthArtist("Patrik", "Goosens", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/165.jpg", DateTime.Now, "auth0|61b650d61c2b8d0069dc044e");
+                YouthArtist youthArtist1 = new YouthArtist("Logan", "De Vriend", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/146.jpg", DateTime.Now, "61b650d61c2b8d0069dc044e");
+                YouthArtist youthArtist2 = new YouthArtist("Jason", "Smet", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/156.jpg", DateTime.Now, "61b650d61c2b8d0069dc044e");
+                YouthArtist youthArtist3 = new YouthArtist("Tuur", "Kwissens", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/135.jpg", DateTime.Now, "61b650d61c2b8d0069dc044e");
+                YouthArtist youthArtist4 = new YouthArtist("Patrik", "Goosens", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/165.jpg", DateTime.Now, "61b650d61c2b8d0069dc044e");
 
                 List<Artist> artists = new List<Artist> { artist1, artist2, artist3, artist2, artist4 };
                 List<YouthArtist> youthArtists = new List<YouthArtist> { youthArtist1, youthArtist2, youthArtist3, youthArtist4 };
@@ -74,11 +81,10 @@ namespace EuropArt.Persistence.Data
                 youthArtwork10.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/10.jpg";
                 youthArtwork11.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/11.jpg";
 
-                Message message = new Message(artist1, youthArtist1, DateTime.Now, "Stef is een blo", "auth0 | 619aaf7421f2b9006fb6eeaa", "auth0|61b650d61c2b8d0069dc044e");
                 
                 List<Artwork> artworks = new List<Artwork> { artwork1, artwork2, artwork3, artwork4 , artwork5 , artwork6 , artwork7 , artwork8 , artwork9 , artwork10 , artwork11 , artwork12 , artwork13 , artwork14 };
 
-                _dbContext.Messages.AddRange(message);
+                
                 _dbContext.YouthArtworks.AddRange(youthArtwork1, youthArtwork2, youthArtwork3, youthArtwork4, youthArtwork5, youthArtwork6, youthArtwork7, youthArtwork8, youthArtwork9, youthArtwork10, youthArtwork11);
                 _dbContext.Artworks.AddRange(artworks);
 
@@ -86,6 +92,11 @@ namespace EuropArt.Persistence.Data
                 Like like1 = new Like(artist1.AuthId, artwork2);
                 Like like2 = new Like(artist1.AuthId, artwork3);
 
+                Conversation conversation = new Conversation(user.AuthId, artist1.AuthId/*, artist1.FirstName, artist1.LastName, artist1.Id*/); 
+                Message message = new Message("Dit is een test", DateTime.Now , "61c1f6a95d5b77007062b218");
+                _dbContext.Messages.Add(message);
+                conversation.Messages.Add(message); 
+                _dbContext.Conversations.Add(conversation);
                 _dbContext.Likes.AddRange(like, like1, like2);
                 _dbContext.SaveChanges();
             }

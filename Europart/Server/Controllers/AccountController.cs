@@ -33,6 +33,12 @@ namespace EuropArt.Server.Controllers
             return accountService.DeleteLikeAsync(request);
         }
 
+        [HttpGet("messages/{AuthId}")]
+        public Task<AccountResponse.GetConversations> GetConversationsAsync([FromRoute] AccountRequest.GetConversations request)
+        {
+            return accountService.GetConversationsAsync(request);
+        }
+
 
     }
 }
