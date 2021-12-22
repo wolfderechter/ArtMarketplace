@@ -47,7 +47,7 @@ else
         <div class="col-md-4 col-12">
             <div class="bieden">
                 <span class="prijs-groot">@artwork.Price.ToString("C")</span>
-                <button @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
+                <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
                 <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
 
                 @if (RequestingDelete)

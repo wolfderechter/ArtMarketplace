@@ -17,8 +17,9 @@ namespace EuropArt.Domain.Artworks
         public DateTime DateCreated;
         public int ArtistId { get; set; }
         public Artist Artist { get; set; }
-      //  public ICollection<Like> Likes { get; set; }
-       
+        public bool IsSold { get; set; }
+        //  public ICollection<Like> Likes { get; set; }
+
         public string Name { 
             get { return name;  }
             set {  name = Guard.Against.NullOrWhiteSpace(value, nameof(name)); }
@@ -58,6 +59,7 @@ namespace EuropArt.Domain.Artworks
             Style = style;
             Category = category;
             ImagePaths = imagePaths;
+            IsSold = false;
         }
     }
 }

@@ -139,6 +139,7 @@ namespace EuropArt.Services.Artworks
                 ImagePaths = x.ImagePaths,
                 Style = x.Style,
                 Category = x.Category,
+                IsSold = x.IsSold
             })
             .SingleOrDefaultAsync(x => x.Id == request.ArtworkId);
 
