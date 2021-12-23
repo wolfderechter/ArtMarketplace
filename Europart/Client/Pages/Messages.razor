@@ -1,0 +1,110 @@
+﻿@page "/messages"
+@using EuropArt.Client.Accounts
+@using EuropArt.Domain.Messages
+@using EuropArt.Shared.Accounts
+@using EuropArt.Shared.Artists
+
+
+
+<div class="container">
+    <div class="g-0 row">
+        <div class="col-sm border"> 
+            @if (Conversations is not null)
+            {
+                <AuthorizeView Roles="Admin">
+
+                    @foreach (var conversation in Conversations)
+                    {
+                        <div @onclick="() => SetCurrentConversation(conversation)" class="no-gutters border-bottom border-dark">
+                            <ConversationArtistDetail AuthId="@conversation.ArtistAuthId"/>
+                        </div>
+                    }
+                </AuthorizeView>   
+                <AuthorizeView Roles="Artist">
+                    @foreach (var conversation in Conversations)
+                    {
+                        <div @onclick="() => SetCurrentConversation(conversation)" class="no-gutters border-bottom border-dark">
+                            <ConversationUserDetail AuthId="@conversation.UserAuthId"/>  
+                        </div>
+                    }
+                </AuthorizeView>
+            }
+        </div>
+        <div class="col-lg border">
+            @if (currentConversation is not null)
+            {
+                @foreach (var message in currentConversation.Messages)
+                {
+                    @if (message.SenderAuthId == AuthId)
+                    {
+                        <p style="margin:0;" class="text-end text-primary">@message.Content</p>
+                    } else
+                    {
+                        <p style="margin:0;" class="text-start text-muted">@message.Content</p>
+                    }
+                }
+                <div class="row">
+                    <input @bind-value="newMessage.Content" type="text" ><br>
+                    <button @onclick="AddMessage"></button>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>   
+
+
+
+
+@code {
+
+
+    private List<Conversation> Conversations { get; set; }
+    [Inject] public AuthenticationStateProvider auth { get; set; }
+    [Inject] public IAccountService AccountService { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
+    private string AuthId { get; set; }
+    private Conversation currentConversation { get; set; }
+    private AccountDto.CreateMessage newMessage = new () {};
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+        AuthId = authId;
+        AccountRequest.GetConversations request = new() { AuthId = authId };
+        var response = await AccountService.GetConversationsAsync(request);
+        Conversations = response.Conversations;
+
+    }
+
+    public void SetCurrentConversation(Conversation conversation)
+    {
+        currentConversation = conversation;
+    }
+
+    public async Task<ArtistDto.Detail> GetArtist(string authId)
+    {
+
+        ArtistRequest.GetDetailByAuthId request = new() { AuthId = authId };
+        var response = await ArtistService.GetDetailByAuthIdAsync(request);
+        var artist = response.Artist;
+        return artist;
+    }
+
+    public async Task AddMessage()
+    {
+
+        newMessage.AuthId = AuthId;
+        newMessage.ConversationId = currentConversation.Id;
+        newMessage.DateCreated = DateTime.Now;
+        AccountRequest.AddMessage request = new()
+            {
+                NewMessage = newMessage,
+                ConversationId = currentConversation.Id
+            };
+        await AccountService.AddMessageAsync(request);
+       
+    }
+}

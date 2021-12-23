@@ -1,4 +1,5 @@
 ﻿using EuropArt.Domain.Common;
+using EuropArt.Domain.Messages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -15,12 +16,8 @@ namespace EuropArt.Persistence.Data.Configuration
         {
             builder.ToTable("Messages");
             builder.HasKey(m => m.Id);
-            builder.HasOne(m => m.Artist).WithMany().OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(m => m.YouthArtist).WithMany().OnDelete(DeleteBehavior.NoAction);
-            builder.Property(m => m.DateCreated);
-            builder.Property(m => m.Content);
-            builder.Property(m => m.ReceiverId);
-            builder.Property(m => m.SenderId);
+          
+            builder.Property(m => m.SenderAuthId);
         }
     }
 }

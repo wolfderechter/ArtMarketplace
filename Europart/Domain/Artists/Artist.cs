@@ -14,7 +14,6 @@ namespace EuropArt.Domain.Artists
         public string Nickname { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
-        public string Test { get; set; }
         public string Postalcode { get; set; }
         public string Street { get; set; }
         //public IEnumerable<string> ImagePaths { get; set; }

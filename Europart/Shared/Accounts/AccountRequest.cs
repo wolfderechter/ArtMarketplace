@@ -8,7 +8,10 @@ namespace EuropArt.Shared.Accounts
 {
     public class AccountRequest
     {
-
+        public class GetIndex
+        {
+            public string AuthId { get; set; }
+        }
         public class AddLike
         {
             public string AuthId { get; set; }
@@ -26,5 +29,19 @@ namespace EuropArt.Shared.Accounts
             public string AuthId { get; set; }
             public int ArtworkId { get; set; }
         }
+
+        public class GetConversations
+        {
+            public string AuthId { get; set; }
+
+        }
+
+        public class AddMessage
+        {
+            public AccountDto.CreateMessage NewMessage { get; set; }
+            public int ConversationId { get; set; }
+        }
+
+
     }
 }
