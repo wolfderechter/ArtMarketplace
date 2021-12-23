@@ -26,8 +26,6 @@ namespace EuropArt.Persistence.Data
                 User user = new User("Zowie", "DaBeast", "61c1f6a95d5b77007062b218", DateTime.Now);
                 _dbContext.Users.Add(user); 
 
-
-
                 Artist artist1 = new Artist("Stef", "Boerjan", "Belgium", "Lokeren", "9160", "Park de Rode Poort 9", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/123.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Justine.be", "619aaf7421f2b9006fb6eeaa");
                 Artist artist2 = new Artist("Wolf", "De Rechter", "Belgium", "Zele", "3800", "Magda Cafmeyerstraat 2", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/124.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Lander.be", "619e6d8a8a4c39007207b719");
                 Artist artist3 = new Artist("Alex", "De Cock", "Belgium", "Oudenaarde", "9300", "Paalstraat 3", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/125.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Alex.be", "61b650bcfcbfe500716d6b1d");

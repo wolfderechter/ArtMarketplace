@@ -29,13 +29,13 @@ namespace EuropArt.Server.Controllers
         {
             return artistService.GetArtistsAndroidAsync(request);
         }
-      /*  [HttpGet("{ArtistId}")]
+        [HttpGet("{ArtistId}")]
         public Task<ArtistResponse.GetDetail> GetDetailAsync([FromRoute] ArtistRequest.GetDetail request)
         {
             return artistService.GetDetailAsync(request);
-        }*/
+        }
 
-        [HttpGet("{AuthId}")]
+        [HttpGet("detail/{AuthId}")]
         public Task<ArtistResponse.GetDetailByAuthId> GetDetailByAuthIdAsync([FromRoute] ArtistRequest.GetDetailByAuthId request)
         {
             return artistService.GetDetailByAuthIdAsync(request);
