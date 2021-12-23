@@ -2,11 +2,10 @@
 using EuropArt.Domain.Artworks;
 using EuropArt.Domain.Likes;
 using EuropArt.Domain.Messages;
+using EuropArt.Domain.Users;
 using EuropArt.Persistence.Data;
 using EuropArt.Shared.Accounts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +18,7 @@ namespace EuropArt.Services.Accounts
         private readonly DbSet<Artwork> artworks;
         private readonly DbSet<Like> likes;
         private readonly DbSet<Conversation> conversations;
+        private readonly DbSet<User> users;
 
 
         public AccountService(HooopDbContext dbContext)
@@ -28,6 +28,7 @@ namespace EuropArt.Services.Accounts
             likes = dbContext.Likes;
             artworks = dbContext.Artworks;
             conversations = dbContext.Conversations;
+            users = dbContext.Users;
         }
         public async Task AddLikeAsync(AccountRequest.AddLike request)
         {
@@ -41,9 +42,9 @@ namespace EuropArt.Services.Accounts
 
         public async Task DeleteLikeAsync(AccountRequest.DeleteLike request)
         {
-             var like = likes
-            .AsNoTracking()
-            .Where(l => l.AuthId == request.AuthId && l.ArtworkId == request.ArtworkId).SingleOrDefault();
+            var like = likes
+           .AsNoTracking()
+           .Where(l => l.AuthId == request.AuthId && l.ArtworkId == request.ArtworkId).SingleOrDefault();
 
             likes.Remove(like);
             await dbContext.SaveChangesAsync();
@@ -56,6 +57,29 @@ namespace EuropArt.Services.Accounts
             response.Conversations = conversations.Include(c => c.Messages).Where(l => l.UserAuthId == request.AuthId || l.ArtistAuthId == request.AuthId).ToList();
             return response;
         }
+
+        public async Task<AccountResponse.GetIndex> GetIndexAsync(AccountRequest.GetIndex request)
+        {
+            await Task.Delay(100);
+            AccountResponse.GetIndex response = new();
+
+            //Query om te filteren
+
+
+            //wanneer request komt van buiten artist page -> snel resultaten terugeven
+            //orderby niet opgevuld dus niet in artist index page
+            response.Users = await users.AsNoTracking().Where(p => p.AuthId == request.AuthId).Select(x => new AccountDto.Index
+            {
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                DateCreated = x.DateCreated,
+                AuthId = x.AuthId
+            }).SingleOrDefaultAsync();
+
+            return response;
+        }
+
 
         public async Task<AccountResponse.GetLikes> GetLikesAsync(AccountRequest.GetLikes request)
         {

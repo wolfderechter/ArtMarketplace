@@ -14,15 +14,6 @@ namespace EuropArt.Domain.Messages
       
         public string UserAuthId { get; set; }
         public string ArtistAuthId { get; set; }
-        /*public string UserFirstName { get; set; }
-        public string UserLasrName { get; set; }
-       
-        public string ArtistFirstName { get; set; }
-        public string ArtistLastName { get; set; }
-        public int ArtistId { get; set; }*/
-
-        public Artist Artist { get; set; }
-        public User User { get; set; }
         public List<Message> Messages { get; set; } = new();
         public Conversation()
         {
@@ -38,7 +29,7 @@ namespace EuropArt.Domain.Messages
               ArtistId = artistId;
           }*/
 
-        public Conversation(string artistAuthId, string userAuthId)
+        public Conversation(string userAuthId, string artistAuthId)
         {
             ArtistAuthId = artistAuthId;
             UserAuthId = userAuthId;

@@ -57,6 +57,7 @@ namespace EuropArt.Persistence.Data
                 Artwork artwork12 = new Artwork("Stoel", new Money(10M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-60), "surrealism", "photography", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/23.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/24.jpg") });
                 Artwork artwork13 = new Artwork("Bank", new Money(201M), "dit is een beschrijving", artist3, DateTime.Now.AddHours(-50), "minimalism", "drawings", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/25.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/26.jpg") });
                 Artwork artwork14 = new Artwork("Vliegtuig", new Money(158M), "dit is een beschrijving", artist2, DateTime.Now.AddHours(-4), "abstract", "drawings", new List<ImagePath>() { new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/27.jpg"), new ImagePath($"https://demostoragehogent.blob.core.windows.net/fakeartworks/28.jpg") });
+                
                 YouthArtwork youthArtwork1 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
                 YouthArtwork youthArtwork2 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
                 YouthArtwork youthArtwork3 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
@@ -92,7 +93,7 @@ namespace EuropArt.Persistence.Data
                 Like like1 = new Like(artist1.AuthId, artwork2);
                 Like like2 = new Like(artist1.AuthId, artwork3);
 
-                Conversation conversation = new Conversation(user.AuthId, artist1.AuthId/*, artist1.FirstName, artist1.LastName, artist1.Id*/); 
+                Conversation conversation = new Conversation(user.AuthId, artist2.AuthId/*, artist1.FirstName, artist1.LastName, artist1.Id*/); 
                 Message message = new Message("Dit is een test", DateTime.Now , "61c1f6a95d5b77007062b218");
                 _dbContext.Messages.Add(message);
                 conversation.Messages.Add(message); 

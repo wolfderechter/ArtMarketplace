@@ -17,12 +17,8 @@ namespace EuropArt.Persistence.Data.Configuration
             builder.HasKey(l => l.Id);
             builder.Property(l => l.ArtistAuthId);
             builder.Property(l => l.UserAuthId);
-     /*       builder.Property(l => l.ArtistFirstName);
-            builder.Property(l => l.ArtistLastName);
-            builder.Property(l => l.ArtistId);*/
             builder.HasMany(l => l.Messages).WithOne();
-            builder.Property(l => l.User);
-            builder.Property(l => l.Artist);
+           
 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using EuropArt.Domain.Messages;
+using EuropArt.Domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace EuropArt.Shared.Accounts
 {
     public class AccountResponse
     {
+        public class GetIndex
+        {
+            public List<User> Users { get; set; }
+        }
         public class GetLikes
         {
            public List<int> ArtworkIds { get; set; }

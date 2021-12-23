@@ -8,7 +8,10 @@ namespace EuropArt.Shared.Accounts
 {
     public class AccountRequest
     {
-
+        public class GetIndex
+        {
+            public string AuthId { get; set; }
+        }
         public class AddLike
         {
             public string AuthId { get; set; }
