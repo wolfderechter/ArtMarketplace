@@ -1,6 +1,11 @@
 ﻿@using EuropArt.Shared.Artists
 
-<p>@artist.LastName</p>
+@if(artist is not null)
+{
+    <p>@artist.LastName</p>
+
+}
+
 
 @code {
     [Parameter] public string AuthId { get; set; }

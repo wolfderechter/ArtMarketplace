@@ -40,6 +40,15 @@ namespace EuropArt.Services.Accounts
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task AddMessageAsync(AccountRequest.AddMessage request)
+        {
+            var conversation = await conversations.Where(c => c.Id == request.ConversationId).SingleOrDefaultAsync();
+            Message message = new Message(request.NewMessage.Content, request.NewMessage.DateCreated, request.NewMessage.AuthId);
+            conversation.Messages.Add(message);
+            await dbContext.SaveChangesAsync();
+
+        }
+
         public async Task DeleteLikeAsync(AccountRequest.DeleteLike request)
         {
             var like = likes
@@ -68,7 +77,7 @@ namespace EuropArt.Services.Accounts
 
             //wanneer request komt van buiten artist page -> snel resultaten terugeven
             //orderby niet opgevuld dus niet in artist index page
-            response.Users = await users.AsNoTracking().Where(p => p.AuthId == request.AuthId).Select(x => new AccountDto.Index
+            response.User = await users.AsNoTracking().Where(p => p.AuthId == request.AuthId).Select(x => new AccountDto.Index
             {
                 Id = x.Id,
                 FirstName = x.FirstName,

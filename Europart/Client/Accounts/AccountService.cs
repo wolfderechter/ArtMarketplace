@@ -38,5 +38,16 @@ namespace EuropArt.Client.Accounts
             var response = await client.GetFromJsonAsync<AccountResponse.GetConversations>($"{endpoint}/messages/{request.AuthId}");
             return response;
         }
+
+        public async Task<AccountResponse.GetIndex> GetIndexAsync(AccountRequest.GetIndex request)
+        {
+            var response = await client.GetFromJsonAsync<AccountResponse.GetIndex>($"{endpoint}/index/{request.AuthId}");
+            return response;
+        }
+
+        public async Task AddMessageAsync(AccountRequest.AddMessage request)
+        {
+            await client.PostAsJsonAsync($"{endpoint}/AddMessageAsync", request);
+        }
     }
 }

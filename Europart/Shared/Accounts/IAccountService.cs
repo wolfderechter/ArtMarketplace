@@ -14,5 +14,6 @@ namespace EuropArt.Shared.Accounts
         Task DeleteLikeAsync(AccountRequest.DeleteLike request);
         Task<AccountResponse.GetConversations> GetConversationsAsync(AccountRequest.GetConversations request);
         Task<AccountResponse.GetIndex> GetIndexAsync(AccountRequest.GetIndex request);
+        Task AddMessageAsync(AccountRequest.AddMessage request);
     }
 }

@@ -12,7 +12,7 @@ namespace EuropArt.Shared.Accounts
     {
         public class GetIndex
         {
-            public List<User> Users { get; set; }
+            public AccountDto.Index User { get; set; }
         }
         public class GetLikes
         {

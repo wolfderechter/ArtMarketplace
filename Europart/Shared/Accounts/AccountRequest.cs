@@ -36,6 +36,12 @@ namespace EuropArt.Shared.Accounts
 
         }
 
+        public class AddMessage
+        {
+            public AccountDto.CreateMessage NewMessage { get; set; }
+            public int ConversationId { get; set; }
+        }
+
 
     }
 }

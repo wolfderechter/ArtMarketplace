@@ -15,6 +15,10 @@ namespace EuropArt.Persistence.Data.Configuration
         {
             builder.ToTable("Users");
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.FirstName);
+            builder.Property(x => x.LastName);
+
+
 
         }
     }

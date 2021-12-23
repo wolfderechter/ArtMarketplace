@@ -16,5 +16,13 @@ namespace EuropArt.Shared.Accounts
             public string AuthId { get; set; }
             public DateTime DateCreated { get; set; }
         }
+
+        public class CreateMessage
+        {
+            public string Content { get; set; }
+            public DateTime DateCreated { get; set; }
+            public string AuthId { get; set; }
+            public int ConversationId { get; set; }
+        }
     }
 }
