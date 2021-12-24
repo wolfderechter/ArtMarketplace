@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EuropArt.Domain.Likes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace EuropArt.Domain.Users
         public string LastName { get; set; }
         public string AuthId { get; set; }
         public DateTime DateCreated { get; set; }
+        public List<Like> Likes { get; set; } = new();
         public User()
         {
 

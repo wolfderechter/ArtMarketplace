@@ -32,11 +32,22 @@ namespace EuropArt.Services.Accounts
         }
         public async Task AddLikeAsync(AccountRequest.AddLike request)
         {
-            var artist = await artists.Where(p => p.AuthId == request.AuthId).SingleOrDefaultAsync();
-            var artwork = await artworks.Where(p => p.Id == request.ArtworkId).SingleOrDefaultAsync();
-            Like like = new Like(artist.AuthId, artwork);
-
-            artist.Likes.Add(like);
+            
+            if (request.Role == "Artist")
+            {
+                var artist = await artists.Where(p => p.AuthId == request.AuthId).SingleOrDefaultAsync();
+                var artwork = await artworks.Where(p => p.Id == request.ArtworkId).SingleOrDefaultAsync();
+                Like like = new Like(artist.AuthId, artwork);
+                artist.Likes.Add(like);
+            }
+            else
+            {
+                var user = await users.Where(u => u.AuthId == request.AuthId).SingleOrDefaultAsync();
+                var artwork = await artworks.Where(p => p.Id == request.ArtworkId).SingleOrDefaultAsync();
+                Like like = new Like(user.AuthId, artwork);
+                user.Likes.Add(like);
+            }
+            
             await dbContext.SaveChangesAsync();
         }
 
@@ -77,13 +88,15 @@ namespace EuropArt.Services.Accounts
 
             //wanneer request komt van buiten artist page -> snel resultaten terugeven
             //orderby niet opgevuld dus niet in artist index page
-            response.User = await users.AsNoTracking().Where(p => p.AuthId == request.AuthId).Select(x => new AccountDto.Index
+            response.User = await users.Include(u => u.Likes).ThenInclude(u => u.Artwork).AsNoTracking().Where(p => p.AuthId == request.AuthId).Select(x => new AccountDto.Index
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 DateCreated = x.DateCreated,
-                AuthId = x.AuthId
+                AuthId = x.AuthId,
+                Likes = x.Likes.ToList()
+
             }).SingleOrDefaultAsync();
 
             return response;
@@ -95,6 +108,13 @@ namespace EuropArt.Services.Accounts
             AccountResponse.GetLikes response = new();
             response.ArtworkIds = likes.Where(l => l.AuthId == request.AuthId).Select(l => l.ArtworkId).ToList();
             return response;
+        }
+
+        public async Task StartConversationAsync(AccountRequest.StartConversation request)
+        {
+            Conversation conversation = new Conversation(request.UserAuthId, request.ArtistAuthId); 
+            conversations.Add(conversation);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

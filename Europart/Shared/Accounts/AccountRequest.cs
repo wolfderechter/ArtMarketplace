@@ -16,6 +16,7 @@ namespace EuropArt.Shared.Accounts
         {
             public string AuthId { get; set; }
             public int ArtworkId { get; set; }
+            public string Role { get; set; }
         }
 
         public class GetLikes
@@ -42,6 +43,10 @@ namespace EuropArt.Shared.Accounts
             public int ConversationId { get; set; }
         }
 
-
+        public class StartConversation
+        {
+            public string UserAuthId { get; set;}
+            public string ArtistAuthId { get; set; }
+        }
     }
 }

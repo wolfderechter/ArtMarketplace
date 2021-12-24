@@ -51,6 +51,11 @@ namespace EuropArt.Server.Controllers
             return accountService.AddMessageAsync(request);
         }
 
+        [HttpPost("AddConversationAsync")]
+        public Task StartConversationAsync([FromBody] AccountRequest.StartConversation request)
+        {
+            return accountService.StartConversationAsync(request);
+        }
 
     }
 }

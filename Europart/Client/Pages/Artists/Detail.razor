@@ -1,4 +1,5 @@
 ﻿@page "/artist/{id:int}"
+@using EuropArt.Shared.Accounts
 @using EuropArt.Shared.Artists
 @using EuropArt.Shared.Artworks
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artists.Detail> Loc
@@ -18,7 +19,12 @@ else
         <div class="col-6 text-end">
             <AuthorizeView>
                 <div class="admin-buttons">
-                    <a href="artist/edit/@artist.Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
+                    <AuthorizeView Roles="Artist" Context="HideEdit">
+                        <a disabled="@IsDisabled" href="artist/edit/@artist.Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="User" Context="Start">
+                        <a href="messages" @onclick="StartConversation" class="edit text-decoration-none text-dark" style="margin-right:5px ">Start conversation</a>
+                    </AuthorizeView>
                     <AuthorizeView Roles="Admin" Context="bruh">
                         @if (RequestingDelete)
                         {
@@ -27,16 +33,12 @@ else
                         }
                         else
                         {
-
                             <a style="color: var(--bs-body-color); text-decoration:none;" class="edit" @onclick="RequestDelete">@Loc["Delete"]</a>
-
                         }
                     </AuthorizeView>
                 </div>
-            </AuthorizeView>
-        
+            </AuthorizeView>     
         </div>
-
     </div>
 
     <div class="row artist-detail align-items-center">
@@ -88,19 +90,36 @@ else
     </div>
 }
 
-@code { 
+@code {
     private ArtistDto.Detail artist;
     private bool RequestingDelete;
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtistService ArtistService { get; set; }
+    [Inject] public IAccountService AccountService { get; set; }
     [Inject] NavigationManager NavigationManager { get; set; }
-
+    [Inject] public AuthenticationStateProvider auth { get; set; }
+    private string AuthId { get; set; }
+    private bool IsDisabled => artist.AuthId == AuthId || artist == null;
     protected override async Task OnParametersSetAsync()
     {
         ArtistRequest.GetDetail request = new() { ArtistId = Id };
         var response = await ArtistService.GetDetailAsync(request);
         artist = response.Artist;
+    }
+
+    public async Task StartConversation()
+    {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+        AuthId = authId;
+        AccountRequest.StartConversation request = new()
+            {
+                UserAuthId = authId,
+                ArtistAuthId = artist.AuthId
+            };
+        await AccountService.StartConversationAsync(request);
     }
 
     private async Task ConfirmDelete()
@@ -119,5 +138,6 @@ else
     {
         RequestingDelete = false;
     }
-    }
+
+}
 

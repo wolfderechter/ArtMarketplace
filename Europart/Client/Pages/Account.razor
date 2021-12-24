@@ -1,6 +1,7 @@
 ﻿@page "/account"
 @attribute [Authorize]
 @inject IStringLocalizer<EuropArt.Shared.Resources.Account> Loc
+@using EuropArt.Shared.Accounts
 @using EuropArt.Shared.Artists
 @using EuropArt.Shared.Artworks
 @using Microsoft.AspNetCore.Components.Authorization
@@ -25,6 +26,7 @@
     </Authorized>
 </AuthorizeView>
 
+<AuthorizeView Roles="Artist">
 @if(artist is not null) {
 @foreach(var item in artist.Likes)
 {
@@ -32,17 +34,28 @@
     <p>@item.Artwork.Name</p>
 }
 }
-
-
+</AuthorizeView>
+<AuthorizeView Roles="User">
+@if(user2 is not null) {
+@foreach(var item in user2.Likes)
+{
+    
+    <p>@item.Artwork.Name</p>
+    
+}
+}
+</AuthorizeView>
 
 
 
 @code{
     private ArtistDto.Detail artist;
+    private AccountDto.Index user2;
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtistService ArtistService { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
+    [Inject] public IAccountService AccountService { get; set; }
     [Inject] public AuthenticationStateProvider auth { get; set; }
 
     private async Task BeginSignOut(MouseEventArgs args)
@@ -61,6 +74,8 @@
         var response = await ArtistService.GetDetailByAuthIdAsync(request);
         artist = response.Artist;
 
-
+        AccountRequest.GetIndex request2 = new() { AuthId = authId };
+        var response2 = await AccountService.GetIndexAsync(request2);
+        user2 = response2.User;
     }
 }

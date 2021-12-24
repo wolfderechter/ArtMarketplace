@@ -49,5 +49,10 @@ namespace EuropArt.Client.Accounts
         {
             await client.PostAsJsonAsync($"{endpoint}/AddMessageAsync", request);
         }
+
+        public async Task StartConversationAsync(AccountRequest.StartConversation request)
+        {
+            await client.PostAsJsonAsync($"{endpoint}/AddConversationAsync", request);
+        }
     }
 }

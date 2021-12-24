@@ -142,7 +142,21 @@
     protected override async Task OnInitializedAsync()
     {
 
-        GetLikes();
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            var authId = user.Claims.ElementAt(4).Value.Substring(6);
+            var role = user.Claims.ElementAt(5).Value;
+            //  var role = user.Claims.
+            AccountRequest.GetLikes accountRequest = new()
+               {
+                 AuthId = authId
+               };
+            var likes = await accountService.GetLikesAsync(accountRequest);
+            likedArtworksByUserLoggedIn = likes.ArtworkIds;
+        }
+
         Filter.OnArtworkFilterChanged += FilterArtworksAsync;
 
         //set OrderBy to newest on startup
@@ -161,23 +175,6 @@
         totalFilteredAmount = response.TotalAmount;
     }
 
-    private async void GetLikes()
-    {
-        var authState = await auth.GetAuthenticationStateAsync();
-        var user = authState.User;
-        if (user.Identity.IsAuthenticated)
-        {
-            var authId = user.Claims.ElementAt(4).Value.Substring(6);
-            var role = user.Claims.ElementAt(5).Value;
-            //  var role = user.Claims.
-            AccountRequest.GetLikes accountRequest = new()
-               {
-                 AuthId = authId
-               };
-            var likes = await accountService.GetLikesAsync(accountRequest);
-            likedArtworksByUserLoggedIn = likes.ArtworkIds;
-        }
-    }
 
     private void ShowFilters()
     {
@@ -240,11 +237,12 @@
         var authState = await auth.GetAuthenticationStateAsync();
         var user = authState.User;
         var authId = user.Claims.ElementAt(4).Value.Substring(6);
-
+        var role = user.Claims.ElementAt(5).Value;
         AccountRequest.AddLike request = new()
         {
             ArtworkId = artworkId,
-            AuthId = authId
+            AuthId = authId,
+            Role = role
         };
 
         await accountService.AddLikeAsync(request);

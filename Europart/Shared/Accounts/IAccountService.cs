@@ -15,5 +15,6 @@ namespace EuropArt.Shared.Accounts
         Task<AccountResponse.GetConversations> GetConversationsAsync(AccountRequest.GetConversations request);
         Task<AccountResponse.GetIndex> GetIndexAsync(AccountRequest.GetIndex request);
         Task AddMessageAsync(AccountRequest.AddMessage request);
+        Task StartConversationAsync(AccountRequest.StartConversation request);
     }
 }
