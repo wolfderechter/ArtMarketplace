@@ -59,7 +59,6 @@ else
                         @if(artist?.Id == artwork.ArtistId)
                         {
                             <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
-
                         @if (RequestingDelete)
                         {
                             <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
