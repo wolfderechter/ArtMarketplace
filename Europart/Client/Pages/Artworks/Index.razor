@@ -99,24 +99,25 @@
                                 <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
                                 <span class="prijs">@artwork.Price.ToString("C")</span>
                             </div>
-                            <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a>
-                             @if (likedArtworksByUserLoggedIn is not null)
-                             {
-                                @if (likedArtworksByUserLoggedIn.Contains(artwork.Id))
+                            <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></span>
+                            <AuthorizeView>
+                                <Authorized>
+                                 @if (likedArtworksByUserLoggedIn is not null)
                                  {
-                                <a><i @onclick="(() => DeleteLike(artwork.Id))" style="margin-left: 83%" class="fa fa-heart icon-2x" aria-hidden="true"></i></a>
-                                } else
-                                {
-                                <a><i @onclick="(() => AddLike(artwork.Id))" style="margin-left: 83%" class="fa fa-heart-o"></i> </a>
-                                }
-                             }
-                             </span>
+                                     @if (likedArtworksByUserLoggedIn.Contains(artwork.Id))
+                                     {
+                                         <a><i @onclick="(() => DeleteLike(artwork.Id))" style="margin-left: 83%" class="fa fa-heart icon-2x" aria-hidden="true"></i></a>
+                                     } else 
+                                     {
+                                         <a><i @onclick="(() => AddLike(artwork.Id))" style="margin-left: 83%" class="fa fa-heart-o"></i> </a>
+                                     }
+                                 }
+                               </Authorized>
+                            </AuthorizeView>
                         </div>
                        
                     </div>
-                    
-
-
+              
             }
                 <ArtworkPager Filter="Filter" TotalAmount="totalFilteredAmount" />
             }
@@ -140,6 +141,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+
         GetLikes();
         Filter.OnArtworkFilterChanged += FilterArtworksAsync;
 
@@ -157,27 +159,24 @@
         var response = await ArtworkService.GetIndexAsync(request);
         artworks = response.Artworks;
         totalFilteredAmount = response.TotalAmount;
-
-
-
-
     }
 
     private async void GetLikes()
     {
         var authState = await auth.GetAuthenticationStateAsync();
         var user = authState.User;
-        var authId = user.Claims.ElementAt(4).Value.Substring(6);
-        var role = user.Claims.ElementAt(5).Value;
-        //  var role = user.Claims.
-        AccountRequest.GetLikes accountRequest = new()
+        if (user.Identity.IsAuthenticated)
         {
-            AuthId = authId,
-           // Role = role
-        };
-
-        var likes = await accountService.GetLikesAsync(accountRequest);
-        likedArtworksByUserLoggedIn = likes.ArtworkIds; 
+            var authId = user.Claims.ElementAt(4).Value.Substring(6);
+            var role = user.Claims.ElementAt(5).Value;
+            //  var role = user.Claims.
+            AccountRequest.GetLikes accountRequest = new()
+               {
+                 AuthId = authId
+               };
+            var likes = await accountService.GetLikesAsync(accountRequest);
+            likedArtworksByUserLoggedIn = likes.ArtworkIds;
+        }
     }
 
     private void ShowFilters()
