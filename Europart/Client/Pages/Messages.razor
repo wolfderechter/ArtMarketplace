@@ -5,13 +5,13 @@
 @using EuropArt.Shared.Artists
 
 
-
+<button>New conversation</button>
 <div class="container">
     <div class="g-0 row">
-        <div class="col-sm border"> 
+        <div class="col border"> 
             @if (Conversations is not null)
             {
-                <AuthorizeView Roles="Admin">
+                <AuthorizeView Roles="User">
 
                     @foreach (var conversation in Conversations)
                     {
@@ -30,9 +30,11 @@
                 </AuthorizeView>
             }
         </div>
-        <div class="col-lg border">
+        <div class="col border">
+         
             @if (currentConversation is not null)
             {
+                <div class="row">
                 @foreach (var message in currentConversation.Messages)
                 {
                     @if (message.SenderAuthId == AuthId)
@@ -43,9 +45,10 @@
                         <p style="margin:0;" class="text-start text-muted">@message.Content</p>
                     }
                 }
+                </div>
                 <div class="row">
-                    <input @bind-value="newMessage.Content" type="text" ><br>
-                    <button @onclick="AddMessage"></button>
+                    <input @oninput="SetMessageContent" type="text" ><br>
+                    <button disabled="@IsDisabled" @onclick="AddMessage">Send</button>
                 </div>
             }
         </div>
@@ -65,6 +68,7 @@
     private string AuthId { get; set; }
     private Conversation currentConversation { get; set; }
     private AccountDto.CreateMessage newMessage = new () {};
+    private bool IsDisabled => newMessage.Content?.Length == 0 || newMessage.Content == null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -104,6 +108,20 @@
                 ConversationId = currentConversation.Id
             };
         await AccountService.AddMessageAsync(request);
-       
+
+        var message = currentConversation.Messages.Last();
+        currentConversation.Messages.Add(message);
+
+        AccountRequest.GetConversations request2 = new() { AuthId = AuthId };
+        var response = await AccountService.GetConversationsAsync(request2);
+        Conversations = response.Conversations;
+        currentConversation = Conversations.Where(c => c.Id == currentConversation.Id).SingleOrDefault();
+
     }
+
+    public void SetMessageContent(ChangeEventArgs args)
+    {
+        newMessage.Content = args.Value.ToString();
+    }
+
 }

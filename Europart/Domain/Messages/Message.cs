@@ -18,7 +18,7 @@ namespace EuropArt.Domain.Messages
 
         }
 
-        public Message(String content, DateTime dateCreated, string senderAuthId)
+        public Message(string content, DateTime dateCreated, string senderAuthId)
         {
             DateCreated = dateCreated;  
             SenderAuthId = senderAuthId;
