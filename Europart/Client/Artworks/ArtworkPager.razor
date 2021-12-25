@@ -1,10 +1,12 @@
-﻿<nav aria-label="Page navigation example">
+﻿@inject IStringLocalizer<EuropArt.Shared.Resources.Pager> Loc
+
+<nav aria-label="Page navigation example">
     <ul class="pagination justify-content-end">
         <li class="page-item">
-            <a class="page-link" style="cursor:pointer" disabled="@hasNoMorePrevious" @onclick="GoToPrevious">Previous</a>
+            <a class="page-link" style="cursor:pointer" disabled="@hasNoMorePrevious" @onclick="GoToPrevious">@Loc["Previous"]</a>
         </li>
         <li class="page-item">
-            <a class="page-link" style="cursor:pointer" disabled="@hasNoMoreNext" @onclick="GoToNext">Next</a>
+            <a class="page-link" style="cursor:pointer" disabled="@hasNoMoreNext" @onclick="GoToNext">@Loc["Next"]</a>
         </li>
     </ul>
 </nav>

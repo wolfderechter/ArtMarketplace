@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EuropArt.Shared.Resources.Artworks {
+namespace EuropArt.Shared.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EuropArt.Shared.Resources.Artworks {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Detail {
+    public class Pager {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Detail() {
+        internal Pager() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EuropArt.Shared.Resources.Artworks {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Shared.Resources.Artworks.Detail", typeof(Detail).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EuropArt.Shared.Resources.Pager", typeof(Pager).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,20 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Buy now.
+        ///   Looks up a localized string similar to Next.
         /// </summary>
-        public static string BuyNow {
+        public static string Next {
             get {
-                return ResourceManager.GetString("BuyNow", resourceCulture);
+                return ResourceManager.GetString("Next", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to By.
+        ///   Looks up a localized string similar to Previous.
         /// </summary>
-        public static string By {
+        public static string Previous {
             get {
-                return ResourceManager.GetString("By", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cancel delete.
-        /// </summary>
-        public static string CancelDelete {
-            get {
-                return ResourceManager.GetString("CancelDelete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Confirm delete.
-        /// </summary>
-        public static string ConfirmDelete {
-            get {
-                return ResourceManager.GetString("ConfirmDelete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete.
-        /// </summary>
-        public static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit.
-        /// </summary>
-        public static string Edit {
-            get {
-                return ResourceManager.GetString("Edit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add to shoppingcart.
-        /// </summary>
-        public static string ShoppingCart {
-            get {
-                return ResourceManager.GetString("ShoppingCart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sold out.
-        /// </summary>
-        public static string SoldOut {
-            get {
-                return ResourceManager.GetString("SoldOut", resourceCulture);
+                return ResourceManager.GetString("Previous", resourceCulture);
             }
         }
     }

@@ -88,7 +88,34 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choos Artwork.
+        ///   Looks up a localized string similar to Add at least one image!.
+        /// </summary>
+        public static string AtLeastOneImage {
+            get {
+                return ResourceManager.GetString("AtLeastOneImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a category!.
+        /// </summary>
+        public static string CategoryError {
+            get {
+                return ResourceManager.GetString("CategoryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose Artwork.
         /// </summary>
         public static string ChooseArtwork {
             get {
@@ -214,6 +241,24 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Style.
+        /// </summary>
+        public static string Style {
+            get {
+                return ResourceManager.GetString("Style", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a style!.
+        /// </summary>
+        public static string StyleError {
+            get {
+                return ResourceManager.GetString("StyleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Surrealisme.
         /// </summary>
         public static string Surrealism {
@@ -228,6 +273,15 @@ namespace EuropArt.Shared.Resources.Artworks {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum three images!.
+        /// </summary>
+        public static string TooManyImages {
+            get {
+                return ResourceManager.GetString("TooManyImages", resourceCulture);
             }
         }
     }

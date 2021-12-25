@@ -135,7 +135,10 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="Shoppingcart" xml:space="preserve">
+  <data name="ShoppingCart" xml:space="preserve">
     <value>Add to shoppingcart</value>
+  </data>
+  <data name="SoldOut" xml:space="preserve">
+    <value>Sold out</value>
   </data>
 </root>

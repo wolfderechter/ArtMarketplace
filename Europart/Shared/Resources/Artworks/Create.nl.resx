@@ -126,6 +126,15 @@
   <data name="AddArtwork" xml:space="preserve">
     <value>Voeg kunstwerk toe</value>
   </data>
+  <data name="AtLeastOneImage" xml:space="preserve">
+    <value>Voeg tenminste 1 afbeelding toe!</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Categorie</value>
+  </data>
+  <data name="CategoryError" xml:space="preserve">
+    <value>Kies een categorie!</value>
+  </data>
   <data name="ChooseArtwork" xml:space="preserve">
     <value>Kies afbeelding</value>
   </data>
@@ -168,10 +177,19 @@
   <data name="Select" xml:space="preserve">
     <value>Selecteer</value>
   </data>
+  <data name="Style" xml:space="preserve">
+    <value>Stijl</value>
+  </data>
+  <data name="StyleError" xml:space="preserve">
+    <value>Kies een stijl!</value>
+  </data>
   <data name="Surrealism" xml:space="preserve">
     <value>Surrealisme</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Titel</value>
+  </data>
+  <data name="TooManyImages" xml:space="preserve">
+    <value>Maximum drie afbeeldingen!</value>
   </data>
 </root>

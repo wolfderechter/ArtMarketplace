@@ -53,7 +53,14 @@ else
         <div class="col-md-4 col-12">
             <div class="bieden">
                 <span class="prijs-groot">@artwork.Price.ToString("C")</span>
-                <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["ShoppingCart"]</button>
+                @if (artwork.IsSold)
+                {
+                    <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["SoldOut"]</button>
+                }
+                else
+                {
+                    <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["ShoppingCart"]</button>
+                }
                 <AuthorizeView Roles="Artist">
                     <Authorized>
                         @if(artist?.Id == artwork.ArtistId)
