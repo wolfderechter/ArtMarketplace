@@ -100,7 +100,7 @@
                                 <span class="prijs">@artwork.Price.ToString("C")</span>
                             </div>
                             <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></span>
-                            <AuthorizeView>
+                            <AuthorizeView Roles="Artist, User">
                                 <Authorized>
                                  @if (likedArtworksByUserLoggedIn is not null)
                                  {

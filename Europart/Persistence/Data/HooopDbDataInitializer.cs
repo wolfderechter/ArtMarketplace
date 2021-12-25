@@ -23,7 +23,7 @@ namespace EuropArt.Persistence.Data
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
-                User user = new User("Zowie", "DaBeast", "61c1f6a95d5b77007062b218", DateTime.Now);
+                User user = new User("Zowie", "Verschuere", "61c1f6a95d5b77007062b218", DateTime.Now);
                 _dbContext.Users.Add(user); 
 
                 Artist artist1 = new Artist("Stef", "Boerjan", "Belgium", "Lokeren", "9160", "Park de Rode Poort 9", "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/123.jpg", DateTime.Now, "Dit is de beschrijving van ...", "www.Justine.be", "619aaf7421f2b9006fb6eeaa");
@@ -96,14 +96,14 @@ namespace EuropArt.Persistence.Data
                 Like like2 = new Like(artist1.AuthId, artwork3);
 
                 Conversation conversation = new Conversation(user.AuthId, artist2.AuthId/*, artist1.FirstName, artist1.LastName, artist1.Id*/); 
-                Message message = new Message("Dit is een test", DateTime.Now , "61c1f6a95d5b77007062b218");
-                Message message2 = new Message("Hallo1", DateTime.Now , "61c1f6a95d5b77007062b218");
-                Message message3 = new Message("Hallo2", DateTime.Now , "619e6d8a8a4c39007207b719");
-                Message message4 = new Message("Hallo3", DateTime.Now , "619e6d8a8a4c39007207b719");
-                Message message5 = new Message("Hallo4", DateTime.Now , "61c1f6a95d5b77007062b218");
-                Message message6 = new Message("Hallo5", DateTime.Now , "619e6d8a8a4c39007207b719");
-                Message message7 = new Message("Hallo6", DateTime.Now , "61c1f6a95d5b77007062b218");
-                Message message8 = new Message("Hallo7", DateTime.Now , "619e6d8a8a4c39007207b719");
+                Message message = new Message("Hallo, is dit kunstwerk nog beschikbaar?", DateTime.Now , "61c1f6a95d5b77007062b218");
+                Message message2 = new Message("Hoi, dit kunstwerk is nog beschikbaar.", DateTime.Now , "619e6d8a8a4c39007207b719");
+                Message message3 = new Message("Zou u het zelf kunnen leveren of is het de bedoeling dat ik het kom halen?", DateTime.Now , "61c1f6a95d5b77007062b218");
+                Message message4 = new Message("U zult zelf het kunstwerk moeten komen halen.", DateTime.Now , "619e6d8a8a4c39007207b719");
+                Message message5 = new Message("Welke dag past voor u deze week?", DateTime.Now , "61c1f6a95d5b77007062b218");
+                Message message6 = new Message("Voor  mij past donderdag het best.", DateTime.Now , "619e6d8a8a4c39007207b719");
+                Message message7 = new Message("Mijn aderes is Magda Cafmeyerstraat 2 in Zele", DateTime.Now , "619e6d8a8a4c39007207b719");
+                Message message8 = new Message("Top, dan kom ik er donderdag in de middag om!", DateTime.Now , "61c1f6a95d5b77007062b218");
                 _dbContext.Messages.AddRange(message, message2, message3, message4, message5, message6, message7, message8);
                 conversation.Messages.Add(message); 
                 conversation.Messages.Add(message2); 
@@ -113,11 +113,7 @@ namespace EuropArt.Persistence.Data
                 conversation.Messages.Add(message6); 
                 conversation.Messages.Add(message7); 
                 conversation.Messages.Add(message8);
-
-                
-               
-
-              
+            
                 _dbContext.Conversations.AddRange(conversation);
                 _dbContext.Likes.AddRange(like, like1, like2);
                 _dbContext.SaveChanges();
