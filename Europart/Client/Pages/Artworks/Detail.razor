@@ -35,9 +35,9 @@ else
                 {
                     if(imagepaths.Count() > 1)
                     {
-                        <button @onclick="PreviousImage">&lt</button>
-                        <img src="@imagepaths[imageNumber].imagePath" style="width:auto;">
-                        <button @onclick="NextImage">&gt</button>
+                        <button class="btn" style="background-color: #372c2e; color:white;" @onclick="PreviousImage">&lt</button>
+                        <img src="@imagepaths[imageNumber].imagePath" style="max-width:60%;">
+                        <button class="btn" style="background-color: #372c2e; color:white;" @onclick="NextImage">&gt</button>
 
                     }
                     else {
