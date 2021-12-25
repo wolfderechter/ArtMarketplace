@@ -29,24 +29,27 @@
                 </AuthorizeView>
             }
         </div>
-        <div class="col border">
-         
+        <div class="col border" style="max-width: 100%; max-height: 100%;overflow: auto" >    
             @if (currentConversation is not null)
             {
-                <div class="row">
+                <div class="g-0 row"style=""> 
                 @foreach (var message in currentConversation.Messages)
                 {
                     @if (message.SenderAuthId == AuthId)
-                    {
-                        <p style="margin:0;" class="text-end text-muted">@message.Content</p>
+                    {  
+                        <div class="row flex justify-content-end">
+                            <p style="height: auto; white-space: initial; padding: auto; max-width: 60%; width: fit-content;" class="text-start text-white badge bg-primary">@message.Content</p>
+                        </div>
                     } else
                     {
-                        <p style="margin:0;" class="text-start text-primay">@message.Content</p>
+                        <div style="margin-left: auto;" class="row flex justify-content-start">
+                            <p style="height: auto; padding:auto; max-width: 60%; white-space: initial; width: fit-content;" class="text-start text-white badge bg-secondary">@message.Content</p>
+                        </div>
                     }
                 }
                 </div>
                 <div class="row" style="margin: auto">
-                    <input @oninput="SetMessageContent" type="text" ><br>
+                    <input @bind-value="Input" @oninput="SetMessageContent" type="text" ><br>
                     <button disabled="@IsDisabled" @onclick="AddMessage">Send</button>
                 </div>
             }
@@ -68,6 +71,8 @@
     private Conversation currentConversation { get; set; }
     private AccountDto.CreateMessage newMessage = new () {};
     private bool IsDisabled => newMessage.Content?.Length == 0 || newMessage.Content == null;
+    private string Input { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -113,6 +118,8 @@
         Conversations = response.Conversations;
         currentConversation = Conversations.Where(c => c.Id == currentConversation.Id).SingleOrDefault();
 
+        Input = null;
+        newMessage = new();
     }
 
     public void SetMessageContent(ChangeEventArgs args)

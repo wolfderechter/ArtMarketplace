@@ -114,27 +114,11 @@ namespace EuropArt.Persistence.Data
                 conversation.Messages.Add(message7); 
                 conversation.Messages.Add(message8);
 
-                Conversation conversation2 = new Conversation(user.AuthId, artist2.AuthId/*, artist1.FirstName, artist1.LastName, artist1.Id*/);
-                Message message0 = new Message("Dit is een test", DateTime.Now, "61c1f6a95d5b77007062b218");
-                Message message21 = new Message("Hallo111111111", DateTime.Now, "61c1f6a95d5b77007062b218");
-                Message message32 = new Message("Hallo2", DateTime.Now, "619e6d8a8a4c39007207b719");
-                Message message43 = new Message("Hallo3", DateTime.Now, "619e6d8a8a4c39007207b719");
-                Message message54 = new Message("Hallo4", DateTime.Now, "61c1f6a95d5b77007062b218");
-                Message message65 = new Message("Hallo5", DateTime.Now, "619e6d8a8a4c39007207b719");
-                Message message76 = new Message("Hallo6", DateTime.Now, "61c1f6a95d5b77007062b218");
-                Message message87 = new Message("Hallo7", DateTime.Now, "619e6d8a8a4c39007207b719");
-                _dbContext.Messages.AddRange(message0, message21, message32, message43, message54, message65, message76, message87);
-                conversation2.Messages.Add(message0);
-                conversation2.Messages.Add(message21);
-                conversation2.Messages.Add(message32);
-                conversation2.Messages.Add(message43);
-                conversation2.Messages.Add(message54);
-                conversation2.Messages.Add(message65);
-                conversation2.Messages.Add(message76);
-                conversation2.Messages.Add(message87);
+                
+               
 
               
-                _dbContext.Conversations.AddRange(conversation, conversation2);
+                _dbContext.Conversations.AddRange(conversation);
                 _dbContext.Likes.AddRange(like, like1, like2);
                 _dbContext.SaveChanges();
             }

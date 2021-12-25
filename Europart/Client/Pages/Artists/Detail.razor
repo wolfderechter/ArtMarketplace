@@ -20,7 +20,10 @@ else
             <AuthorizeView>
                 <div class="admin-buttons">
                     <AuthorizeView Roles="Artist" Context="HideEdit">
-                        <a disabled="@IsDisabled" href="artist/edit/@artist.Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
+                        @if(!IsDisabled)
+                        {
+                            <a disabled="@IsDisabled" href="artist/edit/@artist.Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
+                        }
                     </AuthorizeView>
                     <AuthorizeView Roles="User" Context="Start">
                         <a href="messages" @onclick="StartConversation" class="edit text-decoration-none text-dark" style="margin-right:5px ">Start conversation</a>
@@ -100,9 +103,17 @@ else
     [Inject] NavigationManager NavigationManager { get; set; }
     [Inject] public AuthenticationStateProvider auth { get; set; }
     private string AuthId { get; set; }
-    private bool IsDisabled => artist.AuthId == AuthId || artist == null;
+    private bool IsDisabled => artist.AuthId != AuthId;
     protected override async Task OnParametersSetAsync()
     {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if(user.Identity.IsAuthenticated)
+        {
+            var authId = user.Claims.ElementAt(4).Value.Substring(6);
+            AuthId = authId;
+        }
+       
         ArtistRequest.GetDetail request = new() { ArtistId = Id };
         var response = await ArtistService.GetDetailAsync(request);
         artist = response.Artist;
