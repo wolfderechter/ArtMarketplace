@@ -126,11 +126,17 @@
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Verwijderen bevestigen</value>
   </data>
+  <data name="JoinedOn" xml:space="preserve">
+    <value>Deelgenomen op</value>
+  </data>
   <data name="Latest Artworks" xml:space="preserve">
     <value>Recente Kunstwerken</value>
   </data>
   <data name="No artworks yet" xml:space="preserve">
     <value>Nog geen kunstwerken</value>
+  </data>
+  <data name="StartConversation" xml:space="preserve">
+    <value>Gesprek starten</value>
   </data>
   <data name="View all" xml:space="preserve">
     <value>Bekijk alle</value>

@@ -26,7 +26,7 @@ else
                         }
                     </AuthorizeView>
                     <AuthorizeView Roles="User" Context="Start">
-                        <a href="messages" @onclick="StartConversation" class="edit text-decoration-none text-dark" style="margin-right:5px ">Start conversation</a>
+                        <a href="messages" @onclick="StartConversation" class="edit text-decoration-none text-dark" style="margin-right:5px ">@Loc["StartConversation"]</a>
                     </AuthorizeView>
                     <AuthorizeView Roles="Admin" Context="bruh">
                         @if (RequestingDelete)
@@ -53,7 +53,7 @@ else
                 <img src="images/locate.svg" class="location" /> @artist.City
             </p>
             <p>
-                Joined on @artist.DateCreated.ToString("dd MMMM yyyy")
+                @Loc["JoinedOn"] @artist.DateCreated.ToString("dd MMMM yyyy")
             </p>
             <p>
                 @artist.Biography

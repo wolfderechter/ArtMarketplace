@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Abstract" xml:space="preserve">
+    <value>Abstract</value>
+  </data>
   <data name="Add Artwork" xml:space="preserve">
     <value>Voeg toe</value>
   </data>
@@ -126,17 +129,47 @@
   <data name="ChooseArtwork" xml:space="preserve">
     <value>Kies afbeelding</value>
   </data>
+  <data name="Classic" xml:space="preserve">
+    <value>Klassiek</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Beschrijving</value>
+  </data>
+  <data name="Drawings" xml:space="preserve">
+    <value>Tekeningen</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Kunstwerk wijzigen</value>
   </data>
+  <data name="Minimalism" xml:space="preserve">
+    <value>Minimalisme</value>
+  </data>
+  <data name="Modern" xml:space="preserve">
+    <value>Modern</value>
+  </data>
   <data name="Negative" xml:space="preserve">
     <value>Prijs kan niet lager dan 0 zijn!</value>
   </data>
+  <data name="Other" xml:space="preserve">
+    <value>Andere</value>
+  </data>
+  <data name="Paintings" xml:space="preserve">
+    <value>Schilderijen</value>
+  </data>
+  <data name="Photography" xml:space="preserve">
+    <value>Fotografie</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>Prijs</value>
+  </data>
+  <data name="Sculptures" xml:space="preserve">
+    <value>Sculpturen</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Selecteer</value>
+  </data>
+  <data name="Surrealism" xml:space="preserve">
+    <value>Surrealisme</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Titel</value>

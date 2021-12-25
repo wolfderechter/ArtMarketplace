@@ -88,6 +88,15 @@ namespace EuropArt.Shared.Resources.Artists {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Joined on.
+        /// </summary>
+        public static string JoinedOn {
+            get {
+                return ResourceManager.GetString("JoinedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latest Artworks.
         /// </summary>
         public static string Latest_Artworks {
@@ -102,6 +111,15 @@ namespace EuropArt.Shared.Resources.Artists {
         public static string No_artworks_yet {
             get {
                 return ResourceManager.GetString("No artworks yet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start conversation.
+        /// </summary>
+        public static string StartConversation {
+            get {
+                return ResourceManager.GetString("StartConversation", resourceCulture);
             }
         }
         

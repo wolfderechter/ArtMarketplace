@@ -47,13 +47,13 @@ else
             </div>
             <h2 class="mb-1">@artwork.Name</h2>
             <h4 class="kunstenaar"><a href="/artist/@artwork.ArtistId"><span style="color:#b1b4b7">@Loc["By"]</span> @(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></h4>
-            <h5 style="color:#b1b4b7">Uploaded on @artwork.DateCreated.ToString("dd MMMM yyyy")</h5>
+            <h5 style="color:#b1b4b7">@Loc["UploadedOn"] @artwork.DateCreated.ToString("dd MMMM yyyy")</h5>
             <p>@artwork.Description</p>
         </div>
         <div class="col-md-4 col-12">
             <div class="bieden">
                 <span class="prijs-groot">@artwork.Price.ToString("C")</span>
-                <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
+                <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["ShoppingCart"]</button>
                 <AuthorizeView Roles="Artist">
                     <Authorized>
                         @if(artist?.Id == artwork.ArtistId)

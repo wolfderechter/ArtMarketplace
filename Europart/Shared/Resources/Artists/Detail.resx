@@ -126,11 +126,17 @@
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Confirm delete</value>
   </data>
+  <data name="JoinedOn" xml:space="preserve">
+    <value>Joined on</value>
+  </data>
   <data name="Latest Artworks" xml:space="preserve">
     <value>Latest Artworks</value>
   </data>
   <data name="No artworks yet" xml:space="preserve">
     <value>No artworks yet</value>
+  </data>
+  <data name="StartConversation" xml:space="preserve">
+    <value>Start conversation</value>
   </data>
   <data name="View all" xml:space="preserve">
     <value>View all</value>
