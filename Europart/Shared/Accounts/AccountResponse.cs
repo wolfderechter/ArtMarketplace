@@ -10,7 +10,7 @@ namespace EuropArt.Shared.Accounts
 {
     public class AccountResponse
     {
-        public class GetIndex
+        public class GetIndexAccount
         {
             public AccountDto.Index User { get; set; }
         }
