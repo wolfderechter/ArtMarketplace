@@ -8,6 +8,7 @@
 @using EuropArt.Shared.AuthUsers
 @inject IArtworkService ArtworkService
 @inject HttpClient Http
+@inject AuthenticationStateProvider auth
 @inject IJSRuntime JSRuntime
 
 <h1>@ListView</h1>
@@ -53,8 +54,8 @@
                 <div class="block">
                     <span>@user.Email</span>
                     <div class="buttons">
-                        <a><img class="good" src="/images/good.svg" /></a>
-                        <a @onclick="() => ConfirmDeleteArtwork(artwork.Id)"><img class="bad" src="/images/bad.svg" /></a>
+                        <a @onclick="() => AcceptArtist(user)"><img class="good" src="/images/good.svg" /></a>
+                        <a @onclick="() => DeleteArtist(user)"><img class="bad" src="/images/bad.svg" /></a>
                         <a href="artwork/@artwork.Id"><img src="/images/more.svg" /></a>
                     </div>
                 </div>
@@ -199,6 +200,8 @@
 
     private IEnumerable<AuthUserDto.Index> users;
 
+
+
     protected override async Task OnInitializedAsync()
     {
         ArtistRequest.GetIndex request = new();
@@ -208,6 +211,16 @@
         ArtworkRequest.GetIndex request2 = new();
         var response2 = await ArtworkService.GetIndexAsync(request2);
         artworks = response2.Artworks;
+
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+        var endpoint = "api/Authentication";
+        var res = await publicClient.Client.GetAsync($"{endpoint}/CheckUser/{authId}");
+        
+        }
 
         users = await Http.GetFromJsonAsync<AuthUserDto.Index[]>("authentication");
     }
@@ -230,5 +243,15 @@
             return;
         var request2 = new ArtworkRequest.Delete { ArtworkId = Id };
         await ArtworkService.DeleteAsync(request2);
+    }
+
+    private async Task DeleteArtist(ArtistDto.Index artist)
+    {
+
+    }
+
+    private async Task AcceptArtist(ArtistDto.Index artist)
+    {
+        await Http.DeleteAsync("api/authentication
     }
 }

@@ -17,7 +17,7 @@ namespace EuropArt.Persistence.Data.Configuration
             builder.HasKey(l => new { l.AuthId, l.ArtworkId });
 
             builder.Property(l => l.AuthId);
-            builder.HasOne(l => l.Artwork).WithMany().HasForeignKey(l => l.ArtworkId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(l => l.Artwork).WithMany().HasForeignKey(l => l.ArtworkId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

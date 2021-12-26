@@ -35,6 +35,7 @@ namespace EuropArt.Shared.Artworks
 
         public class Create
         {
+            public string AuthId { get; set; }
             public ArtworkDto.Create Artwork { get; set; }
         }
 

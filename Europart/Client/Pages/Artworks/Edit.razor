@@ -14,7 +14,7 @@
             <div class="mb-3">
                 <h6>@Loc["Title"]</h6>
                 <InputText class="form-control" id="exampleInputTitle" @bind-Value="model.Name"
-                           aria-describedby="titleHelp" placeholder="Enter title" />
+                           aria-describedby="titleHelp" placeholder="Enter title" data-test-id="artwork-name-input"/>
                 <ValidationMessage For="@(() => model.Name)" />
             </div>
             <div class="mb-3">

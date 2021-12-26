@@ -120,6 +120,9 @@
   <data name="Bio" xml:space="preserve">
     <value>Biography</value>
   </data>
+  <data name="ChangeProfilePicture" xml:space="preserve">
+    <value>Change profilepicture</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>City</value>
   </data>
@@ -144,7 +147,7 @@
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
   </data>
-  <data name="LastnameError" xml:space="preserve">
+  <data name="LastNameError" xml:space="preserve">
     <value>Last name has to be filled in!</value>
   </data>
   <data name="Postalcode" xml:space="preserve">
@@ -154,7 +157,7 @@
     <value>Postalcode has to be filled in!</value>
   </data>
   <data name="Street" xml:space="preserve">
-    <value>Street</value>
+    <value>Street + nr</value>
   </data>
   <data name="StreetError" xml:space="preserve">
     <value>Street has to be filled in!</value>

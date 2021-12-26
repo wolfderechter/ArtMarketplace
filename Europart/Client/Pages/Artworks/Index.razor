@@ -10,28 +10,26 @@
 <h1>@Loc["Artworks"]</h1>
 <div class="row">
     <div class="col-6">
-        <button @onclick="ShowFilters" id="filters" type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">@Loc[textOnButton]</button>
+        <button @onclick="ShowFilters" id="filters" data-test-id="show-filters-button" type="button" class="btn btn-secondary btn-lg" data-bs-toggle="button" autocomplete="off">@Loc[textOnButton]</button>
     </div>
     <div class="col-6 text-end">
         @*<button class="btn btn-secondary btn-lg" href="/artwork/add">@Loc["Add Artwork"]</button>*@
         <div class="row">
             <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
-                <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
+                <input @bind="Filter.Searchterm" data-test-id="search-input" class="form-control col" placeholder="@Loc["Search"]" type="search" />
             </div>
             <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
-                <AuthorizeView Roles="Admin, Artist">
-                    <Authorized>
+                <AuthorizeView Roles="Artist">
                         <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
-                    </Authorized>
                 </AuthorizeView>
             </div>
             <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
-                <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
+                <select @bind="Filter.OrderBy" data-test-id="orderby-select" class="form-select mb-3" aria-label="Default select example">
                     <option value="OrderByNewest">@Loc["NewestArtwork"]</option>
                     <option value="OrderByOldest">@Loc["OldestArtwork"]</option>
                     <option value="OrderByName">@Loc["Name"]</option>
                     <option value="OrderByPriceAscending">@Loc["PriceAscending"]</option>
-                    <option value="OrderByPriceDescending">@Loc["PriceDescending"]</option>
+                    <option value="OrderByPriceDescending" data-test-id="orderby-option-pricedescending">@Loc["PriceDescending"]</option>
                 </select>
             </div>
         </div>
@@ -59,11 +57,11 @@
                 <h3>@Loc["Price"]:</h3>
                 <div class="row mb-3">
                     <div class="form-floating col-6">
-                        <input @bind="Filter.MinimumPrice" type="number" class="form-control" id="floatingInput" placeholder="0">
+                        <input @bind="Filter.MinimumPrice" data-test-id="minimumprice-input" type="number" class="form-control" id="floatingInput" placeholder="0">
                         <label for="floatingInput">@Loc["Min"].</label>
                     </div>
                     <div class="form-floating col-6">
-                        <input @bind="Filter.MaximumPrice" type="number" class="form-control" id="floatingInput" placeholder="0">
+                        <input @bind="Filter.MaximumPrice" data-test-id="maximumprice-input" type="number" class="form-control" id="floatingInput" placeholder="0">
                         <label for="floatingInput">@Loc["Max"].</label>
                     </div>
                 </div>
@@ -93,11 +91,11 @@
                 @foreach (var artwork in artworks)
                 {
                     <div class="@cols">
-                        <div class="badge-kunstwerk">
+                        <div class="badge-kunstwerk" data-test-id="artwork-item">
                             <a href="artwork/@artwork.Id"><img src="@artwork.ImagePaths[0].imagePath"></a>
                             <div class="k-p">
-                                <h2 class="kunstenaar"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
-                                <span class="prijs">@artwork.Price.ToString("C")</span>
+                                <h2 class="kunstenaar" data-test-id="artwork-item-name"><a href="/artwork/@artwork.Id">@artwork.Name</a></h2>
+                                <span class="prijs" data-test-id="artwork-item-price">@artwork.Price.ToString("C")</span>
                             </div>
                             <span class="naam"><span style="color:#b1b4b7">@Loc["By"]</span> <a href="artist/@artwork.ArtistId">@(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></span>
                             <AuthorizeView Roles="Artist, User">

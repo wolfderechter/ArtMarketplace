@@ -45,7 +45,7 @@ else
                     }
                 }
             </div>
-            <h2 class="mb-1">@artwork.Name</h2>
+            <h2 class="mb-1" data-test-id="artwork-detail-name">@artwork.Name</h2>
             <h4 class="kunstenaar"><a href="/artist/@artwork.ArtistId"><span style="color:#b1b4b7">@Loc["By"]</span> @(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></h4>
             <h5 style="color:#b1b4b7">@Loc["UploadedOn"] @artwork.DateCreated.ToString("dd MMMM yyyy")</h5>
             <p>@artwork.Description</p>
@@ -59,13 +59,13 @@ else
                 }
                 else
                 {
-                    <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["ShoppingCart"]</button>
+                    <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3" data-test-id=addtoshoppingcart-button>@Loc["ShoppingCart"]</button>
                 }
                 <AuthorizeView Roles="Artist">
                     <Authorized>
                         @if(artist?.Id == artwork.ArtistId)
                         {
-                            <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
+                            <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id" data-test-id="edit-button">@Loc["Edit"]</a>
                         @if (RequestingDelete)
                         {
                             <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>

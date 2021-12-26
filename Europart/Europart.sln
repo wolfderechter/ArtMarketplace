@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 16.0.0.0
@@ -13,6 +13,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuropArt.Services", "Services\EuropArt.Services.csproj", "{694F5041-A037-4A86-8A64-3E3C105DFE47}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EuropArt.Persistence", "Persistence\EuropArt.Persistence.csproj", "{853FF2BD-364A-408E-A1F1-FE4FD58B8471}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuropArt.PlaywrightTests", "PlaywrightTests\EuropArt.PlaywrightTests.csproj", "{8B544825-DCC0-44F4-B78A-515AD60BCE57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,6 +98,18 @@ Global
 		{853FF2BD-364A-408E-A1F1-FE4FD58B8471}.Release|x64.Build.0 = Release|Any CPU
 		{853FF2BD-364A-408E-A1F1-FE4FD58B8471}.Release|x86.ActiveCfg = Release|Any CPU
 		{853FF2BD-364A-408E-A1F1-FE4FD58B8471}.Release|x86.Build.0 = Release|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Release|x64.Build.0 = Release|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B544825-DCC0-44F4-B78A-515AD60BCE57}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
