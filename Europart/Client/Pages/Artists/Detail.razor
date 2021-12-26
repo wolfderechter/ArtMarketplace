@@ -14,7 +14,7 @@ else
 {
     <div class="row">
         <div class="col-6">
-            <h2 class="Kunstenaar">@(artist.FirstName + " " + artist.LastName)</h2>
+            <h2 class="Kunstenaar" data-test-id="artist-detail-name">@(artist.FirstName + " " + artist.LastName)</h2>
         </div>
         <div class="col-6 text-end">
             <AuthorizeView>
@@ -55,7 +55,7 @@ else
             <p>
                 @Loc["JoinedOn"] @artist.DateCreated.ToString("dd MMMM yyyy")
             </p>
-            <p>
+            <p data-test-id="artist-detail-biography">
                 @artist.Biography
             </p>
             <p><a href="http://@artist.Website" target="_blank">@artist.Website</a></p>
@@ -64,7 +64,6 @@ else
             <h3>@Loc["Latest Artworks"]</h3>
         </div>
         <div class="col-4 text-end">
-            <a href="#">@Loc["View all"] @artist.Artworks.Count() @Loc["artworks"]</a>
         </div>
         @if (artist.Artworks.Count > 0)
         {

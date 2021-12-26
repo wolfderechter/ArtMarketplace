@@ -69,7 +69,7 @@ namespace EuropArt.Persistence.Data
                 YouthArtwork youthArtwork11 = new YouthArtwork("jeugd kunstwerk", "Dit is een jeugdkunstwerk", youthArtist1, DateTime.Now);
 
                 //paar artworks op verkocht zetten
-                artwork2.IsSold = true;
+                //artwork2.IsSold = true;
                 artwork3.IsSold = true;
 
                 youthArtwork1.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/1.jpg";

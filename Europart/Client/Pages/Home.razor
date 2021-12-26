@@ -32,8 +32,8 @@
         {
             @for (var i = 3; i < 6; i++)
             {
-                <div class="kol col-lg-4 col-sm-6 col-12">
-                    <div class="badge-kunstwerk">
+                <div class="kol col-lg-4 col-sm-6 col-12" data-test-id="artworks1">
+                    <div class="badge-kunstwerk" data-test-id="artwork-item">
                         <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePaths[0].imagePath"></a>
                         <div class="k-p">
                             <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
@@ -56,8 +56,8 @@
             {
                 @for (var i = 0; i < 3; i++)
                 {
-                    <div class="kol col-lg-4 col-sm-6 col-12">
-                        <div class="badge-kunstwerk">
+                    <div class="kol col-lg-4 col-sm-6 col-12" data-test-id="artworks2">
+                        <div class="badge-kunstwerk" data-test-id="artwork-item">
                             <a href="artwork/@artworks.ElementAt(i).Id"><img src="@artworks.ElementAt(i).ImagePaths[0].imagePath"></a>
                             <div class="k-p">
                                 <h2 class="kunstenaar">@artworks.ElementAt(i).Name</h2>
@@ -81,8 +81,8 @@
             {
                 @for (var i = 1; i < 4; i++)
                 {
-                    <div class="col-lg-4 col-sm-6 col-12 text-center">
-                        <div class="badge-kunstenaars">
+                    <div class="col-lg-4 col-sm-6 col-12 text-center" data-test-id="artists">
+                        <div class="badge-kunstenaars" data-test-id="artist-item">
                             <div class="profile-pic">
                                 <a href="/artist/@artists.ElementAt(i).Id"><img src="@artists.ElementAt(i).ImagePath" /></a>
                             </div>

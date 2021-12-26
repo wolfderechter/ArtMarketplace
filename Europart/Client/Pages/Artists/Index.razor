@@ -23,7 +23,7 @@
             <div class="col-6 text-start">
                 <div class="row">
                     <div class="col-md-8 col-12">
-                        <input class="form-control" placeholder="@Loc["Search"]" type="search" @bind="Filter.Searchterm" />
+                        <input class="form-control" placeholder="@Loc["Search"]" type="search" @bind="Filter.Searchterm" data-test-id="search-input"/>
                     </div>
                 </div>
             </div>
@@ -38,11 +38,11 @@
         @foreach (var artist in artists)
         {
             <div class="col-md-4 col-12 text-center">
-                <div class="badge-kunstenaars">
+                <div class="badge-kunstenaars" data-test-id="artist-item">
                     <div class="profile-pic">
                         <a href="/artist/@artist.Id"><img src="@artist.ImagePath" /></a>
                     </div>
-                    <h2>@(artist.FirstName + " " + artist.LastName)</h2>
+                    <h2 data-test-id="artist-item-name">@(artist.FirstName + " " + artist.LastName)</h2>
                     <span class="locatie"><img src="images/locate.svg" /> @artist.Postalcode</span><br />
                     <span class="kunstwerken">@artist.AmountOfArtworks @Loc["artworks"]</span>
                 </div>
