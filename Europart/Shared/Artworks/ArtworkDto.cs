@@ -49,8 +49,8 @@ namespace EuropArt.Shared.Artworks
                     RuleFor(p => p.Name).MaximumLength(100).WithMessage(Loc["BuyNow"]);
                     RuleFor(p => p.Price).NotEmpty().WithMessage(Loc["Price"]);
                     RuleFor(p => p.Price).GreaterThan(0).WithMessage(Loc["Negative"]);
-                    RuleFor(p => p.Style).NotEmpty().WithMessage(Loc["Style"]);
-                    RuleFor(p => p.Category).NotEmpty().WithMessage(Loc["Category"]);
+                    RuleFor(p => p.Style).NotEmpty().WithMessage(Loc["StyleError"]);
+                    RuleFor(p => p.Category).NotEmpty().WithMessage(Loc["CategoryError"]);
                     RuleFor(p => p.ImagePaths).NotEmpty().WithMessage(Loc["AtLeastOneImage"]);
                 }
             }

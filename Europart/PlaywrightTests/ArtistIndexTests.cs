@@ -20,7 +20,7 @@ namespace EuropArt.PlaywrightTests
             await Page.GotoAsync($"{ServerBaseUrl}/artist");
             await Page.WaitForSelectorAsync("data-test-id=artist-item");
             var amountOfProducts = await Page.Locator("data-test-id=artist-item").CountAsync();
-            amountOfProducts.ShouldBe(4);
+            amountOfProducts.ShouldBe(3);
         }
 
 
@@ -40,7 +40,7 @@ namespace EuropArt.PlaywrightTests
             await Page.PressAsync("data-test-id=search-input", "Enter");
 
             //wait to filter
-            await Task.Delay(100);
+            await Task.Delay(1000);
 
             //Assert
             var nameString = Page.TextContentAsync("data-test-id=artist-item-name").Result;

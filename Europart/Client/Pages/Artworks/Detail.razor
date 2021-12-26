@@ -13,11 +13,6 @@
 }
 else
 {
-    @*<p>@_artwork.Id</p>
-        <p>@_artwork.Name</p>
-        <p>@_artwork.Description</p>
-        <p>@_artwork.Price.ToString("C")</p>
-        <img src="@_artwork.ImagePath" />*@
     <div class="row">
         <AuthorizeView Roles="Admin">
             <Authorized>

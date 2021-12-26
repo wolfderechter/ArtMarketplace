@@ -12,8 +12,8 @@
             <DataAnnotationsValidator />
             <div class="mb-3">
                 <h6>@Loc["FirstName"]</h6>
-                <InputText class="form-control" @bind-Value="model.FirstName"/>
-                <ValidationMessage For="@(() => model.FirstName)" data-test-id=artist-detail-firstname-error/>
+                <InputText class="form-control" @bind-Value="model.FirstName" data-test-id="artist-detail-firstname-input"/>
+                <ValidationMessage For="@(() => model.FirstName)" data-test-id="artist-detail-firstname-error"/>
             </div>
             <div class="mb-3">
                 <h6>@Loc["LastName"]</h6>

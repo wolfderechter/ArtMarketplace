@@ -289,9 +289,9 @@ namespace EuropArt.Services.Artworks
             }
 
             response.TotalAmount = query.Count();
-            query = query.Take(request.Amount);
             query = query.Skip(request.Amount * request.Page);
-            
+            query = query.Take(request.Amount);
+
 
             response.Artworks = query.Select(x => new ArtworkDto.Index
             {

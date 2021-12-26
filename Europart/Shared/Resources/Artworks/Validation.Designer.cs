@@ -61,6 +61,24 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add at least one image!.
+        /// </summary>
+        public static string AtLeastOneImage {
+            get {
+                return ResourceManager.GetString("AtLeastOneImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a category!.
+        /// </summary>
+        public static string CategoryError {
+            get {
+                return ResourceManager.GetString("CategoryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title can not be longer than 100 characters!.
         /// </summary>
         public static string Length {
@@ -84,6 +102,15 @@ namespace EuropArt.Shared.Resources.Artworks {
         public static string Price {
             get {
                 return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a style!.
+        /// </summary>
+        public static string StyleError {
+            get {
+                return ResourceManager.GetString("StyleError", resourceCulture);
             }
         }
         

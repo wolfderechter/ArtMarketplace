@@ -35,24 +35,50 @@ namespace EuropArt.PlaywrightTests
         }
 
         [Test]
-        public async Task ArtistDetail_Edit_ChangesArtistDetail()
+        public async Task ArtworkDetail_Edit_ChangesArtworkDetail()
         {
             //login
             await Page.GotoAsync($"{ServerBaseUrl}/authentication/login");
+            await Task.Delay(16000);
             await Page.FillAsync("input[name='email']", "wolf.derechter@student.hogent.be");
             await Page.FillAsync("input[name='password']", "Paswoord1");
-            await Page.ClickAsync("text=submit");
+            await Page.ClickAsync("button[name='submit']");
+            await Task.Delay(7000);
 
-            var editTitle = "Boom";
+            var editName = "Emmer";
 
-            await Page.GotoAsync($"{ServerBaseUrl}/artwork/3");
+            await Page.GotoAsync($"{ServerBaseUrl}/artwork/edit/1");
+
+            await Page.FillAsync("data-test-id=artwork-name-input", editName);
             await Page.ClickAsync("data-test-id=edit-button");
+            await Task.Delay(3000);
 
-            await Page.FillAsync("data-test-id=artwork-name-input", editTitle);
+            await Page.GotoAsync($"{ServerBaseUrl}/artwork/1");
+            await Page.WaitForSelectorAsync("h2");
+            var artworkName = await Page.TextContentAsync("data-test-id=artwork-detail-name");
+            artworkName.ShouldBe(editName);
+        }
+        [Test]
+        public async Task ArtworkDetail_Edit_NoName_IsInvalid()
+        {
+            //login
+            await Page.GotoAsync($"{ServerBaseUrl}/authentication/login");
+            await Task.Delay(16000);
+            await Page.FillAsync("input[name='email']", "wolf.derechter@student.hogent.be");
+            await Page.FillAsync("input[name='password']", "Paswoord1");
+            await Page.ClickAsync("button[name='submit']");
+            await Task.Delay(7000);
 
-            await Page.WaitForSelectorAsync("data-test-id=artist-detail-name");
-            var artistName = await Page.TextContentAsync("data-test-id=artist-detail-name");
-            artistName.ShouldBe(editTitle);
+            await Page.GotoAsync($"{ServerBaseUrl}/artwork/edit/1");
+
+            await Page.FillAsync("data-test-id=artwork-name-input", " ");
+            await Page.ClickAsync("data-test-id=edit-button");
+            await Task.Delay(3000);
+
+            await Page.GotoAsync($"{ServerBaseUrl}/artwork/1");
+            await Page.WaitForSelectorAsync("h2");
+            var error = await Page.TextContentAsync("data-test-id=artwork-detail-name");
+            error.ShouldNotBeEmpty();
         }
     }
 }
