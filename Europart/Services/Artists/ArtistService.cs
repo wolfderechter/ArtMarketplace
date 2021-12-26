@@ -151,7 +151,7 @@ namespace EuropArt.Services.Artists
                     Price = y.Price,
                 }).ToList(),
                 AuthId = x.AuthId,
-                Likes = likes.Where(l => l.AuthId == x.AuthId).Include(l => l.Artwork).ToList(),
+                Likes = likes.Where(l => l.AuthId == x.AuthId).Include(l => l.Artwork).ThenInclude(l => l.ImagePaths).ToList(),
             }).SingleOrDefaultAsync();
 
             return response;
