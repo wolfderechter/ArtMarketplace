@@ -14,6 +14,7 @@ namespace EuropArt.Shared.AuthUsers
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public bool Blocked { get; set; }
+            public string AuthId { get; set; }
         }
     }
 }

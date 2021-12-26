@@ -28,7 +28,7 @@ namespace EuropArt.Server.Controllers
             this.artistService = artistSer;
         }
 
-        [HttpGet]
+        [HttpGet("GetUsers")]
         public async Task<IEnumerable<AuthUserDto.Index>> GetUsers()
         {
             //get all users
@@ -57,6 +57,7 @@ namespace EuropArt.Server.Controllers
             return users.Select(x => new AuthUserDto.Index
             {
                 Email = x.Email,
+                AuthId = x.UserId.Substring(6),
             });
         }
 
@@ -126,7 +127,8 @@ namespace EuropArt.Server.Controllers
             return Ok();
         }
 
-        [HttpDelete]public async Task<IActionResult> DeleteUser(string authId)
+        [HttpDelete("{authId}")]
+        public async Task<IActionResult> DeleteUser(string authId)
         {
             //get user by authid
             ArtistRequest.GetDetailByAuthId getReq = new ArtistRequest.GetDetailByAuthId();
@@ -138,7 +140,7 @@ namespace EuropArt.Server.Controllers
             await artistService.DeleteAsync(req);
 
             //delete user
-            await _managementApiClient.Users.DeleteAsync(authId);
+            await _managementApiClient.Users.DeleteAsync("auth0|" + authId);
             return Ok();
         }
     }

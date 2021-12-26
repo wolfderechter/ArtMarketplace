@@ -1,5 +1,8 @@
 ﻿@page "/dashboard"
 @attribute [Authorize(Roles ="Admin")]
+@inject HttpClient Http
+@inject AuthenticationStateProvider auth
+@using EuropArt.Shared.AuthUsers
 
 <h1>Dashboard admin</h1>
 
@@ -7,7 +10,13 @@
     <NavLink href="dashboard/artists" class="col-lg-4 col-sm-6 col-12">
         <div class="badge">
             <h2>Goed te keuren kunstenaars</h2>
-            <span>15</span>
+                @if (users == null)
+                {
+                    <span>0</span>
+                } else
+                {
+                    <span>@users.Count()</span>
+                }
         </div>
     </NavLink>
     <NavLink href="dashboard/artworks" class="col-lg-4 col-sm-6 col-12">
@@ -22,12 +31,6 @@
             <span>69</span>
         </div>
     </NavLink>
-    <NavLink href="dashboard/artists" class="col-4 col-sm-6 col-12">
-        <div class="badge">
-            <h2>Nieuwe artiesten</h2>
-            <span>69</span>
-        </div>
-    </NavLink>
     <NavLink href="dashboard/homepage" class="col-lg-4 col-sm-6 col-12">
         <div class="badge">
             <h2>Homepagina bewerken</h2>
@@ -36,5 +39,11 @@
 </div>
 
 @code {
+    private IEnumerable<AuthUserDto.Index> users;
 
+    protected override async Task OnInitializedAsync()
+    {
+        users = await Http.GetFromJsonAsync<AuthUserDto.Index[]>("api/Authentication/GetUsers");
+    }
+    
 }

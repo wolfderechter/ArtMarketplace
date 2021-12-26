@@ -1,5 +1,6 @@
 ﻿@page "/dashboard/{listview}"
 @inject NavigationManager NavigationManager
+@attribute [Authorize(Roles ="Admin")]
 @using EuropArt.Shared.Artists
 @using System.Globalization
 @inject IArtistService ArtistService
@@ -19,29 +20,6 @@
     </div>
 @if (ListView == "artists")
 {
-    @if (artists is null)
-    {
-        <p>Loading...</p>
-    }
-    else
-    {
-        @foreach (var artist in artists)
-        {
-            <div class="col-12">
-                <div class="block d-flex justify-content-between" style="flex-wrap:wrap;">
-                    <img src="@artist.ImagePath" />
-                    <span>@(artist.FirstName + " " + artist.LastName)</span>
-                    <div class="buttons">
-                        <a><img class="good" src="/images/good.svg" /></a>
-                        <a @onclick="() => ConfirmDeleteArtist(artist.Id)"><img class="bad" src="/images/bad.svg" /></a>
-                        <a href="artist/@artist.Id"><img src="/images/more.svg" /></a>
-                    </div>
-                </div>
-            </div>
-        }
-    }
-} else if (ListView == "artists")
-{
     @if (users is null)
     {
         <p>Loading...</p>
@@ -56,7 +34,6 @@
                     <div class="buttons">
                         <a @onclick="() => AcceptArtist(user)"><img class="good" src="/images/good.svg" /></a>
                         <a @onclick="() => DeleteArtist(user)"><img class="bad" src="/images/bad.svg" /></a>
-                        <a href="artwork/@artwork.Id"><img src="/images/more.svg" /></a>
                     </div>
                 </div>
             </div>
@@ -212,17 +189,7 @@
         var response2 = await ArtworkService.GetIndexAsync(request2);
         artworks = response2.Artworks;
 
-        var authState = await auth.GetAuthenticationStateAsync();
-        var user = authState.User;
-        if (user.Identity.IsAuthenticated)
-        {
-        var authId = user.Claims.ElementAt(4).Value.Substring(6);
-        var endpoint = "api/Authentication";
-        var res = await publicClient.Client.GetAsync($"{endpoint}/CheckUser/{authId}");
-        
-        }
-
-        users = await Http.GetFromJsonAsync<AuthUserDto.Index[]>("authentication");
+        users = await Http.GetFromJsonAsync<AuthUserDto.Index[]>("api/Authentication/GetUsers");
     }
 
     private async Task ConfirmDeleteArtist(int Id)
@@ -245,13 +212,19 @@
         await ArtworkService.DeleteAsync(request2);
     }
 
-    private async Task DeleteArtist(ArtistDto.Index artist)
+    private async Task DeleteArtist(AuthUserDto.Index artist)
     {
-
+        var endpoint = "api/Authentication";
+        var authId = artist.AuthId;
+        await Http.DeleteAsync($"{endpoint}/{authId}");
+        users = await Http.GetFromJsonAsync<AuthUserDto.Index[]>("api/Authentication/GetUsers");
     }
 
-    private async Task AcceptArtist(ArtistDto.Index artist)
+    private async Task AcceptArtist(AuthUserDto.Index artist)
     {
-        await Http.DeleteAsync("api/authentication
+        var endpoint = "api/Authentication";
+        var authId = artist.AuthId;
+        await Http.GetAsync($"{endpoint}/ChangeArtistRole/{authId}");
+        users = await Http.GetFromJsonAsync<AuthUserDto.Index[]>("api/Authentication/GetUsers");
     }
 }
