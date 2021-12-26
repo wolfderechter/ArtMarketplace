@@ -85,8 +85,8 @@ namespace EuropArt.Shared.Artists
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
                 {
-                    RuleFor(P => P.FirstName).NotEmpty().WithMessage(Loc["LastNameError"]);
-                    RuleFor(P => P.LastName).NotEmpty().WithMessage(Loc["FirstNameError"]);
+                    RuleFor(P => P.FirstName).NotEmpty().WithMessage(Loc["FirstNameError"]);
+                    RuleFor(P => P.LastName).NotEmpty().WithMessage(Loc["LastNameError"]);
                     RuleFor(p => p.Country).NotEmpty().WithMessage(Loc["CountryError"]);
                     RuleFor(p => p.City).NotEmpty().WithMessage(Loc["CityError"]);
                     RuleFor(p => p.Postalcode).NotEmpty().WithMessage(Loc["PostalcodeError"]);
