@@ -17,7 +17,7 @@ namespace EuropArt.PlaywrightTests
         [Test]
         public async Task Show_ArtistDetail_OnLoad()
         {
-            await Page.GotoAsync($"{ServerBaseUrl}/artist/2");
+            await Page.GotoAsync($"{ServerBaseUrl}/artist/1");
             await Page.WaitForSelectorAsync("data-test-id=artist-detail-name");
             var artistName = await Page.TextContentAsync("data-test-id=artist-detail-name");
             artistName.ShouldNotBeEmpty();
@@ -36,13 +36,13 @@ namespace EuropArt.PlaywrightTests
 
             var editBiography = "Nieuwe beschrijving";
 
-            await Page.GotoAsync($"{ServerBaseUrl}/artist/edit/2");
+            await Page.GotoAsync($"{ServerBaseUrl}/artist/edit/1");
 
             await Page.FillAsync("data-test-id=artist-biography-input", editBiography);
             await Page.ClickAsync("data-test-id=edit-button");
             await Task.Delay(3000);
 
-            await Page.GotoAsync($"{ServerBaseUrl}/artist/2");
+            await Page.GotoAsync($"{ServerBaseUrl}/artist/1");
             await Page.WaitForSelectorAsync("data-test-id=artist-detail-biography");
             var artistDescription = await Page.TextContentAsync("data-test-id=artist-detail-biography");
             artistDescription.ShouldBe(editBiography);
@@ -59,13 +59,13 @@ namespace EuropArt.PlaywrightTests
             await Task.Delay(7000);
 
 
-            await Page.GotoAsync($"{ServerBaseUrl}/artist/edit/2");
+            await Page.GotoAsync($"{ServerBaseUrl}/artist/edit/1");
 
-            await Page.FillAsync("data-test-id=artist-biography-input", "");
+            await Page.FillAsync("data-test-id=artist-detail-firstname-input", " ");
             await Page.ClickAsync("data-test-id=edit-button");
-            await Task.Delay(1000);
+            await Task.Delay(500);
 
-            var error = await Page.TextContentAsync("data-test-id=artist-detail-firstname-error");
+            var error = Page.Locator("data-test-id=artist-detail-firstname-error").TextContentAsync()?.Result;
             error.ShouldNotBeEmpty();
         }
     }

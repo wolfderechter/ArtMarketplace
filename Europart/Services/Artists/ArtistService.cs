@@ -266,8 +266,8 @@ namespace EuropArt.Services.Artists
                 return response;
             }
             response.TotalAmount = query.Count();
-            query = query.Take(request.Amount);
             query = query.Skip(request.Amount * request.Page);
+            query = query.Take(request.Amount);
 
             response.Artists = query.Select(x => new ArtistDto.Index
             {

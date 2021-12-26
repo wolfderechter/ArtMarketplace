@@ -12,7 +12,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="EuropArt.Domain.Artworks.Artwork">
-    <Position X="6" Y="6" Width="1.5" />
+    <Position X="6.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAADAAAAAQAgBAAAAAAAEAQAAIAkAAAABAAMAAAACAA=</HashCode>
       <FileName>Artworks\Artwork.cs</FileName>
@@ -23,7 +23,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="EuropArt.Domain.Likes.Like">
-    <Position X="5.75" Y="11" Width="1.5" />
+    <Position X="6.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAgAAAAAgAAAAAAAAAAAA=</HashCode>
       <FileName>Likes\Like.cs</FileName>
@@ -70,7 +70,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Domain.Common.Entity">
-    <Position X="6.25" Y="2" Width="1.5" />
+    <Position X="6.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAQAgAAAAAAAAAAAAIAAAAAAAAAAAiA=</HashCode>
       <FileName>Common\Entity.cs</FileName>

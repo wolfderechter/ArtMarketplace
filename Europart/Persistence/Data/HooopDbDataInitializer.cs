@@ -103,7 +103,7 @@ namespace EuropArt.Persistence.Data
                 youthArtwork11.ImagePath = $"https://demostoragehogent.blob.core.windows.net/fakeyouthartworks/11.jpg";
 
                 
-                List<Artwork> artworks = new List<Artwork> { artwork1, artwork2, artwork3, artwork4 , artwork5 , artwork6 , artwork7 , artwork9 , artwork10 , artwork11 , artwork12 , artwork13 , artwork14 };
+                List<Artwork> artworks = new List<Artwork> { artwork1, artwork2, artwork3, artwork4 , artwork5 , artwork6 , artwork7 , artwork9 , artwork10 , artwork11 , artwork12 , artwork13 , artwork14, artwork15, artwork16, artwork17, artwork18, artwork19, artwork20, artwork21, artwork22, artwork23, artwork24, artwork25, artwork26, artwork27, artwork28, artwork29, artwork30, artwork31, artwork32, artwork33 };
 
                 
                 _dbContext.YouthArtworks.AddRange(youthArtwork1, youthArtwork2, youthArtwork3, youthArtwork4, youthArtwork5, youthArtwork6, youthArtwork7, youthArtwork8, youthArtwork9, youthArtwork10, youthArtwork11);

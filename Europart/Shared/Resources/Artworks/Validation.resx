@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AtLeastOneImage" xml:space="preserve">
+    <value>Add at least one image!</value>
+  </data>
+  <data name="CategoryError" xml:space="preserve">
+    <value>Choose a category!</value>
+  </data>
   <data name="Length" xml:space="preserve">
     <value>Title can not be longer than 100 characters!</value>
   </data>
@@ -125,6 +131,9 @@
   </data>
   <data name="Price" xml:space="preserve">
     <value>You have to fill in a price!</value>
+  </data>
+  <data name="StyleError" xml:space="preserve">
+    <value>Choose a style!</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>You have to fill in a title!</value>

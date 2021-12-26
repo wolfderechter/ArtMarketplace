@@ -16,8 +16,8 @@ namespace EuropArt.PlaywrightTests
         {
             await Page.GotoAsync($"{ServerBaseUrl}/artwork");
             await Page.WaitForSelectorAsync("data-test-id=artwork-item");
-            var amountOfProducts = await Page.Locator("data-test-id=artwork-item").CountAsync();
-            amountOfProducts.ShouldBe(14);
+            var amountOfArtworks = await Page.Locator("data-test-id=artwork-item").CountAsync();
+            amountOfArtworks.ShouldBe(25);
         }
 
         [Test]
