@@ -13,7 +13,7 @@ namespace EuropArt.Shared.Accounts
         Task<AccountResponse.GetLikes> GetLikesAsync(AccountRequest.GetLikes request);
         Task DeleteLikeAsync(AccountRequest.DeleteLike request);
         Task<AccountResponse.GetConversations> GetConversationsAsync(AccountRequest.GetConversations request);
-        Task<AccountResponse.GetIndex> GetIndexAsync(AccountRequest.GetIndex request);
+        Task<AccountResponse.GetIndexAccount> GetIndexAsync(AccountRequest.GetIndex request);
         Task AddMessageAsync(AccountRequest.AddMessage request);
         Task StartConversationAsync(AccountRequest.StartConversation request);
     }

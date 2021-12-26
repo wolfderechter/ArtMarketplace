@@ -39,9 +39,9 @@ namespace EuropArt.Client.Accounts
             return response;
         }
 
-        public async Task<AccountResponse.GetIndex> GetIndexAsync(AccountRequest.GetIndex request)
+        public async Task<AccountResponse.GetIndexAccount> GetIndexAsync(AccountRequest.GetIndex request)
         {
-            var response = await client.GetFromJsonAsync<AccountResponse.GetIndex>($"{endpoint}/index/{request.AuthId}");
+            var response = await client.GetFromJsonAsync<AccountResponse.GetIndexAccount>($"{endpoint}/index/{request.AuthId}");
             return response;
         }
 

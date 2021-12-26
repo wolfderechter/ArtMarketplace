@@ -93,16 +93,22 @@
     private List<IBrowserFile> images = new();
     private bool SaveButtonIsClicked = false;
     private bool TooManyImages = false;
+    [Inject] public AuthenticationStateProvider auth { get; set; }
 
     private async Task CreateNewArtwork()
     {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+
         SaveButtonIsClicked = true;
         newArtwork.DateCreated = DateTime.Now;
         //newArtwork.ImagePaths = images.Select(x => x.Name).ToList();
 
         ArtworkRequest.Create request = new()
         {
-            Artwork = newArtwork
+            Artwork = newArtwork,
+            AuthId = authId
         };
 
         //response zal sas-token bevatten uiteindelijk

@@ -78,10 +78,10 @@ namespace EuropArt.Services.Accounts
             return response;
         }
 
-        public async Task<AccountResponse.GetIndex> GetIndexAsync(AccountRequest.GetIndex request)
+        public async Task<AccountResponse.GetIndexAccount> GetIndexAsync(AccountRequest.GetIndex request)
         {
             await Task.Delay(100);
-            AccountResponse.GetIndex response = new();
+            AccountResponse.GetIndexAccount response = new();
 
             //Query om te filteren
 

@@ -21,16 +21,25 @@ namespace EuropArt.Server.Controllers
             this.youthArtworkService = youthService;
         }
 
+        /// <summary>
+        /// Gets the data of an youthartwork
+        /// </summary>
         [HttpGet]
         public Task<YouthArtworkResponse.GetIndex> GetIndexAsync([FromQuery] YouthArtworkRequest.GetIndex request)
         {
             return youthArtworkService.GetIndexAsync(request);
         }
+
         [HttpGet("android/")]
         public Task<List<YouthArtworkDto.Detail>> GetYouthArtworksAndroidAsync([FromQuery] YouthArtworkRequest.GetIndex request)
         {
             return youthArtworkService.GetYouthArtworksAndroidAsync(request);
         }
+
+        /// <summary>
+        /// Gets the details of an youthartwork
+        /// </summary>
+        /// <param name="request">The id of the youthArtwork who's data needs to bee retrieved </param>
         [HttpGet("{YouthArtworkId}")]  
         public Task<YouthArtworkResponse.GetDetail> GetDetailAsync([FromRoute] YouthArtworkRequest.GetDetail request)
         {
