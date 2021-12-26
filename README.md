@@ -1,16 +1,30 @@
-# EuropArt
+# Welcop to Hooop Gallery
+
+This is the GitHub repository for DevOps project. U can find and clone all the source code in here.
+This project is about a webshop for people who want to buy and sell art. This is a school project for Jean-Marie Waelkens.
 
 [![GitHub Super-Linter](https://github.com/HoGentTIN/devops-project-web-h8/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 [![Build .NET app](https://github.com/HoGentTIN/devops-project-web-h8/actions/workflows/dotnet.yml/badge.svg)](https://github.com/HoGentTIN/devops-project-web-h8/actions/workflows/dotnet.yml)
+## Table of contents
+
+> - [Used Technology](#Used-technology)
+> - [Group members](#Group-members)
 
 ## Used Technology
-
+ - MySql 
+ - Sql Server
+ - NuGet Packages
+ - Auth0
+ - BlobStorage
+ - 
 ## How to run
 
-> Fill in this information
-Instructions how to run the project (don't forget the DB Connection etc.)
+Clone project in visual studio
+Change startup project to EuropArt.Server
+Go to the startup.cs in EuropArt.Server and put line 42 in comment and line 44 out of comment
+Finally run the project.
 
-## Members
+## Group members
 
 ### Development
 
@@ -29,3 +43,8 @@ Instructions how to run the project (don't forget the DB Connection etc.)
 ## Trello
 
 > - [Information about sprint 1 on Trello](https://trello.com/b/g7cm3JGS/sprint-1)
+> - [Information about sprint 2 on Trello](https://trello.com/b/dbL2LD9O/p3dv2022g8s2)
+> - [Information about sprint 3 on Trello](https://trello.com/b/qJPsRAc3/p3dv2022g8s3)
+> - [Information about sprint 4 on Trello](https://trello.com/b/RQEHTZGe/p3dv2022g8s4)
+> - [Information about sprint 5 on Trello](https://trello.com/b/HfJ7YrVR/p3dv2022g8s5)
+> - [Information about sprint 6on Trello](https://trello.com/b/jrD5zJhG/p3dv2022g8s6)
