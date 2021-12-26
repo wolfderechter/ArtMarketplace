@@ -1,0 +1,135 @@
+﻿@page "/messages"
+@attribute [Authorize]
+@using EuropArt.Client.Accounts
+@using EuropArt.Domain.Messages
+@using EuropArt.Shared.Accounts
+@using EuropArt.Shared.Artists
+
+
+
+<div class="message">
+    <div class="row">
+        <div class="col-6"> 
+            @if (Conversations is not null)
+            {
+                <AuthorizeView Roles="User">
+                    @foreach (var conversation in Conversations)
+                    {
+                        <div @onclick="() => SetCurrentConversation(conversation)" class="no-gutters border-bottom border-dark">
+                            <ConversationArtistDetail AuthId="@conversation.ArtistAuthId"/>
+                        </div>
+                    }
+                </AuthorizeView>   
+                <AuthorizeView Roles="Artist">
+                    @foreach (var conversation in Conversations)
+                    {
+                        <div @onclick="() => SetCurrentConversation(conversation)" class="no-gutters border-bottom border-dark">
+                            <ConversationUserDetail AuthId="@conversation.UserAuthId"/>  
+                        </div>
+                    }
+                </AuthorizeView>
+            }
+        </div>
+        <div class="col-6" style="" >  
+            @if (currentConversation is not null)
+            {
+                <div class="row"style="max-height: 300px;overflow-y: auto; overflow-x: hidden;"> 
+                @foreach (var message in currentConversation.Messages)
+                {
+                    @if (message.SenderAuthId == AuthId)
+                    {  
+                        <div class="row flex justify-content-end">
+                            <p style="height: auto; white-space: initial; max-width: 90%; width: fit-content;padding:0.55rem 0.75rem;" class="text-start text-white badge bg-primary">@message.Content</p>
+                        </div>
+                    } else
+                    {
+                        <div style="margin-left: auto;" class="row flex justify-content-start">
+                            <p style="height: auto; max-width: 90%; white-space: initial; width: fit-content;padding: 0.55rem 0.75rem;" class="text-start text-white badge bg-secondary">@message.Content</p>
+                        </div>
+                    }
+                }
+                </div>
+                <div class="row border" style="margin: auto">
+                    <div class="col-8" style="padding: 0px;">
+                        <input @bind-value="Input" @oninput="SetMessageContent" type="text" style="border-radius: 30px 0px 0px 30px; width: 100%; height: 100%;">
+                    </div>
+                    <div class="col-4" style="padding: 0px;">
+                        <button type="button" class="btn text-white" style="border-radius: 0px 30px 30px 0px; background-color: #372c2e; width: 100%;" disabled="@IsDisabled" @onclick="AddMessage">Send</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>   
+
+
+
+
+@code {
+
+
+    private List<Conversation> Conversations { get; set; }
+    [Inject] public AuthenticationStateProvider auth { get; set; }
+    [Inject] public IAccountService AccountService { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
+    private string AuthId { get; set; }
+    private Conversation currentConversation { get; set; }
+    private AccountDto.CreateMessage newMessage = new () {};
+    private bool IsDisabled => newMessage.Content?.Length == 0 || newMessage.Content == null;
+    private string Input { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+        AuthId = authId;
+        AccountRequest.GetConversations request = new() { AuthId = authId };
+        var response = await AccountService.GetConversationsAsync(request);
+        Conversations = response.Conversations;
+
+    }
+
+    public void SetCurrentConversation(Conversation conversation)
+    {
+        currentConversation = conversation;
+    }
+
+    public async Task<ArtistDto.Detail> GetArtist(string authId)
+    {
+
+        ArtistRequest.GetDetailByAuthId request = new() { AuthId = authId };
+        var response = await ArtistService.GetDetailByAuthIdAsync(request);
+        var artist = response.Artist;
+        return artist;
+    }
+
+    public async Task AddMessage()
+    {
+
+        newMessage.AuthId = AuthId;
+        newMessage.ConversationId = currentConversation.Id;
+        newMessage.DateCreated = DateTime.Now;
+        AccountRequest.AddMessage request = new()
+            {
+                NewMessage = newMessage,
+                ConversationId = currentConversation.Id
+            };
+        await AccountService.AddMessageAsync(request);
+
+        AccountRequest.GetConversations request2 = new() { AuthId = AuthId };
+        var response = await AccountService.GetConversationsAsync(request2);
+        Conversations = response.Conversations;
+        currentConversation = Conversations.Where(c => c.Id == currentConversation.Id).SingleOrDefault();
+
+        Input = null;
+        newMessage = new();
+    }
+
+    public void SetMessageContent(ChangeEventArgs args)
+    {
+        newMessage.Content = args.Value.ToString();
+    }
+
+}

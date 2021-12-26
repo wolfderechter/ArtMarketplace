@@ -42,7 +42,7 @@
                 <li style="position:relative">
                     <NavLink @onclick="OpenShoppingCart" class="shoppingcart text-decoration-none">
                         <img src="/images/shoppingcart.svg" id="shoppingcart" />
-                        <span class="shopping-cart-counter">@Cart.Items.Count</span>
+                        <span class="shopping-cart-counter" data-test-id="shoppingcart-counter">@Cart.Items.Count</span>
                     </NavLink>
                     
                 </li>
@@ -57,8 +57,12 @@
                             </a>
                             <div id="overlay" @onclick="OverlayClicked" style="display:@display;"></div>
                             <div class="dropdown-menu @(show? "show":"")" aria-labelledby="dropdownMenuLink" @onclick="ToggleNavMenu">
-                                <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="account">@Loc["Profile"]</a>
-                                <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="messages">@Loc["Messages"]</a>
+                                <AuthorizeView Roles="Admin, User, Artist" Context="profile">
+                                    <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="account">@Loc["Profile"]</a>
+                                </AuthorizeView>
+                                <AuthorizeView Roles="Artist, User" Context="messages">
+                                    <a class="dropdown-item" @onclick="ToggleAccountDropdown" href="messages">@Loc["Messages"]</a>
+                                </AuthorizeView>
                                 <a class="dropdown-item" @onclick="BeginSignOut" href="#">@Loc["Logout"]</a>
                             </div> 
                         </div>

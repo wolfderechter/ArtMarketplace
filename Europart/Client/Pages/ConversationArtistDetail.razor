@@ -1,0 +1,26 @@
+﻿@using EuropArt.Shared.Artists
+
+@if(artist is not null)
+{
+    <p>@artist.FirstName @artist.LastName</p>
+
+}
+
+
+@code {
+    [Parameter] public string AuthId { get; set; }
+    [Parameter] public string Role { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
+    public ArtistDto.Detail artist { get; set; }
+    protected override async Task OnParametersSetAsync()
+    {
+        var authId = AuthId;
+        var role = Role; 
+      
+        ArtistRequest.GetDetailByAuthId request = new() { AuthId = authId };
+        var response = await ArtistService.GetDetailByAuthIdAsync(request);
+        artist = response.Artist;
+        
+
+    }
+}

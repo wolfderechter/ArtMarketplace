@@ -1,15 +1,12 @@
 ﻿using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
 using EuropArt.Domain.Common;
+using EuropArt.Domain.Likes;
+using EuropArt.Domain.Messages;
+using EuropArt.Domain.Users;
 using EuropArt.Domain.YouthArtworks;
 using EuropArt.Persistence.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EuropArt.Persistence.Data
 {
@@ -20,7 +17,11 @@ namespace EuropArt.Persistence.Data
         public DbSet<YouthArtist> YouthArtists { get; set; }
         public DbSet<Artwork> Artworks { get; set; }
         public DbSet<YouthArtwork> YouthArtworks { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public DbSet<ImagePath> ImagePaths { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
         public HooopDbContext(DbContextOptions<HooopDbContext> options) : base(options)
         {
 
@@ -33,7 +34,11 @@ namespace EuropArt.Persistence.Data
             modelBuilder.ApplyConfiguration(new ArtworkEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new YouthArtworkEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new YouthArtistEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new LikeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MessageEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ImagePathEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ConversationEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
             
         }
     }

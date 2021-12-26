@@ -626,6 +626,8 @@ form.form {
     cursor: default;
 }
 
+
+
 @media (max-width: 575px) {
     .mobile-filter-row-artwork {
         margin-left: 0 !important;
@@ -649,4 +651,6 @@ form.form {
         padding: 0.5rem;
         cursor:pointer;
     }
+
+
 }

@@ -1,38 +1,25 @@
-﻿@page "/register/user"
-@inject IStringLocalizer<EuropArt.Shared.Resources.User> Loc
-
-<h1 class="text-center">@Loc["Welcome Back"]!</h1>
+﻿@page "/register/user/{AuthId}/{state}"
+@inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Create> Loc
+@using EuropArt.Client.Infrastructure
 <div class="row">
-    <div class="col-6 offset-3">
-        <form class="form">
+    <div class="col-8 offset-2">
+        <EditForm Model="@newUser" OnValidSubmit="SignUpAsync" class="form">
+            <FluentValidationValidator />
+            <DataAnnotationsValidator />
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Name"]">
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Street"]">
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["City"]">
+                <h6>@Loc["FirstName"]</h6>
+                <InputText class="form-control" @bind-Value="newUser.FirstName"/>
+                <ValidationMessage For="@(() => newUser.FirstName)" />
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Country"]">
+                <h6>@Loc["LastName"]</h6>
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="newUser.LastName"
+                           aria-describedby="titleHelp" placeholder="Enter lastname" />
+                <ValidationMessage For="@(() => newUser.LastName)" />
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Postalcode"]">
+                <button type="submit" class="btn btn-primary">@Loc["Register"]</button>
             </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Biography"]">
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" placeholder="@Loc["Website"]">
-            </div>
-            <div>
-                <button type="submit" class="btn btn-primary btn-own">@Loc["Sign up"]</button>
-            </div>
-        </form>
+        </EditForm>
     </div>
 </div>
-
-@code {
-
-}

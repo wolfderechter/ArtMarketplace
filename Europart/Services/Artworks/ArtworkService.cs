@@ -54,8 +54,8 @@ namespace EuropArt.Services.Artworks
             //var imageExtension = model.ImagePath.Substring(model.ImagePath.LastIndexOf('.'));
             //var imageFileName = Guid.NewGuid().ToString() + request.Artwork.ImagePath + imageExtension;
             //var imagePath = $"{storageService.StorageBaseUri}artworks/{imageFileName}";
-
-            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated, model.Style, model.Category, imagePaths));
+            var artist = artists.Where(a => a.AuthId == request.AuthId).SingleOrDefault();
+            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artist, model.DateCreated, model.Style, model.Category, imagePaths));
 
             await dbContext.SaveChangesAsync();
             response.ArtworkId = artwork.Entity.Id;
@@ -139,10 +139,80 @@ namespace EuropArt.Services.Artworks
                 ImagePaths = x.ImagePaths,
                 Style = x.Style,
                 Category = x.Category,
+                IsSold = x.IsSold
             })
             .SingleOrDefaultAsync(x => x.Id == request.ArtworkId);
 
             return response;
+        }
+        //only for android
+        public async Task<List<ArtworkDto.Detail>> GetArtworksAndroidAsync(ArtworkRequest.GetIndex request)
+        {
+            await Task.Delay(100);
+            var query = artworks.Include(x => x.Artist).Include(x => x.ImagePaths).AsQueryable().AsNoTracking();
+
+
+            if (!string.IsNullOrWhiteSpace(request.Searchterm))
+                query = query.Where(x => x.Name.Contains(request.Searchterm));
+
+            if (request.MinimumPrice is not null)
+                query = query.Where(x => x.Price.Value >= request.MinimumPrice);
+
+            if (request.MaximumPrice is not null)
+                query = query.Where(x => x.Price.Value <= request.MaximumPrice);
+
+            if (request.Style is not null)
+            {
+                query = query.Where(x => x.Style == request.Style);
+            }
+            if (request.Category is not null)
+            {
+                query = query.Where(x => x.Category == request.Category);
+            }
+            //auctions includen TODO
+
+            if (request.OrderBy is not null)
+            {
+                switch (request.OrderBy.Value)
+                {
+                    case OrderByArtwork.OrderByPriceAscending:
+                        query = query.OrderBy(x => x.Price.Value);
+                        break;
+
+                    case OrderByArtwork.OrderByPriceDescending:
+                        query = query.OrderByDescending(x => x.Price.Value);
+                        break;
+
+                    case OrderByArtwork.OrderByName:
+                        query = query.OrderBy(x => x.Name);
+                        break;
+
+                    case OrderByArtwork.OrderByOldest:
+                        query = query.OrderBy(x => x.DateCreated);
+                        break;
+
+                    case OrderByArtwork.OrderByNewest:
+                        query = query.OrderByDescending(x => x.DateCreated);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            var response = query.Select(x => new ArtworkDto.Detail
+            {
+                Id = x.Id,
+                Name = x.Name,
+                ArtistId = x.Artist.Id,
+                ArtistFirstName = x.Artist.FirstName,
+                ArtistLastName = x.Artist.LastName,
+                Description = x.Description,
+                Price = x.Price.Value,
+                DateCreated = x.DateCreated,
+                ImagePaths = x.ImagePaths,
+                Style = x.Style,
+                Category = x.Category,
+            });
+            return response.ToList();
         }
 
         public async Task<ArtworkResponse.GetIndex> GetIndexAsync(ArtworkRequest.GetIndex request)
@@ -219,9 +289,9 @@ namespace EuropArt.Services.Artworks
             }
 
             response.TotalAmount = query.Count();
-            query = query.Take(request.Amount);
             query = query.Skip(request.Amount * request.Page);
-            
+            query = query.Take(request.Amount);
+
 
             response.Artworks = query.Select(x => new ArtworkDto.Index
             {

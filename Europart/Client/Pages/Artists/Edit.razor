@@ -6,14 +6,14 @@
 @using EuropArt.Client.Infrastructure
 
 <div class="row">
-    <div class="col-8 offset-2">
+    <div class="col-md-8 offset-md-2 col-12 offset-0">
         <EditForm Model="@model" OnValidSubmit="EditArtist" class="form">
             <FluentValidationValidator />
             <DataAnnotationsValidator />
             <div class="mb-3">
                 <h6>@Loc["FirstName"]</h6>
-                <InputText class="form-control" @bind-Value="model.FirstName"/>
-                <ValidationMessage For="@(() => model.FirstName)" />
+                <InputText class="form-control" @bind-Value="model.FirstName" data-test-id="artist-detail-firstname-input"/>
+                <ValidationMessage For="@(() => model.FirstName)" data-test-id="artist-detail-firstname-error"/>
             </div>
             <div class="mb-3">
                 <h6>@Loc["LastName"]</h6>
@@ -48,7 +48,7 @@
             <div class="mb-3">
                 <h6>@Loc["Bio"]</h6>
                 <InputText @bind-Value="model.Biography" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter biography" />
+                           placeholder="Enter biography" data-test-id="artist-biography-input"/>
             </div>
             <div class="mb-3">
                 <h6>@Loc["Web"]</h6>
@@ -67,7 +67,7 @@
 
             </div>
             <div class="mb-3">
-                <button disabled="@(SaveButtonIsClicked)" type="submit" class="btn btn-primary">@Loc["Edit"]</button>
+                <button disabled="@(SaveButtonIsClicked)" type="submit" class="btn btn-primary" data-test-id="edit-button">@Loc["Edit"]</button>
             </div>
         </EditForm>
     </div>

@@ -24,7 +24,6 @@ namespace EuropArt.Server.Controllers
         {
             return youthArtistService.GetIndexAsync(request);
         }
-
         [HttpGet("{YouthArtistId}")]
         public Task<YouthArtistResponse.GetDetail> GetDetailAsync([FromRoute] YouthArtistRequest.GetDetail request)
         {

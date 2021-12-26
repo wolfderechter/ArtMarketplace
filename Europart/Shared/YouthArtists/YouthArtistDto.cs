@@ -20,6 +20,8 @@ namespace EuropArt.Shared.YouthArtists
             public string ImagePath { get; set; }
             public DateTime DateCreated { get; set; }
             public int AmountOfArtworks { get; set; }
+            public string AuthId { get; set; }
+
         }
 
         public class Detail : Index

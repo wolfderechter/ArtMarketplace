@@ -1,4 +1,7 @@
-﻿using EuropArt.Shared.Artists;
+﻿using EuropArt.Domain.Artists;
+using EuropArt.Shared.Artists;
+﻿using EuropArt.Domain.Likes;
+using EuropArt.Shared.Artists;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +17,9 @@ namespace EuropArt.Shared.Artists
         Task<ArtistResponse.Edit> EditAsync(ArtistRequest.Edit request);
         Task DeleteAsync(ArtistRequest.Delete request);
         Task<ArtistResponse.Create> CreateAsync(ArtistRequest.Create request);
-
-
+        //only used for android
+        Task<List<ArtistDto.Detail>> GetArtistsAndroidAsync(ArtistRequest.GetIndex request);
+        Task<ArtistResponse.GetDetailByAuthId> GetDetailByAuthIdAsync(ArtistRequest.GetDetailByAuthId request);
+        
     }
 }

@@ -115,11 +115,38 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add to shoppingcart.
         /// </summary>
-        public static string Shoppingcart {
+        public static string ShoppingCart {
             get {
-                return ResourceManager.GetString("Shoppingcart", resourceCulture);
+                return ResourceManager.GetString("ShoppingCart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sold out.
+        /// </summary>
+        public static string SoldOut {
+            get {
+                return ResourceManager.GetString("SoldOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploaded on.
+        /// </summary>
+        public static string UploadedOn {
+            get {
+                return ResourceManager.GetString("UploadedOn", resourceCulture);
             }
         }
     }

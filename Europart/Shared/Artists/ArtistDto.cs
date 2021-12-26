@@ -1,5 +1,6 @@
 ﻿using EuropArt.Domain.Artists;
 using EuropArt.Domain.Common;
+using EuropArt.Domain.Likes;
 using EuropArt.Shared.Artworks;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
@@ -20,6 +21,7 @@ namespace EuropArt.Shared.Artists
             public string Email { get; set; }
             public string Postalcode { get; set; }
             public DateTime DateCreated { get; set; }
+            public List<Like> Likes { get; set; }
         }
 
         public class Detail : Index
@@ -83,8 +85,8 @@ namespace EuropArt.Shared.Artists
             {
                 public ArtistValidator(IStringLocalizer<Resources.Artists.Edit> Loc)
                 {
-                    RuleFor(P => P.FirstName).NotEmpty().WithMessage(Loc["LastNameError"]);
-                    RuleFor(P => P.LastName).NotEmpty().WithMessage(Loc["FirstNameError"]);
+                    RuleFor(P => P.FirstName).NotEmpty().WithMessage(Loc["FirstNameError"]);
+                    RuleFor(P => P.LastName).NotEmpty().WithMessage(Loc["LastNameError"]);
                     RuleFor(p => p.Country).NotEmpty().WithMessage(Loc["CountryError"]);
                     RuleFor(p => p.City).NotEmpty().WithMessage(Loc["CityError"]);
                     RuleFor(p => p.Postalcode).NotEmpty().WithMessage(Loc["PostalcodeError"]);

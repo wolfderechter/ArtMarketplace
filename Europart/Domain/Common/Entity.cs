@@ -5,7 +5,6 @@ namespace Domain.Common
     public abstract class Entity
     {
         public int Id { get; init; }
-        public bool IsEnabled { get; set; }
         protected Entity()
         {
         }

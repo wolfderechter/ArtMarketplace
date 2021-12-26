@@ -1,4 +1,4 @@
-﻿@page "/register"
+﻿@page "/register/{AuthId}"
 @inject IStringLocalizer<EuropArt.Shared.Resources.Register> Loc
 @using System.Web
 
@@ -12,18 +12,26 @@
 </div>
 
 @code {
+
+    [Parameter] public string AuthId { get; set; }
+
     [Inject] NavigationManager navigationManager { get; set; }
-    public string userRef = "register/user/";
-    private string artistRef = "register/artist/";
-    private string youthRef = "register/youth/";
-    protected override async Task OnInitializedAsync()
-        {
-            Uri myUri = new Uri(navigationManager.Uri);
-            string originalState = HttpUtility.ParseQueryString(myUri.Query).Get("state");
-            Console.WriteLine(originalState);
-            userRef += originalState;
-            artistRef += originalState;
-            youthRef += originalState;
-            
-        }
+    private string artistRef;
+    private string userRef;
+    private string youthRef;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var authId = AuthId;
+        userRef = $"register/user/{authId}/";
+        artistRef = $"register/artist/{authId}/";
+        youthRef = $"register/youth/{authId}/";
+
+        Uri myUri = new Uri(navigationManager.Uri);
+        string originalState = HttpUtility.ParseQueryString(myUri.Query).Get("state");
+        Console.WriteLine(originalState);
+        userRef += originalState;
+        artistRef += originalState;
+        youthRef += originalState;
+    }
 }

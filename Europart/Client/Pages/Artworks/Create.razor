@@ -32,16 +32,19 @@
             <div class="mb-3">
                 <h6>@Loc["Category"]:</h6>
                 <InputSelect @bind-Value="newArtwork.Category" class="form-select mb-3" aria-label="Default select example">
+                    <option value="">@Loc["Select"]</option>
                     <option value="photography">@Loc["Photography"]</option>
                     <option value="painting">@Loc["Paintings"]</option>
                     <option value="sculpture">@Loc["Sculptures"]</option>
                     <option value="drawing">@Loc["Drawings"]</option>
                     <option value="other">@Loc["Other"]</option>
                 </InputSelect>
+                <ValidationMessage For="@(() => newArtwork.Category)" />
             </div>
             <div class="mb-3">
                 <h6>@Loc["Style"]:</h6>
                 <InputSelect @bind-Value="newArtwork.Style" class="form-select mb-3" aria-label="Default select example">
+                    <option value="">@Loc["Select"]</option>
                     <option value="abstract">@Loc["Abstract"]</option>
                     <option value="classic">@Loc["Classic"]</option>
                     <option value="minimalism">@Loc["Minimalism"]</option>
@@ -49,24 +52,36 @@
                     <option value="surrealism">@Loc["Surrealism"]</option>
                     <option value="other">@Loc["Other"]</option>
                 </InputSelect>
+                <ValidationMessage For="@(() => newArtwork.Style)" />
+
             </div>
             <div class="mb-3">
                 <h6>@Loc["ChooseArtwork"]</h6>
                 <InputFile OnChange="LoadImages" class="file-input" name="artwork" accept="image/*" multiple/>
+                <ValidationMessage For="@(() => newArtwork.ImagePaths)" />
                 <div class="col">
-                    @foreach(var file in images)
+                    @if(images.Count > 3)
                     {
-                        <span class="file-name row gx-0">
-                            @file.Name
-                        </span>
+                        <span class="validation-message">@Loc["TooManyImages"]</span>
+                    }
+                    else if(images.Count == 1)
+                    {
+                        
+                    }
+                    else
+                    {
+                        @foreach(var file in images)
+                        {
+                            <span class="file-name row gx-0">
+                                @file.Name
+                            </span>
+                        }
                     }
                 </div>
 
-                <ValidationMessage For="@(() => newArtwork.ImagePath)" />
-
             </div>
             <div class="mb-3">
-                <button disabled="@(SaveButtonIsClicked)" type="submit" class="btn btn-primary">@Loc["Add Artwork"]</button>
+                <button disabled="@(SaveButtonIsClicked || TooManyImages)" type="submit" class="btn btn-primary">@Loc["Add Artwork"]</button>
             </div>
         </EditForm>
     </div>
@@ -77,17 +92,23 @@
     private IBrowserFile image;
     private List<IBrowserFile> images = new();
     private bool SaveButtonIsClicked = false;
+    private bool TooManyImages = false;
+    [Inject] public AuthenticationStateProvider auth { get; set; }
 
     private async Task CreateNewArtwork()
     {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+
         SaveButtonIsClicked = true;
         newArtwork.DateCreated = DateTime.Now;
-        newArtwork.ImagePath = image.Name;
-        newArtwork.ImagePaths = images.Select(x => x.Name).ToList();
+        //newArtwork.ImagePaths = images.Select(x => x.Name).ToList();
 
         ArtworkRequest.Create request = new()
         {
-            Artwork = newArtwork
+            Artwork = newArtwork,
+            AuthId = authId
         };
 
         //response zal sas-token bevatten uiteindelijk
@@ -103,9 +124,19 @@
 
     private void LoadImages(InputFileChangeEventArgs args)
     {
+        images = new();
         foreach(var file in args.GetMultipleFiles())
         {
             images.Add(file);
         }
+        if(images.Count > 3)
+        {
+            TooManyImages = true;
+        }
+        else
+        {
+            TooManyImages = false;
+        }
+        newArtwork.ImagePaths = images.Select(x => x.Name).ToList();
     }
 }

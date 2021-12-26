@@ -55,5 +55,20 @@ namespace EuropArt.Services.Youths
 
             return response;
         }
+        //only used by android
+        public async Task<List<YouthArtworkDto.Detail>> GetYouthArtworksAndroidAsync(YouthArtworkRequest.GetIndex request)
+        {
+            await Task.Delay(100);
+
+            var response = youthArtworks.Select(x => new YouthArtworkDto.Detail
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                ImagePath = x.ImagePath,
+            }).ToList();
+
+            return response;
+        }
     }
 }

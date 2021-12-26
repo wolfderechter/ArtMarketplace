@@ -1,5 +1,6 @@
 using EuropArt.Domain.Artists;
 using EuropArt.Domain.Artworks;
+using EuropArt.Domain.Likes;
 using EuropArt.Persistence.Data;
 using EuropArt.Services.Infrastructure;
 using EuropArt.Shared.Artists;
@@ -19,6 +20,8 @@ namespace EuropArt.Services.Artists
         private readonly HooopDbContext dbContext;
         private readonly DbSet<Artist> artists;
         private readonly DbSet<Artwork> artworks;
+        private readonly DbSet<Like> likes;
+        
         private readonly IStorageService storageService;
         public ArtistService(HooopDbContext dbContext, IStorageService storageService)
         {
@@ -26,6 +29,7 @@ namespace EuropArt.Services.Artists
             artists = dbContext.Artists;
             artworks = dbContext.Artworks;
             this.storageService = storageService;
+            likes = dbContext.Likes;
         }
 
         private IQueryable<Artist> GetArtistById(int id) => artists
@@ -78,7 +82,7 @@ namespace EuropArt.Services.Artists
                 artist.Postalcode = model.Postalcode;
                 artist.Street = model.Street;
                 artist.Website = model.Website;
-
+                
                 //returnen
                 dbContext.Entry(artist).State = EntityState.Modified;
 
@@ -93,7 +97,7 @@ namespace EuropArt.Services.Artists
         {
             ArtistResponse.GetDetail response = new();
 
-            response.Artist = await artists.AsNoTracking().Where(p => p.Id == request.ArtistId).Select(x => new ArtistDto.Detail
+            response.Artist = await artists.Include(l => l.Likes).ThenInclude(l => l.Artwork).AsNoTracking().Where(p => p.Id == request.ArtistId).Select(x => new ArtistDto.Detail
             {
                 Id = x.Id,
                 Biography = x.Biography,
@@ -114,10 +118,104 @@ namespace EuropArt.Services.Artists
                     ImagePaths = y.ImagePaths,
                     Price = y.Price,
                 }).ToList(),
-                AuthId = x.AuthId
+                AuthId = x.AuthId,
+                Likes = x.Likes.ToList(),
             }).SingleOrDefaultAsync();
 
             return response;
+        }
+
+        public async Task<ArtistResponse.GetDetailByAuthId> GetDetailByAuthIdAsync(ArtistRequest.GetDetailByAuthId request)
+        {
+            ArtistResponse.GetDetailByAuthId response = new();
+
+            response.Artist = await artists.Include(l => l.Likes).ThenInclude(l => l.Artwork).AsNoTracking().Where(p => p.AuthId == request.AuthId).Select(x => new ArtistDto.Detail
+            {
+                Id = x.Id,
+                Biography = x.Biography,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Postalcode = x.Postalcode,
+                Country = x.Country,
+                City = x.City,
+                Street = x.Street,
+                Website = x.Website,
+                ImagePath = x.ImagePath,
+                DateCreated = x.DateCreated,
+                Artworks = artworks.Where(aw => aw.Artist.Id == x.Id).Select(y => new ArtworkDto.Detail
+                {
+                    Id = y.Id,
+                    Name = y.Name,
+                    Description = y.Description,
+                    ImagePaths = y.ImagePaths,
+                    Price = y.Price,
+                }).ToList(),
+                AuthId = x.AuthId,
+                Likes = likes.Where(l => l.AuthId == x.AuthId).Include(l => l.Artwork).ThenInclude(l => l.ImagePaths).ToList(),
+            }).SingleOrDefaultAsync();
+
+            return response;
+        }
+        //only for android
+        public async Task<List<ArtistDto.Detail>> GetArtistsAndroidAsync(ArtistRequest.GetIndex request)
+        {
+            await Task.Delay(100);
+            //Query om te filteren
+            var query = artists.AsQueryable().AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(request.Searchterm))
+                query = query.Where(x => (x.FirstName + " " + x.LastName).Contains(request.Searchterm));
+
+            if (request.OrderBy is not null)
+            {
+                switch (request.OrderBy.Value)
+                {
+                    case OrderByArtist.OrderByName:
+                        query = query.OrderBy(x => x.FirstName + " " + x.LastName);
+                        break;
+                    case OrderByArtist.OrderByNewest:
+                        query = query.OrderByDescending(x => x.DateCreated);
+                        break;
+
+                    case OrderByArtist.OrderByOldest:
+                        query = query.OrderBy(x => x.DateCreated);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            var response = artists.AsNoTracking().Select(x => new ArtistDto.Detail
+            {
+                Id = x.Id,
+                Biography = x.Biography,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Postalcode = x.Postalcode,
+                Country = x.Country,
+                City = x.City,
+                Street = x.Street,
+                Website = x.Website,
+                ImagePath = x.ImagePath,
+                DateCreated = x.DateCreated,
+                Artworks = artworks.Where(aw => aw.Artist.Id == x.Id).Select(y => new ArtworkDto.Detail
+                {
+                    Id = y.Id,
+                    Name = y.Name,
+                    ArtistId = y.Artist.Id,
+                    ArtistFirstName = y.Artist.FirstName,
+                    ArtistLastName = y.Artist.LastName,
+                    Description = y.Description,
+                    Price = y.Price.Value,
+                    DateCreated = y.DateCreated,
+                    ImagePaths = y.ImagePaths,
+                    Style = y.Style,
+                    Category = y.Category,
+                }).ToList(),
+                AuthId = x.AuthId
+            });
+
+            return response.ToList();
         }
 
         public async Task<ArtistResponse.GetIndex> GetIndexAsync(ArtistRequest.GetIndex request)
@@ -162,14 +260,14 @@ namespace EuropArt.Services.Artists
                     Postalcode = x.Postalcode,
                     ImagePath = x.ImagePath,
                     AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count(),
-                    DateCreated = x.DateCreated
+                    DateCreated = x.DateCreated,   
                 }).ToList();
 
                 return response;
             }
             response.TotalAmount = query.Count();
-            query = query.Take(request.Amount);
             query = query.Skip(request.Amount * request.Page);
+            query = query.Take(request.Amount);
 
             response.Artists = query.Select(x => new ArtistDto.Index
             {
@@ -179,7 +277,7 @@ namespace EuropArt.Services.Artists
                 Postalcode = x.Postalcode,
                 ImagePath = x.ImagePath,
                 AmountOfArtworks = artworks.Where(aw => aw.Artist.Id == x.Id).Count(),
-                DateCreated = x.DateCreated
+                DateCreated = x.DateCreated,
             }).ToList();
 
             return response;
@@ -195,12 +293,15 @@ namespace EuropArt.Services.Artists
             var imageFileName = Guid.NewGuid().ToString() + request.Artist.ImagePath + imageExtension;
             var imagePath = $"{storageService.StorageBaseUri}profilepictures/{imageFileName}";
 
-            var artist = artists.Add(new Artist(model.FirstName, model.LastName, model.Country, model.City, model.PostalCode, model.Street, model.ImagePath, DateTime.Now, model.Biography, model.Website, model.AuthId));
 
+            var artist = artists.Add(new Artist(model.FirstName, model.LastName, model.Country, model.City, model.PostalCode, model.Street, model.ImagePath, DateTime.Now, model.Biography, model.Website, model.AuthId));
+           
             await dbContext.SaveChangesAsync();
             response.ArtistId = artist.Entity.Id;
-
+          
             return response;
         }
+
+        
     }
 }

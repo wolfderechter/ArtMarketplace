@@ -61,6 +61,15 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abstract.
+        /// </summary>
+        public static string Abstract {
+            get {
+                return ResourceManager.GetString("Abstract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add artwork.
         /// </summary>
         public static string Add_Artwork {
@@ -79,11 +88,47 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choos Artwork.
+        ///   Looks up a localized string similar to Add at least one image!.
+        /// </summary>
+        public static string AtLeastOneImage {
+            get {
+                return ResourceManager.GetString("AtLeastOneImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a category!.
+        /// </summary>
+        public static string CategoryError {
+            get {
+                return ResourceManager.GetString("CategoryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose Artwork.
         /// </summary>
         public static string ChooseArtwork {
             get {
                 return ResourceManager.GetString("ChooseArtwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Klassiek.
+        /// </summary>
+        public static string Classic {
+            get {
+                return ResourceManager.GetString("Classic", resourceCulture);
             }
         }
         
@@ -97,11 +142,38 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Drawings.
+        /// </summary>
+        public static string Drawings {
+            get {
+                return ResourceManager.GetString("Drawings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit artwork.
         /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimalisme.
+        /// </summary>
+        public static string Minimalism {
+            get {
+                return ResourceManager.GetString("Minimalism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modern.
+        /// </summary>
+        public static string Modern {
+            get {
+                return ResourceManager.GetString("Modern", resourceCulture);
             }
         }
         
@@ -115,6 +187,33 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paintings.
+        /// </summary>
+        public static string Paintings {
+            get {
+                return ResourceManager.GetString("Paintings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photography.
+        /// </summary>
+        public static string Photography {
+            get {
+                return ResourceManager.GetString("Photography", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         public static string Price {
@@ -124,11 +223,65 @@ namespace EuropArt.Shared.Resources.Artworks {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sculptures.
+        /// </summary>
+        public static string Sculptures {
+            get {
+                return ResourceManager.GetString("Sculptures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Style.
+        /// </summary>
+        public static string Style {
+            get {
+                return ResourceManager.GetString("Style", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a style!.
+        /// </summary>
+        public static string StyleError {
+            get {
+                return ResourceManager.GetString("StyleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surrealisme.
+        /// </summary>
+        public static string Surrealism {
+            get {
+                return ResourceManager.GetString("Surrealism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum three images!.
+        /// </summary>
+        public static string TooManyImages {
+            get {
+                return ResourceManager.GetString("TooManyImages", resourceCulture);
             }
         }
     }

@@ -14,7 +14,7 @@
             <div class="mb-3">
                 <h6>@Loc["Title"]</h6>
                 <InputText class="form-control" id="exampleInputTitle" @bind-Value="model.Name"
-                           aria-describedby="titleHelp" placeholder="Enter title" />
+                           aria-describedby="titleHelp" placeholder="Enter title" data-test-id="artwork-name-input"/>
                 <ValidationMessage For="@(() => model.Name)" />
             </div>
             <div class="mb-3">
@@ -32,17 +32,28 @@
                 <h6 class="text-muted">*This will overwrite previous uploaded images*</h6>
                 <InputFile OnChange="LoadImages" class="file-input" name="artwork" accept="image/*" multiple/>
                 <div class="col">
-                    @foreach(var file in images)
+                    @if(images.Count > 3)
                     {
-                        <span class="file-name row gx-0">
-                            @file.Name
-                        </span>
+                        <span class="validation-message">@Loc["TooManyImages"]</span>
+                    }
+                    else if(images.Count == 1)
+                    {
+                        
+                    }
+                    else
+                    {
+                        @foreach(var file in images)
+                        {
+                            <span class="file-name row gx-0">
+                                @file.Name
+                            </span>
+                        }
                     }
                 </div>
 
             </div>
             <div class="mb-3">
-                <button disabled="@(SaveButtonIsClicked)" type="submit" class="btn btn-primary">@Loc["Edit"]</button>
+                <button disabled="@(SaveButtonIsClicked || TooManyImages)" type="submit" class="btn btn-primary" data-test-id="edit-button">@Loc["Edit"]</button>
             </div>
         </EditForm>
     </div>
@@ -56,6 +67,7 @@
     [Inject] public IArtworkService ArtworkService { get; set; }
     private List<IBrowserFile> images = new();
     private bool SaveButtonIsClicked = false;
+    private bool TooManyImages = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -102,9 +114,19 @@
 
     private void LoadImages(InputFileChangeEventArgs args)
     {
+        images = new();
         foreach(var file in args.GetMultipleFiles())
         {
             images.Add(file);
         }
+        if(images.Count > 3)
+        {
+            TooManyImages = true;
+        }
+        else
+        {
+            TooManyImages = false;
+        }
+        model.ImagePaths = images.Select(x => new ImagePath(x.Name)).ToList();
     }
 }

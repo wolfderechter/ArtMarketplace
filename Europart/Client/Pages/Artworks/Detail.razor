@@ -1,6 +1,8 @@
 ﻿@page "/artwork/{id:int}"
 @inject NavigationManager NavigationManager
 @using EuropArt.Domain.Common
+@using EuropArt.Shared.Accounts
+@using EuropArt.Shared.Artists
 @using EuropArt.Shared.Artworks
 @inject IStringLocalizer<EuropArt.Shared.Resources.Artworks.Detail> Loc
 @inject IJSRuntime JSRuntime
@@ -11,27 +13,26 @@
 }
 else
 {
-    @*<p>@_artwork.Id</p>
-        <p>@_artwork.Name</p>
-        <p>@_artwork.Description</p>
-        <p>@_artwork.Price.ToString("C")</p>
-        <img src="@_artwork.ImagePath" />*@
     <div class="row">
-        <div class="col-12 text-end mb-3">
-            <div class="admin-buttons">
-                <a class="edit" href="/artwork/edit/@artwork.Id"><img src="/images/edit.svg" /></a>
-                <button  @onclick="ConfirmDelete"><img src="/images/delete.svg" /></button>
-            </div>
-        </div>
+        <AuthorizeView Roles="Admin">
+            <Authorized>
+                <div class="col-12 text-end mb-3">
+                    <div class="admin-buttons">
+                        <a class="edit" href="/artwork/edit/@artwork.Id"><img src="/images/edit.svg" /></a>
+                        <button  @onclick="ConfirmDelete"><img src="/images/delete.svg" /></button>
+                    </div>
+                </div>
+            </Authorized>
+        </AuthorizeView>
         <div class="col-md-8 col-12">
             <div class="badge-kunstwerk text-center" style="padding: 0;">
                 @if(imagepaths is not null)
                 {
                     if(imagepaths.Count() > 1)
                     {
-                        <button @onclick="PreviousImage">&lt</button>
-                        <img src="@imagepaths[imageNumber].imagePath" style="width:auto;">
-                        <button @onclick="NextImage">&gt</button>
+                        <button class="btn" style="background-color: #372c2e; color:white;" @onclick="PreviousImage">&lt</button>
+                        <img src="@imagepaths[imageNumber].imagePath" style="max-width:60%;">
+                        <button class="btn" style="background-color: #372c2e; color:white;" @onclick="NextImage">&gt</button>
 
                     }
                     else {
@@ -39,26 +40,39 @@ else
                     }
                 }
             </div>
-            <h2 class="mb-1">@artwork.Name</h2>
+            <h2 class="mb-1" data-test-id="artwork-detail-name">@artwork.Name</h2>
             <h4 class="kunstenaar"><a href="/artist/@artwork.ArtistId"><span style="color:#b1b4b7">@Loc["By"]</span> @(artwork.ArtistFirstName + " " + artwork.ArtistLastName)</a></h4>
-            <h5 style="color:#b1b4b7">Uploaded on @artwork.DateCreated.ToString("dd MMMM yyyy")</h5>
+            <h5 style="color:#b1b4b7">@Loc["UploadedOn"] @artwork.DateCreated.ToString("dd MMMM yyyy")</h5>
             <p>@artwork.Description</p>
         </div>
         <div class="col-md-4 col-12">
             <div class="bieden">
                 <span class="prijs-groot">@artwork.Price.ToString("C")</span>
-                <button @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["Shoppingcart"]</button>
-                <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id">@Loc["Edit"]</a>
-
-                @if (RequestingDelete)
+                @if (artwork.IsSold)
                 {
-                    <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
-                    <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
+                    <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3">@Loc["SoldOut"]</button>
                 }
                 else
                 {
-                    <button class="btn btn-bieden mb-3" @onclick="RequestDelete">@Loc["Delete"]</button>
+                    <button disabled="@artwork.IsSold" @onclick="AddToCart" class="btn btn-winkelmand mb-3" data-test-id=addtoshoppingcart-button>@Loc["ShoppingCart"]</button>
                 }
+                <AuthorizeView Roles="Artist">
+                    <Authorized>
+                        @if(artist?.Id == artwork.ArtistId)
+                        {
+                            <a class="btn btn-bieden mb-3" href="/artwork/edit/@artwork.Id" data-test-id="edit-button">@Loc["Edit"]</a>
+                        @if (RequestingDelete)
+                        {
+                            <button class="btn btn-bieden mb-3" @onclick="CancelRequestDelete">@Loc["CancelDelete"]</button>
+                            <button class="btn btn-bieden mb-3" @onclick="ConfirmDelete">@Loc["ConfirmDelete"]</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-bieden mb-3" @onclick="RequestDelete">@Loc["Delete"]</button>
+                        }
+                        }
+                    </Authorized>
+                </AuthorizeView>
             </div>
         </div>
     </div>
@@ -71,17 +85,33 @@ else
     private bool RequestingDelete;
     private List<ImagePath> imagepaths;
     private int imageNumber = 0;
+    private ArtistDto.Detail artist;
 
     [Parameter] public int Id { get; set; }
     [Inject] public IArtworkService ArtworkService { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
     [Inject] public Shoppingcart Cart { get; set; }
+    [Inject] public AuthenticationStateProvider auth { get; set; }
+
 
     protected override async Task OnParametersSetAsync()
     {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+
         ArtworkRequest.GetDetail request = new() { ArtworkId = Id };
         var response = await ArtworkService.GetDetailAsync(request);
         artwork = response.Artwork;
         imagepaths = response.Artwork.ImagePaths;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            var authId = user.Claims.ElementAt(4).Value.Substring(6);
+
+            ArtistRequest.GetDetailByAuthId request2 = new() { AuthId = authId };
+            var response2 = await ArtistService.GetDetailByAuthIdAsync(request2);
+            artist = response2.Artist;
+        }
     }
 
     private async Task ConfirmDelete()

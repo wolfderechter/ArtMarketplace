@@ -120,6 +120,9 @@
   <data name="Bio" xml:space="preserve">
     <value>Biografie</value>
   </data>
+  <data name="ChangeProfilePicture" xml:space="preserve">
+    <value>Verander profielfoto</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>Stad</value>
   </data>
@@ -154,10 +157,13 @@
     <value>Postcode moet ingevuld zijn!</value>
   </data>
   <data name="Street" xml:space="preserve">
-    <value>Straat</value>
+    <value>Straat + nr</value>
   </data>
   <data name="StreetError" xml:space="preserve">
     <value>Straat moet ingevuld zijn!</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="Web" xml:space="preserve">
     <value>Website/portfolio</value>

@@ -59,5 +59,52 @@ namespace EuropArt.Shared.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About us.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hope stands for dreaming hoping and believing..
+        /// </summary>
+        public static string Hooop {
+            get {
+                return ResourceManager.GetString("Hooop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Museum.
+        /// </summary>
+        public static string Museum {
+            get {
+                return ResourceManager.GetString("Museum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jean-Marie Waelkens works with wood every day, as an artisan table maker. He makes tables to measure and according to the customer&apos;s taste. At night, he puts in an imaginary world , in which he turns wooden dolls and sculptures. He calls them hooop dolls. His visionary way of looking at wood makes him a wood reader .
+        ///
+        ///            Just as he creates for himself , an escape from the everyday, he wants to create an inspiring world for others. He wants to help everyone believe that dreams are more real than the [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Text {
+            get {
+                return ResourceManager.GetString("Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The museum is an initiative led by Jean-Marie Waelkens that will see an art exhibition in Ghent including the work of Jean-Marie himself. More information will follow..
+        /// </summary>
+        public static string Text2 {
+            get {
+                return ResourceManager.GetString("Text2", resourceCulture);
+            }
+        }
     }
 }

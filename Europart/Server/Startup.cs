@@ -17,6 +17,10 @@ using System.Linq;
 using EuropArt.Shared.YouthArtworks;
 using EuropArt.Services.Youths;
 using EuropArt.Shared.YouthArtists;
+using EuropArt.Shared.Accounts;
+using EuropArt.Services.Accounts;
+using EuropArt.Shared.Users;
+using EuropArt.Services.Users;
 
 namespace EuropArt.Server
 {
@@ -50,7 +54,9 @@ namespace EuropArt.Server
             services.AddScoped<IArtistService, ArtistService>();
             services.AddScoped<IYouthArtworkService, YouthArtworkService>();
             services.AddScoped<IYouthArtistService, YouthArtistService>();
+            services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IStorageService, BlobStorageService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<HooopDataInitializer>();
             services.AddAuthentication(options =>
@@ -62,6 +68,14 @@ namespace EuropArt.Server
                 options.Authority = Configuration["Auth0:Authority"];
                 options.Audience = Configuration["Auth0:ApiIdentifier"];
             });
+            services.AddAuth0AuthenticationClient(config =>
+            {
+                config.Domain = Configuration["Auth0:Authority"];
+                config.ClientId = Configuration["Auth0:ClientId"];
+                config.ClientSecret = Configuration["Auth0:ClientSecret"];
+            });
+
+            services.AddAuth0ManagementClient().AddManagementAccessToken();
         }
 
         private RequestLocalizationOptions GetLocalizationOptions()

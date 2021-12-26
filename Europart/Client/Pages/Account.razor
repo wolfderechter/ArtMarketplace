@@ -1,31 +1,87 @@
 ﻿@page "/account"
 @attribute [Authorize]
 @inject IStringLocalizer<EuropArt.Shared.Resources.Account> Loc
+@using EuropArt.Shared.Accounts
+@using EuropArt.Shared.Artists
+@using EuropArt.Shared.Artworks
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 @inject NavigationManager Navigation
 @inject SignOutSessionStateManager SignOutManager
 
+<h1 class="mb-7">My Account</h1>
+
 <AuthorizeView Roles="Admin">
     <h1>Hello Admin! @context.User.Identity.Name!</h1>
 </AuthorizeView>
-<AuthorizeView Roles="Buyer">
-    <h1>Hello User! @context.User.Identity.Name!</h1>
-</AuthorizeView>
-<AuthorizeView>
-    <Authorized>
-        @foreach(var claim in context.User.Claims)
+
+<AuthorizeView Roles="Artist">
+    @if(artist is not null) {
+        <img src="@artist.ImagePath" class="detail-profile-pic" />
+        <h1 class="mb-3">@Loc["Name"]</h1><h4>@artist.FirstName @artist.LastName</h4>
+        <h1 class="mb-3">@Loc["Email"]</h1><h4>@context.User.Identity.Name</h4>
+        <h1 class="mb-3">@Loc["Address"]:</h1><h4>@artist.Street @artist.Postalcode @artist.City @artist.Country</h4>
+        <h1 class="mb-3">@Loc["Biography"]</h1><h4>@artist.Biography</h4>
+        <h1 class="mb-3">@Loc["Website"]</h1><h4>@artist.Website</h4>
+        <h1 class="mt-5 mb-5">Likes</h1>
+        @foreach(var item in artist.Likes)
         {
-            <p>@claim.Value</p>
+        <div class="badge-kunstwerk m-3" data-test-id="artwork-item">
+            <div class="k-p">
+                <a href="artwork/@item.Artwork.Id"><img src="@item.Artwork.ImagePaths[0].imagePath" class="detail-profile-pic" style="width: 20%;"></a>
+                <h2 class="kunstenaar"><a href="/artwork/@item.ArtworkId">@item.Artwork.Name</a></h2>
+             </div>
+        </div>
         }
-        @context.User.Claims.ElementAt(4).Value
-    </Authorized>
+    }
 </AuthorizeView>
+<AuthorizeView Roles="User">
+@if(user2 is not null) {
+        <h1 class="mb-3">@Loc["Name"]</h1><h4>@user2.FirstName @user2.LastName</h4>
+        <h1 class="mb-3">@Loc["Email"]</h1><h4>@context.User.Identity.Name</h4>
+        <h1 class="mt-5 mb-5">Likes</h1>
+    @foreach(var item in user2.Likes)
+    {   
+        <div class="badge-kunstwerk m-3" data-test-id="artwork-item">
+            <div class="k-p">
+                <h2 class="kunstenaar"><a href="/artwork/@item.ArtworkId">@item.Artwork.Name</a></h2>
+             </div>
+        </div>
+    }
+}
+</AuthorizeView>
+
+
+
 @code{
+    private ArtistDto.Detail artist;
+    private AccountDto.Index user2;
+
+    [Parameter] public int Id { get; set; }
+    [Inject] public IArtistService ArtistService { get; set; }
+    [Inject] public IArtworkService ArtworkService { get; set; }
+    [Inject] public IAccountService AccountService { get; set; }
+    [Inject] public AuthenticationStateProvider auth { get; set; }
+
     private async Task BeginSignOut(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+
+        ArtistRequest.GetDetailByAuthId request = new() { AuthId = authId };
+        var response = await ArtistService.GetDetailByAuthIdAsync(request);
+        artist = response.Artist;
+
+        AccountRequest.GetIndex request2 = new() { AuthId = authId };
+        var response2 = await AccountService.GetIndexAsync(request2);
+        user2 = response2.User;
     }
 }

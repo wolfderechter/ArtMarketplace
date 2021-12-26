@@ -19,9 +19,15 @@
     }
     else
     {
-        <div class="row align-items-end text-end">
-            <div class="col-4">
-                <input class="form-control" placeholder="@Loc["Search"]" type="search" @bind="Filter.Searchterm" />
+        <div class="row">
+            <div class="col-6 text-start">
+                <div class="row">
+                    <div class="col-md-8 col-12">
+                        <input class="form-control" placeholder="@Loc["Search"]" type="search" @bind="Filter.Searchterm" data-test-id="search-input"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 offset-md-2 col-5 offset-1 text-end">
                 <select @bind="Filter.OrderBy" class="form-select mb-3" aria-label="Default select example">
                     <option value="OrderByNewest">@Loc["NewestArtist"]</option>
                     <option value="OrderByOldest">@Loc["OldestArtist"]</option>
@@ -31,12 +37,12 @@
         </div>
         @foreach (var artist in artists)
         {
-            <div class="col-4 text-center">
-                <div class="badge-kunstenaars">
+            <div class="col-md-4 col-12 text-center">
+                <div class="badge-kunstenaars" data-test-id="artist-item">
                     <div class="profile-pic">
                         <a href="/artist/@artist.Id"><img src="@artist.ImagePath" /></a>
                     </div>
-                    <h2>@(artist.FirstName + " " + artist.LastName)</h2>
+                    <h2 data-test-id="artist-item-name">@(artist.FirstName + " " + artist.LastName)</h2>
                     <span class="locatie"><img src="images/locate.svg" /> @artist.Postalcode</span><br />
                     <span class="kunstwerken">@artist.AmountOfArtworks @Loc["artworks"]</span>
                 </div>

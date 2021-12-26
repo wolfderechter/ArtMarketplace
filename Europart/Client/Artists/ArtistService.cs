@@ -1,5 +1,6 @@
 ﻿using EuropArt.Client.Extensions;
 using EuropArt.Client.Infrastructure;
+using EuropArt.Domain.Artists;
 using EuropArt.Shared.Artists;
 using System;
 using System.Collections.Generic;
@@ -51,5 +52,19 @@ namespace EuropArt.Client.Artists
             var response = await publicClient.Client.PostAsJsonAsync(endpoint, request);
             return await response.Content.ReadFromJsonAsync<ArtistResponse.Create>();
         }
+
+        //Only used by android
+        public Task<List<ArtistDto.Detail>> GetArtistsAndroidAsync(ArtistRequest.GetIndex request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ArtistResponse.GetDetailByAuthId> GetDetailByAuthIdAsync(ArtistRequest.GetDetailByAuthId request)
+        {
+            var response = await publicClient.Client.GetFromJsonAsync<ArtistResponse.GetDetailByAuthId>($"{endpoint}/detail/{request.AuthId}");
+            return response;
+        }
+
+     
     }
 }

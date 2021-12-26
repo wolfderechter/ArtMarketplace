@@ -126,6 +126,15 @@
   <data name="Artworks" xml:space="preserve">
     <value>Kunstwerken</value>
   </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Uitloggen</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Berichten</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profiel</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Zoeken</value>
   </data>

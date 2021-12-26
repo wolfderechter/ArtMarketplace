@@ -28,6 +28,7 @@ namespace EuropArt.Shared.Artworks
             public string Description { get; set; }
             public string Style { get; set; }
             public string Category { get; set; }
+            public bool IsSold { get; set; }
         }
 
         public class Create
@@ -38,7 +39,6 @@ namespace EuropArt.Shared.Artworks
             public DateTime DateCreated { get; set; }
             public string Style { get; set; }
             public string Category { get; set; }
-            public string ImagePath { get; set; }
             public List<string> ImagePaths { get; set; }
             //public ArtistDto.Detail Artist { get; set; }
             public class ArtworkValidator : AbstractValidator<Create>
@@ -49,6 +49,9 @@ namespace EuropArt.Shared.Artworks
                     RuleFor(p => p.Name).MaximumLength(100).WithMessage(Loc["BuyNow"]);
                     RuleFor(p => p.Price).NotEmpty().WithMessage(Loc["Price"]);
                     RuleFor(p => p.Price).GreaterThan(0).WithMessage(Loc["Negative"]);
+                    RuleFor(p => p.Style).NotEmpty().WithMessage(Loc["StyleError"]);
+                    RuleFor(p => p.Category).NotEmpty().WithMessage(Loc["CategoryError"]);
+                    RuleFor(p => p.ImagePaths).NotEmpty().WithMessage(Loc["AtLeastOneImage"]);
                 }
             }
 

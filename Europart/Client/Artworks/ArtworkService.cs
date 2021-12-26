@@ -1,5 +1,6 @@
 ﻿using EuropArt.Client.Extensions;
 using EuropArt.Client.Infrastructure;
+using EuropArt.Domain.Artworks;
 using EuropArt.Shared.Artworks;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,12 @@ namespace EuropArt.Client.Artworks
             var queryParameters = request.GetQueryString();
             var response = await publicClient.Client.GetFromJsonAsync<ArtworkResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
+        }
+
+        //Only used by android
+        public Task<List<ArtworkDto.Detail>> GetArtworksAndroidAsync(ArtworkRequest.GetIndex request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

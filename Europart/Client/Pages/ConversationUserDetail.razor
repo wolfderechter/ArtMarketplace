@@ -1,0 +1,24 @@
+﻿@using EuropArt.Shared.Accounts
+
+@if(user is not null) {
+    <p>@user.FirstName @user.LastName</p>
+
+}
+
+@code {
+    [Parameter] public string AuthId { get; set; }
+    [Parameter] public string Role { get; set; }
+    [Inject] public IAccountService AccountService { get; set; }
+    public AccountDto.Index user { get; set; }
+    protected override async Task OnParametersSetAsync()
+    {
+        var authId = AuthId;
+        var role = Role; 
+
+        AccountRequest.GetIndex request = new() { AuthId = authId };
+        var response = await AccountService.GetIndexAsync(request);
+        user = response.User;
+
+
+    }
+}
