@@ -18,6 +18,8 @@ using EuropArt.Shared.YouthArtworks;
 using EuropArt.Shared.YouthArtists;
 using EuropArt.Shared.Accounts;
 using EuropArt.Client.Accounts;
+using EuropArt.Shared.Users;
+using EuropArt.Client.Users;
 
 namespace EuropArt.Client
 {
@@ -33,6 +35,7 @@ namespace EuropArt.Client
             builder.Services.AddScoped<IYouthArtworkService, YouthArtworkService>();
             builder.Services.AddScoped<IYouthArtistService, YouthArtistService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddHttpClient<StorageService>();
             builder.Services.AddScoped<Shoppingcart>();
             builder.Services.AddHttpClient<StorageService>();

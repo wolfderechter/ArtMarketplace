@@ -1,7 +1,10 @@
-﻿using EuropArt.Shared.Artists;
+﻿using EuropArt.Client.Infrastructure;
+using EuropArt.Shared.Users;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EuropArt.Client.Pages.RegisterPages
@@ -9,13 +12,14 @@ namespace EuropArt.Client.Pages.RegisterPages
     partial class UserRegistration
     {
         private readonly IConfiguration _config;
-        ArtistDto.Create newArtist = new() { };
-        //[Inject] private IArtistService artistService { get; set; }
+        UserDto.Create newUser = new() { };
+        [Inject] private IUserService userService { get; set; }
         [Inject] private NavigationManager navigationManager { get; set; }
         [Inject] private AuthenticationStateProvider auth { get; set; }
         public string domain { get; } = "https://dev-ixi3mmyx.eu.auth0.com";
         [Parameter] public string AuthId { get; set; }
         [Parameter] public string state { get; set; }
+        [Inject] private PublicClient publicClient { get; set; }
         public UserRegistration()
         {
 
@@ -26,19 +30,18 @@ namespace EuropArt.Client.Pages.RegisterPages
         }
         public async Task SignUpAsync()
         {
-            /*newArtist.DateCreated = DateTime.Now;
-            newArtist.ImagePath = "/images/banner.jpg";
-            newArtist.AuthId = AuthId;
-            ArtistRequest.Create request = new()
+            newUser.DateCreated = DateTime.Now;
+            newUser.AuthId = AuthId;
+            UserRequest.Create request = new()
             {
-                Artist = newArtist
+                User = newUser
 
             };
-            var response = await artistService.CreateAsync(request);
+            var response = await userService.CreateAsync(request);
             if (response != null)
             {
-                navigationManager.NavigateTo(domain + "/continue?state=" + state);
-            }*/
+                navigationManager.NavigateTo(domain + "/continue?state=" + state); 
+            }
         }
     }
 }

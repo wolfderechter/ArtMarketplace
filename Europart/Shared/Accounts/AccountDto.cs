@@ -26,5 +26,9 @@ namespace EuropArt.Shared.Accounts
             public string AuthId { get; set; }
             public int ConversationId { get; set; }
         }
+
+        public class Create
+        {
+        }
     }
 }

@@ -3,70 +3,23 @@
 @using EuropArt.Client.Infrastructure
 <div class="row">
     <div class="col-8 offset-2">
-        <EditForm Model="@newArtist" OnValidSubmit="SignUpAsync" class="form">
+        <EditForm Model="@newUser" OnValidSubmit="SignUpAsync" class="form">
             <FluentValidationValidator />
             <DataAnnotationsValidator />
             <div class="mb-3">
                 <h6>@Loc["FirstName"]</h6>
-                <InputText class="form-control" @bind-Value="newArtist.FirstName"/>
-                <ValidationMessage For="@(() => newArtist.FirstName)" />
+                <InputText class="form-control" @bind-Value="newUser.FirstName"/>
+                <ValidationMessage For="@(() => newUser.FirstName)" />
             </div>
             <div class="mb-3">
                 <h6>@Loc["LastName"]</h6>
-                <InputText class="form-control" id="exampleInputTitle" @bind-Value="newArtist.LastName"
+                <InputText class="form-control" id="exampleInputTitle" @bind-Value="newUser.LastName"
                            aria-describedby="titleHelp" placeholder="Enter lastname" />
-                <ValidationMessage For="@(() => newArtist.LastName)" />
-            </div>
-            <div class="mb-3">
-                <h6>@Loc["Nickname"]</h6>
-                <InputText class="form-control" id="exampleInputTitle" @bind-Value="newArtist.Nickname"
-                           aria-describedby="titleHelp" placeholder="Enter nickname" />
-                <ValidationMessage For="@(() => newArtist.Nickname)" />
-            </div>
-            <div class="mb-3">
-                <h6>@Loc["TelephoneNr"]</h6>
-                <InputText class="form-control" id="exampleInputTitle" @bind-Value="newArtist.TelephoneNr"
-                           aria-describedby="titleHelp" placeholder="Enter telephone number" />
-                <ValidationMessage For="@(() => newArtist.TelephoneNr)" />
-            </div>
-            <div class="mb-3">
-                <h6>@Loc["City"]</h6>
-                <InputText @bind-Value="newArtist.City" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter city" />
-                <ValidationMessage For="@(() => newArtist.City)" />
-            </div>
-            <div class="mb-3">
-                <h6>@Loc["Country"]</h6>
-                <InputText @bind-Value="newArtist.Country" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter country" />
-                <ValidationMessage For="@(() => newArtist.Country)" />
-            </div>
-            <div class="mb-3">
-                <h6>@Loc["Postalcode"]</h6>
-                <InputText @bind-Value="newArtist.PostalCode" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter postalcode" />
-                <ValidationMessage For="@(() => newArtist.PostalCode)" />
-            </div>
-            <div class="mb-3">
-                <h6>@Loc["Street"]</h6>
-                <InputText @bind-Value="newArtist.Street" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter street" />
-                <ValidationMessage For="@(() => newArtist.Street)" />
-            </div>
-            <div class="mb-3">
-                <h6>@Loc["Bio"]</h6>
-                <InputText @bind-Value="newArtist.Biography" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter biography" />
-            </div>
-            <div class="mb-3">
-                <h6>@Loc["Web"]</h6>
-                <InputText @bind-Value="newArtist.Website" class="form-control" id="exampleInputDescription1"
-                           placeholder="Enter portfolio website" />
+                <ValidationMessage For="@(() => newUser.LastName)" />
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">@Loc["Register"]</button>
             </div>
-            <p>@AuthId</p>
         </EditForm>
     </div>
 </div>

@@ -19,6 +19,8 @@ using EuropArt.Services.Youths;
 using EuropArt.Shared.YouthArtists;
 using EuropArt.Shared.Accounts;
 using EuropArt.Services.Accounts;
+using EuropArt.Shared.Users;
+using EuropArt.Services.Users;
 
 namespace EuropArt.Server
 {
@@ -36,9 +38,9 @@ namespace EuropArt.Server
         public void ConfigureServices(IServiceCollection services)
         {
             var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("HooopDb"));
-            //services.AddDbContext<HooopDbContext>(options => options.UseSqlServer(builder.ConnectionString).EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
+            services.AddDbContext<HooopDbContext>(options => options.UseSqlServer(builder.ConnectionString).EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
 
-            services.AddDbContextPool<HooopDbContext>(options => options.UseMySql(builder.ConnectionString, ServerVersion.AutoDetect(builder.ConnectionString)));
+            //services.AddDbContextPool<HooopDbContext>(options => options.UseMySql(builder.ConnectionString, ServerVersion.AutoDetect(builder.ConnectionString)));
 
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
@@ -54,6 +56,7 @@ namespace EuropArt.Server
             services.AddScoped<IYouthArtistService, YouthArtistService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IStorageService, BlobStorageService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<HooopDataInitializer>();
             services.AddAuthentication(options =>
@@ -65,6 +68,14 @@ namespace EuropArt.Server
                 options.Authority = Configuration["Auth0:Authority"];
                 options.Audience = Configuration["Auth0:ApiIdentifier"];
             });
+            services.AddAuth0AuthenticationClient(config =>
+            {
+                config.Domain = Configuration["Auth0:Authority"];
+                config.ClientId = Configuration["Auth0:ClientId"];
+                config.ClientSecret = Configuration["Auth0:ClientSecret"];
+            });
+
+            services.AddAuth0ManagementClient().AddManagementAccessToken();
         }
 
         private RequestLocalizationOptions GetLocalizationOptions()

@@ -8,6 +8,7 @@
 @using EuropArt.Shared.Resources
 @inject IArtworkService ArtworkService
 @inject IStringLocalizer<EuropArt.Shared.Resources.Home> Loc
+@inject PublicClient publicClient
 
 @inject AuthenticationStateProvider auth
 
@@ -117,12 +118,24 @@
         var user = authState.User;
 
         if (user.Identity.IsAuthenticated)
-        {
-            if(registerService.JustRegistered)
             {
+            if(registerService.JustRegistered)
+                {
                 await registerService.CheckAuthIdAsync();  
             }
         }*/
+
+        var authState = await auth.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+        var authId = user.Claims.ElementAt(4).Value.Substring(6);
+        var endpoint = "api/Authentication";
+        var res = await publicClient.Client.GetAsync($"{endpoint}/CheckUser/{authId}");
+        
+        }
+        
+
         ArtistRequest.GetIndex request = new();
         var response = await ArtistService.GetIndexAsync(request);
         artists = response.Artists;
