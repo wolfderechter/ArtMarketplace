@@ -9,6 +9,7 @@ This project is about a webshop for people who want to buy and sell art. This is
 
 > - [Used Technology](#Used-technology)
 > - [Group members](#Group-members)
+> - [Trello](#trello)
 
 ## Used Technology
  - MySql 
@@ -16,7 +17,7 @@ This project is about a webshop for people who want to buy and sell art. This is
  - NuGet Packages
  - Auth0
  - BlobStorage
- - 
+ 
 ## How to run
 
 Clone project in visual studio
