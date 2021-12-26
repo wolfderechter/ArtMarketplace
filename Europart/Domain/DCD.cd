@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EuropArt.Domain.Artists.Artist">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAECAAAAAgAAIAAAAAKCAkAIAAAACAAIEAAAAAEg=</HashCode>
+      <FileName>Artists\Artist.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Artworks" />
+      <Property Name="Likes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EuropArt.Domain.Artworks.Artwork">
+    <Position X="6" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAQAgBAAAAAAAEAQAAIAkAAAABAAMAAAACAA=</HashCode>
+      <FileName>Artworks\Artwork.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Artist" />
+      <Property Name="Price" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EuropArt.Domain.Likes.Like">
+    <Position X="5.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAgAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Likes\Like.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Artwork" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EuropArt.Domain.Messages.Conversation">
+    <Position X="19.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAQAACAA=</HashCode>
+      <FileName>Messages\Conversation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Messages" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EuropArt.Domain.Messages.Message">
+    <Position X="19.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAAAEAAAAAABAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Messages\Message.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EuropArt.Domain.Users.User">
+    <Position X="8.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAAAgAAAAAACAAAEAAAAAAg=</HashCode>
+      <FileName>Users\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Likes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EuropArt.Domain.YouthArtworks.YouthArtwork">
+    <Position X="16.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAAgAAAAAAAAAIQAAAAEAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>YouthArtworks\YouthArtwork.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="YouthArtist" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Domain.Common.Entity">
+    <Position X="6.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAQAgAAAAAAAAAAAAIAAAAAAAAAAAiA=</HashCode>
+      <FileName>Common\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.ValueObject">
+    <Position X="12.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAoAAAAAAAAAAAAIAAAAAAAACAAAA=</HashCode>
+      <FileName>Common\ValueObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EuropArt.Domain.Common.Address">
+    <Position X="10.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIIAAAACAAAAIAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Common\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EuropArt.Domain.Common.Money">
+    <Position X="14" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAACAAAAAAAIAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Common\Money.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EuropArt.Domain.Artists.YouthArtist">
+    <Position X="17" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAEAAAAAAAAAIAAAAAKCAgAIAAAAAAAIEAAAAAAg=</HashCode>
+      <FileName>Artists\YouthArtist.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Artworks" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

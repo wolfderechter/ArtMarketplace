@@ -110,12 +110,12 @@ else
     protected override async Task OnParametersSetAsync()
     {
         var authState = await auth.GetAuthenticationStateAsync();
-        var user = authState.User;
-        Role = user.Claims.ElementAt(5).Value;
+        var user = authState.User; 
         if(user.Identity.IsAuthenticated)
         {
             var authId = user.Claims.ElementAt(4).Value.Substring(6);
             AuthId = authId;
+            Role = user.Claims.ElementAt(5).Value;
         }
 
         ArtistRequest.GetDetail request = new() { ArtistId = Id };
