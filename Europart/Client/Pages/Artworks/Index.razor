@@ -19,10 +19,8 @@
                 <input @bind="Filter.Searchterm" class="form-control col" placeholder="@Loc["Search"]" type="search" />
             </div>
             <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">
-                <AuthorizeView>
-                    <Authorized>
+                <AuthorizeView Roles="Artist">
                         <a class="btn btn-secondary col" style="margin-left:10px" href="/artwork/add">@Loc["Add Artwork"]</a>
-                    </Authorized>
                 </AuthorizeView>
             </div>
             <div class="offset-lg-6 col-lg-6 offset-md-4 col-md-8 offset-0 col-12 mb-3">

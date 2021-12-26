@@ -54,8 +54,8 @@ namespace EuropArt.Services.Artworks
             //var imageExtension = model.ImagePath.Substring(model.ImagePath.LastIndexOf('.'));
             //var imageFileName = Guid.NewGuid().ToString() + request.Artwork.ImagePath + imageExtension;
             //var imagePath = $"{storageService.StorageBaseUri}artworks/{imageFileName}";
-
-            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artists.First(), model.DateCreated, model.Style, model.Category, imagePaths));
+            var artist = artists.Where(a => a.AuthId == request.AuthId).SingleOrDefault();
+            var artwork = artworks.Add(new Artwork(model.Name, model.Price, model.Description, artist, model.DateCreated, model.Style, model.Category, imagePaths));
 
             await dbContext.SaveChangesAsync();
             response.ArtworkId = artwork.Entity.Id;

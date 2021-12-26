@@ -70,6 +70,15 @@ namespace EuropArt.Shared.Resources.Artists {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change profilepicture.
+        /// </summary>
+        public static string ChangeProfilePicture {
+            get {
+                return ResourceManager.GetString("ChangeProfilePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string City {
@@ -144,9 +153,9 @@ namespace EuropArt.Shared.Resources.Artists {
         /// <summary>
         ///   Looks up a localized string similar to Last name has to be filled in!.
         /// </summary>
-        public static string LastnameError {
+        public static string LastNameError {
             get {
-                return ResourceManager.GetString("LastnameError", resourceCulture);
+                return ResourceManager.GetString("LastNameError", resourceCulture);
             }
         }
         
@@ -169,7 +178,7 @@ namespace EuropArt.Shared.Resources.Artists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Street.
+        ///   Looks up a localized string similar to Street + nr.
         /// </summary>
         public static string Street {
             get {

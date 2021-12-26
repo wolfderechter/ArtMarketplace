@@ -20,7 +20,7 @@ else
             <AuthorizeView>
                 <div class="admin-buttons">
                     <AuthorizeView Roles="Artist" Context="HideEdit">
-                        @if(!IsDisabled)
+                        @if(!IsDisabled )
                         {
                             <a disabled="@IsDisabled" href="artist/edit/@artist.Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
                         }
@@ -28,7 +28,9 @@ else
                     <AuthorizeView Roles="User" Context="Start">
                         <a href="messages" @onclick="StartConversation" class="edit text-decoration-none text-dark" style="margin-right:5px ">@Loc["StartConversation"]</a>
                     </AuthorizeView>
-                    <AuthorizeView Roles="Admin" Context="bruh">
+
+                    <AuthorizeView Roles="Admin" Context="Delete">
+                        <a href="artist/edit/@artist.Id" class="edit" style="margin-right:5px"><img src="/images/edit.svg" /></a>
                         @if (RequestingDelete)
                         {
                             <a style="color: var(--bs-body-color); text-decoration:none;" @onclick="ConfirmDelete" class="edit">@Loc["ConfirmDelete"]</a>
@@ -103,20 +105,25 @@ else
     [Inject] NavigationManager NavigationManager { get; set; }
     [Inject] public AuthenticationStateProvider auth { get; set; }
     private string AuthId { get; set; }
-    private bool IsDisabled => artist.AuthId != AuthId;
+    private string Role = "";
+    private bool IsDisabled => artist?.AuthId != AuthId;
     protected override async Task OnParametersSetAsync()
     {
         var authState = await auth.GetAuthenticationStateAsync();
         var user = authState.User;
+        Role = user.Claims.ElementAt(5).Value;
         if(user.Identity.IsAuthenticated)
         {
             var authId = user.Claims.ElementAt(4).Value.Substring(6);
             AuthId = authId;
         }
-       
+
         ArtistRequest.GetDetail request = new() { ArtistId = Id };
         var response = await ArtistService.GetDetailAsync(request);
         artist = response.Artist;
+        Console.WriteLine(IsDisabled);
+        Console.WriteLine(Role);
+        Console.WriteLine(AuthId);
     }
 
     public async Task StartConversation()
