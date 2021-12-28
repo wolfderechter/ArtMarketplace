@@ -1,4 +1,4 @@
-# Welcop to Hooop Gallery
+# Welcome to Hooop Gallery
 
 This is the GitHub repository for DevOps project. U can find and clone all the source code in here.
 This project is about a webshop for people who want to buy and sell art. This is a school project for Jean-Marie Waelkens.
@@ -17,13 +17,20 @@ This project is about a webshop for people who want to buy and sell art. This is
  - NuGet Packages
  - Auth0
  - BlobStorage
+ - Playwright
  
 ## How to run
 
-Clone project in visual studio
-Change startup project to EuropArt.Server
-Go to the startup.cs in EuropArt.Server and put line 42 in comment and line 44 out of comment
-Finally run the project.
+ - Clone project in visual studio
+ - Change startup project to EuropArt.Server
+ - Go to the startup.cs in EuropArt.Server and put line 42 in comment and line 44 out of comment
+ - Finally run the project
+
+## How to run the tests
+
+ - Open a terminal in the project
+ - Cd to EuropArt.Server and execute 'dotnet run'
+ - Cd to EuropArt.PlaywrightTests and execute 'dotnet test'
 
 ## Group members
 
@@ -48,4 +55,4 @@ Finally run the project.
 > - [Information about sprint 3 on Trello](https://trello.com/b/qJPsRAc3/p3dv2022g8s3)
 > - [Information about sprint 4 on Trello](https://trello.com/b/RQEHTZGe/p3dv2022g8s4)
 > - [Information about sprint 5 on Trello](https://trello.com/b/HfJ7YrVR/p3dv2022g8s5)
-> - [Information about sprint 6on Trello](https://trello.com/b/jrD5zJhG/p3dv2022g8s6)
+> - [Information about sprint 6 on Trello](https://trello.com/b/jrD5zJhG/p3dv2022g8s6)
