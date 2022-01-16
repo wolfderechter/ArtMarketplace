@@ -45,8 +45,8 @@ This project is about a webshop for people who want to buy and sell art. This is
 
 ### Operations
 
-- Groupmember 7 : <https://github.com/vic-rottiers> - Rottiers - Vic
-- Groupmember 8 : <https://github.com/pietervankeer> - Van Keer - Pieter
+- Groupmember 7 : <https://github.com/pietervankeer> - Van Keer - Pieter
+- Groupmember 8 : <https://github.com/vic-rottiers> - Rottiers - Vic
 
 ## Trello
 
