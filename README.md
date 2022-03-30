@@ -8,9 +8,9 @@ This project is about a webshop for people who want to buy and sell art. This is
 
 ## Demo
 
-![Demo HooopGallery](https://user-images.githubusercontent.com/60930264/160895717-2a10372d-115c-4a82-afcd-e09578ba99d9.mp4)
+![Demo HooopGallery](Demo.gif)
 
-![Demo HooopGallery](Demo.mp4)
+![Full Demo Video](Demo.mp4)
 
 ## Table of contents
 
