@@ -1,6 +1,6 @@
 # Welcome to Hooop Gallery
 
-This is the GitHub repository for DevOps project. U can find and clone all the source code in here.
+This is the GitHub repository for DevOps project. You can find and clone all the source code in here.
 This project is about a webshop for people who want to buy and sell art. This is a school project for Jean-Marie Waelkens.
 
 [![GitHub Super-Linter](https://github.com/HoGentTIN/devops-project-web-h8/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
@@ -47,12 +47,3 @@ This project is about a webshop for people who want to buy and sell art. This is
 
 - Groupmember 7 : <https://github.com/pietervankeer> - Van Keer - Pieter
 - Groupmember 8 : <https://github.com/vic-rottiers> - Rottiers - Vic
-
-## Trello
-
-> - [Information about sprint 1 on Trello](https://trello.com/b/g7cm3JGS/sprint-1)
-> - [Information about sprint 2 on Trello](https://trello.com/b/dbL2LD9O/p3dv2022g8s2)
-> - [Information about sprint 3 on Trello](https://trello.com/b/qJPsRAc3/p3dv2022g8s3)
-> - [Information about sprint 4 on Trello](https://trello.com/b/RQEHTZGe/p3dv2022g8s4)
-> - [Information about sprint 5 on Trello](https://trello.com/b/HfJ7YrVR/p3dv2022g8s5)
-> - [Information about sprint 6 on Trello](https://trello.com/b/jrD5zJhG/p3dv2022g8s6)
