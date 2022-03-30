@@ -5,6 +5,13 @@ This project is about a webshop for people who want to buy and sell art. This is
 
 [![GitHub Super-Linter](https://github.com/HoGentTIN/devops-project-web-h8/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 [![Build .NET app](https://github.com/HoGentTIN/devops-project-web-h8/actions/workflows/dotnet.yml/badge.svg)](https://github.com/HoGentTIN/devops-project-web-h8/actions/workflows/dotnet.yml)
+
+## Demo
+
+![Demo HooopGallery](https://user-images.githubusercontent.com/60930264/160895717-2a10372d-115c-4a82-afcd-e09578ba99d9.mp4)
+
+![Demo HooopGallery](Demo.mp4)
+
 ## Table of contents
 
 > - [Used Technology](#Used-technology)
@@ -42,6 +49,7 @@ This project is about a webshop for people who want to buy and sell art. This is
 - Groupmember 4 : <https://github.com/DylanDC666> - De Corte - Dylan
 - Groupmember 5 : <https://github.com/EmielDehaen> - Dehaen - Emiel
 - Groupmember 6 : <https://github.com/SimonBekaertt> - Bekaert - Simon
+
 
 ### Operations
 
